@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<C500Hemis.Models.HemisContext>(options =>
-    options.UseSqlServer("Server=tcp:c500.database.windows.net,1433;Database=dbHemisC500;Trusted_Connection=True;Id=c500;Password=@Abc1234" ));
+//builder.Services.AddDbContext<C500Hemis.Models.HemisContext>(options =>
+//    options.UseSqlServer("Server=tcp:c500.database.windows.net,1433;Database=dbHemisC500;Trusted_Connection=True;Id=c500;Password=@Abc1234" ));
 
 
 // Add services to the container.
