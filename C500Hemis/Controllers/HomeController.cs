@@ -18,6 +18,61 @@ namespace C500Hemis.Controllers
             return View();
         }
 
+        public IActionResult CB()
+        {
+            return View();
+        }
+
+        public IActionResult HTQT()
+        {
+            return View();
+        }
+
+        public IActionResult CSGD ()
+        {
+            return View();
+        }
+
+        public IActionResult CSVC()
+        {
+            return View();
+        }
+
+        public IActionResult CTDT()
+        {
+            return View();
+        }
+
+        public IActionResult KHCN()
+        {
+            return View();
+        }
+
+        public IActionResult NDT()
+        {
+            return View();
+        }
+
+        public IActionResult NH()
+        {
+            return View();
+        }
+
+        public IActionResult TCTS()
+        {
+            return View();
+        }
+
+        public IActionResult TS()
+        {
+            return View();
+        }
+
+        public IActionResult VB()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
