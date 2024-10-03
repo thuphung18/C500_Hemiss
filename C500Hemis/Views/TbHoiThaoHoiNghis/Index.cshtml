@@ -1,0 +1,95 @@
+﻿@model IEnumerable<C500Hemis.Models.TbHoiThaoHoiNghi>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHoiThaoHoiNghi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenHoiThaoHoiNghi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoQuanCoThamQuyenCapPhep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MucTieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongDaiBieuThamDu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongDaiBieuQuocTeThamDu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianToChuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaDiemToChuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DonViChuTri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNguonKinhPhiHoiThaoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHoiThaoHoiNghi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHoiThaoHoiNghi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoQuanCoThamQuyenCapPhep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MucTieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongDaiBieuThamDu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongDaiBieuQuocTeThamDu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianToChuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaDiemToChuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViChuTri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNguonKinhPhiHoiThaoNavigation.IdNguonKinhPhi)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdHoiThaoHoiNghi">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdHoiThaoHoiNghi">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdHoiThaoHoiNghi">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

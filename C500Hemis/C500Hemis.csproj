@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\HTQT\" />
     <Folder Include="Controllers\KHCN\" />
     <Folder Include="Controllers\CSVC\" />
     <Folder Include="Controllers\CSGD\" />
