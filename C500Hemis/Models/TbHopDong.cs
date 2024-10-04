@@ -9,12 +9,13 @@ namespace C500Hemis.Models;
 
 public partial class TbHopDong
 {
+    [DisplayName(displayName: "Mã số hợp đồng")]
     public int IdHopDong { get; set; }
-
+    [DisplayName(displayName: "Mã số cán bộ")]
     public int? IdCanBo { get; set; }
     [DisplayName(displayName: "Số hợp đồng")]
     public string? SoHopDong { get; set; }
-
+    [DisplayName(displayName: "Mã số loại hợp đồng")]
     public int? IdLoaiHopDong { get; set; }
     [DisplayName(displayName: "Số quyết định")]
     public string? SoQuyetDinh { get; set; }

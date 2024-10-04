@@ -1,13 +1,13 @@
 ﻿@model C500Hemis.Models.TbHopDong
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết hợp đồng";
 }
 
-<h1>Details</h1>
+<h1>Chi tiết hợp đồng</h1>
 
 <div>
-    <h4>TbHopDong</h4>
+    <h4>Hợp đồng</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -70,3 +70,85 @@
     <a asp-action="Edit" asp-route-id="@Model?.IdHopDong">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<style>
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #f0f2f5;
+        color: #333333;
+    }
+
+    h1 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+    }
+
+    h4 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #34495e;
+        margin-bottom: 15px;
+        font-size: 1.75rem;
+    }
+    /* Tùy chỉnh vùng hiển thị hợp đồng */
+    .contract-form {
+        background-color: #ffffff; 
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        max-width: 600px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .contract-details {
+        background-color: #ffffff; 
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
+    dl.row {
+        margin-bottom: 0;
+    }
+
+    dl.row dt {
+        font-weight: bold;
+        color: #2c3e50;
+        padding-top: 10px;
+    }
+
+    dl.row dd {
+        margin-bottom: 10px;
+        color: #555555;
+    }
+
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+
+    .link-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .link-actions a {
+        margin: 0 10px;
+    }
+
+
+</style>
