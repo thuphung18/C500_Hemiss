@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
@@ -9,9 +11,9 @@ public partial class TbCanBo
     public int IdCanBo { get; set; }
 
     public int? IdNguoi { get; set; }
-
+    
     public string? MaCanBo { get; set; }
-
+    
     public int? IdChucVuCongTac { get; set; }
 
     public string? SoBaoHiemXaHoi { get; set; }

@@ -1,17 +1,19 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbGiaoVienQpan>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Thông tin";
 }
 
-<h1>Index</h1>
+<h1 style="text-align:center">Danh sách</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a style="text-decoration:none" asp-action="Create">Tạo mới</a>
 </p>
-<table class="table">
+<h3> Gồm @Model.Count() giáo viên</h3>
+<table class="table" id="ntable">
     <thead>
         <tr>
+            <th>STT</th>
             <th>
                 @Html.DisplayNameFor(model => model.NamBatDauBietPhai)
             </th>
@@ -37,8 +39,11 @@
         </tr>
     </thead>
     <tbody>
+        @{int dem = 0;}
 @foreach (var item in Model) {
-        <tr>
+            dem++;
+            <tr>
+            <td>@dem</td>
             <td>
                 @Html.DisplayFor(modelItem => item.NamBatDauBietPhai)
             </td>
@@ -61,11 +66,69 @@
                 @Html.DisplayFor(modelItem => item.IdQuanHamNavigation.IdQuanHam)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGiaoVienQpan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan">Delete</a>
+                <a class="edit" asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan">Chỉnh sửa</a> |
+                <a class="details" asp-action="Details" asp-route-id="@item.IdGiaoVienQpan">Mô tả</a> |
+                <a class="delete" asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan">Xoá</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<style>
+    a{
+        text-decoration: none;
+    }
+    a:hover{
+        color:black;
+    }
+    .edit{
+        
+        color:white;
+        background: #FFCE00;
+        padding: 0 10px;
+    }
+
+    .details{
+        
+        color: white;
+        background: #002C88;
+        padding: 0 10px;
+
+    }
+    .delete{
+        
+        color: white;
+        background: #C9072A;
+        padding: 0 10px;
+    }
+</style>
+<script>
+
+    new DataTable('#ntable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        processing: true,
+        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
+            }
+        },
+    });
+</script>
