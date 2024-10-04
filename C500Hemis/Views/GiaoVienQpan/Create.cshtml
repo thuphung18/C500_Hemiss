@@ -1,12 +1,12 @@
 ﻿@model C500Hemis.Models.TbGiaoVienQpan
 
 @{
-    ViewData["Title"] = "Tạo mới";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Tạo</h1>
+<h1>Create</h1>
 
-<h4>Giáo viên quốc phòng an ninh</h4>
+<h4>TbGiaoVienQpan</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -50,14 +50,14 @@
                 <span asp-validation-for="SoTruongCongTac" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
