@@ -4,22 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
+<h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
 
-<p>
-    <a asp-action="Create">THÊM HỒ SƠ KỶ LUẬT</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
+        <tr style="text-align: center">
             <th>
                 Lý do
             </th>
             <th>
-                Ngày nhận quyết định
+                Ngày nhận QĐ
             </th>
             <th>
-                Số quyết định
+                Số QĐ
             </th>
             <th>
                 Năm bị kỷ luật
@@ -28,10 +25,10 @@
                 ID Cán bộ
             </th>
             <th>
-                Cấp quyết định
+                Cấp QĐ
             </th>
             <th>
-                Loại kỷ luật
+                Hình thức
             </th>
             <th></th>
         </tr>
@@ -39,8 +36,8 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr style="text-align: center">
+                <td style="text-align: left">
                     @Html.DisplayFor(modelItem => item.LyDo)
                 </td>
                 <td>
@@ -56,10 +53,10 @@
                     @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.IdCapKhenThuong)
+                    @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.CapKhenThuong)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
+                    @Html.DisplayFor(modelItem => item.IdLoaiKyLuatNavigation.LoaiKyLuat)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.IdKyLuatCanBo">Sửa</a> |
@@ -70,3 +67,6 @@
         }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create">THÊM HỒ SƠ KỶ LUẬT</a>
+</p>

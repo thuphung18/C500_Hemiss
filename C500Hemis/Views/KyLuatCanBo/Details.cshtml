@@ -4,50 +4,50 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>THÔNG TIN CHI TIẾT</h1>
 
 <div>
-    <h4>TbKyLuatCanBo</h4>
+    <h4>* Ở đây sẽ là tên cán bộ </h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LyDo)
+            Lý do kỷ luật
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.LyDo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayThangNamQuyetDinh)
+            Ngày nhận quyết định
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NgayThangNamQuyetDinh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinh)
+            Số quyết định
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.SoQuyetDinh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamBiKyLuat)
+            Năm kỷ luật
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NamBiKyLuat)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+            ID cán bộ
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
+            Cấp quyết định
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
+            Hình thức kỷ luật
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKyLuatCanBo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdKyLuatCanBo">Chỉnh sửa</a> |
+    <a asp-action="Index">Quay lại</a>
 </div>
