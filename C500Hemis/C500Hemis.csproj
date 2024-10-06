@@ -23,7 +23,6 @@
     <Folder Include="Controllers\CSVC\" />
     <Folder Include="Controllers\NDT\" />
     <Folder Include="Controllers\TCTS\" />
-    <Folder Include="Controllers\NH\" />
     <Folder Include="TaiLieu\" />
   </ItemGroup>
 
