@@ -7,6 +7,8 @@ namespace C500Hemis.Models;
 
 public partial class TbChuongTrinhDaoTao
 {
+    [DisplayName("Chương Trình Đào Tạo")]   
+    
     public int IdChuongTrinhDaoTao { get; set; }
     [DisplayName("Mã Chương Trình Đào Tạo ")]
 
