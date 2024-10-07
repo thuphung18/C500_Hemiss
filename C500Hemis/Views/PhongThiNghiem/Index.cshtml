@@ -1,0 +1,59 @@
+﻿@model IEnumerable<C500Hemis.Models.TbPhongThiNghiem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MucDoDapUngNhuCauNckh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLinhVucNavigation.IdLinhVucNghienCuu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPhongThiNghiem">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPhongThiNghiem">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPhongThiNghiem">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
