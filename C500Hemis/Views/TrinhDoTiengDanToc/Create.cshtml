@@ -1,45 +1,51 @@
 ﻿@model C500Hemis.Models.TbTrinhDoTiengDanToc
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Tạo mới</h1>
 
-<h4>TbTrinhDoTiengDanToc</h4>
+<h4 class="text-center">Thông tin trình độ tiếng dân tộc</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdTrinhDoTiengDanToc" class="control-label"></label>
-                <input asp-for="IdTrinhDoTiengDanToc" class="form-control" />
-                <span asp-validation-for="IdTrinhDoTiengDanToc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCanBo" class="control-label"></label>
-                <select asp-for="IdCanBo" class ="form-control" asp-items="ViewBag.IdCanBo"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTiengDanToc" class="control-label"></label>
-                <select asp-for="IdTiengDanToc" class ="form-control" asp-items="ViewBag.IdTiengDanToc"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdKhungNangLucNgoaiNgu" class="control-label"></label>
-                <select asp-for="IdKhungNangLucNgoaiNgu" class ="form-control" asp-items="ViewBag.IdKhungNangLucNgoaiNgu"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="IdCanBo" class="control-label"> Id Cán bộ</label>
+                    <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
+                    <span asp-validation-for="IdCanBo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IdTiengDanToc" class="control-label">Tiếng dân tộc</label>
+                    <select asp-for="IdTiengDanToc" class="form-control" asp-items="ViewBag.IdTiengDanToc"></select>
+                    <span asp-validation-for="IdTiengDanToc" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="IdKhungNangLucNgoaiNgu" class="control-label">Khung năng lực ngoại ngữ</label>
+                    <select asp-for="IdKhungNangLucNgoaiNgu" class="form-control" asp-items="ViewBag.IdKhungNangLucNgoaiNgu"></select>
+                    <span asp-validation-for="IdKhungNangLucNgoaiNgu" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index">Quay lại danh sách</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
