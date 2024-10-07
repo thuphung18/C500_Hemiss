@@ -59,6 +59,7 @@ namespace C500Hemis.Controllers.CB
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        // gửi dữ liệu về server xử lí sau khi người dùng nhập thông tin vào form và thực hiện submit
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdChucDanhKhoaHocCuaCanBo,IdCanBo,IdChucDanhKhoaHoc,IdThamQuyenQuyetDinh,SoQuyetDinh,NgayQuyetDinh")] TbChucDanhKhoaHocCuaCanBo tbChucDanhKhoaHocCuaCanBo)
         {
