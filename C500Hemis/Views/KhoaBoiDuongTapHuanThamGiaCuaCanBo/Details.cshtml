@@ -4,75 +4,83 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Chi tiết thông tin cán bộ</h1>
+<div>
 
-<div>
-    <h4>TbKhoaBoiDuongTapHuanThamGiaCuaCanBo</h4>
+    <h4>Khoa bồi dưỡng tập huấn tham gia của cán bộ</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenKhoaBoiDuongTapHuan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenKhoaBoiDuongTapHuan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DonViToChuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DonViToChuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiaDiemToChuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiaDiemToChuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianBatDau)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianBatDau)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianKetThuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChungChi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChungChi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayCap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayCap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiBoiDuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiBoiDuongNavigation.IdLoaiBoiDuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNguonKinhPhiNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.IdNguonKinhPhi)
-        </dd>
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Tên khoa bồi dưỡng tập huấn</th>
+            <td>@Html.DisplayFor(model => model.TenKhoaBoiDuongTapHuan)</td>
+        </tr>
+        <tr>
+            <th>Đơn vị tổ chức</th>
+            <td>@Html.DisplayFor(model => model.DonViToChuc)</td>
+        </tr>
+        <tr>
+            <th>Địa điểm tổ chức</th>
+            <td>@Html.DisplayFor(model => model.DiaDiemToChuc)</td>
+        </tr>
+        <tr>
+            <th>Thời gian bắt đầu</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianBatDau)</td>
+        </tr>
+        <tr>
+            <th>Thời gian kết thúc</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianKetThuc)</td>
+        </tr>
+        <tr>
+            <th>Chứng chỉ</th>
+            <td>@Html.DisplayFor(model => model.ChungChi)</td>
+        </tr>
+        <tr>
+            <th>Ngày cấp</th>
+            <td>@Html.DisplayFor(model => model.NgayCap)</td>
+        </tr>
+        <tr>
+            <th>ID cán bộ giảng dạy</th>
+            <td>@Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)</td>
+        </tr>
+        <tr>
+            <th>ID loại bồi dưỡng cán bộ</th>
+            <td>@Html.DisplayFor(model => model.IdLoaiBoiDuongNavigation.IdLoaiBoiDuong)</td>
+        </tr>
+        <tr>
+            <th>Nguồn kinh phí cán bộ</th>
+            <td>@Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.IdNguonKinhPhi)</td>
+        </tr>
+    </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo" class="btn-red">Chỉnh sửa</a> |
+    <a asp-action="Index" class="btn-blue">Quay lại danh sách</a>
 </div>
+
+<style>
+    .btn-red, .btn-blue {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .btn-red {
+        background-color: red;
+    }
+
+        .btn-red:hover {
+            background-color: darkred;
+        }
+
+    .btn-blue {
+        background-color: blue;
+    }
+
+        .btn-blue:hover {
+            background-color: darkblue;
+        }
+</style>

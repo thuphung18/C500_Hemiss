@@ -3,46 +3,56 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<style>
+    th, h1, td{
+        text-align:center;
+    }
+    table{
+        border-bottom:solid;
+    }
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgb(230,241,216);
+    }
+</style>
+<body>
+<h1>KHÓA HUẤN LUYỆN TẬP HUẤN THAM GIA CỦA CÁN BỘ</h1>
+    <table class="table" style="background-color:rgba(230,241,216,0.85)" >
     <thead>
-        <tr>
+            <tr style="background-color:rgba(54,117,23,0.8)">
             <th>
-                @Html.DisplayNameFor(model => model.TenKhoaBoiDuongTapHuan)
+                TÊN KHÓA BỒI DƯỠNG TẬP HUẤN
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DonViToChuc)
+                ĐƠN VỊ TỔ CHỨC
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiaDiemToChuc)
+                ĐỊA ĐIỂM TỔ CHỨC
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+                THỜI GIAN BẮT ĐẦU
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+                THỜI GIAN KẾT THÚC
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChungChi)
+                CHỨNG CHỈ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayCap)
+                NGÀY CẤP
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+                ID CÁN BỘ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdLoaiBoiDuongNavigation)
+                ID LOẠI BỒI DƯỠNG
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNguonKinhPhiNavigation)
+                ID NGUỒN KINH PHÍ
             </th>
-            <th></th>
+            <th>CHỨC NĂNG</th>
         </tr>
     </thead>
     <tbody>
@@ -79,11 +89,15 @@
                 @Html.DisplayFor(modelItem => item.IdNguonKinhPhiNavigation.IdNguonKinhPhi)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.freepik.com/512/32/32355.png" width="16px" /></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.flaticon.com/512/1/1755.png" width="16px" title="XEM"/></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.freepik.com/512/1345/1345874.png" width="16px" title="XÓA" /></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+    <form>
+        <input type="submit" value="Tạo mới" class="btn btn-primary" style="background-color:darkolivegreen" asp-action="Create" />
+    </form>
+</body>
