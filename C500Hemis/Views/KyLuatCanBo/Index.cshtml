@@ -5,7 +5,85 @@
 }
 
 <h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
+<style>
+    /* HỒ SƠ CÁN BỘ BỊ KỶ LUẬT */
+    h1 {
+        font-size: 40px;
+    }
 
+    /* BẢNG CHUNG */
+    table {
+        margin-bottom: 200px;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #f1f3f3;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    }
+
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 5px solid #ddd;
+        }
+
+        table th {
+            background-color: #AAAAAA;
+            color: black;
+            font-size: 16px;
+        }
+
+        table tr:hover {
+            background-color: #D3D3D3;
+        }
+
+    p {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    /* NÚT SỬA, XÓA */
+    .button_a_edit, .button_a_del {
+        border-style: solid;
+        border-width: 0.5px;
+        font-size: 14px;
+        display: inline-block;
+        padding: 4px 8px;
+        text-decoration: none;
+        color: black;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột */
+        margin: 2px; /* Khoảng cách giữa các nút */
+    }
+
+    /* màu mặc định của 2 nút trùng màu khi hover vào dòng */
+    .button_a_edit, .button_a_del {
+        background-color: #D3D3D3; /* Trùng màu bảng */
+    }
+
+        /* Khi di chuột vào nút "SỬA" */
+        .button_a_edit:hover {
+            background-color: #007bff; /*màu xanh dương*/
+            color: white;
+        }
+
+        /* Khi di chuột vào nút "XÓA" */
+        .button_a_del:hover {
+            background-color: #dc3545; /* Màu đỏ */
+            color: white;
+        }
+
+    /* Đặt kiểu bố cục cho khối chứa các nút */
+    .edit_del {
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Canh giữa các nút trong div */
+        align-items: center;
+    }
+
+</style> 
 <table class="table">
     <thead>
         
@@ -89,76 +167,3 @@
     </tbody>
 </table>
 
-<style>
-    /* HỒ SƠ CÁN BỘ BỊ KỶ LUẬT */
-    h1 {font-size: 40px;}
-
-    /* BẢNG CHUNG */
-    table {
-        margin-bottom: 200px;
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #f1f3f3;
-        margin-top: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    }
-        table th, table td {
-            padding: 12px;
-            text-align: center;
-            border-bottom: 5px solid #ddd;
-        }
-        table th {
-            background-color: #AAAAAA;
-            color: black;
-            font-size: 16px;
-        }
-        table tr:hover {
-            background-color: #D3D3D3;
-        }
-    p {
-        text-align: center;
-        margin-top: 30px;
-    }
-    
-    /* NÚT SỬA, XÓA */
-    .button_a_edit, .button_a_del {
-        border-style: solid;
-        border-width: 0.5px;
-        font-size: 14px;
-        display: inline-block;
-        padding: 4px 8px;
-        text-decoration: none;
-        color: black;
-        border-radius: 5px;
-        font-weight: bold;
-        text-align: center;
-        transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột */
-        margin: 2px; /* Khoảng cách giữa các nút */
-    }
-
-    /* màu mặc định của 2 nút trùng màu khi hover vào dòng */
-    .button_a_edit, .button_a_del {
-        background-color: #D3D3D3; /* Trùng màu bảng */
-    }
-
-        /* Khi di chuột vào nút "SỬA" */
-        .button_a_edit:hover {
-            background-color: #007bff; /*màu xanh dương*/
-            color: white;
-        }
-
-        /* Khi di chuột vào nút "XÓA" */
-        .button_a_del:hover {
-            background-color: #dc3545; /* Màu đỏ */
-            color: white;
-        }
-
-    /* Đặt kiểu bố cục cho khối chứa các nút */
-    .edit_del {
-        width: 100%;
-        display: flex;
-        justify-content: center; /* Canh giữa các nút trong div */
-        align-items: center;
-    }
-
-</style>
