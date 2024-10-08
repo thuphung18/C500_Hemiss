@@ -1,270 +1,71 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbGiaoVienQpan>
-@* ==== font awesome===== *@
-<script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
+
 @{
-    ViewData["Title"] = "Giáo viên quốc phòng an ninh";
-    int stt = 0;
+    ViewData["Title"] = "Index";
 }
 
-<h1 style="text-align:center">DANH SÁCH GIÁO VIÊN QUỐC PHÒNG AN NINH </h1>
-<h3 style="text-align:center">Gồm có <strong style="color:red"> @Model.Count() </strong>giáo viên</h3>
+<h1>Index</h1>
+
 <p>
-    
-    <a class="btn-create" asp-action="Create"><i class="fa-solid fa-user-plus"></i>    Thêm giáo viên</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table" id="TableGvqpan">
+<table class="table">
     <thead>
-        <tr >
-            <th class="Stt">STT</th>
-            <th class="NamBatDauBietPhai">
+        <tr>
+            <th>
                 @Html.DisplayNameFor(model => model.NamBatDauBietPhai)
             </th>
-            <th class="SoNamBietPhai">
+            <th>
                 @Html.DisplayNameFor(model => model.SoNamBietPhai)
             </th>
-            <th style="text-align:left" class="DaoTaoGdqpan">
+            <th>
                 @Html.DisplayNameFor(model => model.DaoTaoGdqpan)
             </th>
-            <th class="SoTruongCongTac">
+            <th>
                 @Html.DisplayNameFor(model => model.SoTruongCongTac)
             </th>
-            
-            <th class="option"></th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiGiangVienQpNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdQuanHamNavigation)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-            var rowClass = ( stt % 2 == 0) ? "even-row" : "odd-row"; 
-            <tr class="@rowClass">
-                <td class="Stt" style="text-align:left">
-                    @(++stt)
-                </td>
-                <td class="NamBatDauBietPhai">
+        <tr>
+            <td>
                 @Html.DisplayFor(modelItem => item.NamBatDauBietPhai)
             </td>
-                <td class="SoNamBietPhai">
+            <td>
                 @Html.DisplayFor(modelItem => item.SoNamBietPhai)
             </td>
-                <td class="DaoTaoGdqpan">
+            <td>
                 @Html.DisplayFor(modelItem => item.DaoTaoGdqpan)
             </td>
-                <td class="SoTruongCongTac">
+            <td>
                 @Html.DisplayFor(modelItem => item.SoTruongCongTac)
             </td>
-            <td class="option">
-                    <a style="margin-left:20px" class="btn" id="btn-edit" asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan">
-                        <i style="margin-right:10px" class="fa-solid fa-pen-to-square"></i>Chỉnh sửa
-                    </a>
- |
-                    <a class="btn" id="btn-details" asp-action="Details" asp-route-id="@item.IdGiaoVienQpan"><i style="margin-right:10px" class="fa-solid fa-circle-info"></i>Mô tả</a> |
-                    <a class="btn" id="btn-delete" asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan"><i style="margin-right:10px" class="fa-solid fa-trash"></i>Xoá</a>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiGiangVienQpNavigation.IdLoaiGiangVienQuocPhong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdQuanHamNavigation.IdQuanHam)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdGiaoVienQpan">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan">Delete</a>
             </td>
         </tr>
-}   
+}
     </tbody>
 </table>
-
-@*=========== datatable ======= *@
-<script>
-        new DataTable('#TableGvqpan',{
-        lengthMenu: [5,10,20,50,100],
-        language: {
-            processing: "Đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
-            info: "Tổng cộng _TOTAL_ bản ghi",
-            infoEmpty: "Chưa có giáo viên nào trong danh sách",
-            infoFiltered: "",
-            infoPostFix: "", // Cái này khi thêm vào nó sẽ đứng sau info
-            loadingRecords: "",
-            zeroRecords: "Không tìm thấy dữ liệu",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "<<",
-                previous: "<",
-                next: ">",
-                last: ">>"
-            },
-            aria: {
-                sortAscending: ": Đang sắp xếp",
-                sortDescending: ": Đang sắp xếp",
-            }
-        },
-    });
-</script>
-
-
-@* ========== css ========== *@
-<style>
-    body{
-        background-color:#e9f2ef;
-    }
-    a {
-        text-decoration: none;
-        padding: 10px 20px;
-    }
-    thead tr{
-        background-color:#808080;
-        color:white;
-    }
-    .even-row {
-    background-color: #f2f2f2 !important; /* Màu nền cho hàng chẵn */
-    }
-
-    .odd-row {
-    background-color: #ffffff !important; /* Màu nền cho hàng lẻ */
-    }
-
-    /* ======= table ======== */
-    .Stt {
-        width: 5%; 
-        background-color:black;
-    }
-
-    .NamBatDauBietPhai {
-        width: 12%;
-    }
-
-    .SoNamBietPhai {
-        width: 12%;
-    }
-
-    .DaoTaoGdqpan {
-        width: 20%;
-    }
-
-    .SoTruongCongTac {
-        width: 20%;
-    }
-
-    .option {
-        width: 31%;
-    }
-    /* ==========create========== */
-    .btn-create {
-        appearance: none;
-        backface-visibility: hidden;
-        background-color: #27ae60;
-        border-radius: 8px;
-        border-style: none;
-        box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        display: inline-block;
-        font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: normal;
-        line-height: 1.5;
-        outline: none;
-        overflow: hidden;
-        padding: 13px 20px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        transform: translate3d(0, 0, 0);
-        transition: all .3s;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        vertical-align: top;
-        white-space: nowrap;
-    }
-
-    .btn-create:hover {
-        background-color: #1e8449;
-        opacity: 1;
-        transform: translateY(0);
-        transition-duration: .35s;
-        color:white;
-    }
-
-    .btn-create:active {
-        transform: translateY(2px);
-        transition-duration: .35s;
-    }
-
-    .btn-create:hover {
-        box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
-    }
-
-
-    /* =====button======== */
-    .btn{
-        border-radius: 6px;
-        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 16px;
-        min-height: 40px;
-        outline: 0;
-        padding: 10px 14px;
-        text-align: center;
-        text-rendering: geometricprecision;
-        text-transform: none;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        vertical-align: middle;
-    }
-
-    /* ======== edit ======== */
-    #btn-edit {
-        background: #2596be;
-        border: 1px solid #2596be;
-    }
-
-        #btn-edit:hover,
-        #btn-edit:active {
-            background-color: initial;
-            background-position: 0 0;
-            color: #2596be;
-        }
-
-        #btn-edit:active {
-            opacity: .5;
-        }
-
-    /* ======== details ======== */
-    #btn-details {
-        background: #cbda02;
-        border: 1px solid #cbda02;
-    }
-
-        #btn-details:hover,
-        #btn-details:active {
-            background-color: initial;
-            background-position: 0 0;
-            color: #cbda02;
-        }
-
-        #btn-details:active {
-            opacity: .5;
-        }
-
-    /* ======== delete ======== */
-    #btn-delete {
-        background: #FF4742;
-        border: 1px solid #FF4742;
-       
-
-    }
-
-        #btn-delete:hover,
-        #btn-delete:active {
-            background-color: initial;
-            background-position: 0 0;
-            color: #FF4742;
-        }
-
-        #btn-delete:active {
-            opacity: .5;
-        }
-</style>
-
-
