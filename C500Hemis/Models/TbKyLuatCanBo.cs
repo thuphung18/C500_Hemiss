@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
@@ -15,11 +16,13 @@ public partial class TbKyLuatCanBo
     public string? LyDo { get; set; }
 
     public int? IdCapQuyetDinh { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public DateOnly? NgayThangNamQuyetDinh { get; set; }
 
     public string? SoQuyetDinh { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public DateOnly? NamBiKyLuat { get; set; }
 
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
