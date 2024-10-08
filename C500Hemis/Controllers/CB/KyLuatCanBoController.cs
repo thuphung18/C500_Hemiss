@@ -76,11 +76,23 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdKyLuatCanBo,IdCanBo,IdLoaiKyLuat,LyDo,IdCapQuyetDinh,NgayThangNamQuyetDinh,SoQuyetDinh,NamBiKyLuat")] TbKyLuatCanBo tbKyLuatCanBo)
         {
+            //Kiểm tra dữ liệu có đúng chuẩn không, trên cơ sơ
+            //đối sánh với lớp tbKyLuatCanBo
             if (ModelState.IsValid)
             {
-                _context.Add(tbKyLuatCanBo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    //Thêm đối tượng vào context
+                    _context.Add(tbKyLuatCanBo);
+                    //Lưu vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    //Nếu thành công sẽ trở về trang index
+                    return RedirectToAction(nameof(Index));
+                }catch(Exception ex)
+                {
+                    ViewBag.Loi = ex.ToString().Substring(0,200);
+
+                }
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
