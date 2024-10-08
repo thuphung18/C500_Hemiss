@@ -9,39 +9,57 @@ using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.CB
 {
-    public class DanhHieuThiDuaGiaiThuongKhenThuongCanBoController : Controller
-    {
-        private readonly HemisContext _context;
-
-        public DanhHieuThiDuaGiaiThuongKhenThuongCanBoController(HemisContext context)
+   
+        public class DanhHieuThiDuaGiaiThuongKhenThuongCanBoController : Controller
         {
-            _context = context;
-        }
+            private readonly HemisContext _context;
 
-        // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo
-        //public async Task<IActionResult> Index()
-        //{
-        //    var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
-        //    return View(await hemisContext.ToListAsync());
-        //}
-        public IActionResult Index(string IDCB)
+            public DanhHieuThiDuaGiaiThuongKhenThuongCanBoController(HemisContext context)
+            {
+                _context = context;
+            }
+
+            // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo
+            //public async Task<IActionResult> Index()
+            //{
+            //    var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
+            //    return View(await hemisContext.ToListAsync());
+            //}
+            public IActionResult Index(string IDCB, string SapXep)
+            {
+                ViewBag.IdCanBo = IDCB;
+                HemisContext db = new HemisContext();
+                var kq = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.ToList();
+                var danhSach = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
+                    .Include(item => item.IdCanBoNavigation)
+                    .Include(item => item.IdCapKhenThuongNavigation)
+                    .Include(item => item.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+                    .Include(item => item.IdPhuongThucKhenThuongNavigation)
+                    .Include(item => item.IdThiDuaGiaiThuongKhenThuongNavigation)
+                    .Where(item => string.IsNullOrEmpty(IDCB) || item.IdCanBo.ToString() == IDCB)
+                    .ToList();
+
+                var sapXepDanhSach = danhSach;
+
+                if (SapXep == "SapXep")
+                {
+                    sapXepDanhSach = danhSach.OrderBy(x => x.NamKhenThuong).ToList();
+                }
+
+                ViewBag.KqTimKiem = danhSach;
+                ViewBag.KqSapXep = sapXepDanhSach;
+
+                return View(sapXepDanhSach);
+            }
+
+        public IActionResult Delete(int id)
         {
-            ViewBag.IdCanBo = IDCB;
-
-            HemisContext db = new HemisContext();
-
-            var danhSach = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.ToList();
-
-             var kqTimKiem = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
-            .Include(item => item.IdCanBoNavigation)
-            .Include(item => item.IdCapKhenThuongNavigation)
-            .Include(item => item.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-            .Include(item => item.IdPhuongThucKhenThuongNavigation)
-            .Include(item => item.IdThiDuaGiaiThuongKhenThuongNavigation)
-            .Where(item => string.IsNullOrEmpty(IDCB) || item.IdCanBo.ToString()== IDCB)
-            .ToList();
-
-            return View(kqTimKiem);
+            var cb = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Find(id);
+            if (cb == null)
+            {
+                return NotFound();
+            }
+            return View(cb);
         }
         // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -70,10 +88,10 @@ namespace C500Hemis.Controllers.CB
         public IActionResult Create()
         {
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong");
-            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong");
-            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "IdPhuongThucKhenThuong");
-            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "IdThiDuaGiaiThuongKhenThuong");
+            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
+            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "LoaiDanhHieuThiDuaGiaiThuongKhenThuong");
+            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "PhuongThucKhenThuong");
+            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "ThiDuaGiaiThuongKhenThuong");
             return View();
         }
 
@@ -82,7 +100,7 @@ namespace C500Hemis.Controllers.CB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo,IdCanBo,IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong,IdThiDuaGiaiThuongKhenThuong,SoQuyetDinh,IdPhuongThucKhenThuong,NamKhenThuong,IdCapKhenThuong")] TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo)
+        public async Task<IActionResult> Create([Bind("IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo,IdCanBo,LoaiDanhHieuThiDuaGiaiThuongKhenThuong,ThiDuaGiaiThuongKhenThuong,SoQuyetDinh,PhuongThucKhenThuong,NamKhenThuong,CapKhenThuong")] TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo)
         {
             if (ModelState.IsValid)
             {
@@ -91,10 +109,10 @@ namespace C500Hemis.Controllers.CB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCanBo);
-            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
-            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
-            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "IdPhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
-            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "IdThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
+            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
+            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "LoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
+            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "PhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
+            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "ThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
             return View(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
         }
 
@@ -112,10 +130,10 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCanBo);
-            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
-            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
-            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "IdPhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
-            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "IdThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
+            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
+            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "LoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
+            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "PhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
+            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "ThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
             return View(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
         }
 
@@ -149,53 +167,67 @@ namespace C500Hemis.Controllers.CB
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCanBo);
-            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
-            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
-            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "IdPhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
-            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "IdThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
+            ViewData["IdCapKhenThuong"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdCapKhenThuong);
+            ViewData["IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmLoaiDanhHieuThiDuaGiaiThuongKhenThuongs, "IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong", "LoaiDanhHieuThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong);
+            ViewData["IdPhuongThucKhenThuong"] = new SelectList(_context.DmPhuongThucKhenThuongs, "IdPhuongThucKhenThuong", "PhuongThucKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdPhuongThucKhenThuong);
+            ViewData["IdThiDuaGiaiThuongKhenThuong"] = new SelectList(_context.DmThiDuaGiaiThuongKhenThuongs, "IdThiDuaGiaiThuongKhenThuong", "ThiDuaGiaiThuongKhenThuong", tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo.IdThiDuaGiaiThuongKhenThuong);
             return View(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
         }
 
-        // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo = await _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
-                .Include(t => t.IdCanBoNavigation)
-                .Include(t => t.IdCapKhenThuongNavigation)
-                .Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-                .Include(t => t.IdPhuongThucKhenThuongNavigation)
-                .Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation)
-                .FirstOrDefaultAsync(m => m.IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo == id);
-            if (tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo == null)
-            {
-                return NotFound();
-            }
+        //    var tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo = await _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
+        //        .Include(t => t.IdCanBoNavigation)
+        //        .Include(t => t.IdCapKhenThuongNavigation)
+        //        .Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+        //        .Include(t => t.IdPhuongThucKhenThuongNavigation)
+        //        .Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation)
+        //        .FirstOrDefaultAsync(m => m.IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo == id);
+        //    if (tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
-        }
+        //    return View(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
+        //}
 
-        // POST: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo = await _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.FindAsync(id);
+        //    if (tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo != null)
+        //    {
+        //        _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Remove(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
+        //    }
+
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo = await _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.FindAsync(id);
-            if (tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo != null)
+            var tkb = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Find(id);
+            if (tkb != null)
             {
-                _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Remove(tbDanhHieuThiDuaGiaiThuongKhenThuongCanBo);
+                _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Remove(tkb);
+                _context.SaveChanges();
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
+
 
         private bool TbDanhHieuThiDuaGiaiThuongKhenThuongCanBoExists(int id)
         {
