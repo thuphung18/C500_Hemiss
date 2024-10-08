@@ -1,48 +1,48 @@
 ﻿@model C500Hemis.Models.TbTrinhDoTiengDanToc
-
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center">Sửa Thông Tin Trình Độ Tiếng Dân Tộc</h1>
-
-<div class="container">
-    <h4 class="text-center">Thông Tin Trình Độ Tiếng Dân Tộc Của Cán Bộ</h4>
+<div class="container mt-5">
+    <h1 class="text-primary text-center">Chỉnh Sửa Trình Độ Tiếng Dân Tộc</h1>
+    <h4 class="text-secondary text-center">Cập nhật thông tin</h4>
     <hr />
+
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-8">
+            <form asp-action="Edit" class="shadow-lg p-4 bg-light rounded border border-primary">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
                 <input type="hidden" asp-for="IdTrinhDoTiengDanToc" />
 
                 <div class="form-group">
-                    <label asp-for="IdCanBo" class="control-label"> Id Cán bộ</label>
+                    <label asp-for="IdCanBo" class="control-label font-weight-bold">Id Cán bộ</label>
                     <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
                     <span asp-validation-for="IdCanBo" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IdTiengDanToc" class="control-label">Tiếng dân tộc</label>
+                    <label asp-for="IdTiengDanToc" class="control-label font-weight-bold">Tiếng dân tộc</label>
                     <select asp-for="IdTiengDanToc" class="form-control" asp-items="ViewBag.IdTiengDanToc"></select>
                     <span asp-validation-for="IdTiengDanToc" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="IdKhungNangLucNgoaiNgu" class="control-label">Khung năng lực ngoại ngữ</label>
+                    <label asp-for="IdKhungNangLucNgoaiNgu" class="control-label font-weight-bold">Khung năng lực ngoại ngữ</label>
                     <select asp-for="IdKhungNangLucNgoaiNgu" class="form-control" asp-items="ViewBag.IdKhungNangLucNgoaiNgu"></select>
                     <span asp-validation-for="IdKhungNangLucNgoaiNgu" class="text-danger"></span>
                 </div>
 
                 <div class="form-group text-center">
-                    <input type="submit" value="Lưu" class="btn btn-success" />
+                    <input type="submit" value="Lưu Thay Đổi" class="btn btn-success btn-lg" />
                 </div>
             </form>
         </div>
     </div>
-</div>
 
-<div class="text-center mt-3">
-    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-info btn-lg">Quay Lại Danh Sách</a>
+    </div>
 </div>
 
 @section Scripts {
@@ -50,3 +50,52 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    body {
+        background: #DAEBE3;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    h1 {
+        color: #007bff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        margin-bottom: 15px;
+    }
+
+    h4 {
+        color: #6c757d;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            transform: scale(1.05);
+        }
+
+    .border-primary {
+        border-color: #007bff !important;
+    }
+</style>
