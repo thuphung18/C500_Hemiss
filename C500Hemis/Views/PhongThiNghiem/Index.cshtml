@@ -4,12 +4,42 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        .create-new {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+        .action-links a {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body1>
+    <div class="container">
+        <h1 align="center">Phòng Thí Nghiệm</h1>
+        <p>
+            <a class="create-new" asp-action="Create">Tạo Mới</a>
+        </p>
+        <table class="table">
     <thead>
         <tr>
             <th>
@@ -56,4 +86,6 @@
         </tr>
 }
     </tbody>
+    </body1>
 </table>
+</html>
