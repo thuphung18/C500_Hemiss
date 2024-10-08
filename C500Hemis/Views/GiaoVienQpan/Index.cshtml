@@ -1,236 +1,188 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbGiaoVienQpan>
-
+<script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
 @{
     ViewData["Title"] = "Giảng viên QPAN";
     int stt = 0;
 }
 
 
-<h2 class="text-center my-4">Gíao viên quốc phòng an ninh</h2>
+<h3 class="text-center my-4">GIÁO VIÊN QUỐC PHÒNG AN NINH</h3>
+<h5 style="text-align:center ">Gồm có <strong style="color:red">@Model.Count()</strong> giáo viên</h5>
 
 <div class="text-right mb-3">
     <a asp-action="Create" class="btn btn-success">
-        <i class="fas fa-plus"></i> Thêm giáo viên mới
+        <i style="margin-right:10px" class="fas fa-plus"></i> Thêm giáo viên mới
     </a>
 
 </div>
-<table class="table">
+<table id="ntable">
     <thead>
-        <tr>
-            <th>
-                Stt
-                @*  @stt  *@
+        <tr style="background-color:#fafbed ; color:#713d0a">
+            <th class="Id">
+                STT
             </th>
-
-
-            <th>
-                Sở trường công tác
-                @*                 @Html.DisplayNameFor(model => model.SoTruongCongTac) *@
+            <th class="NamBatDauBietPhai">
+                 @Html.DisplayNameFor(model => model.NamBatDauBietPhai) 
             </th>
-            <th>
-                Cán bộ
-                @*                 @Html.DisplayNameFor(model => model.IdCanBoNavigation) *@
+            <th class="SoNamBietPhai">  
+                 @Html.DisplayNameFor(model => model.SoNamBietPhai) 
             </th>
-            <th>
-                Loại giảng viên QP
-                @* @Html.DisplayNameFor(model => model.IdLoaiGiangVienQpNavigation) *@
+            <th class="DaoTaoGdqpan">
+                @Html.DisplayNameFor(model => model.DaoTaoGdqpan) 
             </th>
-            <th>
-                Quân hàm
-                @*  @Html.DisplayNameFor(model => model.IdQuanHamNavigation) *@
+            <th class="SoTruongCongTac">
+                @Html.DisplayNameFor(model => model.SoTruongCongTac) 
             </th>
-            <th></th>
+            <th class="option"></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            var text = stt % 2 == 0 ? "even" : "odd";
+            <tr class="@text">
+                <td class="Id">
                     @(++stt)
                 </td>
+                <td class="NamBatDauBietPhai">
+                    @Html.DisplayFor(modelItem => item.NamBatDauBietPhai)
 
-
-                <td style="text-align:left">
+                </td>
+                <td class="SoNamBietPhai">
+                    @Html.DisplayFor(modelItem => item.SoNamBietPhai)
+                </td>
+                <td class="DaoTaoGdqpan">
+                    @Html.DisplayFor(modelItem => item.DaoTaoGdqpan)
+                </td>
+                <td class="SoTruongCongTac">
                     @Html.DisplayFor(modelItem => item.SoTruongCongTac)
-
                 </td>
-                <td style="text-align:left">
-                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
-                </td>
-                <td style="text-align:left">
-                    @Html.DisplayFor(modelItem => item.IdLoaiGiangVienQpNavigation.IdLoaiGiangVienQuocPhong)
-                </td>
-                <td style="text-align:left">
-                    @Html.DisplayFor(modelItem => item.IdQuanHamNavigation.IdQuanHam)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan" class="button-1" role="button" style="text-align:left"><b class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdGiaoVienQpan" class="button-2" role="button" style="text-align:left"><b class="fa-solid fa-circle-info"></b>Chi tiết</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan" class="button-3" role="button" style="text-align:left"><b class="fa-solid fa-trash"></b>Xóa bỏ</a>
+                <td class="option">
+                    <a class="btn1" id="btn-edit" asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan" ><b style="margin-right:10px" class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
+                    <a class="btn1" id="btn-details" asp-action="Details" asp-route-id="@item.IdGiaoVienQpan"><b style="margin-right:10px" class="fa-solid fa-circle-info"></b>Chi tiết</a> |
+                    <a class="btn1" id="btn-delete" asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan"><b style="margin-right:10px" class="fa-solid fa-trash"></b>Xóa bỏ</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>;
-<!-- Đoạn CSS -->
+
+@* ======== css ========= *@
 <style>
-    th, td {
-        text-align: left !important;
+/* ===== button option ======= */
+    a{
+        text-decoration:none;
     }
-    /* Hình nền cho toàn bộ trang */
-    body {
-        background-color: #fff7ee;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        position: relative;
-    }
-
-    /* Lớp phủ mờ */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff7ee; /* Màu đen mờ với độ mờ 50% */
-            z-index: -1; /* Đặt lớp phủ dưới các nội dung khác */
-        }
-
-    h1, .table {
-        position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
-        color: black; /* Đảm bảo chữ hiển thị rõ ràng */
-    }
-
-    .table {
-        background-color: #fff8ec; /* Nền trắng mờ cho bảng */
-    }
-
-    .thead-dark {
-        background-color: rgba(0, 0, 0, 0.8); /* Nền đen mờ cho tiêu đề bảng */
-    }
-
-    h2 {
-        color: black;
-        font-family: Roboto;
-        font-size: 90px;
-    }
-
-    .btn btn-succcess {
-        background-color: #db6ec3;
-        color: white;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-    .button-1 {
-        background-color: #ff4d4d;
-        border-radius: 8px;
-        border-style: none;
+    .btn1 {
+        
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
         box-sizing: border-box;
         color: #FFFFFF;
         cursor: pointer;
         display: inline-block;
-        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
-        position: relative;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 10px 14px;
         text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
+        text-rendering: geometricprecision;
+        text-transform: none;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
+        vertical-align: middle;
     }
 
-        .button-1:hover,
-        .button-1:focus {
-            background-color: #ff6666;
-            color: white;
-        }
-
-    .button-2 {
-        background-color: #0099ff;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
+    /* ====== table ====== */
+    .even {
+        background-color: #f4e4cb !important; /* Màu cho dòng chẵn */
     }
 
-        .button-2:hover,
-        .button-2:focus {
-            background-color: #4db8ff;
-            color: white;
-        }
-
-    .button-3 {
-        background-color: #ff9900;
-        border-radius: 8px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #FFFFFF;
-        cursor: pointer;
-        display: inline-block;
-        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
+    .odd {
+        background-color: #fafbed !important; /* Màu cho dòng lẻ */
     }
 
-        .button-3:hover,
-        .button-3:focus {
-            background-color: #ff6666;
-            color: white;
+    .Id{
+        width:5%;
+        text-align:left !important;
+    }
+
+    .NamBatDauBietPhai{
+        width:12%;
+    }
+
+    .SoNamBietPhai{
+        width:12%;
+    }
+
+    .DaoTaoGdqpan{
+        width:20%;
+    }
+
+    .SoTruongCongTac{
+        width:20%;
+    }
+    .option{
+        width:31%;
+    }
+    /* delete */
+    #btn-delete{
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    }
+    #btn-delete:hover,
+    #btn-delete:active {
+        background-color: initial;
+        background-position: 0 0;
+        
+        color:red;
+    }
+
+    #btn-delete:active {
+        opacity: .5;
+    }
+
+    /* edit */
+    #btn-edit {
+        background: blue;
+        border: 1px solid blue;
+    }
+    #btn-edit:hover,
+    #btn-edit:active {
+        background-color: initial;
+        background-position: 0 0;
+        color: blue;
+    }
+
+    #btn-edit:active {
+        opacity: .5;
+    }
+
+    /* details */
+    #btn-details {
+        background: yellow;
+        border: 1px solid yellow;
+    }
+
+        #btn-details:hover,
+        #btn-details:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: yellow;
         }
-       
+
+        #btn-details:active {
+            opacity: .5;
+        }
 </style>
+
+@* ======== datatable ======== *@
 <script>
-    new DataTable('.table', {
-        lengthMenu:[5,10,15,20,25,30,35,40,45,50],
+    new DataTable('#ntable', {
+        lengthMenu:[5,10,20,50,100],
         language: {
             processing: "Đang tải dữ liệu",
             search: "Tìm kiếm",
