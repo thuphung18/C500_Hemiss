@@ -35,7 +35,10 @@
             <tr>
                 <td class="lvnc">@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
                 <td>@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
+
+               <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
+
+          
                 <td>@Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
                 <td class="text-center">
                     <a asp-action="Edit" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-warning mx-1">
