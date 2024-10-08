@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.CB
         // GET: KyLuatCanBo
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
+            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
             return View(await hemisContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace C500Hemis.Controllers.CB
 
             var tbKyLuatCanBo = await _context.TbKyLuatCanBos
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(human => human.IdNguoiNavigation)
                 .Include(t => t.IdCapQuyetDinhNavigation)
                 .Include(t => t.IdLoaiKyLuatNavigation)
                 .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);
@@ -43,15 +44,28 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
 
+            ViewBag.Hoten =
+                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
             return View(tbKyLuatCanBo);
         }
 
-        // GET: KyLuatCanBo/Create
+
+        /// <summary>
+        /// Hàm khởi tạo thông tin kỷ luật cán bộ
+        /// phutn_8.10.2024
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong");
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "IdLoaiKyLuat");
+            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+
+            //Lấy danh sách cấp quyết định, hiện thị cụ thể cấp quyết định
+            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
+            
+            //Lấy danh sách các loại kỷ luật, hiện thị cụ thể tên loại kỷ luật
+            //8.10.2024: bổ sung theo góp ý của thầy Phú
+            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat");
             return View();
         }
 
@@ -69,12 +83,16 @@ namespace C500Hemis.Controllers.CB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "IdLoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
         }
 
-        // GET: KyLuatCanBo/Edit/5
+        /// <summary>
+        /// Khởi tạo sưa thông tin kỷ luật
+        /// </summary>
+        /// <param name="id"> là id định danh của Kỷ luật cán bộ trong cơ sở dữ liệu </param>
+        /// <returns>View khởi tạo kỷ luật cán bộ</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,8 +106,8 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "IdLoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
         }
 
@@ -126,8 +144,8 @@ namespace C500Hemis.Controllers.CB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "IdCapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "IdLoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
         }
 

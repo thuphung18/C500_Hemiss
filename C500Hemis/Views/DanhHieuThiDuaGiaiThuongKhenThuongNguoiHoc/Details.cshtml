@@ -1,0 +1,60 @@
+﻿@model C500Hemis.Models.TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NamKhenThuong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NamKhenThuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.IdCapKhenThuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdThiDuaGiaiThuongKhenThuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

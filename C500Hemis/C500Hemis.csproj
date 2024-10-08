@@ -20,9 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\CSVC\" />
+    <Folder Include="Controllers\KHCN\" />
     <Folder Include="Controllers\CSGD\" />
     <Folder Include="Controllers\NDT\" />
+    <Folder Include="Controllers\TS\" />
     <Folder Include="Controllers\TCTS\" />
     <Folder Include="Controllers\NH\" />
     <Folder Include="TaiLieu\" />

@@ -19,11 +19,39 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
+        //    return View(await hemisContext.ToListAsync());
+        //}
+        public IActionResult Index(string IDCB, string SapXep)
         {
-            var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
-            return View(await hemisContext.ToListAsync());
+            ViewBag.IdCanBo = IDCB;
+            HemisContext db = new HemisContext();
+            var kq = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.ToList();
+            var danhSach = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
+                .Include(item => item.IdCanBoNavigation)
+                .Include(item => item.IdCapKhenThuongNavigation)
+                .Include(item => item.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+                .Include(item => item.IdPhuongThucKhenThuongNavigation)
+                .Include(item => item.IdThiDuaGiaiThuongKhenThuongNavigation)
+                .Where(item => string.IsNullOrEmpty(IDCB) || item.IdCanBo.ToString() == IDCB)
+                .ToList();
+
+            var sapXepDanhSach = danhSach;
+
+            if (SapXep == "SapXep")
+            {
+                sapXepDanhSach = danhSach.OrderBy(x => x.NamKhenThuong).ToList();
+            }
+
+            ViewBag.KqTimKiem = danhSach;
+            ViewBag.KqSapXep = sapXepDanhSach;
+
+            return View(sapXepDanhSach);
         }
+
+
 
         // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -183,5 +211,7 @@ namespace C500Hemis.Controllers.CB
         {
             return _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Any(e => e.IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo == id);
         }
+
+
     }
 }

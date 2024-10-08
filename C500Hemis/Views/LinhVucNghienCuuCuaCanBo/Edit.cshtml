@@ -1,12 +1,12 @@
 ﻿@model C500Hemis.Models.TbLinhVucNghienCuuCuaCanBo
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Sửa";
 }
 
-<h1>Edit</h1>
+<h1>Sửa</h1>
 
-<h4>TbLinhVucNghienCuuCuaCanBo</h4>
+<h4>Lĩnh Vực Nghiên Cứu Của Cán Bộ</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -41,9 +41,52 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về danh sách</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<style>
+    /* Định dạng form */
+    form {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Định dạng tiêu đề và nhãn */
+    h1, h4 {
+        text-align: center;
+        color: black;
+    }
+
+    label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /* Định dạng input */
+    input[type="text"], select, input[type="number"] {
+        border: 1px solid #ced4da;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    /* Định dạng nút bấm */
+    .btn-primary {
+        background-color: #28a745;
+        border-color: #28a745;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    /* Định dạng lỗi */
+    .text-danger {
+        color: #dc3545;
+    }
+
+
+</style>
