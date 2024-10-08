@@ -17,7 +17,7 @@ public partial class TbGiangVienNn
     public int? IdNoiDungHoatDongTaiVietNam { get; set; }
     [DisplayName(displayName: "TÊN CÁN BỘ")]
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
-    [DisplayName(displayName: "ID NỘI DUNG HOẠT ĐỘNG TẠI VIỆT NAM")]
+    [DisplayName(displayName: "NỘI DUNG HOẠT ĐỘNG TẠI VIỆT NAM")]
 
     public virtual DmNoiDungHoatDongTaiVietNam? IdNoiDungHoatDongTaiVietNamNavigation { get; set; }
 }
