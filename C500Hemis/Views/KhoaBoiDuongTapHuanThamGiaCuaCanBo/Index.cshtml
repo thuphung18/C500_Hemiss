@@ -16,7 +16,6 @@
         background-repeat: no-repeat;
         background-color: rgb(230,241,216);
     }
-
 </style>
 <body>
 <h1>KHÓA HUẤN LUYỆN TẬP HUẤN THAM GIA CỦA CÁN BỘ</h1>
@@ -91,16 +90,17 @@
             </td>
             <td>
                         <a asp-action="Edit" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.freepik.com/512/32/32355.png" width="16px" title="SỬA" /></a> |
-                        <a asp-action="Details" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.flaticon.com/512/1/1755.png" width="16px" title="CHI TIẾT" /></a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.freepik.com/512/1345/1345874.png" width="16px" title="XÓA"  /></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                            <a asp-action="Details" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.flaticon.com/512/1/1755.png" width="16px" title="CHI TIẾT"/></a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdKhoaBoiDuongTapHuanThamGiaCuaCanBo"><img src="https://cdn-icons-png.freepik.com/512/1345/1345874.png" width="16px" title="XÓA" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
     <form>
         <input type="submit" value="Tạo mới" class="btn btn-primary" style="background-color:darkolivegreen" asp-action="Create" />
     </form>
+
 </body>
 <script>
 
