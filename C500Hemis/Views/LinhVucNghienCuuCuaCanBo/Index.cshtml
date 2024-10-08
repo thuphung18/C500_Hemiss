@@ -21,7 +21,7 @@
 
     <thead class="thead-dark">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)</th>
+            <th class="lvnc">@Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)</th>
             <th>@Html.DisplayNameFor(model => model.SoNamNghienCuu)</th>
             <th>@Html.DisplayNameFor(model => model.IdCanBoNavigation)</th>
             <th>@Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)</th>
@@ -35,7 +35,10 @@
             <tr>
                 <td class="lvnc">@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
                 <td>@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
+
+               <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
+
+          
                 <td>@Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
                 <td class="text-center">
                     <a asp-action="Edit" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-warning mx-1">
@@ -138,6 +141,9 @@
         background-color: #d9534f;
         border-color: #d43f3a;
         background-size: cover;
+    }
+    .lvnc{
+        width:20%;
     }
 
 </style>
