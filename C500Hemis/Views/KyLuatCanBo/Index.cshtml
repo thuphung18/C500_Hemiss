@@ -23,7 +23,7 @@
                 NĂM BỊ KỶ LUẬT
             </th>
             <th>
-                ID CÁN BỘ
+                CÁN BỘ
             </th>
             <th>
                 CẤP QĐ
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.NamBiKyLuat)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
+                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ho) @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ten)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.CapKhenThuong)

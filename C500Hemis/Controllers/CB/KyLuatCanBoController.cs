@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.CB
         // GET: KyLuatCanBo
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
+            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
             return View(await hemisContext.ToListAsync());
         }
 
