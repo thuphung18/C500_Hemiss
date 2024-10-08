@@ -85,7 +85,7 @@ namespace C500Hemis.Controllers.CB
             {
                 return NotFound();
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdNguoiNavigation.name", tbGiangVienNn.IdCanBo);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(human => human.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbGiangVienNn.IdCanBo);
             ViewData["IdNoiDungHoatDongTaiVietNam"] = new SelectList(_context.DmNoiDungHoatDongTaiVietNams, "IdNoiDungHoatDongTaiVietNam", "NoiDungHoatDongTaiVietNam", tbGiangVienNn.IdNoiDungHoatDongTaiVietNam);
             return View(tbGiangVienNn);
         }
