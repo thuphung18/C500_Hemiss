@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.CB
         // GET: KyLuatCanBo
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
+            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
             return View(await hemisContext.ToListAsync());
         }
 
@@ -44,13 +44,15 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
 
+            ViewBag.Hoten =
+                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
             return View(tbKyLuatCanBo);
         }
 
         // GET: KyLuatCanBo/Create
         public IActionResult Create()
         {
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat");
             return View();

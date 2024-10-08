@@ -4,68 +4,71 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 >Thông tin chi tiết</h1>
 
-<div>
-    <h4>TbDoanCongTac</h4>
+
+    
+
+<div class="container">
+    <h4 style="text-align:center">Đoàn công tác</h4>
     <hr />
-    <dl class="row">
+    <dl class="row"  >
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaDoanCongTac)
+            Mã đoàn công tác:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MaDoanCongTac)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenDoanCongTac)
+            Tên đoàn công tác:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.TenDoanCongTac)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinh)
+            Số quyết định:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.SoQuyetDinh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayQuyetDinh)
+            Ngày quyết định:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NgayQuyetDinh)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+            Thời gian bắt đầu:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ThoiGianBatDau)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianketThuc)
+            Thời gian kết thúc:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ThoiGianketThuc)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDichCongTac)
+           Mục đích công tác:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MucDichCongTac)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KetQuaCongTac)
+           Kết quả công tác:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.KetQuaCongTac)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhanLoaiDoanRaDoanVaoNavigation)
+            Phân loại đoàn ra/vào:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdPhanLoaiDoanRaDoanVaoNavigation.IdPhanLoaiDoanRaDoanVao)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdQuocGiaDoanNavigation)
+            Quốc gia đoàn được cử:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdQuocGiaDoanNavigation.IdQuocTich)
@@ -73,6 +76,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdDoanCongTac">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdDoanCongTac"> Sửa </a> |
+    <a asp-action="Index"> Quay lại </a>
 </div>

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 style="text-align:center">Thiết bị phòng thí nghiệm / thực hành trên 500 triệu</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -40,38 +40,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaThietBi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenThietBi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamSanXuat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HangSanXuat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuongThietBiCungLoai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdQuocGiaXuatXuNavigation.IdQuocTich)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdThietBiPtnTh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdThietBiPtnTh">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdThietBiPtnTh">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaThietBi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenThietBi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamSanXuat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HangSanXuat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongThietBiCungLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdQuocGiaXuatXuNavigation.IdQuocTich)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdThietBiPtnTh">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdThietBiPtnTh">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdThietBiPtnTh">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
