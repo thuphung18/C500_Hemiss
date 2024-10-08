@@ -1,17 +1,20 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbNguoi>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Người";
 }
 
-<h1>Index</h1>
+<h1>Danh sách người trong cơ sở dữ liệu (<b>@Model.Count()</b> )</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Thêm mới người</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                STT
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ho)
             </th>
@@ -94,8 +97,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @{
+            int dem = 0;
+        }
+        @foreach (var item in Model) {
+            dem++;
+            <tr>
+            <td>
+                @dem
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ho)
             </td>
