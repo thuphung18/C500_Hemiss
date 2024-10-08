@@ -49,22 +49,11 @@ namespace C500Hemis.Controllers.CB
             return View(tbKyLuatCanBo);
         }
 
-
-        /// <summary>
-        /// Hàm khởi tạo thông tin kỷ luật cán bộ
-        /// phutn_8.10.2024
-        /// </summary>
-        /// <returns></returns>
+        // GET: KyLuatCanBo/Create
         public IActionResult Create()
         {
-            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
-
-            //Lấy danh sách cấp quyết định, hiện thị cụ thể cấp quyết định
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
-            
-            //Lấy danh sách các loại kỷ luật, hiện thị cụ thể tên loại kỷ luật
-            //8.10.2024: bổ sung theo góp ý của thầy Phú
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat");
             return View();
         }
@@ -88,11 +77,7 @@ namespace C500Hemis.Controllers.CB
             return View(tbKyLuatCanBo);
         }
 
-        /// <summary>
-        /// Khởi tạo sưa thông tin kỷ luật
-        /// </summary>
-        /// <param name="id"> là id định danh của Kỷ luật cán bộ trong cơ sở dữ liệu </param>
-        /// <returns>View khởi tạo kỷ luật cán bộ</returns>
+        // GET: KyLuatCanBo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

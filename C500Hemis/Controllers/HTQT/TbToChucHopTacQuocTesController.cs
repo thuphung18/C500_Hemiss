@@ -48,10 +48,6 @@ namespace C500Hemis.Controllers.HTQT
         public IActionResult Create()
         {
             ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich");
-            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "TenHinhThuc"); // Adjust the fields as necessary
-
-
-
             return View();
         }
 
@@ -69,7 +65,6 @@ namespace C500Hemis.Controllers.HTQT
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbToChucHopTacQuocTe.IdQuocGia);
-            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "TenHinhThuc");
             return View(tbToChucHopTacQuocTe);
         }
 

@@ -1,38 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
+using Newtonsoft.Json.Serialization;
 
 namespace C500Hemis.Models;
 
 public partial class TbHopDong
 {
+    [DisplayName(displayName: "Mã số hợp đồng")]
     public int IdHopDong { get; set; }
-
+    [DisplayName(displayName: "Mã số cán bộ")]
     public int? IdCanBo { get; set; }
-    [DisplayName("Số hợp đồng")]
+    [DisplayName(displayName: "Số hợp đồng")]
     public string? SoHopDong { get; set; }
-    [DisplayName("Loại hợp đồng")]
+    [DisplayName(displayName: "Mã số loại hợp đồng")]
     public int? IdLoaiHopDong { get; set; }
-    [DisplayName("Số quyết định")]
+    [DisplayName(displayName: "Số quyết định")]
     public string? SoQuyetDinh { get; set; }
-    [DisplayName("Ngày quyết định")]
+    [DisplayName(displayName: "Ngày quyết định")]
+    [Required(ErrorMessage = "Nhập đủ ngày tháng năm")]
     public DateOnly? NgayQuyetDinh { get; set; }
-    [DisplayName("Có giá trị từ")]
+    [Required(ErrorMessage = "Chỉ nhập ngày")]
+    [DisplayName(displayName: "Nhập đủ ngày tháng năm")]
     public DateOnly? CoGiaTriTu { get; set; }
-    [DisplayName("Có giá trị đến")]
+    [Required(ErrorMessage = "Chỉ nhập ngày")]
+    [DisplayName(displayName: "Nhập đủ ngày tháng năm")]
     public DateOnly? CoGiaTriDen { get; set; }
-    [DisplayName("Tình trạng hợp đồng")]
+    [DisplayName(displayName: "Tình trạng hợp đồng")]
     public int? IdTinhTrangHopDong { get; set; }
-    [DisplayName("Làm việc toàn thời gian")]
+    [DisplayName(displayName: "Làm việc toàn thời gian")]
     public bool? LamViecToanThoiGian { get; set; }
-    
-    [DisplayName("ID Cán bộ")]
+    [DisplayName(displayName: "Cán bộ")]
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
-
-    [DisplayName("ID Hợp đồng")]
+    [DisplayName(displayName: "Loại hợp đồng")]
     public virtual DmLoaiHopDong? IdLoaiHopDongNavigation { get; set; }
-
-    [DisplayName("ID Tình trạng hợp đồng")]
+    [DisplayName(displayName: "Tình trạng hợp đồng")]
     public virtual DmTinhTrangHopDong? IdTinhTrangHopDongNavigation { get; set; }
 }
