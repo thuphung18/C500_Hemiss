@@ -19,10 +19,19 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: QuaTrinhDaoTaoCuaCanBo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Search)
         {
-            var hemisContext = _context.TbQuaTrinhDaoTaoCuaCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdLoaiHinhDaoTaoNavigation).Include(t => t.IdNganhDaoTaoNavigation).Include(t => t.IdQuocGiaDaoTaoNavigation).Include(t => t.IdTrinhDoDaoTaoNavigation);
-            return View(await hemisContext.ToListAsync());
+            // Lấy danh sách tất cả quá trình công tác
+            var id = from s in _context.TbQuaTrinhDaoTaoCuaCanBos select s;
+
+            // Nếu có giá trị tìm kiếm, lọc theo IdCanBo
+            if (Search.HasValue)
+            {
+                id = id.Where(s => s.IdCanBo == Search.Value);
+            }
+
+            // Trả về view với danh sách đã lọc
+            return View(await id.ToListAsync());
         }
 
         // GET: QuaTrinhDaoTaoCuaCanBo/Details/5
