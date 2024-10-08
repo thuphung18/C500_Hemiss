@@ -93,7 +93,7 @@
 <h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
 
 <div class="contain">
-    <table class="table">
+    <table class="table" id="view_table">
         <thead>
 
             <tr style="text-align: center">
@@ -168,15 +168,43 @@
                     </td>
                 </tr>
             }
-            <tr style="text-align: center; cursor: pointer;"
-                onclick="window.location.href='@Url.Action("Create")'">
-                <td class="create" colspan="8" style="text-align: center;">
-                    <b>THÊM HỒ SƠ BỊ KỶ LUẬT</b>
-            </tr>
         </tbody>
     </table>
 </div>
 @section Scripts {
-    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#view_table", {
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                search: "Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary', //Thêm class cho button
+                            text: 'Thêm hồ sơ bị kỷ luật',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        //HTMLDOM Element: https://developer.mozilla.org/en-US/docs/Web/API/Element
+        //Datatables API: https://datatables.net/reference/api/table().header()
+        var row = table.table().header().lastElementChild;
+        row.lastElementChild.remove();
+        row.appendChild(document.createElement('th'));
+        console.log(row.lastElementChild);
+    </script>
 }
