@@ -4,52 +4,66 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<body style="background-color: #e0f7fa; font-family: Arial, sans-serif; margin: 0; padding: 20px;">
 
-<h4>TbNganhGiangDayCuaCanBo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdNganhGiangDayCuaCanBo" class="control-label"></label>
-                <input asp-for="IdNganhGiangDayCuaCanBo" class="form-control" />
-                <span asp-validation-for="IdNganhGiangDayCuaCanBo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCanBo" class="control-label"></label>
-                <select asp-for="IdCanBo" class ="form-control" asp-items="ViewBag.IdCanBo"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTrinhDoDaoTao" class="control-label"></label>
-                <select asp-for="IdTrinhDoDaoTao" class ="form-control" asp-items="ViewBag.IdTrinhDoDaoTao"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNganh" class="control-label"></label>
-                <select asp-for="IdNganh" class ="form-control" asp-items="ViewBag.IdNganh"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="LaNganhChinh" class="control-label"></label>
-                <input asp-for="LaNganhChinh" class="form-control" />
-                <span asp-validation-for="LaNganhChinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DonViThinhGiang" class="control-label"></label>
-                <input asp-for="DonViThinhGiang" class="form-control" />
-                <span asp-validation-for="DonViThinhGiang" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h1 style="color: #00796b; font-size: 36px; text-align: center; margin-bottom: 20px;">Create</h1>
+
+    <h4 style="color: #00796b; font-size: 24px; text-align: center; margin-bottom: 10px;">Ngành Giảng Dạy Của Cán Bộ</h4>
+    <hr style="border-top: 2px solid #00796b; margin-bottom: 20px;" />
+
+    <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+        <div style="width: 100%; max-width: 600px;">
+            <form asp-action="Create" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                <div asp-validation-summary="ModelOnly" style="color: #e74c3c; margin-bottom: 15px;"></div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="IdNganhGiangDayCuaCanBo" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <input asp-for="IdNganhGiangDayCuaCanBo" class="form-control" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;" />
+                    <span asp-validation-for="IdNganhGiangDayCuaCanBo" style="color: #e74c3c; font-size: 14px;"></span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="IdCanBo" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;"></select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="IdTrinhDoDaoTao" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <select asp-for="IdTrinhDoDaoTao" class="form-control" asp-items="ViewBag.IdTrinhDoDaoTao" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;"></select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="IdNganh" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <select asp-for="IdNganh" class="form-control" asp-items="ViewBag.IdNganh" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;"></select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="LaNganhChinh" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <input asp-for="LaNganhChinh" class="form-control" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;" />
+                    <span asp-validation-for="LaNganhChinh" style="color: #e74c3c; font-size: 14px;"></span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="DonViThinhGiang" class="control-label" style="color: #00796b; font-weight: bold;"></label>
+                    <input asp-for="DonViThinhGiang" class="form-control" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;" />
+                    <span asp-validation-for="DonViThinhGiang" style="color: #e74c3c; font-size: 14px;"></span>
+                </div>
+
+                <div class="form-group" style="text-align: center;">
+                    <input type="submit" value="Create" style="background-color: #00796b; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div style="text-align: center;">
+        <a asp-action="Index" style="color: #00796b; text-decoration: none; font-size: 18px;">Back to List</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+</body>
