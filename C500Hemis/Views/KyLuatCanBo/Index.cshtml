@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbKyLuatCanBo>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DANH SÁCH KỶ LUẬT";
 }
 
 <h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
@@ -113,6 +113,8 @@
     
     /* NÚT SỬA, XÓA */
     .button_a_edit, .button_a_del {
+        border-style: solid;
+        border-width: 0.5px;
         font-size: 14px;
         display: inline-block;
         padding: 4px 8px;
@@ -125,7 +127,7 @@
         margin: 2px; /* Khoảng cách giữa các nút */
     }
 
-    /* màu mặc định của 2 nút trùng màu khi hover vào dòng và ngược lại */
+    /* màu mặc định của 2 nút trùng màu khi hover vào dòng */
     .button_a_edit, .button_a_del {
         background-color: #D3D3D3; /* Trùng màu bảng */
     }
@@ -134,18 +136,15 @@
         .button_a_edit:hover {
             background-color: #007bff; /*màu xanh dương*/
             color: white;
-       
- 
         }
 
-    
         /* Khi di chuột vào nút "XÓA" */
         .button_a_del:hover {
             background-color: #dc3545; /* Màu đỏ */
             color: white;
         }
 
-    /* Đặt kiểu bố cục cho div chứa các nút */
+    /* Đặt kiểu bố cục cho khối chứa các nút */
     .edit_del {
         width: 100%;
         display: flex;
