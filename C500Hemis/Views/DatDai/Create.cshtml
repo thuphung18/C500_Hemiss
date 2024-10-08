@@ -4,13 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 align="center">Tạo Mới</h1>
+
+<h1 align="center">Tạo mới</h1>
 
 <h4 align="center">Thông Tin Đất Đai</h4>
 <hr />
 <style>
+    .form-group {
+        padding: 10px 50px;
+        margin-right: 5px;
+        background-color: mintcream;
+        color: black;
+        text-decoration: none;
+        border-radius: 3px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
 
+    .col-md-4 {
+        margin: auto;
+    }
+
+    .row {
+        margin: auto;
+        padding: auto;
+    }
+
+    .action-links a {
+        padding: auto;
+        margin-right: auto;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin: 100px;
+        margin-bottom: auto;
+    }
+
+    . back {
+        padding: auto;
+    }
 </style>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -67,15 +104,17 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
         </form>
     </div>
+
+</div>
+<div class="back">
+    <a asp-action="Index">Trở lại</a>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
