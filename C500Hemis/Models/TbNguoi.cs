@@ -101,4 +101,5 @@ public partial class TbNguoi
     public virtual ICollection<TbDoiTuongThamGium> TbDoiTuongThamGia { get; set; } = new List<TbDoiTuongThamGium>();
     [DisplayName("Học Viên ")]
     public virtual ICollection<TbHocVien> TbHocViens { get; set; } = new List<TbHocVien>();
+    public string name { get => Ho + " " + Ten; }
 }

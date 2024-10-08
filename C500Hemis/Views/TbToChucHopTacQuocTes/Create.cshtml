@@ -38,7 +38,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="ThoiGianKyKet" class="control-label"></label>
-                <input asp-for="ThoiGianKyKet" class="form-control" />
+                <input asp-for="ThoiGianKyKet" class="form-control datetimepicker" />
+
+                
                 <span asp-validation-for="ThoiGianKyKet" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,3 +67,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+$(document).ready(function() {
+    $('.datetimepicker').datetimepicker({
+        format: 'DD-MM-YYYY HH:mm' // hoặc định dạng bạn muốn
+    });
+});
+</script>
