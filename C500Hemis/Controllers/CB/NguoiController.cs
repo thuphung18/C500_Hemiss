@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.CB
         // GET: Nguoi
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbNguois.Include(t => t.IdChucDanhKhoaHocNavigation).Include(t => t.IdChuyenMonDaoTaoNavigation).Include(t => t.IdDanToc1).Include(t => t.IdDanTocNavigation).Include(t => t.IdGiaDinhChinhSachNavigation).Include(t => t.IdGioiTinhNavigation).Include(t => t.IdKhungNangLucNgoaiNgucNavigation).Include(t => t.IdNgoaiNguNavigation).Include(t => t.IdQuocTichNavigation).Include(t => t.IdThuongBinhHangNavigation).Include(t => t.IdTrinhDoDaoTaoNavigation).Include(t => t.IdTrinhDoLyLuanChinhTriNavigation).Include(t => t.IdTrinhDoQuanLyNhaNuocNavigation).Include(t => t.IdTrinhDoTinHocNavigation);
+            var hemisContext = _context.TbNguois.Include(t => t.IdChucDanhKhoaHocNavigation).Include(t => t.IdChuyenMonDaoTaoNavigation).Include(t => t.IdTonGiaoNavigation).Include(t => t.IdDanTocNavigation).Include(t => t.IdGiaDinhChinhSachNavigation).Include(t => t.IdGioiTinhNavigation).Include(t => t.IdKhungNangLucNgoaiNgucNavigation).Include(t => t.IdNgoaiNguNavigation).Include(t => t.IdQuocTichNavigation).Include(t => t.IdThuongBinhHangNavigation).Include(t => t.IdTrinhDoDaoTaoNavigation).Include(t => t.IdTrinhDoLyLuanChinhTriNavigation).Include(t => t.IdTrinhDoQuanLyNhaNuocNavigation).Include(t => t.IdTrinhDoTinHocNavigation);
             return View(await hemisContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace C500Hemis.Controllers.CB
             var tbNguoi = await _context.TbNguois
                 .Include(t => t.IdChucDanhKhoaHocNavigation)
                 .Include(t => t.IdChuyenMonDaoTaoNavigation)
-                .Include(t => t.IdDanToc1)
+                .Include(t => t.IdTonGiaoNavigation)
                 .Include(t => t.IdDanTocNavigation)
                 .Include(t => t.IdGiaDinhChinhSachNavigation)
                 .Include(t => t.IdGioiTinhNavigation)
@@ -62,7 +62,7 @@ namespace C500Hemis.Controllers.CB
         {
             ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc");
             ViewData["IdChuyenMonDaoTao"] = new SelectList(_context.DmNganhDaoTaos, "IdNganhDaoTao", "IdNganhDaoTao");
-            ViewData["IdDanToc"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao");
+            ViewData["IdTonGiao"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao");
             ViewData["IdDanToc"] = new SelectList(_context.DmDanTocs, "IdDanToc", "IdDanToc");
             ViewData["IdGiaDinhChinhSach"] = new SelectList(_context.DmHoGiaDinhChinhSaches, "IdHoGiaDinhChinhSach", "IdHoGiaDinhChinhSach");
             ViewData["IdGioiTinh"] = new SelectList(_context.DmGioiTinhs, "IdGioiTinh", "IdGioiTinh");
@@ -92,7 +92,7 @@ namespace C500Hemis.Controllers.CB
             }
             ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbNguoi.IdChucDanhKhoaHoc);
             ViewData["IdChuyenMonDaoTao"] = new SelectList(_context.DmNganhDaoTaos, "IdNganhDaoTao", "IdNganhDaoTao", tbNguoi.IdChuyenMonDaoTao);
-            ViewData["IdDanToc"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
+            ViewData["IdTonGiao"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
             ViewData["IdDanToc"] = new SelectList(_context.DmDanTocs, "IdDanToc", "IdDanToc", tbNguoi.IdDanToc);
             ViewData["IdGiaDinhChinhSach"] = new SelectList(_context.DmHoGiaDinhChinhSaches, "IdHoGiaDinhChinhSach", "IdHoGiaDinhChinhSach", tbNguoi.IdGiaDinhChinhSach);
             ViewData["IdGioiTinh"] = new SelectList(_context.DmGioiTinhs, "IdGioiTinh", "IdGioiTinh", tbNguoi.IdGioiTinh);
@@ -122,7 +122,7 @@ namespace C500Hemis.Controllers.CB
             }
             ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbNguoi.IdChucDanhKhoaHoc);
             ViewData["IdChuyenMonDaoTao"] = new SelectList(_context.DmNganhDaoTaos, "IdNganhDaoTao", "IdNganhDaoTao", tbNguoi.IdChuyenMonDaoTao);
-            ViewData["IdDanToc"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
+            ViewData["IdTonGiao"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
             ViewData["IdDanToc"] = new SelectList(_context.DmDanTocs, "IdDanToc", "IdDanToc", tbNguoi.IdDanToc);
             ViewData["IdGiaDinhChinhSach"] = new SelectList(_context.DmHoGiaDinhChinhSaches, "IdHoGiaDinhChinhSach", "IdHoGiaDinhChinhSach", tbNguoi.IdGiaDinhChinhSach);
             ViewData["IdGioiTinh"] = new SelectList(_context.DmGioiTinhs, "IdGioiTinh", "IdGioiTinh", tbNguoi.IdGioiTinh);
@@ -171,7 +171,7 @@ namespace C500Hemis.Controllers.CB
             }
             ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbNguoi.IdChucDanhKhoaHoc);
             ViewData["IdChuyenMonDaoTao"] = new SelectList(_context.DmNganhDaoTaos, "IdNganhDaoTao", "IdNganhDaoTao", tbNguoi.IdChuyenMonDaoTao);
-            ViewData["IdDanToc"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
+            ViewData["IdTonGiao"] = new SelectList(_context.DmTonGiaos, "IdTonGiao", "IdTonGiao", tbNguoi.IdDanToc);
             ViewData["IdDanToc"] = new SelectList(_context.DmDanTocs, "IdDanToc", "IdDanToc", tbNguoi.IdDanToc);
             ViewData["IdGiaDinhChinhSach"] = new SelectList(_context.DmHoGiaDinhChinhSaches, "IdHoGiaDinhChinhSach", "IdHoGiaDinhChinhSach", tbNguoi.IdGiaDinhChinhSach);
             ViewData["IdGioiTinh"] = new SelectList(_context.DmGioiTinhs, "IdGioiTinh", "IdGioiTinh", tbNguoi.IdGioiTinh);
@@ -197,7 +197,7 @@ namespace C500Hemis.Controllers.CB
             var tbNguoi = await _context.TbNguois
                 .Include(t => t.IdChucDanhKhoaHocNavigation)
                 .Include(t => t.IdChuyenMonDaoTaoNavigation)
-                .Include(t => t.IdDanToc1)
+                .Include(t => t.IdTonGiaoNavigation)
                 .Include(t => t.IdDanTocNavigation)
                 .Include(t => t.IdGiaDinhChinhSachNavigation)
                 .Include(t => t.IdGioiTinhNavigation)

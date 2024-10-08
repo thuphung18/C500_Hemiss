@@ -4,60 +4,82 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>DELETE </h1>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-dy+Dvhgi7KkKbP4qxFqDncdchCRO1GfBPOIQFxDb/WIOVQ5SWEphI8MNsxF9auhgGChlpS+nfsP24i7IbxNwOQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<h3>Are you sure you want to delete this?</h3>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
 <div>
-    <h4>TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.IdCapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdThiDuaGiaiThuongKhenThuongNavigation.IdThiDuaGiaiThuongKhenThuong)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
+    <table class="table table-striped">
+        <thead style="background-color:#dddddd">
+            <tr>
+                <th>
+                   Số Quyết Định
+                </th>
+                <th>
+                    Năm Khen Thưởng
+                </th>
+                <th>
+                   ID Cán Bộ
+                </th>
+                <th>
+                    ID Cấp Khen Thưởng
+                </th>
+                <th>
+                    ID Loại Danh Hiệu Thi Đua Giải Thưởng Khen Thường
+                </th>
+                <th>
+                    ID Phương Thức Khen Thưởng 
+                </th>
+                <th>
+                    ID Thi Đua Giải Thưởng Khen Thưởng
+                </th>
+            </tr>
+        </thead>
+       
+        <tbody>
+            <tr>
+                <td>@Model.SoQuyetDinh </td>
+                <td>@(Model.NamKhenThuong.HasValue ? Model.NamKhenThuong.Value.ToString("yyyy") : "")</td>
+
+                <td>@Model.IdCanBoNavigation.IdCanBo</td>
+                <td>@Model.IdCapKhenThuongNavigation.IdCapKhenThuong</td>
+                <td>@Model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong</td>
+                <td>@Model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong</td>
+                <td>@Model.IdThiDuaGiaiThuongKhenThuongNavigation.IdThiDuaGiaiThuongKhenThuong</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <h4>Bạn có chắc chắn muốn xóa không?</h4>
+    <form asp-action="Index" asp-controller="LopHoc">
         <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <div>
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+            </button>
+            <a asp-action="Index" asp-controller="TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo" class="btn btn-secondary">Cancel</a>
+        </div>
+
     </form>
-</div>

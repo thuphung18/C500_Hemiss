@@ -3534,8 +3534,8 @@ public partial class HemisContext : DbContext
                 .HasForeignKey(d => d.IdDanToc)
                 .HasConstraintName("FK_tbNguoi_dmDanToc");
 
-            entity.HasOne(d => d.IdDanToc1).WithMany(p => p.TbNguois)
-                .HasForeignKey(d => d.IdDanToc)
+            entity.HasOne(d => d.IdTonGiaoNavigation).WithMany(p => p.TbNguois)
+                .HasForeignKey(d => d.IdTonGiao)
                 .HasConstraintName("FK_tbNguoi_dmTonGiao");
 
             entity.HasOne(d => d.IdGiaDinhChinhSachNavigation).WithMany(p => p.TbNguois)

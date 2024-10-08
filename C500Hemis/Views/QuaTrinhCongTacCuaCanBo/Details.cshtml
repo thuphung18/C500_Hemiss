@@ -1,54 +1,55 @@
 ﻿@model C500Hemis.Models.TbQuaTrinhCongTacCuaCanBo
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi Tiết Quá Trình Công Tác";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Chi Tiết Quá Trình Công Tác</h1>
 
-<div>
-    <h4>TbQuaTrinhCongTacCuaCanBo</h4>
+<div class="container">
+    <h4>Thông tin chi tiết</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TuThangNam)
+        <dt class="col-sm-2">
+            Từ Tháng/Năm
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TuThangNam)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DenThangNam)
+        <dt class="col-sm-2">
+            Đến Tháng/Năm
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DenThangNam)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DonViCongTac)
+        <dt class="col-sm-2">
+            Đơn vị công tác
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DonViCongTac)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+        <dt class="col-sm-2">
+            Id Cán bộ
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdChucDanhGiangVienNavigation)
+        <dt class="col-sm-2">
+            Chức danh giảng viên
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdChucDanhGiangVienNavigation.IdChucDanhGiangVien)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdChucVuNavigation)
+        <dt class="col-sm-2">
+            Chức vụ
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdChucVuNavigation.IdChucVu)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdQuaTrinhCongTacCuaCanBo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdQuaTrinhCongTacCuaCanBo">Sửa</a>
+    <a class="btn btn-secondary" asp-action="Index">Quay lại danh sách</a>
 </div>

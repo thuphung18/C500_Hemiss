@@ -2,38 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    body {
+        background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
+        font-family: Arial, sans-serif; /* Font chữ đẹp */
+    }
+
+    .editdiv {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px; /* Khoảng cách giữa các div */
+        justify-content: center;
+        padding: 20px; /* Khoảng đệm cho toàn bộ khu vực */
+    }
+
+        .editdiv a {
+            text-decoration: none; /* Không gạch chân */
+            color: white; /* Màu chữ */
+            display: block; /* Đảm bảo toàn bộ div có thể nhấp vào */
+            height: 100%; /* Chiếm toàn bộ chiều cao của div */
+            transition: color 0.3s; /* Hiệu ứng chuyển màu chữ */
+        }
+
+    div.ner {
+        margin: 20px;
+        border-radius: 10px;
+        float: left;
+        width: 20vw;
+        background-color: deepskyblue;
+        justify-content: space-around;
+        transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển động */
+        border: 1px solid #ccc; /* Đường viền giữa các thẻ */
+    }
+
+        div.ner:hover {
+            box-shadow: 1px 1px 6px rgb(143, 131, 131);
+            transform: translate(0px, -6px);
+        }
+
+        div.ner img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+    div.textunimg {
+        padding: 15px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333; /* Màu chữ tiêu đề */
+    }
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Nhóm 1 </h1>
 </div>
 
-<h1>Thông tin cán bộ (CB) gồm 22 bảng</h1>
-
-<a href="/Nguoi/Index">CSDL người</a>
-<br />
-
-<a href="/CanBo/Index">Thông tin cán bộ</a>
-<br />
-<a href="/CanBoHuongDanThanhCongSinhVien">Cán bộ hướng dẫn sinh viên</a>
-<br />
-
-<a href="/QuaTrinhCongTacCuaCanBo">QuaTrinhCongTacCuaCanBo</a>
-<br />
-
-<a href="/QuaTrinhDaoTaoCuaCanBo">QuaTrinhDaoTaoCuaCanBo</a>
-<br />
-
-<a href="/TrinhDoTiengDanToc">TrinhDoTiengDanToc</a>
-<br />
-
-<a href="/ChucDanhKhoaHocCuaCanBo">ChucDanhKhoaHocCuaCanBo</a>
-<br />
-
-<a href="/DanhGiaXepLoaiCanBo">DanhGiaXepLoaiCanBo</a>
-<br />
-
-<a href="/DanhHieuThiDuaGiaiThuongKhenThuongCanBo">DanhHieuThiDuaGiaiThuongKhenThuongCanBo</a>
-<br />
+<h1 style="display: flex; justify-content: center;">Thông tin cán bộ</h1>
 
 <a href="/DienBienLuong">DienBienLuong</a>
 <br />
