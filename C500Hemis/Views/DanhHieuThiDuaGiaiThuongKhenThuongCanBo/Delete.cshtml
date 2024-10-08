@@ -61,25 +61,22 @@
         <tbody>
             <tr>
                 <td>@Model.SoQuyetDinh </td>
-                <td>@(Model.NamKhenThuong.HasValue ? Model.NamKhenThuong.Value.ToString("yyyy") : "")</td>
-
-                <td>@Model.IdCanBoNavigation.IdCanBo</td>
-                <td>@Model.IdCapKhenThuongNavigation.IdCapKhenThuong</td>
-                <td>@Model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong</td>
-                <td>@Model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong</td>
-                <td>@Model.IdThiDuaGiaiThuongKhenThuongNavigation.IdThiDuaGiaiThuongKhenThuong</td>
+                <td>@(Model.NamKhenThuong.HasValue ? Model.NamKhenThuong.Value.ToString("dd/MM/yyyy") : "")</td>
+                <td>@Model.IdCanBoNavigation?.IdCanBo</td>
+                <td>@Model.IdCapKhenThuongNavigation?.IdCapKhenThuong</td>
+                <td>@Model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation?.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong</td>
+                <td>@Model.IdPhuongThucKhenThuongNavigation?.IdPhuongThucKhenThuong</td>
+                <td>@Model.IdThiDuaGiaiThuongKhenThuongNavigation?.IdThiDuaGiaiThuongKhenThuong</td>
             </tr>
         </tbody>
     </table>
     <hr />
     <h4>Bạn có chắc chắn muốn xóa không?</h4>
-    <form asp-action="Index" asp-controller="LopHoc">
+    <form asp-action="Index" asp-controller="DanhHieuThiDuaGiaiThuongKhenThuongCanBo">
         <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo" />
         <div>
-            <button type="submit" class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i> Delete
-            </button>
-            <a asp-action="Index" asp-controller="TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo" class="btn btn-secondary">Cancel</a>
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" asp-controller="DanhHieuThiDuaGiaiThuongKhenThuongCanBo" class="btn btn-secondary">Cancel</a>
         </div>
 
     </form>

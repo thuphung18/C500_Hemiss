@@ -21,10 +21,10 @@ namespace C500Hemis.Controllers.CB
         // GET: LinhVucNghienCuuCuaCanBo
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbLinhVucNghienCuuCuaCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdLinhVucNghienCuuNavigation);
+            var hemisContext = _context.TbLinhVucNghienCuuCuaCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdLinhVucNghienCuuNavigation);
             return View(await hemisContext.ToListAsync());
         }
-
+      
         // GET: LinhVucNghienCuuCuaCanBo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -35,13 +35,17 @@ namespace C500Hemis.Controllers.CB
 
             var tbLinhVucNghienCuuCuaCanBo = await _context.TbLinhVucNghienCuuCuaCanBos
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(human => human.IdNguoiNavigation)
                 .Include(t => t.IdLinhVucNghienCuuNavigation)
                 .FirstOrDefaultAsync(m => m.IdLinhVucNghienCuuCuaCanBo == id);
             if (tbLinhVucNghienCuuCuaCanBo == null)
             {
                 return NotFound();
             }
-
+         
+            ViewBag.Hoten =
+                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbLinhVucNghienCuuCuaCanBo.IdCanBoNavigation.IdNguoi).Ho;
+                 
             return View(tbLinhVucNghienCuuCuaCanBo);
         }
 

@@ -37,11 +37,11 @@
                             <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
                         </div>
                         <div class="form-group">
-                            <label asp-for="IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong" class="control-label">ID Loại Danh Hiệu Thi Đua Giải Thưởng Khen Thưởng</label>
+                            <label asp-for="IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong" class="control-label"> Loại Danh Hiệu Thi Đua Giải Thưởng Khen Thưởng</label>
                             <select asp-for="IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong" class="form-control" asp-items="ViewBag.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong"></select>
                         </div>
                         <div class="form-group">
-                            <label asp-for="IdThiDuaGiaiThuongKhenThuong" class="control-label">ID Thi Đua Giải Thưởng Khen Thưởng</label>
+                            <label asp-for="IdThiDuaGiaiThuongKhenThuong" class="control-label"> Thi Đua Giải Thưởng Khen Thưởng</label>
                             <select asp-for="IdThiDuaGiaiThuongKhenThuong" class="form-control" asp-items="ViewBag.IdThiDuaGiaiThuongKhenThuong"></select>
                         </div>
                         <div class="form-group">
@@ -50,7 +50,7 @@
                             <span asp-validation-for="SoQuyetDinh" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="IdPhuongThucKhenThuong" class="control-label">ID Phương Thức Khen Thưởng</label>
+                            <label asp-for="IdPhuongThucKhenThuong" class="control-label"> Phương Thức Khen Thưởng</label>
                             <select asp-for="IdPhuongThucKhenThuong" class="form-control" asp-items="ViewBag.IdPhuongThucKhenThuong"></select>
                         </div>
                         <div class="form-group">
@@ -59,12 +59,16 @@
                             <span asp-validation-for="NamKhenThuong" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="IdCapKhenThuong" class="control-label">ID Cấp Khen Thưởng</label>
+                            <label asp-for="IdCapKhenThuong" class="control-label">Cấp Khen Thưởng</label>
                             <select asp-for="IdCapKhenThuong" class="form-control" asp-items="ViewBag.IdCapKhenThuong"></select>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                            <a asp-action="Index" asp-controller="TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo" class="btn btn-secondary">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-file-earmark-plus-fill"></i>
+                                Create
+                            </button>
+
+                            <a asp-action="Index" asp-controller="DanhHieuThiDuaGiaiThuongKhenThuongCanBo" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left-circle"></i> Cancel
                             </a>
 

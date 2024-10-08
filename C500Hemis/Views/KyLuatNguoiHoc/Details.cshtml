@@ -3,7 +3,69 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        padding: 30px;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    dl.row dt, dl.row dd {
+        margin-bottom: 10px;
+    }
+
+    dt {
+        font-weight: bold;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    dd {
+        margin-bottom: 10px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #dee2e6;
+    }
+    form{
+        padding-bottom: 50px;
+    }
+</style>
 <h1>Details</h1>
 
 <div>
@@ -54,7 +116,7 @@
         </dd>
     </dl>
 </div>
-<div>
+<form>
     <a asp-action="Edit" asp-route-id="@Model?.IdKyLuatNguoiHoc">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</form>

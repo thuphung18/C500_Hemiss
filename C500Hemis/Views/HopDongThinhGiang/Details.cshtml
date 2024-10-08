@@ -3,11 +3,23 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
+<style>
+    .row {
+        width: 1000px;
+        height: 600px;
+        background: transparent;
+        color: black;
+        border-radius: 10px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        padding: 30px 40px;
+        border: 2px solid rgba(255, 255, 255, .2);
+    }
+</style>
+<h1>Chi tiết</h1>
 
 <div>
-    <h4>TbHopDongThinhGiang</h4>
+    <h4>Hợp đồng thỉnh giảng</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -67,6 +79,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHopDongThinhGiang">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdHopDongThinhGiang">Chỉnh sửa</a> |
+    <a asp-action="Index">Trở về danh sách</a>
 </div>

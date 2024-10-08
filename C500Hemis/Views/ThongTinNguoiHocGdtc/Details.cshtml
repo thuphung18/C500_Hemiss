@@ -62,6 +62,10 @@
         border: 0;
         border-top: 1px solid #dee2e6;
     }
+
+    form {
+        padding-bottom: 50px;
+    }
 </style>
 <h1>Thông tin chi tiết</h1>
 
@@ -95,7 +99,7 @@
         </dd>
     </dl>
 </div>
-<div>
+<form>
     <a asp-action="Edit" asp-route-id="@Model?.IdThongTinNguoiHocGdtc">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</form>

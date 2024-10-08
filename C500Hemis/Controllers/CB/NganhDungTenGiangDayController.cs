@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace C500Hemis.Controllers.CB
 {
     public class NganhDungTenGiangDayController : Controller
     {
-        private readonly HemisContext _context;
+        private readonly HemisContext _context; //Kiem tra thong tin dau vao
 
         public NganhDungTenGiangDayController(HemisContext context)
         {
@@ -26,7 +26,7 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: NganhDungTenGiangDay/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id) //Xem chi tiet thong tin 
         {
             if (id == null)
             {
@@ -58,7 +58,7 @@ namespace C500Hemis.Controllers.CB
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdNganhDungTenGiangDay,IdCanBo,IdNganhDaoTao,TrongSo")] TbNganhDungTenGiangDay tbNganhDungTenGiangDay)
+        public async Task<IActionResult> Create([Bind("IdNganhDungTenGiangDay,IdCanBo,IdNganhDaoTao,TrongSo,TenCanBo,TenNganhGiangDay,NgayBatDau,NgayKetThuc")] TbNganhDungTenGiangDay tbNganhDungTenGiangDay)
         {
             if (ModelState.IsValid)
             {
@@ -90,11 +90,11 @@ namespace C500Hemis.Controllers.CB
         }
 
         // POST: NganhDungTenGiangDay/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // To protect from overposting attack
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdNganhDungTenGiangDay,IdCanBo,IdNganhDaoTao,TrongSo")] TbNganhDungTenGiangDay tbNganhDungTenGiangDay)
+        public async Task<IActionResult> Edit(int id, [Bind("IdNganhDungTenGiangDay,IdCanBo,IdNganhDaoTao,TrongSo,TenCanBo,TenNganhGiangDay,NgayBatDau,NgayKetThuc")] TbNganhDungTenGiangDay tbNganhDungTenGiangDay)
         {
             if (id != tbNganhDungTenGiangDay.IdNganhDungTenGiangDay)
             {
@@ -126,7 +126,7 @@ namespace C500Hemis.Controllers.CB
             return View(tbNganhDungTenGiangDay);
         }
 
-        // GET: NganhDungTenGiangDay/Delete/5
+        // GET: NganhDungTenGiangDay/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,7 +146,7 @@ namespace C500Hemis.Controllers.CB
             return View(tbNganhDungTenGiangDay);
         }
 
-        // POST: NganhDungTenGiangDay/Delete/5
+        // POST: NganhDungTenGiangDay/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
