@@ -1,16 +1,57 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang chủ";
 }
+<style>
+    /* Định dạng tiêu đề */
+    .text-center {
+        text-align: center;
+    }
 
+    .display-4 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    /* Định dạng cho h1 và căn giữa */
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Định dạng liên kết */
+    a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+        /* Hiệu ứng khi di chuột vào liên kết */
+        a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+    /* Định dạng dòng ngăn cách */
+    hr {
+        border: 0;
+        height: 1px;
+        background-color: #ccc;
+        margin: 10px 0;
+    }
+
+    /* Khoảng cách giữa các liên kết */
+    a + br {
+        margin-bottom: 10px;
+    }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Nguời học</h1>
 </div>
 
-<h1>Nhóm người học (NH) gồm 10 bảng</h1>
 
-
-<a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Danh hiệu thi đua giải thuỏng khen thưởng người học</a>
+<a href="/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Danh hiệu thi đua giải thưởng khen thưởng người học</a>
 <br />
 <hr />
 
@@ -50,5 +91,3 @@
 <a href="/ThongTinViPham">Thông tin vi phạm</a>
 <br />
 <hr />
-
-

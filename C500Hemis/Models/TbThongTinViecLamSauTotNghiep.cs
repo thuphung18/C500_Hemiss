@@ -7,10 +7,10 @@ namespace C500Hemis.Models;
 
 public partial class TbThongTinViecLamSauTotNghiep
 {
-    [Display(Name = "Họ và tên")]
+    [Display(Name = "Id việc làm sau tốt nghiệp")]
     public int IdThongTinViecLamSauTotNghiep { get; set; }
 
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public int? IdHocVien { get; set; }
 
     [Display(Name = "Tên đơn vị cấp bằng")]
@@ -22,25 +22,27 @@ public partial class TbThongTinViecLamSauTotNghiep
 
     [Display(Name = "hình thức tuyển dụng")]
     public int? IdHinhThucTuyenDung { get; set; }
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 
     [Display(Name = "Thời gian tuyển dụng")]
 
     public DateOnly? ThoiGianTuyenDung { get; set; }
 
-    [Display(Name = "Vị trí việc làm")]
+    [Display(Name = "Id vị trí việc làm")]
     public int? IdViTriViecLam { get; set; }
 
     [Display(Name = "Mức lương khởi điểm")]
 
     public int? MucLuongKhoiDiem { get; set; }
 
-    [Display(Name = "hình thức tuyển dụng")]
+    [Display(Name = "Id hình thức tuyển dụng")]
 
     public virtual DmHinhThucTuyenDung? IdHinhThucTuyenDungNavigation { get; set; }
 
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public virtual TbHocVien? IdHocVienNavigation { get; set; }
 
-    [Display(Name = "Vị trí việc làm")]
+    [Display(Name = "Id vị trí việc làm")]
     public virtual DmViTriViecLam? IdViTriViecLamNavigation { get; set; }
 }

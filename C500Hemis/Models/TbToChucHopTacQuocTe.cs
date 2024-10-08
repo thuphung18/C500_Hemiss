@@ -16,7 +16,7 @@ public partial class TbToChucHopTacQuocTe
 
     public string? NoiDung { get; set; }
 
-    public DateOnly? ThoiGianKyKet { get; set; }
+    public DateTime? ThoiGianKyKet { get; set; }
 
     public string? KetQuaHopTac { get; set; }
 

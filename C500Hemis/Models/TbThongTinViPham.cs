@@ -7,12 +7,14 @@ namespace C500Hemis.Models;
 
 public partial class TbThongTinViPham
 {
-    [Display(Name = "Thông tin vi phạm")]
+    [Display(Name = "Id thông tin vi phạm")]
 
     public int IdThongTinViPham { get; set; }
 
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public int? IdHocVien { get; set; }
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 
     [Display(Name = "Thời gian vi phạm")]
 
@@ -25,12 +27,12 @@ public partial class TbThongTinViPham
 
     public string? HinhThucXuLy { get; set; }
 
-    [Display(Name = "Loại vi phạm")]
+    [Display(Name = "Id loại vi phạm")]
     public int? IdLoaiViPham { get; set; }
 
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public virtual TbHocVien? IdHocVienNavigation { get; set; }
 
-    [Display(Name = "Loại vi phạm")]
+    [Display(Name = "Id loại vi phạm")]
     public virtual DmLoaiViPham? IdLoaiViPhamNavigation { get; set; }
 }

@@ -16,7 +16,7 @@ public partial class TbDoanCongTac
 
     public string? SoQuyetDinh { get; set; }
 
-    public DateOnly? NgayQuyetDinh { get; set; }
+    public DateTime? NgayQuyetDinh { get; set; }
 
     public int? IdQuocGiaDoan { get; set; }
 
