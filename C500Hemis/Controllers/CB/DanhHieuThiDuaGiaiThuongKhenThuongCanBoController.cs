@@ -19,12 +19,30 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
+        //    return View(await hemisContext.ToListAsync());
+        //}
+        public IActionResult Index(string IDCB)
         {
-            var hemisContext = _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdCapKhenThuongNavigation).Include(t => t.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation).Include(t => t.IdPhuongThucKhenThuongNavigation).Include(t => t.IdThiDuaGiaiThuongKhenThuongNavigation);
-            return View(await hemisContext.ToListAsync());
-        }
+            ViewBag.IdCanBo = IDCB;
 
+            HemisContext db = new HemisContext();
+
+            var danhSach = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.ToList();
+
+             var kqTimKiem = db.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos
+            .Include(item => item.IdCanBoNavigation)
+            .Include(item => item.IdCapKhenThuongNavigation)
+            .Include(item => item.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+            .Include(item => item.IdPhuongThucKhenThuongNavigation)
+            .Include(item => item.IdThiDuaGiaiThuongKhenThuongNavigation)
+            .Where(item => string.IsNullOrEmpty(IDCB) || item.IdCanBo.ToString()== IDCB)
+            .ToList();
+
+            return View(kqTimKiem);
+        }
         // GET: DanhHieuThiDuaGiaiThuongKhenThuongCanBo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -183,5 +201,7 @@ namespace C500Hemis.Controllers.CB
         {
             return _context.TbDanhHieuThiDuaGiaiThuongKhenThuongCanBos.Any(e => e.IdDanhHieuThiDuaGiaiThuongKhenThuongCanBo == id);
         }
+       
+
     }
 }

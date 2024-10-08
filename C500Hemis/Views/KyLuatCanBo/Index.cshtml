@@ -1,72 +1,155 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbKyLuatCanBo>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DANH SÁCH KỶ LUẬT";
 }
 
 <h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
 
 <table class="table">
     <thead>
+        
         <tr style="text-align: center">
             <th>
-                Lý do
+                LÝ DO
             </th>
             <th>
-                Ngày nhận QĐ
+                NGÀY NHẬN QĐ
             </th>
             <th>
-                Số QĐ
+               SỐ QĐ
             </th>
             <th>
-                Năm bị kỷ luật
+                NĂM BỊ KỶ LUẬT
             </th>
             <th>
-                ID Cán bộ
+                CÁN BỘ
             </th>
             <th>
-                Cấp QĐ
+                CẤP QĐ
             </th>
             <th>
-                Hình thức
+                HÌNH THỨC
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="text-align: center">
+@foreach (var item in Model) {
+            <tr style="text-align: center; cursor: pointer;"
+               
+                onclick="window.location.href='@Url.Action("Details", new { id = item.IdKyLuatCanBo })'">
                 <td style="text-align: left">
-                    @Html.DisplayFor(modelItem => item.LyDo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NgayThangNamQuyetDinh)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoQuyetDinh)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NamBiKyLuat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.CapKhenThuong)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdLoaiKyLuatNavigation.LoaiKyLuat)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdKyLuatCanBo">Sửa</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdKyLuatCanBo">Chi tiết</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdKyLuatCanBo">Xóa</a>
-                </td>
-            </tr>
-        }
+                @Html.DisplayFor(modelItem => item.LyDo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThangNamQuyetDinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoQuyetDinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamBiKyLuat)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ho) @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.CapKhenThuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiKyLuatNavigation.LoaiKyLuat)
+            </td>
+            <td>
+                    <div class="edit_del">
+                        
+                            <a class ="button_a_edit" asp-action="Edit" asp-route-id="@item.IdKyLuatCanBo">SỬA</a>
+                         
+                            <a class ="button_a_del" asp-action="Delete" asp-route-id="@item.IdKyLuatCanBo">XÓA</a>
+                            
+                       
+                    </div>
+
+            </td>
+        </tr>
+}
+        <tr style="text-align: center; cursor: pointer;"
+            onclick="window.location.href='@Url.Action("Create")'">
+            <td class="create" colspan="8" style="text-align: center;">
+                <b>THÊM HỒ SƠ BỊ KỶ LUẬT</b>
+        </tr>
     </tbody>
 </table>
-<p>
-    <a asp-action="Create">THÊM HỒ SƠ KỶ LUẬT</a>
-</p>
+
+<style>
+    /* HỒ SƠ CÁN BỘ BỊ KỶ LUẬT */
+    h1 {font-size: 40px;}
+
+    /* BẢNG CHUNG */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #f1f3f3;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    }
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 5px solid #ddd;
+        }
+        table th {
+            background-color: #AAAAAA;
+            color: black;
+            font-size: 16px;
+        }
+        table tr:hover {
+            background-color: #D3D3D3;
+        }
+    p {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    /* NÚT SỬA, XÓA */
+    .button_a_edit, .button_a_del {
+        border-style: solid;
+        border-width: 0.5px;
+        font-size: 14px;
+        display: inline-block;
+        padding: 4px 8px;
+        text-decoration: none;
+        color: black;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột */
+        margin: 2px; /* Khoảng cách giữa các nút */
+    }
+
+    /* màu mặc định của 2 nút trùng màu khi hover vào dòng */
+    .button_a_edit, .button_a_del {
+        background-color: #D3D3D3; /* Trùng màu bảng */
+    }
+
+        /* Khi di chuột vào nút "SỬA" */
+        .button_a_edit:hover {
+            background-color: #007bff; /*màu xanh dương*/
+            color: white;
+        }
+
+        /* Khi di chuột vào nút "XÓA" */
+        .button_a_del:hover {
+            background-color: #dc3545; /* Màu đỏ */
+            color: white;
+        }
+
+    /* Đặt kiểu bố cục cho khối chứa các nút */
+    .edit_del {
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Canh giữa các nút trong div */
+        align-items: center;
+    }
+
+</style>

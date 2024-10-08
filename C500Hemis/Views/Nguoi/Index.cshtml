@@ -1,17 +1,20 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbNguoi>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Người";
 }
 
-<h1>Index</h1>
+<h1>Danh sách người trong cơ sở dữ liệu (<b>@Model.Count()</b> )</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Thêm mới người</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                STT
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ho)
             </th>
@@ -55,7 +58,7 @@
                 @Html.DisplayNameFor(model => model.IdChuyenMonDaoTaoNavigation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdDanToc1)
+                @Html.DisplayNameFor(model => model.IdTonGiaoNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdDanTocNavigation)
@@ -94,8 +97,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @{
+            int dem = 0;
+        }
+        @foreach (var item in Model) {
+            dem++;
+            <tr>
+            <td>
+                @dem
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ho)
             </td>
@@ -139,7 +149,7 @@
                 @Html.DisplayFor(modelItem => item.IdChuyenMonDaoTaoNavigation.IdNganhDaoTao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdDanToc1.IdTonGiao)
+                @Html.DisplayFor(modelItem => item.IdTonGiaoNavigation.IdTonGiao)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdDanTocNavigation.IdDanToc)
