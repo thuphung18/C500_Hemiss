@@ -44,6 +44,8 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
 
+            ViewBag.Hoten =
+                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
             return View(tbKyLuatCanBo);
         }
 

@@ -9,52 +9,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin cơ sở vật chất</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+        .body {
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
         }
 
-        a1 {
-            display: block;
-            padding: 10px;
-            background: #ffcccc;
-            color: #fff;
-            text-align: center;
+        .container .button-csvc {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-csvc .link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             text-decoration: none;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            margin-right: 20px;
+            font-size: 22px;
+            font-weight: 500;
+            color: black;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 align="center">Thông tin cơ sở vật chất</h1>
+        <h1 align="center">THÔNG TIN CƠ SỞ VẬT CHẤT </h1>
+        <div class="button-csvc">
+            <a href="/DatDai" class="link">Đất Đai</a>
+            <hr />
 
-      <a1>  <a href="/DatDai">Đất Đai</a> </a1>
-        <hr />
+            <a href="/PhongHocGiangDuongHoiTruong" class="link">Phòng Học, Giảng Đường, Hội Trường</a>
+            <hr />
 
-        <a1>  <a href="/PhongHocGiangDuongHoiTruong">Phòng Học, Giảng Đường, Hội Trường</a> </a1>
-        <hr />
+            <a href="/KiTucXa" class="link">Kí Túc Xá</a>
+            <hr />
 
-        <a1>   <a href="/KiTucXa">Kí Túc Xá</a> </a1>
-        <hr />
+            <a href="/CongTrinhCoSoVatChat" class="link">Công Trình Cơ Sở Vật Chất</a>
+            <hr />
 
-        <a1> <a href="/CongTrinhCoSoVatChat">Công Trình Cơ Sở Vật Chất</a> </a1>
-        <hr />
+            <a href="/PhongThiNghiem" class="link">Phòng Thí Nghiệm</a>
+            <hr />
 
-        <a1>  <a href="/PhongThiNghiem">Phòng Thí Nghiệm</a> </a1>
-        <hr />
+            <a href="/PhongThucHanh" class="link">Phòng Thực Hành</a>
+            <hr />
 
-        <a1>   <a href="/PhongThucHanh">Phòng Thực Hành</a> </a1>
-        <hr />
+            <a href="/ThietBiPtnThtren500Tr" class="link">Thiết Bị Phòng</a>
+            <hr />
+        </div>
 
-        <a1>  <a href="/ThietBiPtnThtren500Tr">Thiết Bị Phòng</a> </a1>
-        <hr />
     </div>
 </body>
 </html>
