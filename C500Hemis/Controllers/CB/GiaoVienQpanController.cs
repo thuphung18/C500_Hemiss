@@ -50,7 +50,7 @@ namespace C500Hemis.Controllers.CB
         public IActionResult Create()
         {
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdLoaiGiangVienQp"] = new SelectList(_context.DmLoaiGiangVienQuocPhongs, "IdLoaiGiangVienQuocPhong", "IdLoaiGiangVienQuocPhong");
+            ViewData["IdLoaiGiangVienQp"] = new SelectList(_context.DmLoaiGiangVienQuocPhongs, "IdLoaiGiangVienQuocPhong", "IdLoaiGiangVienQuocPhong");  //trường đầu tiên là value
             ViewData["IdQuanHam"] = new SelectList(_context.DmQuanHams, "IdQuanHam", "IdQuanHam");
             return View();
         }
