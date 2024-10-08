@@ -1,117 +1,47 @@
-﻿@model IEnumerable<C500Hemis.Models.TbLinhVucNghienCuuCuaCanBo>
+﻿@model IEnumerable<C500Hemis.Models.TbTrinhDoTiengDanToc>
 
 @{
-    ViewData["Title"] = "Lĩnh vực nghiên cứu của cán bộ";
+    ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center my-4">Lĩnh vực nghiên cứu của cán bộ</h1>
+<h1>Index</h1>
 
-<div class="text-right mb-3">
-    <a asp-action="Create" class="btn btn-success">
-        <i class="fas fa-plus"></i> Thêm mới
-    </a>
-</div>
-
-<table class="table table-striped table-hover table-bordered bg-white rounded shadow">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <thead class="thead-dark">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)</th>
-            <th>@Html.DisplayNameFor(model => model.SoNamNghienCuu)</th>
-            <th>@Html.DisplayNameFor(model => model.IdCanBoNavigation)</th>
-            <th>@Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)</th>
-            <th class="text-center">Hành động</th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdKhungNangLucNgoaiNguNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTiengDanTocNavigation)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
-                <td>@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
-                <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-warning mx-1">
-                        <i class="fas fa-edit"></i> Sửa
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-info mx-1">
-                        <i class="fas fa-info-circle"></i> Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-danger mx-1">
-                        <i class="fas fa-trash-alt"></i> Xóa
-                    </a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdKhungNangLucNgoaiNguNavigation.IdKhungNangLucNgoaiNgu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTiengDanTocNavigation.IdTiengDanToc)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdTrinhDoTiengDanToc">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdTrinhDoTiengDanToc">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTrinhDoTiengDanToc">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-<!-- Đoạn CSS -->
-<style>
-    /* Hình nền cho toàn bộ trang với logo */
-    <style >
-    /* Hình nền cho toàn bộ trang với logo */
-    body {
-        position: relative;
-        font-family: 'Times New Roman', Times, serif, sans-serif;
-    }
-
-
-
-    h1 {
-        color: #333;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .table {
-        background-color: rgba(255, 255, 255, 0.95); /* Nền trắng mờ cho bảng */
-    }
-
-    .table-bordered {
-        border: 1px solid #ddd;
-    }
-
-    .table th, .table td {
-        vertical-align: middle;
-        padding: 10px;
-    }
-
-    /* Nút chỉnh sửa */
-    .btn {
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-
-    /* Hiệu ứng hover cho bảng */
-    .table-hover tbody tr:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-
-    .thead-dark {
-        background-color: #343a40;
-        color: white;
-    }
-
-    /* Nền trắng với bóng đổ */
-    .shadow {
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Nút hành động */
-    .btn-warning {
-        background-color: #f0ad4e;
-        border-color: #eea236;
-    }
-
-    .btn-info {
-        background-color: #5bc0de;
-        border-color: #46b8da;
-    }
-
-    .btn-danger {
-        background-color: #d9534f;
-        border-color: #d43f3a;
-    }
-</style>

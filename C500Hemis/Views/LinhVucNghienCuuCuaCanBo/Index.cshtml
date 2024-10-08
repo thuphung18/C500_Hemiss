@@ -3,9 +3,6 @@
 @{
     ViewData["Title"] = "Lĩnh vực nghiên cứu của cán bộ";
 }
-<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 <h1 class="text-center my-4">Lĩnh vực nghiên cứu của cán bộ</h1>
 
@@ -15,39 +12,34 @@
     </a>
 </div>
 
-<table id="ntable" class="table table-striped table-hover">
+<table class="table table-striped table-hover table-bordered bg-white rounded shadow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <thead class="thead-dark">
         <tr>
-            <th class="lvnc">@Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)</th>
-            <th class="snnc">@Html.DisplayNameFor(model => model.SoNamNghienCuu)</th>
+            <th>@Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)</th>
+            <th>@Html.DisplayNameFor(model => model.SoNamNghienCuu)</th>
             <th>@Html.DisplayNameFor(model => model.IdCanBoNavigation)</th>
             <th>@Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)</th>
-            @*    <th class="text-center">Hành động</th> *@
-            <th>
-
-            </th>
+            <th class="text-center">Hành động</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
-
         {
             <tr>
-                <td class="lvnc">@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
-                <td class="snnc">@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
+                <td>@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
+                <td>@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
                 <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
                 <td>@Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
                 <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-warning btn-sm">
-
+                    <a asp-action="Edit" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-warning mx-1">
                         <i class="fas fa-edit"></i> Sửa
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-info btn-sm">
+                    <a asp-action="Details" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-info mx-1">
                         <i class="fas fa-info-circle"></i> Chi tiết
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-danger ms-xl-1">
+                    <a asp-action="Delete" asp-route-id="@item.IdLinhVucNghienCuuCuaCanBo" class="btn btn-sm btn-danger mx-1">
                         <i class="fas fa-trash-alt"></i> Xóa
                     </a>
                 </td>
@@ -55,86 +47,71 @@
         }
     </tbody>
 </table>
-<script>
-    new DataTable('#ntable', {
-        searching: true, // Mặc định là true, set false để tắt chức năng search
-        processing: true,
-        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
-        lengthMenu: [2, 3, 4, 5, 6],
-        language: {
-            processing: "Message khi đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
-            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
-            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
-            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
-            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
-            loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
-            },
-            aria: {
-                sortAscending: ": Message khi đang sắp xếp theo column",
-                sortDescending: ": Message khi đang sắp xếp theo column",
-            }
-        },
-    });
-</script>
 
-
-<!-- ĐOạn CSS -->
+<!-- Đoạn CSS -->
 <style>
-    /* Hình nền cho toàn bộ trang */
+    /* Hình nền cho toàn bộ trang với logo */
+    <style >
+    /* Hình nền cho toàn bộ trang với logo */
     body {
-        position: revert-layer;
-        background-color: palegreen;
+        position: relative;
+        font-family: 'Times New Roman', Times, serif, sans-serif;
     }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://static.wixstatic.com/media/9d8ed5_80206ab61cf14532924c2295418701a0~mv2.jpg/v1/fit/w_1000%2Ch_710%2Cal_c%2Cq_80/file.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            opacity: 0.5; /* Độ mờ của ảnh */
-            z-index: -1;
-        }
-        /* Lớp phủ mờ */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Màu đen mờ với độ mờ 50% */
-            z-index: -1; /* Đặt lớp phủ dưới các nội dung khác */
-        }
 
-       .H1{
-             position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
-        color: white; /* Đảm bảo chữ hiển thị rõ ràng */
-       }
-      .table {
-        position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
-        color: white; /* Đảm bảo chữ hiển thị rõ ràng */
+
+    h1 {
+        color: #333;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .table {
-        background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ cho bảng */
+        background-color: rgba(255, 255, 255, 0.95); /* Nền trắng mờ cho bảng */
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        padding: 10px;
+    }
+
+    /* Nút chỉnh sửa */
+    .btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /* Hiệu ứng hover cho bảng */
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.05);
     }
 
     .thead-dark {
-        background-color: rgba(0, 0, 0, 0.8); /* Nền đen mờ cho tiêu đề bảng */
+        background-color: #343a40;
+        color: white;
+    }
+
+    /* Nền trắng với bóng đổ */
+    .shadow {
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Nút hành động */
+    .btn-warning {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+
+    .btn-info {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+
+    .btn-danger {
+        background-color: #d9534f;
+        border-color: #d43f3a;
     }
 </style>
