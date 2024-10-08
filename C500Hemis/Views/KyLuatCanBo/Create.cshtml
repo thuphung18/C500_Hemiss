@@ -99,14 +99,26 @@
         margin-bottom: 20px;
     }
 
+    .background-image {
+        position: absolute; /* Đặt ảnh nền ở vị trí tuyệt đối */
+        top: 0; /* Canh từ trên cùng */
+        left: 0; /* Canh từ bên trái */
+        width: 100%; /* Chiều rộng 100% */
+        height: 100%; /* Chiều cao 100% */
+       background: url('/images/hinh-nen-dong-dep-55.gif') no-repeat center center/cover;
+        z-index: -1; /* Đẩy ảnh nền xuống 1 layout */
+    }
+
+    
+
 </style>
 
-<h1>THÊM HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
 
-<hr />
 <div class="row">
+    <div class="background-image"></div>
     <div class="col-md-6">
         <form asp-action="Create">
+            <h1>THÊM HỒ SƠ KỶ LUẬT</h1>
             <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
 
             <div class="form-group">
