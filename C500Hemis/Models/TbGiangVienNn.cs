@@ -9,7 +9,7 @@ public partial class TbGiangVienNn
 {
 
     public int IdGvnn { get; set; }
-
+    [DisplayName(displayName: "Tên Cán Bộ")]
     public int? IdCanBo { get; set; }
     [DisplayName(displayName: "CƠ QUAN CHỦ QUẢN Ở NƯỚC NGOÀI")]
     public string? CoQuanChuQuanOnuocNgoai { get; set; }

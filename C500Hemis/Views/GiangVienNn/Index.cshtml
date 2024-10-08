@@ -147,14 +147,14 @@
                 {
                     <tr>
                         <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
+                            @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CoQuanChuQuanOnuocNgoai)
                         </td>
 
                         <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.IdNoiDungHoatDongTaiVietNamNavigation.IdNoiDungHoatDongTaiVietNam)
+                            @Html.DisplayFor(modelItem => item.IdNoiDungHoatDongTaiVietNamNavigation.NoiDungHoatDongTaiVietNam)
                         </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.IdGvnn" class="btn btn-edit">
