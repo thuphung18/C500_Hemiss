@@ -71,8 +71,8 @@ public partial class TbNguoi
     public virtual DmChucDanhKhoaHoc? IdChucDanhKhoaHocNavigation { get; set; }
     [DisplayName("Chuyên Môn Đào Tạo Navigation ")]
     public virtual DmNganhDaoTao? IdChuyenMonDaoTaoNavigation { get; set; }
-    [DisplayName("Dân Tộc ")]
-    public virtual DmTonGiao? IdDanToc1 { get; set; }
+    [DisplayName("Tôn Giáo Navigation ")]
+    public virtual DmTonGiao? IdTonGiaoNavigation { get; set; }
     [DisplayName("Dân Tộc Navigation ")]
     public virtual DmDanToc? IdDanTocNavigation { get; set; }
     [DisplayName("Gia Đình Chính Sách Navigation ")]
