@@ -1,72 +1,257 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbGiaoVienQpan>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Giảng viên QPAN";
+    int stt = 0;
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2 class="text-center my-4">Gíao viên quốc phòng an ninh</h2>
+
+<div class="text-right mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Thêm giáo viên mới
+    </a>
+
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NamBatDauBietPhai)
+                Stt
+                @*  @stt  *@
+            </th>
+
+
+            <th>
+                Sở trường công tác
+                @*                 @Html.DisplayNameFor(model => model.SoTruongCongTac) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoNamBietPhai)
+                Cán bộ
+                @*                 @Html.DisplayNameFor(model => model.IdCanBoNavigation) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DaoTaoGdqpan)
+                Loại giảng viên QP
+                @* @Html.DisplayNameFor(model => model.IdLoaiGiangVienQpNavigation) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoTruongCongTac)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiGiangVienQpNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdQuanHamNavigation)
+                Quân hàm
+                @*  @Html.DisplayNameFor(model => model.IdQuanHamNavigation) *@
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamBatDauBietPhai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoNamBietPhai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DaoTaoGdqpan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoTruongCongTac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiGiangVienQpNavigation.IdLoaiGiangVienQuocPhong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdQuanHamNavigation.IdQuanHam)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGiaoVienQpan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(++stt)
+                </td>
+
+
+                <td style="text-align:left">
+                    @Html.DisplayFor(modelItem => item.SoTruongCongTac)
+
+                </td>
+                <td style="text-align:left">
+                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
+                </td>
+                <td style="text-align:left">
+                    @Html.DisplayFor(modelItem => item.IdLoaiGiangVienQpNavigation.IdLoaiGiangVienQuocPhong)
+                </td>
+                <td style="text-align:left">
+                    @Html.DisplayFor(modelItem => item.IdQuanHamNavigation.IdQuanHam)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdGiaoVienQpan" class="button-1" role="button" style="text-align:left"><b class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdGiaoVienQpan" class="button-2" role="button" style="text-align:left"><b class="fa-solid fa-circle-info"></b>Chi tiết</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdGiaoVienQpan" class="button-3" role="button" style="text-align:left"><b class="fa-solid fa-trash"></b>Xóa bỏ</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-a
+<script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>;
+<!-- Đoạn CSS -->
+<style>
+    th, td {
+        text-align: left !important;
+    }
+    /* Hình nền cho toàn bộ trang */
+    body {
+        background-color: #fff7ee;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+    }
+
+    /* Lớp phủ mờ */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff7ee; /* Màu đen mờ với độ mờ 50% */
+            z-index: -1; /* Đặt lớp phủ dưới các nội dung khác */
+        }
+
+    h1, .table {
+        position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
+        color: black; /* Đảm bảo chữ hiển thị rõ ràng */
+    }
+
+    .table {
+        background-color: #fff8ec; /* Nền trắng mờ cho bảng */
+    }
+
+    .thead-dark {
+        background-color: rgba(0, 0, 0, 0.8); /* Nền đen mờ cho tiêu đề bảng */
+    }
+
+    h2 {
+        color: black;
+        font-family: Roboto;
+        font-size: 90px;
+    }
+
+    .btn btn-succcess {
+        background-color: #db6ec3;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .button-1 {
+        background-color: #ff4d4d;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        .button-1:hover,
+        .button-1:focus {
+            background-color: #ff6666;
+            color: white;
+        }
+
+    .button-2 {
+        background-color: #0099ff;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        .button-2:hover,
+        .button-2:focus {
+            background-color: #4db8ff;
+            color: white;
+        }
+
+    .button-3 {
+        background-color: #ff9900;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+        .button-3:hover,
+        .button-3:focus {
+            background-color: #ff6666;
+            color: white;
+        }
+       
+</style>
+<script>
+    new DataTable('.table', {
+        lengthMenu:[5,10,15,20,25,30,35,40,45,50],
+        language: {
+            processing: "Đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Tổng cộng _TOTAL_ bản ghi",
+            infoEmpty: "Chưa có giáo viên nào trong danh sách",
+            infoFiltered: "",
+            infoPostFix: "", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Không tìm thấy dữ liệu",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "<<",
+                previous: "<",
+                next: ">",
+                last: ">>"
+            },
+            aria: {
+                sortAscending: ": Đang sắp xếp",
+                sortDescending: ": Đang sắp xếp",
+            }
+        },
+    });
+</script>

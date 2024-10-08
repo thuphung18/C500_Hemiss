@@ -9,13 +9,13 @@ public partial class TbGiangVienNn
 {
 
     public int IdGvnn { get; set; }
-
+  
     public int? IdCanBo { get; set; }
     [DisplayName(displayName: "CƠ QUAN CHỦ QUẢN Ở NƯỚC NGOÀI")]
     public string? CoQuanChuQuanOnuocNgoai { get; set; }
 
     public int? IdNoiDungHoatDongTaiVietNam { get; set; }
-    [DisplayName(displayName: "ID CÁN BỘ")]
+    [DisplayName(displayName: "TÊN CÁN BỘ")]
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
     [DisplayName(displayName: "ID NỘI DUNG HOẠT ĐỘNG TẠI VIỆT NAM")]
 
