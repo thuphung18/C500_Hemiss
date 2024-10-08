@@ -1,13 +1,13 @@
 ﻿@model C500Hemis.Models.TbGiaoVienQpan
-
+<link href="./css/GdQpAn/Details.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Mô tả";
 }
 
-<h1>Details</h1>
+<h1>Mô tả</h1>
 
 <div>
-    <h4>TbGiaoVienQpan</h4>
+    <h4>Thông tin giáo viên</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -55,6 +55,14 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdGiaoVienQpan">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdGiaoVienQpan">Chỉnh sửa</a> |
+    <a asp-action="Delete" asp-route-id="@Model?.IdGiaoVienQpan">Xoá</a> |
+    <a asp-action="Index">Quay lại</a>
 </div>
+
+
+<style>
+    a{
+        text-decoration:none;
+    }
+</style>

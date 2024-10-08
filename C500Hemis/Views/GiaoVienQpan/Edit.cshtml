@@ -1,12 +1,11 @@
 ﻿@model C500Hemis.Models.TbGiaoVienQpan
-
+<link href="./css/GdQpAn/Edit.css" rel="stylesheet" />
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh sửa";
 }
+<h1>Chỉnh sửa</h1>
 
-<h1>Edit</h1>
-
-<h4>TbGiaoVienQpan</h4>
+<h4>Thông tin giáo viên</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -56,9 +55,14 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+ <style>
+     a{
+         text-decoration:none;
+     }
+ </style> 
