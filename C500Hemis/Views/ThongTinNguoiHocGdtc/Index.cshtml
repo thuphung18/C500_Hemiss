@@ -3,23 +3,35 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<style>
+    p a {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+</style>
+<h1>Thông tin người học GDTC</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo mới</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.IdThongTinNguoiHocGdtc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdHocVien)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.KetQuaHocTap)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TieuChuanDanhGiaXepLoaiTheLuc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
             </th>
             <th></th>
         </tr>
@@ -27,15 +39,20 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdThongTinNguoiHocGdtc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHocVien)
+                </td>
+                <td>
             <td>
                 @Html.DisplayFor(modelItem => item.KetQuaHocTap)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TieuChuanDanhGiaXepLoaiTheLuc)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdHocVien)
-            </td>
+            <td></td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdThongTinNguoiHocGdtc">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.IdThongTinNguoiHocGdtc">Details</a> |

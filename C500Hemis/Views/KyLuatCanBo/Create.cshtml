@@ -19,11 +19,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdCanBo" class="control-label"> ID cán bộ</label>
-                <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
+                <select asp-for="IdCanBo" class ="form-control" asp-items="ViewBag.IdCanBo"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdLoaiKyLuat" class="control-label">Hình thức kỷ luật</label>
-                <select asp-for="IdLoaiKyLuat" class="form-control" asp-items="ViewBag.IdLoaiKyLuat"></select>
+                <select asp-for="IdLoaiKyLuat" class ="form-control" asp-items="ViewBag.IdLoaiKyLuat"></select>
             </div>
             <div class="form-group">
                 <label asp-for="LyDo" class="control-label">Lý do kỷ luật</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdCapQuyetDinh" class="control-label">Cấp quyết định</label>
-                <select asp-for="IdCapQuyetDinh" class="form-control" asp-items="ViewBag.IdCapQuyetDinh"></select>
+                <select asp-for="IdCapQuyetDinh" class ="form-control" asp-items="ViewBag.IdCapQuyetDinh"></select>
             </div>
             <div class="form-group">
                 <label asp-for="NgayThangNamQuyetDinh" class="control-label">Ngày nhận quyết định</label>
@@ -61,7 +61,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
