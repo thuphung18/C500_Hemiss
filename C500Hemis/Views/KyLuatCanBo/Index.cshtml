@@ -11,6 +11,9 @@
         
         <tr style="text-align: center">
             <th>
+                CÁN BỘ
+            </th>
+            <th>
                 LÝ DO
             </th>
             <th>
@@ -22,9 +25,7 @@
             <th>
                 NĂM BỊ KỶ LUẬT
             </th>
-            <th>
-                CÁN BỘ
-            </th>
+            
             <th>
                 CẤP QĐ
             </th>
@@ -39,27 +40,34 @@
             <tr style="text-align: center; cursor: pointer;"
                
                 onclick="window.location.href='@Url.Action("Details", new { id = item.IdKyLuatCanBo })'">
-                <td style="text-align: left">
-                @Html.DisplayFor(modelItem => item.LyDo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayThangNamQuyetDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoQuyetDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamBiKyLuat)
-            </td>
             <td>
                     @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ho) @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ten)
             </td>
+
+            <td style="text-align: left">
+                @Html.DisplayFor(modelItem => item.LyDo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayThangNamQuyetDinh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SoQuyetDinh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NamBiKyLuat)
+            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.IdCapQuyetDinhNavigation.CapKhenThuong)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.IdLoaiKyLuatNavigation.LoaiKyLuat)
             </td>
+
             <td>
                     <div class="edit_del">
                         
@@ -87,6 +95,7 @@
 
     /* BẢNG CHUNG */
     table {
+        margin-bottom: 200px;
         width: 100%;
         border-collapse: collapse;
         background-color: #f1f3f3;
