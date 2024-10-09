@@ -84,9 +84,17 @@ namespace C500Hemis.Controllers.CB
             // Kiểm tra tính hợp lệ của model
             if (ModelState.IsValid)
             {
-                _context.Add(tbQuaTrinhCongTacCuaCanBo); // Thêm mới vào context
-                await _context.SaveChangesAsync(); // Lưu thay đổi
-                return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+                try
+                {
+                    _context.Add(tbQuaTrinhCongTacCuaCanBo); // Thêm mới vào context
+                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+                }
+                catch (Exception ex)
+                {
+                    //ViewBag.ErrorMessage = ex.Message;
+                    ViewBag.ErrorMessage = ex.Message + " Đây là lỗi người làm ra chưa tìm ra cách fix thông cảm";
+                }
             }
 
             // Nếu không hợp lệ, tạo lại danh sách lựa chọn

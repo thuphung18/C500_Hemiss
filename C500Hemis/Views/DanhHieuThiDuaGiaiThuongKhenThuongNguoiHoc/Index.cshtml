@@ -3,20 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-<head>
-    <!-- Import Bootstrap and JQuery-->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--DataTables-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css" />
-
-    <script type="text/javascript"
-            charset="utf8" src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-    <!--My CSS anf JQuery-->
-    <link href="./css/style.css" rel="stylesheet" />
-</head>
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+}
 <style>
        th{
 
@@ -56,15 +45,11 @@
         text-align:center;
     }
     table{
-        padding-bottom: 50px;
+        padding-bottom: 100px;
     }
 </style>
 <h1>Danh hiệu thi đua giải thưởng khen thưởng người học</h1>
-
-<p>
-    <a asp-action="Create">Tạo mới</a>
-</p>
-<table class="table">
+<table class="table table-hover" id="view_table">
     <thead>
         <tr>
             <th>
@@ -116,18 +101,48 @@
                 @Html.DisplayFor(modelItem => item.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Chỉnh sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc">Xóa</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<script>
-
-    // Khởi tạo DataTable từ dữ liệu đã được render bởi Razor
-    $('#users').DataTable();
-
-
-</script>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#view_table", {
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                search: "Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary', //Thêm class cho button
+                            text: 'Tạo mới',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        //HTMLDOM Element: https://developer.mozilla.org/en-US/docs/Web/API/Element
+        //Datatables API: https://datatables.net/reference/api/table().header()
+        var row = table.table().header().lastElementChild;
+        row.lastElementChild.remove();
+        row.appendChild(document.createElement('th'));
+        console.log(row.lastElementChild);
+    </script>
+}

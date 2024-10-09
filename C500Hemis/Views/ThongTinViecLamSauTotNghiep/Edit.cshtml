@@ -4,17 +4,12 @@
     ViewData["Title"] = "Edit";
 }
 <style>
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
+    h1, h4 {
         text-align: center;
     }
 
-    h4 {
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
+    div {
+        margin: auto;
     }
 </style>
 <h1>Chỉnh sửa</h1>
@@ -61,16 +56,24 @@
                 <input asp-for="MucLuongKhoiDiem" class="form-control" />
                 <span asp-validation-for="MucLuongKhoiDiem" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="submit" value="Lưu" class="btn btn-primary" />
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary"</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

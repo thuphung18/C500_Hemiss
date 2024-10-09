@@ -621,7 +621,6 @@ public partial class HemisContext : DbContext
     public virtual DbSet<VToChucKiemDinh> VToChucKiemDinhs { get; set; }
 
     public virtual DbSet<VVanBanTuChu> VVanBanTuChus { get; set; }
-    public object TbCanBoHuongDanThanhCongSinhVien { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -4259,10 +4258,10 @@ public partial class HemisContext : DbContext
 
         modelBuilder.Entity<TbThuVienTrungTamHocLieu>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("tbThuVienTrungTamHocLieu", "CSVC");
+            entity.HasKey(e => e.IdThuVienTrungTamHocLieu);
+            entity.ToTable("tbThuVienTrungTamHocLieu", "CSVC");
 
+            entity.Property(e => e.IdThuVienTrungTamHocLieu).ValueGeneratedNever();
             entity.Property(e => e.IdTinhTrangCsvc).HasColumnName("IdTinhTrangCSVC");
             entity.Property(e => e.MaThuVienTrungTamHocLieu).HasMaxLength(50);
             entity.Property(e => e.NamDuaVaoSuDung).HasColumnType("text");
