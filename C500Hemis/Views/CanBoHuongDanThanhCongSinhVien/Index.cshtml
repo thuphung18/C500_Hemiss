@@ -4,12 +4,25 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <h1 class="tieude" align="center";>Thông Tin</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    <p>
+        <h2 class="btn" style="background-color:currentColor"><a asp-action="Create">Create New</a></h2>
+    </p>
+
+    <div class="table-container" style="margin-bottom:15px;">
+        <table class="table table-bordered" id="customers">
+
     <thead>
         <tr>
             <th>
@@ -48,12 +61,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien">Delete</a>
-            </td>
+                        <td class="tuychon">
+                            <a asp-action="Edit"
+                               asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien"
+                               class="btn btn-warning">Edit</a>
+                            <a asp-action="Details"
+                               asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien"
+                               class="btn btn-warning">Details</a>
+                            <a asp-action="Delete"
+                               asp-route-id="@item.IdCanBoHuongDanThanhCongSinhVien"
+                               class="btn btn-warning">Delete</a>
+                        </td>
         </tr>
 }
-    </tbody>
-</table>
+      </tbody>
+        </table>
+    </div>
+</body>
