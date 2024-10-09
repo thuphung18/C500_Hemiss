@@ -4258,10 +4258,10 @@ public partial class HemisContext : DbContext
 
         modelBuilder.Entity<TbThuVienTrungTamHocLieu>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("tbThuVienTrungTamHocLieu", "CSVC");
+            entity.HasKey(e => e.IdThuVienTrungTamHocLieu);
+            entity.ToTable("tbThuVienTrungTamHocLieu", "CSVC");
 
+            entity.Property(e => e.IdThuVienTrungTamHocLieu).ValueGeneratedNever();
             entity.Property(e => e.IdTinhTrangCsvc).HasColumnName("IdTinhTrangCSVC");
             entity.Property(e => e.MaThuVienTrungTamHocLieu).HasMaxLength(50);
             entity.Property(e => e.NamDuaVaoSuDung).HasColumnType("text");
