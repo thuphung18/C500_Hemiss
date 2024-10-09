@@ -69,7 +69,7 @@
 </style>
 <h1>Xóa</h1>
 
-<h3>ABạn có chắc muốn xóa không?</h3>
+<h3>Bạn có chắc muốn xóa không?</h3>
 <div>
     <h4>Kỷ luật người học</h4>
     <hr />
@@ -117,10 +117,21 @@
             @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdKyLuatNguoiHoc" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+    <table>
+        <tr>
+            <td>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="IdKyLuatNguoiHoc" />
+                    <input type="submit" value="Xóa" class="btn btn-danger" />
+                </form>
+            </td>
+            <td>
+                <form asp-action="Index">
+                    <input type="hidden" asp-for="IdKyLuatNguoiHoc" />
+                    <input type="submit" value="Về trang chủ" class="btn btn-danger" />
+                </form>
+            </td>
+        </tr>
+    </table>
 </div>
