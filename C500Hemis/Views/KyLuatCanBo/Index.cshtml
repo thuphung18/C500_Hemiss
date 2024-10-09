@@ -34,7 +34,7 @@
                 font-size: 16px;
             }
 
-            table tr:hover {
+            .value:hover {
                 background-color: #D3D3D3;
             }
 
@@ -90,7 +90,7 @@
     </style>
 }
 
-<h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
+<h1 style="text-align: center">HỒ SƠ CÁN BỘ BỊ KỶ LUẬT (@Model.Count())</h1>
 
 <div class="contain">
     <table class="table" id="view_table">
@@ -125,7 +125,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr style="text-align: center; cursor: pointer;"
+                <tr class="value" style="text-align: center; cursor: pointer;"
                     onclick="window.location.href='@Url.Action("Details", new { id = item.IdKyLuatCanBo })'">
                     <td>
                         @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ho) @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ten)
