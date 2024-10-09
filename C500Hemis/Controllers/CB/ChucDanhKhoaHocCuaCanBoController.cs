@@ -47,9 +47,12 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: ChucDanhKhoaHocCuaCanBo/Create
+        /// Hàm khởi tạo thông tin Chức Danh Khoa Học của Cán Bộ
         public IActionResult Create()
         {
+            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
+            //Lấy danh sách Chức danh khoa học, hiển thị cụ thể chức danh khoa học
             ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc");
             ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "IdLoaiQuyetDinh");
             return View();
@@ -63,10 +66,16 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdChucDanhKhoaHocCuaCanBo,IdCanBo,IdChucDanhKhoaHoc,IdThamQuyenQuyetDinh,SoQuyetDinh,NgayQuyetDinh")] TbChucDanhKhoaHocCuaCanBo tbChucDanhKhoaHocCuaCanBo)
         {
+
+            // Kiểm tra dữ liệu có chuẩn không
+            // Đối sánh với lớp tbChucDanhKhoaHocCuaCanBo
             if (ModelState.IsValid)
             {
+                //Thêm đối tượng vào context
                 _context.Add(tbChucDanhKhoaHocCuaCanBo);
+                // Lưu vào cơ sở dữ liệu
                 await _context.SaveChangesAsync();
+                // Nếu thành công sẽ trở về trang index
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
@@ -76,6 +85,7 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: ChucDanhKhoaHocCuaCanBo/Edit/5
+        /// <param name="id"> là id định danh của CDKHCCB trong cơ sở dữ liệu </param>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
