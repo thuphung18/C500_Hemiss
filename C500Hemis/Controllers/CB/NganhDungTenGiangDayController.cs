@@ -90,7 +90,7 @@ namespace C500Hemis.Controllers.CB
         }
 
         // POST: NganhDungTenGiangDay/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // To protect from overposting attack
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -146,7 +146,7 @@ namespace C500Hemis.Controllers.CB
             return View(tbNganhDungTenGiangDay);
         }
 
-        // POST: NganhDungTenGiangDay/Deletelonh
+        // POST: NganhDungTenGiangDay/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -167,4 +167,3 @@ namespace C500Hemis.Controllers.CB
         }
     }
 }
-

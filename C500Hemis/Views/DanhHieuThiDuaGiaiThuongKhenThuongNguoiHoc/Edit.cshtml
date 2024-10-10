@@ -3,12 +3,18 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<style>
+    h1, h4  {
+        text-align: center;
+    }
+    div {
+        margin:auto;
+    }
+</style>
+<h1>Chỉnh sửa </h1>
 
-<h1>Edit</h1>
-
-<h4>TbDanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc</h4>
+<h4>Danh hiệu thi đua giải thưởng khen thưởng người học</h4>
 <hr />
-<div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -48,17 +54,22 @@
                 <select asp-for="IdCapKhenThuong" class="form-control" asp-items="ViewBag.IdCapKhenThuong"></select>
                 <span asp-validation-for="IdCapKhenThuong" class="text-danger"></span>
             </div>
+            <table>
+                <tr>
+                    <td>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
-        </form>
+            </td>
+            <td>
+        <div>
+            <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary"</a>
+        </div>
+        </td>
+        </tr>
+        </table>
+            </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

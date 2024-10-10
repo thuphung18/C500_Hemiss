@@ -3,67 +3,71 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<style>
+    table {
+        width: 100%; /* Chiều rộng bảng 100% */
+        border-collapse: collapse; /* Gộp đường viền ô */
+    }
+
+    th, td {
+        border: 1px solid #000; /* Đường viền đen cho các ô */
+        text-align: left;
+        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    }
+
+    th {
+        font-weight: bold; /* Chữ đậm cho tiêu đề */
+    }
+
+    tr:hover {
+        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+</style>
 
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>TbDeAnDuAnChuongTrinh</h4>
+    <h4>Đề án, dự án, chương trình</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaDeAnDuAnChuongTrinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaDeAnDuAnChuongTrinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenDeAnDuAnChuongTrinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenDeAnDuAnChuongTrinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoiDungTomTat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoiDungTomTat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucTieu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucTieu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianHopTacTu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianHopTacTu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianHopTacDen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianHopTacDen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongKinhPhi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongKinhPhi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation.IdNguonKinhPhiChoDeAn)
-        </dd>
-    </dl>
-    
+    <table>
+        <tr>
+            <th>Mã đề án, dự án, chương trình</th>
+            <td>@Html.DisplayFor(model => model.MaDeAnDuAnChuongTrinh)</td>
+        </tr>
+        <tr>
+            <th>Tên đề án, dự án, chương trình</th>
+            <td>@Html.DisplayFor(model => model.TenDeAnDuAnChuongTrinh)</td>
+        </tr>
+        <tr>
+            <th>Nội dung tóm tắt</th>
+            <td>@Html.DisplayFor(model => model.NoiDungTomTat)</td>
+        </tr>
+        <tr>
+            <th>Mục tiêu</th>
+            <td>@Html.DisplayFor(model => model.MucTieu)</td>
+        </tr>
+        <tr>
+            <th>Thời gian hợp tác từ</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianHopTacTu)</td>
+        </tr>
+        <tr>
+            <th>Thời gian hợp tác đến</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianHopTacDen)</td>
+        </tr>
+        <tr>
+            <th>Tổng kinh phí</th>
+            <td>@Html.DisplayFor(model => model.TongKinhPhi)</td>
+        </tr>
+        <tr>
+            <th>Nguồn kinh phí đề án, dự án, chương trình</th>
+            <td> @Html.DisplayFor(model => model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation.IdNguonKinhPhiChoDeAn)</td>
+        </tr>
+    </table>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDeAnDuAnChuongTrinh" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

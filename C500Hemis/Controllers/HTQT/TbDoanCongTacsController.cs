@@ -45,7 +45,10 @@ namespace C500Hemis.Controllers.HTQT
             return View(tbDoanCongTac);
         }
 
-        // GET: TbDoanCongTacs/Create
+        /// <summary>
+        /// hàm khởi tạo
+        /// </summary> tạo danh sách 
+        /// <returns></returns> 
         public IActionResult Create()
         {
             ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "IdPhanLoaiDoanRaDoanVao");
