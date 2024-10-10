@@ -3,30 +3,50 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
 <style>
-    .row {
-        width: 900px;
-        background-color: transparent;
-        color: black;
-        border-radius: 10px;
-        backdrop-filter: blur(20px);
-        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-        padding: 30px 40px;
-        border: 2px solid rgba(255, 255, 255, .2);
-        margin: auto;
-        display: flex;
+    body{
+        background-color: #C4DAD2;
     }
-    dt{
+    div .row{
+        background-color: #E9EFEC;
+        justify-content: center;
+        align-items: center;
+        border-radius:10px;
+        border-collapse: collapse;
+        border: 2px solid #243642;
+        height: 500px
+    }
+    h1{
         font-weight:bold;
+        text-shadow: 0 0 0.2em #6A9C89;
+        color: #E9EFEC;
+        padding: 5px;
+        background-color: #16423C;
+        display:inline-block;
+        border-radius:8px;
+        margin-top:10px;
+        align-items:center;
     }
-
+    .backto{
+        text-decoration:none;
+        display:inline-block;
+        background-color: #1769ff;
+        color:white;
+        padding:6px;
+        border-radius:4px;
+    }
+    dt,dd{
+        color: #387478;
+        padding:3px;
+    }
+    dd{
+        border: 0.5px solid black;
+        border-radius: 10px;
+        border-width: medium;
+    }
 </style>
-<h1>Xóa</h1>
-
-<h3>Bạn có muốn xóa không?</h3>
+<h1>Warning!</h1>
 <div>
-    <h4>Hợp đồng thỉnh giảng</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -84,10 +104,9 @@
             @Html.DisplayFor(model => model.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdHopDongThinhGiang" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Trở về danh sácn</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="backto">Back to List</a>
     </form>
 </div>
