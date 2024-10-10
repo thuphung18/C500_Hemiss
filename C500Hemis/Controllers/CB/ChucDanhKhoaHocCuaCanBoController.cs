@@ -64,45 +64,58 @@ namespace C500Hemis.Controllers.CB
         [HttpPost]
         // gửi dữ liệu về server xử lí sau khi người dùng nhập thông tin vào form và thực hiện submit
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("IdChucDanhKhoaHocCuaCanBo,IdCanBo,IdChucDanhKhoaHoc,IdThamQuyenQuyetDinh,SoQuyetDinh,NgayQuyetDinh")] TbChucDanhKhoaHocCuaCanBo tbChucDanhKhoaHocCuaCanBo)
         {
-
-            // Kiểm tra dữ liệu có chuẩn không
-            // Đối sánh với lớp tbChucDanhKhoaHocCuaCanBo
             if (ModelState.IsValid)
             {
-                //Thêm đối tượng vào context
-                _context.Add(tbChucDanhKhoaHocCuaCanBo);
-                // Lưu vào cơ sở dữ liệu
-                await _context.SaveChangesAsync();
-                // Nếu thành công sẽ trở về trang index
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(tbChucDanhKhoaHocCuaCanBo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Xử lý lỗi khi lưu vào database
+                    ModelState.AddModelError(string.Empty, "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message);
+                }
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
-            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
-            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "IdLoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
+
+            // Kiểm tra xem các trường bắt buộc có bị thiếu hay không
+            if (string.IsNullOrEmpty(tbChucDanhKhoaHocCuaCanBo.SoQuyetDinh))
+            {
+                ModelState.AddModelError("SoQuyetDinh", "Số quyết định là bắt buộc.");
+            }
+
+            if (tbChucDanhKhoaHocCuaCanBo.NgayQuyetDinh == default(DateTime))
+            {
+                ModelState.AddModelError("NgayQuyetDinh", "Ngày quyết định là bắt buộc.");
+            }
+
+            if (!tbChucDanhKhoaHocCuaCanBo.IdCanBo.HasValue)
+            {
+                ModelState.AddModelError("IdCanBo", "Cán bộ là bắt buộc.");
+            }
+
+            if (!tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc.HasValue)
+            {
+                ModelState.AddModelError("IdChucDanhKhoaHoc", "Chức danh khoa học là bắt buộc.");
+            }
+
+            if (!tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh.HasValue)
+            {
+                ModelState.AddModelError("IdThamQuyenQuyetDinh", "Thẩm quyền quyết định là bắt buộc.");
+            }
+
+            // Nếu có lỗi, trả lại view với dữ liệu hiện tại
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "TenCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
+            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "TenChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
+            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "TenLoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
+
             return View(tbChucDanhKhoaHocCuaCanBo);
         }
 
-        // GET: ChucDanhKhoaHocCuaCanBo/Edit/5
-        /// <param name="id"> là id định danh của CDKHCCB trong cơ sở dữ liệu </param>
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tbChucDanhKhoaHocCuaCanBo = await _context.TbChucDanhKhoaHocCuaCanBos.FindAsync(id);
-            if (tbChucDanhKhoaHocCuaCanBo == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
-            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
-            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "IdLoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
-            return View(tbChucDanhKhoaHocCuaCanBo);
-        }
 
         // POST: ChucDanhKhoaHocCuaCanBo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
