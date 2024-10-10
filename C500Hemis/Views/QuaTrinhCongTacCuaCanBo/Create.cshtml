@@ -5,6 +5,8 @@
 }
 
 <h1 class="text-center mt-4">Tạo Mới Quá Trình Công Tác</h1>
+@* <h1 class="text-center mt-4" style="color:red">@ViewBag.mess</h1>
+ *@
 
 <div class="container mt-5">
     <h4 class="text-secondary" style="text-align:center">Thông Tin Quá Trình Công Tác</h4>
@@ -58,6 +60,9 @@
                 </div>
             </form>
         </div>
+    </div>
+    <div>
+        <p style="text-align:center; color:red">@ViewBag.ErrorMessage</p>
     </div>
 
     <div class="text-center mt-4">

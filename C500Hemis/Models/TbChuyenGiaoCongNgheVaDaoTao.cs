@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
 
 public partial class TbChuyenGiaoCongNgheVaDaoTao
 {
+    //[DisplayName(displayName: "NỘI DUNG HOẠT ĐỘNG TẠI VIỆT NAM")]
     public int IdChuyenGiaoCongNgheVaDaoTao { get; set; }
 
     public int? IdNhiemVuKhcn { get; set; }
