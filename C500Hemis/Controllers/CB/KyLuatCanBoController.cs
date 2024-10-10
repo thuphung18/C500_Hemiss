@@ -44,8 +44,7 @@ namespace C500Hemis.Controllers.CB
                 return NotFound();
             }
 
-            ViewBag.Hoten =
-                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
+            ViewBag.Hoten =_context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
             return View(tbKyLuatCanBo);
         }
 
@@ -76,13 +75,18 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdKyLuatCanBo,IdCanBo,IdLoaiKyLuat,LyDo,IdCapQuyetDinh,NgayThangNamQuyetDinh,SoQuyetDinh,NamBiKyLuat")] TbKyLuatCanBo tbKyLuatCanBo)
         {
+            // Kiểm tra dữ liệu có chuẩn không
+            // Đối sánh với lớp tbKyluatCanBo
             if (ModelState.IsValid)
             {
-                _context.Add(tbKyLuatCanBo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
+                    //Thêm đối tượng vào context
+                    _context.Add(tbKyLuatCanBo);
+                    // Lưu vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    // Nếu thành công sẽ trở về trang index
+                    return RedirectToAction(nameof(Index));
+                }
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
@@ -105,7 +109,7 @@ namespace C500Hemis.Controllers.CB
             {
                 return NotFound();
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
@@ -143,7 +147,7 @@ namespace C500Hemis.Controllers.CB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbKyLuatCanBo.IdCanBo);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
             return View(tbKyLuatCanBo);
@@ -159,6 +163,7 @@ namespace C500Hemis.Controllers.CB
 
             var tbKyLuatCanBo = await _context.TbKyLuatCanBos
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(h => h.IdNguoiNavigation)
                 .Include(t => t.IdCapQuyetDinhNavigation)
                 .Include(t => t.IdLoaiKyLuatNavigation)
                 .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);

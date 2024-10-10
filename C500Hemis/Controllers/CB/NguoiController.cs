@@ -21,7 +21,22 @@ namespace C500Hemis.Controllers.CB
         // GET: Nguoi
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbNguois.Include(t => t.IdChucDanhKhoaHocNavigation).Include(t => t.IdChuyenMonDaoTaoNavigation).Include(t => t.IdTonGiaoNavigation).Include(t => t.IdDanTocNavigation).Include(t => t.IdGiaDinhChinhSachNavigation).Include(t => t.IdGioiTinhNavigation).Include(t => t.IdKhungNangLucNgoaiNgucNavigation).Include(t => t.IdNgoaiNguNavigation).Include(t => t.IdQuocTichNavigation).Include(t => t.IdThuongBinhHangNavigation).Include(t => t.IdTrinhDoDaoTaoNavigation).Include(t => t.IdTrinhDoLyLuanChinhTriNavigation).Include(t => t.IdTrinhDoQuanLyNhaNuocNavigation).Include(t => t.IdTrinhDoTinHocNavigation);
+            var hemisContext = 
+                _context.TbNguois
+                .Include(t => t.IdChucDanhKhoaHocNavigation)
+                .Include(t => t.IdChuyenMonDaoTaoNavigation)
+                .Include(t => t.IdTonGiaoNavigation)
+                .Include(t => t.IdDanTocNavigation)
+                .Include(t => t.IdGiaDinhChinhSachNavigation)
+                .Include(t => t.IdGioiTinhNavigation)
+                .Include(t => t.IdKhungNangLucNgoaiNgucNavigation)
+                .Include(t => t.IdNgoaiNguNavigation)
+                .Include(t => t.IdQuocTichNavigation)
+                .Include(t => t.IdThuongBinhHangNavigation)
+                .Include(t => t.IdTrinhDoDaoTaoNavigation)
+                .Include(t => t.IdTrinhDoLyLuanChinhTriNavigation)
+                .Include(t => t.IdTrinhDoQuanLyNhaNuocNavigation)
+                .Include(t => t.IdTrinhDoTinHocNavigation);
             return View(await hemisContext.ToListAsync());
         }
 

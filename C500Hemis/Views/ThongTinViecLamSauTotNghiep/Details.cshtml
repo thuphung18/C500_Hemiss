@@ -62,6 +62,10 @@
         border: 0;
         border-top: 1px solid #dee2e6;
     }
+
+    form {
+        padding-bottom: 50px;
+    }
 </style>
 <h1>Thông tin chi tiết</h1>
 
@@ -114,6 +118,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdThongTinViecLamSauTotNghiep">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdThongTinViecLamSauTotNghiep"><input type="submit" value="Chỉnh sửa" class="btn btn-primary" /></a> |
+    <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary" /></a>
 </div>

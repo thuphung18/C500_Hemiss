@@ -19,7 +19,7 @@ namespace C500Hemis.Controllers.CB
         {
             _context = context;
         }
-
+        #region Index và chức năng tìm kiếm
         // GET: QuaTrinhCongTacCuaCanBo
         // Phương thức hiển thị danh sách quá trình công tác, có thể tìm kiếm theo IdCanBo
         public async Task<IActionResult> Index(int? Search)
@@ -36,7 +36,9 @@ namespace C500Hemis.Controllers.CB
             // Trả về view với danh sách đã lọc
             return View(await name.ToListAsync());
         }
+        #endregion
 
+        #region Hiển thị chi tiết
         // GET: QuaTrinhCongTacCuaCanBo/Details/5
         // Phương thức hiển thị chi tiết một quá trình công tác
         public async Task<IActionResult> Details(int? id)
@@ -63,7 +65,9 @@ namespace C500Hemis.Controllers.CB
             // Trả về view với thông tin chi tiết
             return View(tbQuaTrinhCongTacCuaCanBo);
         }
+        #endregion
 
+        #region tạo form 
         // GET: QuaTrinhCongTacCuaCanBo/Create
         // Phương thức hiển thị form tạo mới quá trình công tác
         public IActionResult Create()
@@ -84,9 +88,21 @@ namespace C500Hemis.Controllers.CB
             // Kiểm tra tính hợp lệ của model
             if (ModelState.IsValid)
             {
-                _context.Add(tbQuaTrinhCongTacCuaCanBo); // Thêm mới vào context
-                await _context.SaveChangesAsync(); // Lưu thay đổi
-                return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+                try
+                {
+                    _context.Add(tbQuaTrinhCongTacCuaCanBo); // Thêm mới vào context
+                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+                }
+                catch (Exception ex)
+                {
+                    //ViewBag.ErrorMessage = ex.Message;
+                    ViewBag.ErrorMessage = ex.Message + " Đây là lỗi người làm ra chưa tìm ra cách fix thông cảm";
+                }
+                //finally
+                //{
+                //    ViewBag.mess = "Vui lòng nhập lại";
+                //}
             }
 
             // Nếu không hợp lệ, tạo lại danh sách lựa chọn
@@ -95,7 +111,9 @@ namespace C500Hemis.Controllers.CB
             ViewData["IdChucVu"] = new SelectList(_context.DmChucVus, "IdChucVu", "IdChucVu", tbQuaTrinhCongTacCuaCanBo.IdChucVu);
             return View(tbQuaTrinhCongTacCuaCanBo); // Trả về view với thông tin đã nhập
         }
+        #endregion
 
+        #region Edit
         // GET: QuaTrinhCongTacCuaCanBo/Edit/5
         // Phương thức hiển thị form chỉnh sửa quá trình công tác
         public async Task<IActionResult> Edit(int? id)
@@ -160,7 +178,9 @@ namespace C500Hemis.Controllers.CB
             ViewData["IdChucVu"] = new SelectList(_context.DmChucVus, "IdChucVu", "IdChucVu", tbQuaTrinhCongTacCuaCanBo.IdChucVu);
             return View(tbQuaTrinhCongTacCuaCanBo); // Trả về view với thông tin đã chỉnh sửa
         }
+        #endregion
 
+        #region xoá
         // GET: QuaTrinhCongTacCuaCanBo/Delete/5
         // Phương thức hiển thị form xác nhận xóa quá trình công tác
         public async Task<IActionResult> Delete(int? id)
@@ -202,7 +222,7 @@ namespace C500Hemis.Controllers.CB
             await _context.SaveChangesAsync(); // Lưu thay đổi
             return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
         }
-
+        #endregion
         // Phương thức kiểm tra xem quá trình công tác có tồn tại hay không
         private bool TbQuaTrinhCongTacCuaCanBoExists(int id)
         {

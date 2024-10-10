@@ -3,11 +3,73 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-<h1>Details</h1>
+    h3 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        padding: 30px;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    dl.row dt, dl.row dd {
+        margin-bottom: 10px;
+    }
+
+    dt {
+        font-weight: bold;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    dd {
+        margin-bottom: 10px;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #dee2e6;
+    }
+    form{
+        padding-bottom: 50px;
+    }
+</style>
+<h1>Chi tiết</h1>
 
 <div>
-    <h4>TbCanBo</h4>
+    <h4>Cán bộ</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -199,6 +261,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCanBo">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit"><input type="submit" value="Chỉnh sửa" class="btn btn-primary" /></a> 
+    <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary" /></a>
 </div>

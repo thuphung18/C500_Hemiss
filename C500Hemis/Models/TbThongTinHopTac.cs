@@ -10,9 +10,9 @@ public partial class TbThongTinHopTac
 
     public int? IdToChucHopTac { get; set; }
 
-    public DateOnly? ThoiGianHopTacTu { get; set; }
+    public DateTime? ThoiGianHopTacTu { get; set; }
 
-    public DateOnly? ThoiGianHopTacDen { get; set; }
+    public DateTime? ThoiGianHopTacDen { get; set; }
 
     public string? TenThoaThuan { get; set; }
 
