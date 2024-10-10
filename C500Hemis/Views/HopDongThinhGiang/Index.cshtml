@@ -21,9 +21,6 @@
     tbody{
         background-color: #E9EFEC;
     }
-    ntable{
-        border: 2px solid #0053b3;
-    }
     th{
         border: solid black 0.5px;
         padding: 20px;
@@ -35,25 +32,22 @@
     }
 
     a {
-        color: #007bff;
+        color: #E9EFEC;
         text-decoration: none;
     }
 
         a:hover {
-            text-decoration: underline;
-            color: darkred;
+            text-decoration: none;
+            color: white;
         }
     ntable {
-        width: 100%;
+        border: 2px solid #0053b3; width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
    th:hover {
-        background-color: #6A9C89;
-    }
-    td:hover{
         background-color: #6A9C89;
     }
     footer {
@@ -74,17 +68,44 @@
         margin: 4px 2px;
         cursor: pointer;
     }
-    .butcreate:hover{
-        background-color: #48CFCB;
-        color: black;
+    .btn a:hover{
+        color: #E9EFEC;
+        text-decoration:none;
     }
-    .butcreate a:hover{
-        color: black;
+    .btn-edit{
+        background-color: #16423C;
+        color: #E9EFEC;
     }
-    .butcreate a{
-        text-decoration: none;
-        color: white;
+        .btn-edit:hover{
+            transform: scale(1.05);
+        }
+
+    .btn-details {
+        background-color: #16423C;
+        color: #E9EFEC;
     }
+
+        .btn-details:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-delete {
+        background-color: #16423C;
+        color: #E9EFEC;
+    }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+        }
+
+    .btn-create {
+        background-color: #16423C;
+        color: #E9EFEC;
+    }
+
+        .btn-create:hover {
+            transform: scale(1.05);
+        }
 </style>
 
 <h1>Hợp đồng thỉnh giảng</h1>
@@ -119,7 +140,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdTrangThaiHopDongNavigation)
             </th>
-            <th>
+            <th nowrap>
                 Chức năng
             </th>
         </tr>
@@ -154,16 +175,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)
             </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdHopDongThinhGiang"><i class='bx bx-edit-alt'></i></a> |
-                    <a asp-action="Details" asp-route-id="@item.IdHopDongThinhGiang"><i class='bx bx-info-circle'></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdHopDongThinhGiang"><i class='bx bx-trash-alt'></i></a>
+            <td nowrap>
+                    <a asp-action="Edit" asp-route-id="@item.IdHopDongThinhGiang" class="btn btn-edit"><i class='bx bx-edit-alt'></i> Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.IdHopDongThinhGiang" class="btn btn-details"><i class='bx bx-info-circle'></i> Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdHopDongThinhGiang" class="btn btn-delete"><i class='bx bx-trash-alt'></i> Xóa</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<button class="butcreate"><a asp-action="Create">Tạo mới</a></button>
+<a asp-action="Create" class="btn btn-create">Tạo mới</a>
 
 <script>
     new DataTable('#ntable', {
