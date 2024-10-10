@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "SỬA HỒ SƠ";
+    string ngaynhanqd = "";
+    string nambikyluat = "";
+    if (Model.NamBiKyLuat != null)
+    {
+        nambikyluat = Model.NamBiKyLuat.Value.ToString("yyyy-MM-dd");
+    } 
+    if (Model.NgayThangNamQuyetDinh != null) ngaynhanqd = Model.NgayThangNamQuyetDinh.Value.ToString("yyyy-MM-dd");
 }
 
 @section Styles {
@@ -164,7 +171,10 @@
         </form>
     </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById("NgayThangNamQuyetDinh").value = "@ngaynhanqd";
+        document.getElementById("NamBiKyLuat").value = "@nambikyluat";
+    </script>
 }
