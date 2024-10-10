@@ -5,6 +5,9 @@
 }
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
@@ -76,6 +79,7 @@
             background-color: #048a55;
         }
 </style>
+<body>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -140,7 +144,7 @@
 <div>
     <a asp-action="Index">Quay lại</a>
 </div>
-
+</body>
 <!-- Scripts for DateTimePicker -->
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -148,11 +152,12 @@
     <script>
         $(function () {
             $('.datetimepicker').datetimepicker({
-                format: 'd/m/Y H:i', // Định dạng ngày tháng
-                step: 30 // Tăng thời gian theo từng bước 30 phút
+                format: ' d/m/Y ', // Định dạng ngày tháng
+                timepicker: false // Tắt chọn giờ
             });
         });
     </script>
+
 
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
