@@ -1,92 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
 
 public partial class TbCanBo
 {
+    [Display(Name = "Id cán bộ")]
     public int IdCanBo { get; set; }
-
+    [Display(Name = "Id người")]
     public int? IdNguoi { get; set; }
-
+    [Display(Name = "Mã cán bộ")]
     public string? MaCanBo { get; set; }
-
+    [Display(Name = "Id chức vụ công tác")]
     public int? IdChucVuCongTac { get; set; }
-
+    [Display(Name = "Số bảo hiểm xã hội")]
     public string? SoBaoHiemXaHoi { get; set; }
-
+    [Display(Name = "Id xã")]
     public int? IdXa { get; set; }
-
+    [Display(Name = "Id huyện")]
     public int? IdHuyen { get; set; }
-
+    [Display(Name = "Id tỉnh")]
     public int? IdTinh { get; set; }
-
+    [Display(Name = "Email")]
     public string? Email { get; set; }
-
+    [Display(Name = "Điện thoại")]
     public string? DienThoai { get; set; }
-
+    [Display(Name = "Id trạng thái làm việc")]
     public int? IdTrangThaiLamViec { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Ngày chuyển trạng thái")]
     public DateOnly? NgayChuyenTrangThai { get; set; }
-
+    [Display(Name = "Số quyết định hưu nghỉ việc")]
     public string? SoQuyetDinhHuuNghiViec { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Ngày quyết định hưu nghỉ việc")]
     public DateOnly? NgayQuyetDinhHuuNghiViec { get; set; }
-
+    [Display(Name = "Hình thức chuyển đến")]
     public string? HinhThucChuyenDen { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Ngày kết thúc tạm nghỉ")]
     public DateOnly? NgayKetThucTamNghi { get; set; }
-
+    [Display(Name = "Id chức danh nghề nghiệp")]
     public int? IdChucDanhNgheNghiep { get; set; }
-
+    [Display(Name = "Id chức danh giảng viên")]
     public int? IdChucDanhGiangVien { get; set; }
-
+    [Display(Name = "Id chức danh nghiên cứu khoa học")]
     public int? IdChucDanhNghienCuuKhoaHoc { get; set; }
-
+    [Display(Name = "Id nghạch")]
     public int? IdNgach { get; set; }
-
+    [Display(Name = "Cơ quan công tác")]
     public string? CoQuanCongTac { get; set; }
-
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [Display(Name = "Ngày tuyển dụng")]
     public DateOnly? NgayTuyenDung { get; set; }
-
+    [Display(Name = "Chứng chỉ sư phạm giảng viên")]
     public bool? ChungChiSuPhamGiangVien { get; set; }
-
+    [Display(Name = "Là công chức")]
     public bool? LaCongChuc { get; set; }
-
+    [Display(Name = "Là viên chức")]
     public bool? LaVienChuc { get; set; }
-
+    [Display(Name = "Có dạy môn Mác-Lênin")]
     public bool? CoDayMonMacLeNin { get; set; }
-
+    [Display(Name = "Có dạy môn sư phạm")]
     public bool? CoDayMonSuPham { get; set; }
+    [Display(Name = "Số giấy phép lao động")]
 
     public string? SoGiayPhepLaoDong { get; set; }
+    [Display(Name = "Thâm niên công tác")]
 
     public int? ThamNienCongTac { get; set; }
+    [Display(Name = "Tên doanh nghiệp")]
 
     public string? TenDoanhNghiep { get; set; }
+    [Display(Name = "Năm kinh nghiệm giảng dạy")]
 
     public int? NamKinhNghiemGiangDay { get; set; }
+    [Display(Name = "Giảng viên đáp ứng TT03")]
 
     public bool? GiangVienDapUngTt03 { get; set; }
+    [Display(Name = "Id chức danh giảng viên")]
 
     public virtual DmChucDanhGiangVien? IdChucDanhGiangVienNavigation { get; set; }
+    [Display(Name = "Id chức danh nghề nghiệp")]
 
     public virtual DmChucDanhNgheNghiep? IdChucDanhNgheNghiepNavigation { get; set; }
+    [Display(Name = "Id chức danh nghiên cứu khoa học")]
 
     public virtual DmChucDanhNckh? IdChucDanhNghienCuuKhoaHocNavigation { get; set; }
+    [Display(Name = "Id chức vụ công tác")]
 
     public virtual DmChucVu? IdChucVuCongTacNavigation { get; set; }
+    [Display(Name = "Id huyện")]
 
     public virtual DmHuyen? IdHuyenNavigation { get; set; }
+    [Display(Name = "Id nghạch")]
 
     public virtual DmNgach? IdNgachNavigation { get; set; }
+    [Display(Name = "Id người")]
 
     public virtual TbNguoi? IdNguoiNavigation { get; set; }
+    [Display(Name = "Id tỉnh")]
 
     public virtual DmTinh? IdTinhNavigation { get; set; }
+    [Display(Name = "Id trạng thái việc làm")]
 
     public virtual DmTrangThaiCanBo? IdTrangThaiLamViecNavigation { get; set; }
+    [Display(Name = "Id xã")]
 
     public virtual DmXa? IdXaNavigation { get; set; }
 
