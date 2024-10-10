@@ -79,13 +79,13 @@ namespace C500Hemis.Controllers.CB
             // Đối sánh với lớp tbKyluatCanBo
             if (ModelState.IsValid)
             {
-                    //Thêm đối tượng vào context
-                    _context.Add(tbKyLuatCanBo);
-                    // Lưu vào cơ sở dữ liệu
-                    await _context.SaveChangesAsync();
-                    // Nếu thành công sẽ trở về trang index
-                    return RedirectToAction(nameof(Index));
-                }
+                //Thêm đối tượng vào context
+                _context.Add(tbKyLuatCanBo);
+                // Lưu vào cơ sở dữ liệu
+                await _context.SaveChangesAsync();
+                // Nếu thành công sẽ trở về trang index
+                return RedirectToAction(nameof(Index));
+            }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
             ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
             ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
