@@ -1,39 +1,165 @@
-﻿@model C500Hemis.Models.TbNganhDungTenGiangDay
+﻿
+
+
+@model C500Hemis.Models.TbNganhDungTenGiangDay
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Chỉnh sửa thông tin ";
 }
 
-<h1>Delete</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbNganhDungTenGiangDay</h4>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f7f8;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 16px;
+        background-color: white;
+        max-width: 800px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        font-family: 'Segoe UI', sans-serif;
+        margin-bottom: 30px;
+    }
+
+    img {
+        max-width: 150px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .info-block {
+        margin-bottom: 25px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    dt, dd {
+        flex: 1;
+        text-align: left;
+        margin: 0;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #555;
+    }
+
+    dd {
+        text-align: right;
+        color: #333;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 30px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;
+        margin: 10px 5px;
+        transition: background-color 0.3s;
+    }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+    .return-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+
+    @@media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        dd {
+            text-align: center;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .container {
+            padding: 10px;
+        }
+
+        dt, dd {
+            flex: none;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1><b>XÁC NHẬN XÓA THÔNG TIN </b></h1>
+    <p style="text-align: center;">
+        <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Học viện An ninh nhân dân">
+    </p>
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TrongSo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TrongSo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNganhDaoTaoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNganhDaoTaoNavigation.IdNganhDaoTao)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdNganhDungTenGiangDay" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+    <div class="info-block">
+        <dl class="row">
+            <dt>Mã cán bộ:</dt>
+            <dd>@Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Cán bộ giảng dạy:</dt>
+            <dd>@Html.DisplayFor(model => model.TenCanBo)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Mã đào tạo:</dt>
+            <dd>@Html.DisplayFor(model => model.IdNganhDaoTaoNavigation.IdNganhDaoTao)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Ngành giảng dạy:</dt>
+            <dd>@Html.DisplayFor(model => model.TenNganhGiangDay)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Ngày bắt đầu giảng dạy:</dt>
+            <dd>@Html.DisplayFor(model => model.NgayBatDau)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Ngày kết thúc giảng dạy:</dt>
+            <dd>@Html.DisplayFor(model => model.NgayKetThuc)</dd>
+        </dl>
+        <dl class="row">
+            <dt>Trọng số:</dt>
+            <dd>@Html.DisplayFor(model => model.TrongSo)</dd>
+        </dl>
+    </div>
+
+    <div class="return-btn">
+        <a asp-action="Index" asp-route-id="@Model?.IdNganhDungTenGiangDay" class="btn"><i class="fa fa-edit"></i> <b>Trở về </b></a>
+        <a asp-action="Delete" asp-route-id="@Model?.IdNganhDungTenGiangDay" class="btn"><i class="fa fa-home"></i> <b>Xóa dữ liệu </b></a>
+       
+    </div>
 </div>
+

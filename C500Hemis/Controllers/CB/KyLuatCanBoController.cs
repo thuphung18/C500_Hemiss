@@ -105,6 +105,7 @@ namespace C500Hemis.Controllers.CB
             }
 
             var tbKyLuatCanBo = await _context.TbKyLuatCanBos.FindAsync(id);
+            Console.WriteLine(tbKyLuatCanBo.NamBiKyLuat);
             if (tbKyLuatCanBo == null)
             {
                 return NotFound();
