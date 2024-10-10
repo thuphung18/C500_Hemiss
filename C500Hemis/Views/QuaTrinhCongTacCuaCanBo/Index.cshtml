@@ -82,10 +82,11 @@
                     <th>ID Cán bộ</th>
                     <th>ID Chức danh giảng viên</th>
                     <th>ID Chức vụ</th>
+                    <th>ID Quá trình ct</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -95,6 +96,7 @@
                         <td>@Html.DisplayFor(modelItem => item.IdCanBo)</td>
                         <td>@Html.DisplayFor(modelItem => item.IdChucDanhGiangVien)</td>
                         <td>@Html.DisplayFor(modelItem => item.IdChucVu)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdQuaTrinhCongTacCuaCanBo)</td>
                         <td>
                             <a class="btn btn-primary btn-sm btn-custom" asp-action="Edit" asp-route-id="@item.IdQuaTrinhCongTacCuaCanBo">Sửa</a>
                             <a class="btn btn-info btn-sm btn-custom" asp-action="Details" asp-route-id="@item.IdQuaTrinhCongTacCuaCanBo">Chi tiết</a>

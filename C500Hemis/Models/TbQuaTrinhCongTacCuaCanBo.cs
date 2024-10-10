@@ -7,6 +7,7 @@ namespace C500Hemis.Models;
 
 public partial class TbQuaTrinhCongTacCuaCanBo
 {
+    [Required(ErrorMessage = "Vui lòng nhập ID và không trùng với các ID trước")]
     public int IdQuaTrinhCongTacCuaCanBo { get; set; }
 
     public int? IdCanBo { get; set; }

@@ -155,8 +155,8 @@ namespace C500Hemis.Controllers.HTQT
             {
                 _context.TbToChucHopTacQuocTes.Remove(tbToChucHopTacQuocTe);
             }
-
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+           
             return RedirectToAction(nameof(Index));
         }
 
