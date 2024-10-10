@@ -24,7 +24,7 @@
         .action-links a {
             padding: 5px 10px;
             margin-right: 5px;
-            background-color: #007bff;
+            background-color: #ffcccc;
             color: #fff;
             text-decoration: none;
             border-radius: 3px;
@@ -73,9 +73,14 @@
                 @Html.DisplayFor(modelItem => item.IdLinhVucNavigation.IdLinhVucNghienCuu)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPhongThucHanh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPhongThucHanh">Details</a> |
+                            <div class="action-links">
+                <a asp-action="Edit" asp-route-id="@item.IdPhongThucHanh">Edit</a>
+                <hr>
+                <a asp-action="Details" asp-route-id="@item.IdPhongThucHanh">Details</a>
+                <hr>
                 <a asp-action="Delete" asp-route-id="@item.IdPhongThucHanh">Delete</a>
+                <hr>
+                </div>
             </td>
         </tr>
 }

@@ -6,9 +6,9 @@ namespace C500Hemis.Models;
 
 public partial class TbThongTinNguoiHocGdtc
 {
-    [Display(Name = "Họ và tên")]
+    [Display(Name = "Id thông tin người học GDTC")]
     public int IdThongTinNguoiHocGdtc { get; set; }
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public int IdHocVien { get; set; }
 
     [Display(Name = "Kết quả học tập ")]
@@ -17,6 +17,6 @@ public partial class TbThongTinNguoiHocGdtc
     [Display(Name = "Tiêu chuẩn đánh giá xếp loại thể lực ")]
     public string? TieuChuanDanhGiaXepLoaiTheLuc { get; set; }
 
-    [Display(Name = "Mã học viên")]
+    [Display(Name = "Id học viên")]
     public virtual TbHocVien? IdHocVienNavigation { get; set; }
 }

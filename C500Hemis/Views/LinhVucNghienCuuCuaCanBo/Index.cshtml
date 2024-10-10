@@ -36,8 +36,10 @@
                 <td class="lvnc">@Html.DisplayFor(modelItem => item.LaLinhVucNghienCuuChuyenSau)</td>
                 <td>@Html.DisplayFor(modelItem => item.SoNamNghienCuu)</td>
 
-               <td>@Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)</td>
-
+                       
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ho) @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdNguoiNavigation.Ten)
+                </td>
           
                 <td>@Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
                 <td class="text-center">
