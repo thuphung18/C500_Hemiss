@@ -10,7 +10,7 @@ public partial class TbGiaHanChuongTrinhDaoTao
     public int IdGiaHanChuongTrinhDaoTao { get; set; }
     [DisplayName(displayName: "ID Chương Trình Đào Tạo")]
     public int? IdChuongTrinhDaoTao { get; set; }
-    [DisplayName(displayName: "TSố Quyết Định Gia Hạn")]
+    [DisplayName(displayName: "Số Quyết Định Gia Hạn")]
     public string? SoQuyetDinhGiaHan { get; set; }
     [DisplayName(displayName: "Ngày Ban Hành Văn Bản Gia Hạn")]
     public DateOnly? NgayBanHanhVanBanGiaHan { get; set; }

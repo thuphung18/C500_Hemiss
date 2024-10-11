@@ -2,52 +2,111 @@
 
 @{
     ViewData["Title"] = "Index";
+    int stt = 0;
 }
-
-<h1>Index</h1>
-
+@section Heads{
+    @* ======= nhúng datatable ========= *@
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    @* ========== nhúng icon ========= *@
+    <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
+}
+<h1>DANH SÁCH GIA HẠN CHƯƠNG TRÌNH ĐÀO TẠO</h1>
+<h4><strong style="color:red">@Model.Count()</strong> chương trình đào tạo đã được gia hạn</h4>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">
+        <i style="margin-right:10px" class="fas fa-plus"></i>
+        Thêm mới
+    </a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)
+            <th class="col-1">
+                STT
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaHanLanThu)
-            </th>
-            <th>
+            <th class="col-2">
                 @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
             </th>
-            <th></th>
+            <th class ="col-3">
+                @Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)
+            </th>
+            <th class="col-4">
+                @Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)
+            </th>
+            <th class="col-5">
+                @Html.DisplayNameFor(model => model.GiaHanLanThu)
+            </th>
+            
+            <th class="col-6"></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+
+            <td class="col-1">
+                    @(++stt)
+            </td>
+                <td class="col-2">
+                    @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
+            </td>
+                <td class="col-3">
                 @Html.DisplayFor(modelItem => item.SoQuyetDinhGiaHan)
             </td>
-            <td>
+                <td class="col-4">
                 @Html.DisplayFor(modelItem => item.NgayBanHanhVanBanGiaHan)
             </td>
-            <td>
+                <td class="col-5">
                 @Html.DisplayFor(modelItem => item.GiaHanLanThu)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao">Delete</a>
+            
+                <td class="col-6">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-circle-info"></b>Mô tả</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-trash"></b>Xoá</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+@section Styles{
+    @* ======== common ======== *@
+    <style>
+        a{
+            text-decoration:none;
+        }
+
+        h1,h4{
+            text-align:center;
+        }
+
+        /* ======== chỉnh độ rộng của cột ======= */
+        .col-1{
+            width: 3%;
+        }
+
+        .col-2 {
+            width: 17%;
+        }
+
+        .col-3 {
+            width: 18%;
+        }
+
+        .col-4 {
+            width: 22%;
+        }
+
+        .col-5 {
+            width: 12%;
+        }
+
+        .col-6 {
+            width: 28%;
+        }
+
+
+    </style>
+}
