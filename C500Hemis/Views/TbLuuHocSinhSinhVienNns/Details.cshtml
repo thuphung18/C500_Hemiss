@@ -1,7 +1,7 @@
 ﻿@model C500Hemis.Models.TbLuuHocSinhSinhVienNn
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Thông tin chi tiết";
 }
 <style>
     table {
@@ -23,10 +23,10 @@
         background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
     }
 </style>
-<h1>Details</h1>
+<h1>Thông tin chi tiết</h1>
 
 <div>
-    <h4>TbLuuHocSinhSinhVienNn</h4>
+    <h4>Lưu học sinh, sinh viên nước ngoài</h4>
     <hr />
     <table>
         <tr>
@@ -43,8 +43,9 @@
         </tr>
     </table>
 </div>
-<form asp-action="Edit">
-    <input type="hidden" asp-for="IdLuuHocSinhSinhVienNn" />
-    <input type="submit" value="Edit" class="btn btn-danger" />
-    <a asp-action="Index">Back to List</a>
-</form>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdLuuHocSinhSinhVienNn"> Sửa </a> |
+    <a asp-action="Index">Quay lại </a>
+</div>
