@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using C500Hemis.Models.DM;
-
 namespace C500Hemis.Models;
 
 public partial class TbNganhGiangDayCuaCanBo
