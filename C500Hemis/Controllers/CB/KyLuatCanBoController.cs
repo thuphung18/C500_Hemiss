@@ -17,35 +17,47 @@ namespace C500Hemis.Controllers.CB
         {
             _context = context;
         }
-
+        // Toàn bộ action mặc định không xuất lổi chỉ trả về BadRequest
         // GET: KyLuatCanBo
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                var hemisContext = _context.TbKyLuatCanBos.Include(t => t.IdCanBoNavigation).ThenInclude(human => human.IdNguoiNavigation).Include(t => t.IdCapQuyetDinhNavigation).Include(t => t.IdLoaiKyLuatNavigation);
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: KyLuatCanBo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbKyLuatCanBo = await _context.TbKyLuatCanBos
-                .Include(t => t.IdCanBoNavigation)
-                .ThenInclude(human => human.IdNguoiNavigation)
-                .Include(t => t.IdCapQuyetDinhNavigation)
-                .Include(t => t.IdLoaiKyLuatNavigation)
-                .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);
-            if (tbKyLuatCanBo == null)
+                var tbKyLuatCanBo = await _context.TbKyLuatCanBos
+                    .Include(t => t.IdCanBoNavigation)
+                    .ThenInclude(human => human.IdNguoiNavigation)
+                    .Include(t => t.IdCapQuyetDinhNavigation)
+                    .Include(t => t.IdLoaiKyLuatNavigation)
+                    .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);
+                if (tbKyLuatCanBo == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbKyLuatCanBo);
+            } catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            ViewBag.Hoten =_context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbKyLuatCanBo.IdCanBoNavigation.IdNguoi).Ho;
-            return View(tbKyLuatCanBo);
         }
 
 
@@ -56,16 +68,23 @@ namespace C500Hemis.Controllers.CB
         /// <returns></returns>
         public IActionResult Create()
         {
-            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+            try
+            {
+                //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
 
-            //Lấy danh sách cấp quyết định, hiện thị cụ thể cấp quyết định
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
-            
-            //Lấy danh sách các loại kỷ luật, hiện thị cụ thể tên loại kỷ luật
-            //8.10.2024: bổ sung theo góp ý của thầy Phú
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat");
-            return View();
+                //Lấy danh sách cấp quyết định, hiện thị cụ thể cấp quyết định
+                ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong");
+
+                //Lấy danh sách các loại kỷ luật, hiện thị cụ thể tên loại kỷ luật
+                //8.10.2024: bổ sung theo góp ý của thầy Phú
+                ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: KyLuatCanBo/Create
@@ -75,23 +94,29 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdKyLuatCanBo,IdCanBo,IdLoaiKyLuat,LyDo,IdCapQuyetDinh,NgayThangNamQuyetDinh,SoQuyetDinh,NamBiKyLuat")] TbKyLuatCanBo tbKyLuatCanBo)
         {
-            //Kiểm tra đã tồn tại trong TbKyLuatCanBo chua
-            TbKyLuatCanBo? cr = (await _context.TbKyLuatCanBos.SingleOrDefaultAsync(e => e.IdKyLuatCanBo == tbKyLuatCanBo.IdKyLuatCanBo));
-            //Nếu đã tồn tại tức khác null thì thêm Error cho IdKyLuatCanBo
-            if (cr != null) ModelState.AddModelError("IdKyLuatCanBo", "Đã tồn tại Id này!");
-            if (ModelState.IsValid)
+            try
             {
-                //Thêm đối tượng vào context
-                _context.Add(tbKyLuatCanBo);
-                // Lưu vào cơ sở dữ liệu
-                await _context.SaveChangesAsync();
-                // Nếu thành công sẽ trở về trang index
-                return RedirectToAction(nameof(Index));
+                
+                //Nếu đã tồn tại thì thêm Error cho IdKyLuatCanBo
+                if (await existId(tbKyLuatCanBo.IdKyLuatCanBo)) ModelState.AddModelError("IdKyLuatCanBo", "Đã tồn tại Id này!");
+                if (ModelState.IsValid)
+                {
+                    //Thêm đối tượng vào context
+                    _context.Add(tbKyLuatCanBo);
+                    // Lưu vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    // Nếu thành công sẽ trở về trang index
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
+                ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+                ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+                return View(tbKyLuatCanBo);
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
-            return View(tbKyLuatCanBo);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         /// <summary>
@@ -101,20 +126,28 @@ namespace C500Hemis.Controllers.CB
         /// <returns>View khởi tạo kỷ luật cán bộ</returns>
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbKyLuatCanBo = await _context.TbKyLuatCanBos.FindAsync(id);
-            if (tbKyLuatCanBo == null)
-            {
-                return NotFound();
+                var tbKyLuatCanBo = await _context.TbKyLuatCanBos.FindAsync(id);
+                if (tbKyLuatCanBo == null)
+                {
+                    return NotFound();
+                }
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
+                ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+                ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+                return View(tbKyLuatCanBo);
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
-            return View(tbKyLuatCanBo);
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
 
         // POST: KyLuatCanBo/Edit/5
@@ -124,57 +157,71 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdKyLuatCanBo,IdCanBo,IdLoaiKyLuat,LyDo,IdCapQuyetDinh,NgayThangNamQuyetDinh,SoQuyetDinh,NamBiKyLuat")] TbKyLuatCanBo tbKyLuatCanBo)
         {
-            if (id != tbKyLuatCanBo.IdKyLuatCanBo)
+            try
             {
-                return NotFound();
-            }
+                if (id != tbKyLuatCanBo.IdKyLuatCanBo)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(tbKyLuatCanBo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbKyLuatCanBoExists(tbKyLuatCanBo.IdKyLuatCanBo))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(tbKyLuatCanBo);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!(await existId(tbKyLuatCanBo.IdKyLuatCanBo)))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
+                ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
+                ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
+                return View(tbKyLuatCanBo);
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbKyLuatCanBo.IdCanBo);
-            ViewData["IdCapQuyetDinh"] = new SelectList(_context.DmCapKhenThuongs, "IdCapKhenThuong", "CapKhenThuong", tbKyLuatCanBo.IdCapQuyetDinh);
-            ViewData["IdLoaiKyLuat"] = new SelectList(_context.DmLoaiKyLuats, "IdLoaiKyLuat", "LoaiKyLuat", tbKyLuatCanBo.IdLoaiKyLuat);
-            return View(tbKyLuatCanBo);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: KyLuatCanBo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbKyLuatCanBo = await _context.TbKyLuatCanBos
-                .Include(t => t.IdCanBoNavigation)
-                .ThenInclude(h => h.IdNguoiNavigation)
-                .Include(t => t.IdCapQuyetDinhNavigation)
-                .Include(t => t.IdLoaiKyLuatNavigation)
-                .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);
-            if (tbKyLuatCanBo == null)
+                var tbKyLuatCanBo = await _context.TbKyLuatCanBos
+                    .Include(t => t.IdCanBoNavigation)
+                    .ThenInclude(h => h.IdNguoiNavigation)
+                    .Include(t => t.IdCapQuyetDinhNavigation)
+                    .Include(t => t.IdLoaiKyLuatNavigation)
+                    .FirstOrDefaultAsync(m => m.IdKyLuatCanBo == id);
+                if (tbKyLuatCanBo == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbKyLuatCanBo);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            return View(tbKyLuatCanBo);
         }
 
         // POST: KyLuatCanBo/Delete/5
@@ -182,19 +229,28 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbKyLuatCanBo = await _context.TbKyLuatCanBos.FindAsync(id);
-            if (tbKyLuatCanBo != null)
+            try
             {
-                _context.TbKyLuatCanBos.Remove(tbKyLuatCanBo);
+                var tbKyLuatCanBo = await _context.TbKyLuatCanBos.FindAsync(id);
+                if (tbKyLuatCanBo != null)
+                {
+                    _context.TbKyLuatCanBos.Remove(tbKyLuatCanBo);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
-
-        private bool TbKyLuatCanBoExists(int id)
+        private async Task<bool> existId(int id)
         {
-            return _context.TbKyLuatCanBos.Any(e => e.IdKyLuatCanBo == id);
+            //Kiểm tra đã tồn tại trong TbKyLuatCanBo chua
+            TbKyLuatCanBo? cr = (await _context.TbKyLuatCanBos.SingleOrDefaultAsync(e => e.IdKyLuatCanBo == id));
+            if (cr == null) return false;
+            return true;
         }
     }
 }
