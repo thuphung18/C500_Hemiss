@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
 
 namespace C500Hemis.Models;
 
@@ -14,7 +18,7 @@ public partial class TbKhoanTrichLapQuy
     [Display(Name = "Tên Khoản Trích Lập Quỹ")]
     public string? TenKhoanTrichLapQuy { get; set; }
 
-    [Display(Name = "Năm Tài Chính)]
+    [Display(Name = "Năm Tài Chính")]
     public string? NamTaiChinh { get; set; }
 
     [Display(Name = "Số Tiền")]
