@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "Edit";
+    string thoigianhoptactu = "";
+    string thoigianhoptacden = "";
+    if (Model.ThoiGianHopTacTu != null)
+    {
+        thoigianhoptactu = Model.ThoiGianHopTacTu.Value.ToString("yyyy-MM-dd");
+    }
+    if (Model.ThoiGianHopTacDen != null) thoigianhoptacden = Model.ThoiGianHopTacDen.Value.ToString("yyyy-MM-dd");
 }
 <style>
     div{
@@ -126,5 +133,9 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            document.getElementById("ThoiGianHopTactu").value = "@thoigianhoptactu";
+            document.getElementById("ThoiGianHopTacDen").value = "@thoigianhoptacden";
+        </script>
     }
 }
