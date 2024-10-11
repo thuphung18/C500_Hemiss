@@ -119,22 +119,22 @@
                 @Html.DisplayFor(model => model.NamBiKyLuat)
             </dd>
             <dt class="col-sm-2">
-            Họ tên cán bộ
+                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
+                @Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name)
             </dd>
             <dt class="col-sm-2">
-                Cấp quyết định
+                @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
+                @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.CapKhenThuong)
             </dd>
             <dt class="col-sm-2">
-               Hình thức kỷ luật
+                @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
+                @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.LoaiKyLuat)
             </dd>
         </dl>
         <div class="submit"> <a asp-action="Index" class="back">Quay lại</a></div>
