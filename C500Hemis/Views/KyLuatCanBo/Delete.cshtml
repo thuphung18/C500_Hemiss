@@ -5,13 +5,17 @@
 }
 @section Styles {
     <style>
-        /* Thiết lập cơ bản cho form */
+        /* Về cơ bản giống form thông tin chi tiết */
+        /* Có sửa đổi cho phù hợp với form xóa hồ sơ */
+        /* Thiết lập cơ bản cho vùng xóa, làm cho bảng vào giữa */
        .total{
             display: flex;
             justify-content: center;
             margin-top:50px;
             margin-bottom: 50px;
        }
+
+       /* Bảng thông tin */
         .form_del {
             background-color: #f9f9f9;
             padding: 20px;
@@ -20,6 +24,7 @@
             width:50%;
         }
 
+        /* Đặt tiêu đề nổi "XÓA HỒ SƠ BỊ KỶ LUẬT */
         h1 {
             font-size: 36px;
             text-align: center;
@@ -27,6 +32,7 @@
             margin-bottom: 20px;
         }
 
+        /* Lời nhắn, có muốn xóa hay không? */
         h3 {
             text-align: center;
             font-size: 24px;
@@ -38,7 +44,7 @@
         .row {
             display: grid;
             grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% */
-            gap: 10px; /* Khoảng cách giữa các phần tử */
+            gap: 10px;                      /* Khoảng cách giữa các phần tử */
             padding: 15px;
             background-color: #fff;
             border-radius: 8px;
@@ -46,6 +52,7 @@
             margin: 20px;
         }
 
+        /* Cột thông tin bên phải */
         dt {
             font-weight: bold;
             color: #444;
@@ -56,12 +63,14 @@
             
         }
 
+        /* Cột thông tin bên trái */
         dd {
             color: #555;
             margin-bottom: 0;
             align-self: center; /* Canh giữa theo trục dọc */
         }
 
+        /* Núi xác nhận xóa */
         .btn-danger {
             background-color: #e3342f;
             border: none;
@@ -73,6 +82,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+        /* Khi di chuột vào núi xác nhận xóa */
         .btn-danger:hover {
             background-color: #c82333;
             transform: scale(1.05);
@@ -86,21 +96,25 @@
             color: white;
             border-radius: 5px;
             text-decoration: none;
-            margin-left: 10px;
+            margin-top: 15px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+        /* Khi di chuột vào núi back */
         .back:hover {
             background-color: #5a6268;
             transform: scale(1.05);
-        }
+            color: white;
+            }
 
-        /* Canh giữa form */
+        /* Núi xác nhận */
         .submit {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
+
+        /* Canh giữa cho nút xác nhận */
         .submit_center{
             display: flex;
             justify-content: center;

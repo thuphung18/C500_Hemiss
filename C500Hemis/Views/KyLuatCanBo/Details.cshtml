@@ -5,7 +5,9 @@
 }
 @section Styles {
     <style>
-        /* Thiết lập cơ bản cho form */
+        /* Thiết lập cơ bản cho các khối con nằm bên trong */
+        /* ở đây chỉ có 1 khối con nằm bên trong là form cần hiển thị */
+        /* Mục đích làm cho form thông tin chi tiết căn giữa trang web */
         .total {
             display: flex;
             justify-content: center;
@@ -13,6 +15,7 @@
             margin-bottom: 50px;
         }
 
+        /* Các thuộc tính cơ bản cho bảng: màu, căn lề, bo góc, hiệu ứng, ... */
         .form_del {
             background-color: #f9f9f9;
             padding: 20px;
@@ -21,23 +24,17 @@
             width: 50%;
         }
 
+        /* Tiêu đề "THÔNG TIN CHI TIẾT" */
         h1 {
             font-size: 36px;
             text-align: center;
         }
 
-        h3 {
-            text-align: center;
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
         /* Định dạng cho bảng thông tin, ô nhỏ phía trong */
         .row {
             display: grid;
-            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% */
-            gap: 10px; /* Khoảng cách giữa các phần tử */
+            grid-template-columns: 50% 50%; /* Mỗi cột thông tin chiếm 50% */
+            gap: 10px;                      /* Khoảng cách giữa các phần tử */
             padding: 15px;
             background-color: #fff;
             border-radius: 8px;
@@ -45,6 +42,7 @@
             margin: 20px;
         }
 
+        /* Cột thông tin bên trái */
         dt {
             font-weight: bold;
             color: #444;
@@ -54,6 +52,7 @@
             padding-right: 10px; /* Thêm khoảng cách giữa dt và dd */
         }
 
+        /* Cột thông tin bên phải */
         dd {
             color: #555;
             margin-bottom: 0;
@@ -61,23 +60,25 @@
         }
 
         /* Nút quay lại */
-        .back {
+         .back {
             display: inline-block;
             padding: 10px 15px;
             background-color: #6c757d;
             color: white;
             border-radius: 5px;
             text-decoration: none;
-            margin-left: 10px;
+            margin-top: 15px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-            .back:hover {
-
-                transform: scale(1.05);
+        /* Khi di chuột vào nút quay lại, sẽ to hơn, màu đậm hơn */
+        .back:hover {
+             background-color: #5a6268;
+             transform: scale(1.05);
+             color: white;
             }
 
-        /* Canh giữa form */
+        /* Căn giữa cho nút xác nhận */
         .submit {
             display: flex;
             justify-content: center;
@@ -85,8 +86,6 @@
         }
     </style>
 }
-
-
 
 <div class="total">
     <div class="form_del">
@@ -138,7 +137,7 @@
             </dd>
         </dl>
         <div class="submit"> <a asp-action="Index" class="back">Quay lại</a></div>
-       
+      
     </div>
     
 </div>
