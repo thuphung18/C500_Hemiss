@@ -4002,10 +4002,10 @@ public partial class HemisContext : DbContext
 
         modelBuilder.Entity<TbThoaThuanHopTacQuocTe>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("tbThoaThuanHopTacQuocTe", "HTQT");
+            entity.HasKey(e => e.IdThoaThuanHopTacQuocTe);
+            entity.ToTable("tbThoaThuanHopTacQuocTe", "HTQT");
 
+            entity.Property(e => e.IdThoaThuanHopTacQuocTe).ValueGeneratedNever();
             entity.Property(e => e.MaThoaThuan).HasMaxLength(50);
             entity.Property(e => e.SoVanBanKyKet).HasMaxLength(50);
             entity.Property(e => e.TenThoaThuan).HasMaxLength(200);
