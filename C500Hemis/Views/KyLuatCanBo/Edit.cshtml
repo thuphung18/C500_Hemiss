@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "SỬA HỒ SƠ";
+    string ngaynhanqd = "";
+    string nambikyluat = "";
+    if (Model.NamBiKyLuat != null)
+    {
+        nambikyluat = Model.NamBiKyLuat.Value.ToString("yyyy-MM-dd");
+    } 
+    if (Model.NgayThangNamQuyetDinh != null) ngaynhanqd = Model.NgayThangNamQuyetDinh.Value.ToString("yyyy-MM-dd");
 }
 
 @section Styles {
@@ -111,11 +118,13 @@
     </style>
 }
 
-<h1>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
-<hr />
+
 <div class="row">
     <div class="col-md-6">
+       
         <form asp-action="Edit">
+            <h2><b>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</b></h2>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdKyLuatCanBo" />
             <div class="form-group">
@@ -164,7 +173,10 @@
         </form>
     </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById("NgayThangNamQuyetDinh").value = "@ngaynhanqd";
+        document.getElementById("NamBiKyLuat").value = "@nambikyluat";
+    </script>
 }

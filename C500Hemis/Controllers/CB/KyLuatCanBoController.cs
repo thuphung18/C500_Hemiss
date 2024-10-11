@@ -75,8 +75,10 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdKyLuatCanBo,IdCanBo,IdLoaiKyLuat,LyDo,IdCapQuyetDinh,NgayThangNamQuyetDinh,SoQuyetDinh,NamBiKyLuat")] TbKyLuatCanBo tbKyLuatCanBo)
         {
-            // Kiểm tra dữ liệu có chuẩn không
-            // Đối sánh với lớp tbKyluatCanBo
+            //Kiểm tra đã tồn tại trong TbKyLuatCanBo chua
+            TbKyLuatCanBo? cr = (await _context.TbKyLuatCanBos.SingleOrDefaultAsync(e => e.IdKyLuatCanBo == tbKyLuatCanBo.IdKyLuatCanBo));
+            //Nếu đã tồn tại tức khác null thì thêm Error cho IdKyLuatCanBo
+            if (cr != null) ModelState.AddModelError("IdKyLuatCanBo", "Đã tồn tại Id này!");
             if (ModelState.IsValid)
             {
                 //Thêm đối tượng vào context
