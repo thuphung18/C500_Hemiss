@@ -68,7 +68,6 @@ namespace C500Hemis.Controllers.CSGD
             {
                 try
                 {
-                    Console.WriteLine("dawdawdaw\n\n\n");
                     // Thêm đối tượng vào context
                     _context.Add(tbDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd);
 
