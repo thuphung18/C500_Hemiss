@@ -47,7 +47,7 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbDeAnDuAnChuongTrinhs/Create
         public IActionResult Create()
         {
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn");
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn");
             return View();
         }
 
@@ -81,7 +81,7 @@ namespace C500Hemis.Controllers.HTQT
             {
                 return NotFound();
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
             return View(tbDeAnDuAnChuongTrinh);
         }
 
@@ -117,7 +117,7 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
             return View(tbDeAnDuAnChuongTrinh);
         }
 

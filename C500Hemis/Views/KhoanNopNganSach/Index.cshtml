@@ -13,7 +13,7 @@ ViewData["Title"] = "Index";
     <p>
         <a asp-action="Create">Create New</a>
     </p>
-    <table class="table">
+    <table class="table" id="view_table">
         <thead>
             <tr>
                 <th>
@@ -47,9 +47,15 @@ ViewData["Title"] = "Index";
                     @Html.DisplayFor(modelItem => item.NamTaiChinh)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdKhoanNopNganSach">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdKhoanNopNganSach">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdKhoanNopNganSach">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-primary" style="background-color: #3498db; color: white; text-decoration: none;">
+                        <i class="fas fa-edit"></i> Sửa
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-success" style="background-color: #456512; color: white; text-decoration: none;">
+                        <i class="fas fa-info-circle"></i> Chi tiết
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-danger" style="background-color: #e74c3c; color: white; text-decoration: none;">
+                        <i class="fas fa-trash"></i> Xóa
+                    </a>
                 </td>
             </tr>
 }
