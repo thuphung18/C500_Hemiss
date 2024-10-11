@@ -3,58 +3,143 @@
 @{
     ViewData["Title"] = "CHI TIẾT";
 }
+@section Styles {
+    <style>
+        /* Thiết lập cơ bản cho form */
+        .total {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
 
-<h1>THÔNG TIN CHI TIẾT</h1>
+        .form_del {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            width: 50%;
+        }
 
-<div>
-    <h4>Họ và tên: @Model.IdCanBoNavigation.IdNguoiNavigation.Ho @Model.IdCanBoNavigation.IdNguoiNavigation.Ten </h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Lý do kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LyDo)
-        </dd>
-        <dt class = "col-sm-2">
-            Ngày nhận quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayThangNamQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            Số quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            Năm kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamBiKyLuat)
-        </dd>
-        <dt class = "col-sm-2">
-            ID cán bộ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            Cấp quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            Hình thức kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
-        </dd>
-    </dl>
+        h1 {
+            font-size: 36px;
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Định dạng cho bảng thông tin, ô nhỏ phía trong */
+        .row {
+            display: grid;
+            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+
+        dt {
+            font-weight: bold;
+            color: #444;
+            white-space: nowrap; /* Tránh xuống dòng */
+            align-self: center; /* Canh giữa theo trục dọc */
+            text-align: right; /* Căn phải để khoảng cách giữa dt và dd đều đặn hơn */
+            padding-right: 10px; /* Thêm khoảng cách giữa dt và dd */
+        }
+
+        dd {
+            color: #555;
+            margin-bottom: 0;
+            align-self: center; /* Canh giữa theo trục dọc */
+        }
+
+        /* Nút quay lại */
+        .back {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+            .back:hover {
+
+                transform: scale(1.05);
+            }
+
+        /* Canh giữa form */
+        .submit {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+}
+
+
+
+<div class="total">
+    <div class="form_del">
+        <h1 style="text-align:center">THÔNG TIN CHI TIẾT</h1>
+        <h4 style="text-align:center">Họ và tên: @Model.IdCanBoNavigation.IdNguoiNavigation.name </h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LyDo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LyDo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayThangNamQuyetDinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayThangNamQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoQuyetDinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NamBiKyLuat)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NamBiKyLuat)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.CapKhenThuong)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.LoaiKyLuat)
+            </dd>
+        </dl>
+        <div class="submit"> <a asp-action="Index" class="back">Quay lại</a></div>
+       
+    </div>
+    
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKyLuatCanBo">Chỉnh sửa</a> |
-    <a asp-action="Index">Quay lại</a>
-</div>
+
