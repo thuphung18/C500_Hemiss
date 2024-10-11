@@ -4,9 +4,13 @@
     ViewData["Title"] = "Giảng viên QPAN";
     int stt = 0;
 }
+@section Heads { 
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+}
 
-
-<h3 class="text-center my-4">GIÁO VIÊN QUỐC PHÒNG AN NINH</h3>
+<h1 class="text-center my-4">DANH SÁCH GIÁO VIÊN QUỐC PHÒNG AN NINH</h1>
 <h5 style="text-align:center ">Gồm có <strong style="color:red">@Model.Count()</strong> giáo viên</h5>
 
 <div class="text-right mb-3">
@@ -66,12 +70,15 @@
         }
     </tbody>
 </table>
-
 @* ======== css ========= *@
 <style>
 /* ===== button option ======= */
     a{
         text-decoration:none;
+    }
+
+    body{
+        background-color: #fafbed;
     }
     .btn1 {
         
@@ -103,6 +110,10 @@
 
     .odd {
         background-color: #fafbed !important; /* Màu cho dòng lẻ */
+    }
+
+    #ntable{
+        border-radius:30% !important;
     }
 
     .Id{
@@ -163,15 +174,15 @@
 
     /* details */
     #btn-details {
-        background: yellow;
-        border: 1px solid yellow;
+        background: #0f172a;
+        border: 1px solid #0f172a;
     }
 
         #btn-details:hover,
         #btn-details:active {
             background-color: initial;
             background-position: 0 0;
-            color: yellow;
+            color: #0f172a;
         }
 
         #btn-details:active {

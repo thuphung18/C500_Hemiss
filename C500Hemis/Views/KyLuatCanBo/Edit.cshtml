@@ -2,61 +2,187 @@
 
 @{
     ViewData["Title"] = "SỬA HỒ SƠ";
+    string ngaynhanqd = "";
+    string nambikyluat = "";
+    if (Model.NamBiKyLuat != null)
+    {
+        nambikyluat = Model.NamBiKyLuat.Value.ToString("yyyy-MM-dd");
+    } 
+    if (Model.NgayThangNamQuyetDinh != null) ngaynhanqd = Model.NgayThangNamQuyetDinh.Value.ToString("yyyy-MM-dd");
 }
 
-<h1>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
-<hr />
+@section Styles {
+    <style>
+        /* Diện tích khối div của form sửa thông tin, không phải vùng toàn thể (body) của web */
+        .row {
+            min-width: 500px; /* Kích thước tối thiểu, có thể cuộn được*/
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Sửa màu, căn lề, bo góc cho form */
+        form {
+            background-color: #f9f9f9; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Làm nổi form trên nền trắng, cảm giác như tờ giấy */
+        }
+
+        /* Chỉnh tiêu đề "CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT" */
+        h1 {
+            font-size: 36px;
+            text-align: center; /*Căn giữa*/
+            color: #333;
+            margin-bottom: 20px; /* tạo 1 khoảng cách với phần tử phía dưới */
+        }
+
+        /* Biểu thị các giá trị cần nhập */
+        /* Nằm phía trên hộp dữ liệu */
+        label {
+            font-weight: bold;
+            color: #444;
+        } 
+
+        /* Khối dữ liệu, mỗi trường thông tin cách nhau khoảng 15px */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        /* CSS cho các hộp dùng để nhập dữ liệu */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Khi nhấn vào hộp dữ liệu sẽ có viền xanh, . . . */
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        .text-danger {
+            color: #e3342f;
+        }
+
+        /* Nút xác nhận */
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Khi di chuột vào nút xác nhận */
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Nút quay lại */
+        .back {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Khi di chuột vào núi "quay lại" */
+        .back:hover {
+                background-color: #5a6268;
+                transform: scale(1.05);
+                color: white;
+        }
+
+        /* Căn giữa nút Xác nhận */
+        .submit {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Hiển thị lỗi */
+        .validation-summary-errors {
+            background-color: #f8d7da;
+            color: yellow;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+            margin-bottom: 20px;
+        }
+    </style>
+}
+
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">       
         <form asp-action="Edit">
+            <h2><b>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</b></h2>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdKyLuatCanBo" />
             <div class="form-group">
-                <label asp-for="IdCanBo" class="control-label">ID cán bộ</label>
+                <label asp-for="IdCanBo" class="control-label"></label>
                 <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
                 <span asp-validation-for="IdCanBo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdLoaiKyLuat" class="control-label">Hình thức kỷ luật</label>
+                <label asp-for="IdLoaiKyLuat" class="control-label"></label>
                 <select asp-for="IdLoaiKyLuat" class="form-control" asp-items="ViewBag.IdLoaiKyLuat"></select>
                 <span asp-validation-for="IdLoaiKyLuat" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LyDo" class="control-label">Lý do kỷ luật</label>
+                <label asp-for="LyDo" class="control-label"></label>
                 <input asp-for="LyDo" class="form-control" />
                 <span asp-validation-for="LyDo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCapQuyetDinh" class="control-label">Cấp quyết định</label>
+                <label asp-for="IdCapQuyetDinh" class="control-label"></label>
                 <select asp-for="IdCapQuyetDinh" class="form-control" asp-items="ViewBag.IdCapQuyetDinh"></select>
                 <span asp-validation-for="IdCapQuyetDinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NgayThangNamQuyetDinh" class="control-label">Ngày nhận quyết định</label>
+                <label asp-for="NgayThangNamQuyetDinh" class="control-label"></label>
                 <input asp-for="NgayThangNamQuyetDinh" class="form-control" />
                 <span asp-validation-for="NgayThangNamQuyetDinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SoQuyetDinh" class="control-label">Số quyết định</label>
+                <label asp-for="SoQuyetDinh" class="control-label"></label>
                 <input asp-for="SoQuyetDinh" class="form-control" />
                 <span asp-validation-for="SoQuyetDinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NamBiKyLuat" class="control-label">Năm bị kỷ luật</label>
+                <label asp-for="NamBiKyLuat" class="control-label"></label>
                 <input asp-for="NamBiKyLuat" class="form-control" />
                 <span asp-validation-for="NamBiKyLuat" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Xác nhận chỉnh sửa" class="btn btn-primary" />
+            <div class="sub_back">
+                <div class="submit">
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+
+                <a class="back" asp-action="Index">Quay lại</a>
+
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Quay lại</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById("NgayThangNamQuyetDinh").value = "@ngaynhanqd";
+        document.getElementById("NamBiKyLuat").value = "@nambikyluat";
+    </script>
 }

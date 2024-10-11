@@ -22,7 +22,7 @@ public partial class TbDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd
 
     public virtual DmCapKhenThuong? IdCapKhenThuongNavigation { get; set; }
 
-    public virtual DmThiDuaGiaiThuongKhenThuong IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation { get; set; } = null!;
+    public virtual DmThiDuaGiaiThuongKhenThuong? IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation { get; set; } = null!;
 
     public virtual DmLoaiDanhHieuThiDuaGiaiThuongKhenThuong? IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation { get; set; }
 

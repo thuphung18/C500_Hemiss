@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+}
 <style>
     th, h1, td{
         text-align:center;
@@ -102,33 +105,38 @@
     </form>
 
 </body>
-<script>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
 
-    new DataTable('#ntable', {
-        searching: true, // Mặc định là true, set false để tắt chức năng search
-        processing: true,
-        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
-        language: {
-            processing: "Message khi đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
-            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
-            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
-            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
-            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
-            loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
+        new DataTable('#ntable', {
+            searching: true, // Mặc định là true, set false để tắt chức năng search
+            processing: true,
+            info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+            language: {
+                processing: "Message khi đang tải dữ liệu",
+                search: "Tìm kiếm",
+                lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+                info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
+                infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+                infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+                infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
+                loadingRecords: "",
+                zeroRecords: "Khi tìm kiếm không match với record nào",
+                emptyTable: "Không có dữ liệu",
+                paginate: {
+                    first: "Trang đầu",
+                    previous: "Trang trước",
+                    next: "Trang sau",
+                    last: "Trang cuối"
+                },
+                aria: {
+                    sortAscending: ": Message khi đang sắp xếp theo column",
+                    sortDescending: ": Message khi đang sắp xếp theo column",
+                }
             },
-            aria: {
-                sortAscending: ": Message khi đang sắp xếp theo column",
-                sortDescending: ": Message khi đang sắp xếp theo column",
-            }
-        },
-    });
-</script>
+        });
+    </script>
+}

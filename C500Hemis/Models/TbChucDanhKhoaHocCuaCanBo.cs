@@ -9,9 +9,11 @@ namespace C500Hemis.Models;
 public partial class TbChucDanhKhoaHocCuaCanBo
 {
     [Display(Name = "ID CHỨC DANH KHOA HỌC CỦA CÁN BỘ")]
+    [Required(ErrorMessage = "ID CHỨC DANH KHOA HỌC CỦA CÁN BỘ là bắt buộc.")]
     public int IdChucDanhKhoaHocCuaCanBo { get; set; }
 
     [Display(Name = "ID CÁN BỘ")]
+    [Required(ErrorMessage = "ID Cán bộ là bắt buộc.")]
     public int? IdCanBo { get; set; }
 
     [Display(Name = "ID CHỨC DANH KHOA HỌC")]

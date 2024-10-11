@@ -99,10 +99,10 @@ namespace C500Hemis.Controllers.CB
                     //ViewBag.ErrorMessage = ex.Message;
                     ViewBag.ErrorMessage = ex.Message + " Đây là lỗi người làm ra chưa tìm ra cách fix thông cảm";
                 }
-                finally
-                {
-                    ViewBag.mess = "Vui lòng nhập lại";
-                }
+                //finally
+                //{
+                //    ViewBag.mess = "Vui lòng nhập lại";
+                //}
             }
 
             // Nếu không hợp lệ, tạo lại danh sách lựa chọn

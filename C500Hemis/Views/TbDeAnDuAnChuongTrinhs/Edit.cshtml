@@ -1,7 +1,18 @@
 ﻿@model C500Hemis.Models.TbDeAnDuAnChuongTrinh
 
 @{
+<<<<<<< HEAD
     ViewData["Title"] = "Sửa";
+=======
+    ViewData["Title"] = "Edit";
+    string thoigianhoptactu = "";
+    string thoigianhoptacden = "";
+    if (Model.ThoiGianHopTacTu != null)
+    {
+        thoigianhoptactu = Model.ThoiGianHopTacTu.Value.ToString("yyyy-MM-dd");
+    }
+    if (Model.ThoiGianHopTacDen != null) thoigianhoptacden = Model.ThoiGianHopTacDen.Value.ToString("yyyy-MM-dd");
+>>>>>>> 54b112329fc1eb8a4edb3683c8489a573addb500
 }
 
 <h1 style="text-align:center"> Sửa </h1>
@@ -168,5 +179,9 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            document.getElementById("ThoiGianHopTactu").value = "@thoigianhoptactu";
+            document.getElementById("ThoiGianHopTacDen").value = "@thoigianhoptacden";
+        </script>
     }
 }
