@@ -118,11 +118,13 @@
     </style>
 }
 
-<h1>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
-<hr />
+
 <div class="row">
     <div class="col-md-6">
+       
         <form asp-action="Edit">
+            <h2><b>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</b></h2>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdKyLuatCanBo" />
             <div class="form-group">
