@@ -23,6 +23,8 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         border: 1px solid #ddd;
+        position: relative;
+        z-index: 5;
     }
 
     h1 {
@@ -54,8 +56,8 @@
     dt {
         font-weight: bold;
         color: #6c757d;
-        flex-basis: 30%; /* Giữ chiều rộng đồng đều */
-        max-width: 200px; /* Đảm bảo không vượt quá */
+        flex-basis: 30%;
+        max-width: 200px;
         text-align: left;
     }
 
@@ -64,8 +66,8 @@
         background-color: #f8f9fa;
         padding: 10px;
         border-radius: 4px;
-        flex-basis: 65%; /* Giữ chiều rộng đồng đều */
-        max-width: calc(100% - 200px); /* Đảm bảo cùng chiều rộng với dt */
+        flex-basis: 65%;
+        max-width: calc(100% - 200px);
         margin: 0;
         text-align: left;
     }
@@ -74,7 +76,11 @@
         display: flex;
         justify-content: center;
         gap: 10px;
+        position: relative;
+        z-index: 10;
     }
+
+    \
 
     .btn {
         padding: 10px 20px;
@@ -125,18 +131,17 @@
                 <dt>Ngành giảng dạy:</dt>
                 <dd>@Html.DisplayFor(model => model.TenNganhGiangDay)</dd>
             </dl>
-
             <dl class="row">
                 <dt>Ngày bắt đầu giảng dạy:</dt>
                 <dd>@Html.DisplayFor(model => model.NgayBatDau)</dd>
             </dl>
 
-           
+
             <dt>Trọng số:</dt>
             <dd>@Html.DisplayFor(model => model.TrongSo)</dd>
         </dl>
 
-        <form asp-action="Xoá">
+        <form asp-action="Delete" method="post">
             <input type="hidden" asp-for="IdNganhDungTenGiangDay" />
             <input type="submit" value="Xoá" class="btn btn-danger" />
             <a asp-action="Index" class="btn btn-secondary">Trở lại</a>
