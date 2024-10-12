@@ -9,7 +9,6 @@
     <style>
         /* Hình nền cho toàn bộ trang */
         body {
-            position: revert-layer;
             background-color: palegreen;
         }
 
@@ -24,92 +23,89 @@
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
-                opacity: 0.5; /* Độ mờ của ảnh */
+                opacity: 0.5;
                 z-index: -1;
             }
 
         .h1 {
-            position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
-            color: black; /* Đảm bảo chữ hiển thị rõ ràng */
+            position: relative;
+            color: black;
         }
-        .text_mau{
-            color:black;
+
+        .text_mau {
+            color: black;
         }
+
         /* Phần chỉnh frontend cho bảng */
         .table {
-            with: 100%;
-            border-collapse: collapse; /* Bỏ viền của bảng */
-            margin-top: 20px; /* Cách lề trên 20px */
-            position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Hiệu ứng đường viền, tạo cảm giác bảng là tờ giấy */
-            color: black; /* Đảm bảo chữ hiển thị rõ ràng */
-            background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ cho bảng */
-            table th, table td
-            {
-            padding: 12px; /* Khoảng trống giữa nội dung và viền bảng */
-            text-align: center;
-            border-bottom: 5px solid #ddd; /* Viền của bảng: Kích thước - kiểu - màu */
-             }
-
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            color: black;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
-        /* NÚT SỬA, XÓA */
+            .table th, .table td {
+                padding: 12px;
+                text-align: center;
+                border-bottom: 2px solid #ddd;
+            }
+
+        /* Nút SỬA, XÓA, CHI TIẾT */
         .button_edit, .button_del, .button_details {
             border-style: solid;
             border-width: 0.5px;
             font-size: 14px;
             display: inline-block;
-            padding: 4px 8px;
+            padding: 4px 12px; /* Chỉnh kích thước padding để nút lớn hơn */
             text-decoration: none;
             color: black;
             border-radius: 5px;
             font-weight: bold;
             text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột trong thời gian 0.3s */
-            margin: 2px; /* Khoảng cách giữa các nút */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 5px; /* Khoảng cách giữa các nút */
         }
 
-        /* màu mặc định của 3 nút */
-        .button_edit
-        {
+        /* Màu mặc định của các nút */
+        .button_edit {
             background-color: #f0ad4e;
             border-color: #eea236;
         }
-        .button_details
-        {
+
+        .button_details {
             background-color: #5bc0de;
             border-color: #46b8da;
         }
-        .button_del{
+
+        .button_del {
             background-color: #d9534f;
             border-color: #d43f3a;
         }
-            /* Khi di chuột vào nút "SỬA" */
-            .button_edit:hover {
-                background-color: darkgoldenrod; /* màu xanh dương */
-                color: white;
-            }
 
-            /* Khi di chuột vào nút "Chi tiết" */
-            .button_details:hover {
-                background-color: #17a2b8; /* Màu xanh biển */
-                color: white;
-              }       
-            /* Khi di chuột vào nút "XÓA" */
-            .button_del:hover {
-                background-color: #dc3545; /* Màu đỏ */
-                color: white;
-            }
-            
-        /* Đặt kiểu bố cục cho khối chứa các nút sửa xóa */
-        .edit_del {
-            width: 100%;
-            display: flex;
-            justify-content: center; /* Căn giữa các nút trong khối */
-            align-items: center; /* Cũng là căn giữa (theo trục) */
+        /* Khi di chuột vào các nút */
+        .button_edit:hover {
+            background-color: darkgoldenrod;
+            color: white;
         }
-        .contain {
-            margin-bottom: 100px;
+
+        .button_details:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .button_del:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Bố cục khối chứa các nút */
+        .edit_del {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 }
@@ -179,7 +175,9 @@
                     infoEmpty: "Không có bản ghi nào",
                     lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
                     zeroRecords: "Không tìm thấy kết quả nào phù hợp",
-                    infoFiltered: "(lọc từ _MAX_ tổng bản ghi)"
+                    infoFiltered: "(lọc từ _MAX_ tổng bản ghi)",
+                    
+
                 },
                 createdRow: (row, data, index) => {
                 },

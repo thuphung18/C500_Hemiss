@@ -14,9 +14,10 @@ public partial class TbDuLieuTrungTuyen
 
     public string? MaTuyenSinh { get; set; }
 
-    public string? KhoaDaoTaoTrungTuyen { get; set; }
+   
 
-    public int? IdDoiTuongDauVao { get; set; }
+    public string? KhoaDaoTaoTrungTuyen { get; set; }
+    public int? IdDoiTuongDauVao { get; set; } // là đối tượng tuyển sinh ( để trùng với DM nên đề đầu vào )
 
     public int? IdDoiTuongUuTien { get; set; }
 
