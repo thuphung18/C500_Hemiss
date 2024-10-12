@@ -1,71 +1,84 @@
 ﻿@model C500Hemis.Models.TbThongTinHopTac
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Thông tin chi tiết";
 }
 
 <h1> Thông tin chi tiết</h1>
 
-<div>
-    <h4>TbThongTinHopTac</h4>
+
+<style>
+    table {
+        width: 100%; /* Chiều rộng bảng 100% */
+        border-collapse: collapse; /* Gộp đường viền ô */
+    }
+
+    th, td {
+        border: 1px solid #000; /* Đường viền đen cho các ô */
+        text-align: left;
+        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    }
+
+    th {
+        font-weight: bold; /* Chữ đậm cho tiêu đề */
+    }
+
+    tr:hover {
+        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+</style>
+
+
+<div class="container">
+    <h4 style="text-align:center">Thông tin hợp tác với tổ chức </h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Mã hợp tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdToChucHopTacNavigation.IdToChucHopTacQuocTe)
-        </dd>
-        <dt class = "col-sm-2">
-            Thời gian hợp tác từ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianHopTacTu)
-        </dd>
-        <dt class = "col-sm-2">
-            Thời gian hợp tác đến
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianHopTacDen)
-        </dd>
-        <dt class = "col-sm-2">
-            Tên thỏa thuận
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenThoaThuan)
-        </dd>
-        <dt class = "col-sm-2">
-            Thông tin liên hệ đối tác
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThongTinLienHeDoiTac)
-        </dd>
-        <dt class = "col-sm-2">
-            Mục tiêu
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucTieu)
-        </dd>
-        <dt class = "col-sm-2">
-            Đơn vị triển khai
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DonViTrienKhai)
-        </dd>
-        <dt class="col-sm-2">
-            Hình thức hợp tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdHinhThucHopTacNavigation.IdHinhThucHopTac)
-        </dd>
-        <dt class = "col-sm-2">
-            Sản phẩm chính
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SanPhamChinh)
-        </dd>
-        
-    </dl>
+   <table>   
+       
+        <tr>
+            <th>Mã hợp tác</th>
+            <td>@Html.DisplayFor(model => model.IdToChucHopTacNavigation.IdToChucHopTacQuocTe)</td>
+        </tr>
+        <tr>
+            <th> Thời gian hợp tác từ </th>
+            <td>@Html.DisplayFor(model => model.ThoiGianHopTacTu)</td>
+        </tr>
+        <tr>
+            <th>  Thời gian hợp tác đến  </th>
+            <td>@Html.DisplayFor(model => model.ThoiGianHopTacDen)</td>
+        </tr>
+        <tr>
+            <th>Tên thỏa thuận</th>
+            <td>@Html.DisplayFor(model => model.TenThoaThuan)</td>
+        </tr>
+        <tr>
+            <th>Thông tin liên hệ đối tác</th>
+            <td>@Html.DisplayFor(model => model.ThongTinLienHeDoiTac)</td>
+        </tr>
+        <tr>
+            <th>Mục tiêu</th>
+            <td>@Html.DisplayFor(model => model.MucTieu)</td>
+        </tr>
+        <tr>
+            <th>Đơn vị triển khai</th>
+            <td>@Html.DisplayFor(model => model.DonViTrienKhai)</td>
+        </tr>
+        <tr>
+            <th> Hình thức hợp tác</th>
+            <td>@Html.DisplayFor(model => model.IdHinhThucHopTacNavigation.IdHinhThucHopTac)</td>
+        </tr>
+        <tr>
+            <th>Sản phẩm chính</th>
+            <td>@Html.DisplayFor(model => model.SanPhamChinh)</td>
+        </tr>
+
+       
+    
+    </table>
+
+
+
+
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.IdThongTinHopTac"> Sửa </a> |
