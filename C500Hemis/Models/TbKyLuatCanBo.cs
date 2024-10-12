@@ -25,7 +25,7 @@ public partial class TbKyLuatCanBo
 
     [Display(Name = "Ngày nhận quyết định")]
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
     public DateOnly? NgayThangNamQuyetDinh { get; set; }
 
     [Display(Name = "Số quyết định")]
@@ -33,7 +33,7 @@ public partial class TbKyLuatCanBo
 
     [Display(Name = "Năm bị kỷ luật")]
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "{0:yyyy}")]
     public DateOnly? NamBiKyLuat { get; set; }
 
     [Display(Name = "Họ và Tên")]
