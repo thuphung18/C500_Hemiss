@@ -17,7 +17,7 @@ public partial class TbDeAnDuAnChuongTrinh
 
     public string? MucTieu { get; set; }
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}" )]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
     public DateOnly? ThoiGianHopTacTu { get; set; }
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

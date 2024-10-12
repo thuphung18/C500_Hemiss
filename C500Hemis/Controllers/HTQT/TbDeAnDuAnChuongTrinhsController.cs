@@ -101,6 +101,7 @@ namespace C500Hemis.Controllers.HTQT
             {
                 try
                 {
+                    Console.WriteLine(tbDeAnDuAnChuongTrinh.IdDeAnDuAnChuongTrinh);
                     _context.Update(tbDeAnDuAnChuongTrinh);
                     await _context.SaveChangesAsync();
                 }
