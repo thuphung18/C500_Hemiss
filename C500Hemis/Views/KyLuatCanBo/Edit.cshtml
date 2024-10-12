@@ -2,44 +2,47 @@
 
 @{
     ViewData["Title"] = "SỬA HỒ SƠ";
-    string ngaynhanqd = "";
-    string nambikyluat = "";
-    if (Model.NamBiKyLuat != null)
-    {
-        nambikyluat = Model.NamBiKyLuat.Value.ToString("yyyy-MM-dd");
-    } 
-    if (Model.NgayThangNamQuyetDinh != null) ngaynhanqd = Model.NgayThangNamQuyetDinh.Value.ToString("yyyy-MM-dd");
 }
 
 @section Styles {
     <style>
-        /* Thiết lập cơ bản cho form */
+        /* Diện tích khối div của form sửa thông tin, không phải vùng toàn thể (body) của web */
         .row {
-            min-width: 500px;
-        }
-        form {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            min-width: 500px; /* Kích thước tối thiểu, có thể cuộn được*/
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
+        /* Sửa màu, căn lề, bo góc cho form */
+        form {
+            background-color: #f9f9f9; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Làm nổi form trên nền trắng, cảm giác như tờ giấy */
+        }
+
+        /* Chỉnh tiêu đề "CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT" */
         h1 {
             font-size: 36px;
             text-align: center; /*Căn giữa*/
             color: #333;
-            margin-bottom: 20px; /**/
+            margin-bottom: 20px; /* tạo 1 khoảng cách với phần tử phía dưới */
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
+        /* Biểu thị các giá trị cần nhập */
+        /* Nằm phía trên hộp dữ liệu */
         label {
             font-weight: bold;
             color: #444;
-        }
+        } 
 
+        /* Khối dữ liệu, mỗi trường thông tin cách nhau khoảng 15px */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        /* CSS cho các hộp dùng để nhập dữ liệu */
         .form-control {
             width: 100%;
             padding: 10px;
@@ -49,6 +52,7 @@
             transition: all 0.3s ease;
         }
 
+        /* Khi nhấn vào hộp dữ liệu sẽ có viền xanh, . . . */
         .form-control:focus {
             border-color: #007bff;
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
@@ -71,6 +75,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+        /* Khi di chuột vào nút xác nhận */
         .btn-primary:hover {
             background-color: #0056b3;
             transform: scale(1.05);
@@ -87,22 +92,18 @@
             margin-top: 15px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
+        /* Khi di chuột vào núi "quay lại" */
+        .back:hover {
+                background-color: #5a6268;
+                transform: scale(1.05);
+                color: white;
+        }
+
+        /* Căn giữa nút Xác nhận */
         .submit {
             display: flex;
             justify-content: center;
-        }
-
-        .back:hover {
-            background-color: #5a6268;
-            transform: scale(1.05);
-            color:white;
-        }
-
-        /* Canh giữa form */
-        .row {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
         }
 
         /* Hiển thị lỗi */
@@ -114,14 +115,12 @@
             border: 1px solid #f5c6cb;
             margin-bottom: 20px;
         }
-
     </style>
 }
 
 
 <div class="row">
-    <div class="col-md-6">
-       
+    <div class="col-md-6">       
         <form asp-action="Edit">
             <h2><b>CHỈNH SỬA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</b></h2>
             <hr />
@@ -175,8 +174,4 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        document.getElementById("NgayThangNamQuyetDinh").value = "@ngaynhanqd";
-        document.getElementById("NamBiKyLuat").value = "@nambikyluat";
-    </script>
 }

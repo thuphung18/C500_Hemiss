@@ -27,7 +27,7 @@
         margin-top:10px;
         align-items:center;
     }
-    .backto{
+    .btn-backto{
         text-decoration:none;
         display:inline-block;
         background-color: #1769ff;
@@ -35,14 +35,16 @@
         padding:6px;
         border-radius:4px;
     }
+    .btn-backto:hover{
+        transform: scale(1.05);
+    }
+    .btn-danger:hover{
+        transform: scale(1.05);
+    }
+
     dt,dd{
         color: #387478;
         padding:3px;
-    }
-    dd{
-        border: 0.5px solid black;
-        border-radius: 10px;
-        border-width: medium;
     }
 </style>
 <h1>Warning!</h1>
@@ -107,6 +109,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdHopDongThinhGiang" />
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index" class="backto">Back to List</a>
+        <a asp-action="Index" class="btn btn-backto">Back to List</a>
     </form>
 </div>

@@ -5,25 +5,21 @@
 }
 @section Heads {
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
-    <style>
-        /* HỒ SƠ CÁN BỘ BỊ KỶ LUẬT */
-        h1 {
-            font-size: 40px;
-        }
+    <style>        
+        h1 {font-size: 40px;} /*Tăng cỡ chữ to hơn*/
 
-        /* BẢNG CHUNG */
-        table {
+        table {                                        /* SỬA BẢNG CHUNG */
             width: 100%;
-            border-collapse: collapse;
-            background-color: #f1f3f3;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            border-collapse: collapse;                 /*Bỏ viền của bảng*/
+            background-color: #f1f3f3;                 /*Màu mặc định trắng đục, ngả xám*/
+            margin-top: 20px;                          /*Cách lề trên 20px*/
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);  /*Hiệu ứng đường viền, tạo cảm giác bảng là tờ giấy*/
         }
 
             table th, table td {
-                padding: 12px;
-                text-align: center;
-                border-bottom: 5px solid #ddd;
+                padding: 12px;                  /*Khoảng trống giữa nội dung và viền bảng*/
+                text-align: center;            
+                border-bottom: 5px solid #ddd;  /*Viền của bảng: Kích thước - kiểu - màu*/
             }
 
             table th {
@@ -53,7 +49,7 @@
             border-radius: 5px;
             font-weight: bold;
             text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột */
+            transition: transform 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột trong thời gian 0.3s */
             margin: 2px; /* Khoảng cách giữa các nút */
         }
 
@@ -74,16 +70,20 @@
                 color: white;
             }
 
-        /* Đặt kiểu bố cục cho khối chứa các nút */
+        /* Đặt kiểu bố cục cho khối chứa các nút sửa xóa */
         .edit_del {
             width: 100%;
             display: flex;
-            justify-content: center; /* Canh giữa các nút trong div */
-            align-items: center;
+            justify-content: center; /* Căn giữa các nút trong khối */
+            align-items: center;     /* Cũng là căn giữa (theo trục) */
         }
 
         .contain {
             margin-bottom: 100px;
+        }
+
+        #view_table th {
+            text-align: center;
         }
     </style>
 }
@@ -93,35 +93,35 @@
 <div class="contain">
     <table class="table" id="view_table">
         <thead>
-
-            <tr style="text-align: center">
+            <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+                    Họ và tên
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LyDo)
+                    Lý do
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NgayThangNamQuyetDinh)
+                    Ngày nhận QĐ
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SoQuyetDinh)
+                    Số QĐ
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NamBiKyLuat)
+                    Năm kỷ luật
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
+                    Cấp QĐ
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
+                    Hình thức
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
-            {
+            {    // 2 dòng này dùng khi kích chuột vào hàng dữ liệu trong bảng sẽ chuyển sang trang detail
+                 // Kết hợp với hiệu ứng hover khi di chuột
                 <tr class="value" style="text-align: center; cursor: pointer;"
                     onclick="window.location.href='@Url.Action("Details", new { id = item.IdKyLuatCanBo })'">
                     <td>

@@ -47,7 +47,7 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbDeAnDuAnChuongTrinhs/Create
         public IActionResult Create()
         {
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn");
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn");
             return View();
         }
 
@@ -56,7 +56,7 @@ namespace C500Hemis.Controllers.HTQT
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,IdNguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
+        public async Task<IActionResult> Create([Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,NguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace C500Hemis.Controllers.HTQT
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
             return View(tbDeAnDuAnChuongTrinh);
         }
 
@@ -81,7 +81,7 @@ namespace C500Hemis.Controllers.HTQT
             {
                 return NotFound();
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
             return View(tbDeAnDuAnChuongTrinh);
         }
 
@@ -92,7 +92,7 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,IdNguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
         {
-            if (id != tbDeAnDuAnChuongTrinh.IdDeAnDuAnChuongTrinh)
+            if (id ==null)
             {
                 return NotFound();
             }
@@ -117,7 +117,7 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "IdNguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
             return View(tbDeAnDuAnChuongTrinh);
         }
 

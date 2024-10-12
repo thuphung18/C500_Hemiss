@@ -23,10 +23,10 @@
         background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
     }
 </style>
-<h1>Details</h1>
+<h1>Thông tin chi tiết </h1>
 
 <div>
-    <h4>TbDeAnDuAnChuongTrinh</h4>
+    <h4>Đề án/Dự án chương trình</h4>
     <hr />
     <table>
         <tr>
@@ -62,9 +62,10 @@
             <td> @Html.DisplayFor(model => model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation.IdNguonKinhPhiChoDeAn)</td>
         </tr>
     </table>
-    <form asp-action="Edit">
-        <input type="hidden" asp-for="IdDeAnDuAnChuongTrinh" />
-        <input type="submit" value="Edit" class="btn btn-danger" />
-        <a asp-action="Index">Back to List</a>
-    </form>
+  
     
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdDeAnDuAnChuongTrinh"> Sửa </a> |
+    <a asp-action="Index">Quay lại </a>
+</div>

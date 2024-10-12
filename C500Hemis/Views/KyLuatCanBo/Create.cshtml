@@ -5,7 +5,7 @@
 }
 @section Styles {
     <style>
-        /* Thiết lập cơ bản cho form */
+        /* Thiết lập cơ bản cho form: màu, lề, bo góc, ... */
         form {
             background-color: #f9f9f9;
             padding: 20px;
@@ -13,22 +13,27 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
 
+        /* Tiêu đề "THÊM HỒ SƠ" */
         h1 {
             font-size: 36px;
             text-align: center; /*Căn giữa*/
             color: #333; 
-            margin-bottom: 20px; /**/
+            margin-bottom: 20px; 
         }
 
+        /* Khối thông tin */
         .form-group {
             margin-bottom: 15px;
         }
 
+        /* Mãu thông tin cần nhập */
+        /* Nằm phía trên hộp nhập dữ liệu */
         label {
             font-weight: bold;
             color: #444;
         }
 
+        /* Hộp nhập dữ liệu */
         .form-control {
             width: 100%;
             padding: 10px;
@@ -38,11 +43,13 @@
             transition: all 0.3s ease;
         }
 
+        /* Hiệu ứng khi nhấn vào hộp */
         .form-control:focus {
             border-color: #007bff;
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
             outline: none;
         }
+
 
         .text-danger {
             color: #e3342f;
@@ -60,6 +67,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
+        /* Hiệu ứng khi di chuột vào nút xác nhận */
         .btn-primary:hover {
             background-color: #0056b3;
             transform: scale(1.05);
@@ -76,18 +84,21 @@
             margin-top: 15px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
+        /* Hiệu ứng khi di chuột vào nút back */
+        .back:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+            color: white;
+            } 
+
+        /* Căn giữa cho nút xác nhận */
         .submit {
             display: flex;
             justify-content: center;
         }
 
-        .back:hover {
-            background-color: #5a6268;
-            transform: scale(1.05);
-            color:white;
-        }
-
-        /* Canh giữa form */
+        /* Canh giữa cho form */
         .row {
             display: flex;
             justify-content: center;
@@ -103,7 +114,6 @@
             border: 1px solid #f5c6cb;
             margin-bottom: 20px;
         }
-
     </style>
 }
 

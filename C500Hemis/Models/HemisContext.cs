@@ -3405,7 +3405,7 @@ public partial class HemisContext : DbContext
 
             entity.Property(e => e.IdLoaiThuChi).ValueGeneratedNever();
             entity.Property(e => e.MaLoaiThuChi).HasMaxLength(50);
-            entity.Property(e => e.MoTa).HasColumnType("text");
+            entity.Property(e => e.MoTa).HasColumnType("ntext");
             entity.Property(e => e.TenLoaiThuChi).HasMaxLength(200);
 
             entity.HasOne(d => d.IdPhanLoaiThuChiNavigation).WithMany(p => p.TbLoaiThuChis)
@@ -4002,10 +4002,10 @@ public partial class HemisContext : DbContext
 
         modelBuilder.Entity<TbThoaThuanHopTacQuocTe>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("tbThoaThuanHopTacQuocTe", "HTQT");
+            entity.HasKey(e => e.IdThoaThuanHopTacQuocTe);
+            entity.ToTable("tbThoaThuanHopTacQuocTe", "HTQT");
 
+            entity.Property(e => e.IdThoaThuanHopTacQuocTe).ValueGeneratedNever();
             entity.Property(e => e.MaThoaThuan).HasMaxLength(50);
             entity.Property(e => e.SoVanBanKyKet).HasMaxLength(50);
             entity.Property(e => e.TenThoaThuan).HasMaxLength(200);

@@ -27,9 +27,6 @@
         text-align: left;
         color: #C4DAD2;
     }
-    td{
-        border: solid black 0.5px;
-    }
 
     a {
         color: #E9EFEC;
@@ -40,11 +37,14 @@
             text-decoration: none;
             color: white;
         }
-    ntable {
-        border: 2px solid #0053b3; width: 100%;
+
+    table {
+        border-radius: 10px;
+        width: 100%;
         border-collapse: collapse;
+        background-color: #f1f3f3;
         margin-top: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
     }
 
    th:hover {
@@ -71,12 +71,14 @@
     .btn a:hover{
         color: #E9EFEC;
         text-decoration:none;
+
     }
     .btn-edit{
         background-color: #16423C;
         color: #E9EFEC;
     }
         .btn-edit:hover{
+            background-color: #6A9C89;
             transform: scale(1.05);
         }
 
@@ -86,6 +88,7 @@
     }
 
         .btn-details:hover {
+            background-color: #6A9C89;
             transform: scale(1.05);
         }
 
@@ -96,6 +99,7 @@
 
         .btn-delete:hover {
             transform: scale(1.05);
+            background-color: red;
         }
 
     .btn-create {
@@ -104,13 +108,14 @@
     }
 
         .btn-create:hover {
+            background-color: #6A9C89;
             transform: scale(1.05);
         }
 </style>
 
 <h1>Hợp đồng thỉnh giảng</h1>
 
-<table class="ntable" id="ntable">
+<table class="table" id="ntable">
     <thead>
         <tr>
             <th>

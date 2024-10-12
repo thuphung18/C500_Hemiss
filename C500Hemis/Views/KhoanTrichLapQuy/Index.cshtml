@@ -1,53 +1,157 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbKhoanTrichLapQuy>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Khoản Trích Lập Quỹ";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamTaiChinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoTien)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaKhoanTrichLapQuy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenKhoanTrichLapQuy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamTaiChinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoTien)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdKhoanTrichLapQuy">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdKhoanTrichLapQuy">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdKhoanTrichLapQuy">Delete</a>
-            </td>
-        </tr>
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 }
-    </tbody>
-</table>
+    <style>
+        body {
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .table-container {
+            background-color: #ffffff; /* Màu nền cho bảng */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        #view_table thead {
+            background-color: #34495e;
+            color: white;
+        }
+
+        #view_table tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .btn-custom {
+            border: none;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-primary-custom {
+            background-color: #3498db;
+        }
+
+        .btn-success-custom {
+            background-color: #28a745;
+        }
+
+        .btn-danger-custom {
+            background-color: #e74c3c;
+        }
+
+        .btn-custom:hover {
+            opacity: 0.8;
+        }
+
+        a.btn-custom i {
+            margin-right: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Hiệu chỉnh phần tiêu đề chính */
+        h1 {
+            font-size: 50px;
+            color: #c0392b;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+
+<h1>Khoản Trích Lập Quỹ</h1>
+
+<!-- Bao bọc bảng trong một container có nền khác với nền trang -->
+<div>
+    <table class="table-container" id="view_table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NamTaiChinh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoTien)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaKhoanTrichLapQuy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKhoanTrichLapQuy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NamTaiChinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoTien)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdKhoanTrichLapQuy" class="btn btn-primary-custom btn-custom">
+                            <i class="fas fa-edit"></i> Sửa
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.IdKhoanTrichLapQuy" class="btn btn-success-custom btn-custom">
+                            <i class="fas fa-info-circle"></i> Chi tiết
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdKhoanTrichLapQuy" class="btn btn-danger-custom btn-custom">
+                            <i class="fas fa-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
+        var table = new DataTable("#view_table", {
+            language: {
+                search: "Tìm kiếm",
+                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {
+                topStart: {
+                    buttons: [
+                        {
+                            className: 'btn btn-primary',
+                            text: 'Tạo mới',
+                            action: function (e, dt, node, config) {
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+}

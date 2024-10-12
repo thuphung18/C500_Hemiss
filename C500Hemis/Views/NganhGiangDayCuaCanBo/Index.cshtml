@@ -4,15 +4,16 @@
     ViewData["Title"] = "Ngành Giảng Dạy Của Cán Bộ";
     }
 
+    @section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    }
+
     <body style="background-color: #e0f7fa; font-family: Arial, sans-serif; margin: 0; padding: 20px;">
 
         <h1 style="font-size: 50px; color: #c0392b; text-align: center; margin-bottom: 20px;">Ngành Giảng Dạy Của Cán Bộ</h1>
 
-        <p style="text-align: center; font-size: 25px; margin-bottom: 30px;">
-            <a asp-action="Create" style="color: #3498db; text-decoration: none; font-weight: bold; border: 2px solid #3498db; padding: 10px 20px; border-radius: 5px;">Create New</a>
-        </p>
-
-        <table id="ntable" style="width: 100%; border-collapse: collapse; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <table id="view_table" style="width: 100%; border-collapse: collapse; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <thead>
                 <tr style="background-color: #34495e; color: white;">
                     <th style="padding: 12px; border: 1px solid #ddd; text-align: center; font-size: 18px;">@Html.DisplayNameFor(model => model.LaNganhChinh)</th>
@@ -49,34 +50,32 @@
             }
             </tbody>
         </table>
-
     </body>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
     <script>
-    new DataTable('#ntable', {
-        searching: true, // Mặc định là true, set false để tắt chức năng search
-        processing: true,
-        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
-        language: {
-            processing: "Message khi đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang MENU ",
-            info: "Bản ghi từ START đến END Tổng công TOTAL bản ghi",
-            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
-            infoFiltered: "(Message bổ sung cho info khi không search đc record nào MAX)",
-            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
-            loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
+        var table = new DataTable("#view_table", {
+            language: {
+                search: "Tìm kiếm",
+                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
             },
-            aria: {
-                sortAscending: ": Message khi đang sắp xếp theo column",
-                sortDescending: ": Message khi đang sắp xếp theo column",
+            createdRow: (row, data, index) => {
+            },
+            layout: {
+                topStart: {
+                    buttons: [
+                        {
+                            className: 'btn btn-primary',
+                            text: 'Tạo mới',
+                            action: function (e, dt, node, config) {
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        }
+                    ]
+                }
             }
-        },
-    });
+        });
     </script>
+}
