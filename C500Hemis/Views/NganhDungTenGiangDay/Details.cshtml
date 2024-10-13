@@ -23,6 +23,8 @@
         margin: auto;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        /* Add extra padding to prevent the buttons from being covered */
+        margin-bottom: 50px; /* Adjust this value if needed */
     }
 
     h1 {
@@ -87,6 +89,8 @@
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        /* Add a bottom margin to create space before the footer */
+        margin-bottom: 30px; /* Adjust this value if needed */
     }
 
 
@@ -129,7 +133,7 @@
             <dt>Cán bộ giảng dạy:</dt>
             <dd>@Html.DisplayFor(model => model.TenCanBo)</dd>
         </dl>
-        
+
         <dl class="row">
             <dt>Ngành giảng dạy:</dt>
             <dd>@Html.DisplayFor(model => model.TenNganhGiangDay)</dd>
@@ -137,7 +141,7 @@
         <dl class="row">
             <dt>Mã đào tạo:</dt>
             <dd>@Html.DisplayFor(model => model.IdNganhDaoTaoNavigation.IdNganhDaoTao)</dd>
-            </dl>
+        </dl>
         <dl class="row">
             <dt>Ngày bắt đầu giảng dạy:</dt>
             <dd>@Html.DisplayFor(model => model.NgayBatDau)</dd>
@@ -155,6 +159,6 @@
     <div class="return-btn">
         <a asp-action="Index" asp-route-id="@Model?.IdNganhDungTenGiangDay" class="btn"><i class="fa fa-edit"></i> <b>Trở về </b></a>
         <a asp-action="Edit" asp-route-id="@Model?.IdNganhDungTenGiangDay" class="btn"><i class="fa fa-home"></i> <b>Chỉnh sửa </b></a>
-       
+
     </div>
 </div>
