@@ -11,7 +11,7 @@ public partial class TbGiaoVienQpan
     public int IdGiaoVienQpan { get; set; }
     [DisplayName(displayName: "ID Cán bộ")]
     public int? IdCanBo { get; set; }
-    [DisplayName(displayName: "Năm đầu biệt phái")]
+    [DisplayName(displayName: "Năm bắt đầu biệt phái")]
     public DateOnly? NamBatDauBietPhai { get; set; }
     [DisplayName(displayName: "Số năm biệt phái")]
     public DateOnly? SoNamBietPhai { get; set; }
@@ -30,6 +30,6 @@ public partial class TbGiaoVienQpan
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
     [DisplayName(displayName: "ID Loại giảng viên QP")]
     public virtual DmLoaiGiangVienQuocPhong? IdLoaiGiangVienQpNavigation { get; set; }
-    [DisplayName(displayName: "ID Quân hàm")]
+    [DisplayName(displayName: "Quân hàm")]
     public virtual DmQuanHam? IdQuanHamNavigation { get; set; }
 }

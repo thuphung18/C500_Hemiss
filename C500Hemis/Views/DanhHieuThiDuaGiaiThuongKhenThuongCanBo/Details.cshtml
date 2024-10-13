@@ -21,9 +21,16 @@
                 <b>ID Cán Bộ:</b> @Model.IdCanBoNavigation?.IdCanBo
             </div>
             <div class="cancel-box">
-                <div class="btn" type="submit"> Cancel</div>
+                <div class="btn" type="submit">
+                    <a asp-action="Index" asp-controller="DanhHieuThiDuaGiaiThuongKhenThuongCanBo" style="text-decoration:none; color:black;">
+                        <i class="bi bi-arrow-left-circle"></i> Cancel
+                    </a>
+                </div>
+
             </div>
+
         </form>
+    </div>
     </div>
     <div class="info-content Login">
         <b>ID Cấp khen thưởng:</b>

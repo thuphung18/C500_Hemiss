@@ -8,71 +8,75 @@
 
 <h3 > Bạn có chắc chắn muốn xóa?</h3>
 
+<style>
+    table {
+        width: 100%; /* Chiều rộng bảng 100% */
+        border-collapse: collapse; /* Gộp đường viền ô */
+    }
+
+    th, td {
+        border: 1px solid #000; /* Đường viền đen cho các ô */
+        text-align: left;
+        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    }
+
+    th {
+        font-weight: bold; /* Chữ đậm cho tiêu đề */
+    }
+
+    tr:hover {
+        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+</style>
+
+
 <div style="margin:auto">
     <h4 style="text-align:center">Đoàn công tác</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Mã đoàn công tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MaDoanCongTac)
-        </dd>
-        <dt class="col-sm-2">
-            Tên đoàn công tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TenDoanCongTac)
-        </dd>
-        <dt class="col-sm-2">
-            Số quyết định
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinh)
-        </dd>
-        <dt class="col-sm-2">
-            Ngày quyết định
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NgayQuyetDinh)
-        </dd>
-        <dt class="col-sm-2">
-            Thời gian bắt đầu
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianBatDau)
-        </dd>
-        <dt class="col-sm-2">
-            Thời gian kết thúc
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianketThuc)
-        </dd>
-        <dt class="col-sm-2">
-            Mục đích công tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MucDichCongTac)
-        </dd>
-        <dt class="col-sm-2">
-            Kết quả công tác
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KetQuaCongTac)
-        </dd>
-        <dt class="col-sm-2">
-            Phân loại đoàn ra/vào
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdPhanLoaiDoanRaDoanVaoNavigation.IdPhanLoaiDoanRaDoanVao)
-        </dd>
-        <dt class="col-sm-2">
-            Quốc gia đoàn được cử
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdQuocGiaDoanNavigation.IdQuocTich)
-        </dd>
-    </dl>
+    <table>
+        <tr>
+            <th>Mã đoàn công tác:</th>
+            <td>@Html.DisplayFor(model => model.MaDoanCongTac)</td>
+        </tr>
+        <tr>
+            <th> Tên đoàn công tác  </th>
+            <td>@Html.DisplayFor(model => model.TenDoanCongTac)</td>
+        </tr>
+        <tr>
+            <th>Số quyết định</th>
+            <td>@Html.DisplayFor(model => model.SoQuyetDinh)</td>
+        </tr>
+        <tr>
+            <th>Ngày quyết định</th>
+            <td>@Html.DisplayFor(model => model.NgayQuyetDinh)</td>
+        </tr>
+        <tr>
+            <th>Thời gian bắt đầu</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianBatDau)</td>
+        </tr>
+        <tr>
+            <th>Thời gian kết thúc</th>
+            <td>@Html.DisplayFor(model => model.ThoiGianketThuc)</td>
+        </tr>
+        <tr>
+            <th>Mục đích công tác</th>
+            <td>@Html.DisplayFor(model => model.MucDichCongTac)</td>
+        </tr>
+        <tr>
+            <th>Kết quả công tác</th>
+            <td>@Html.DisplayFor(model => model.KetQuaCongTac)</td>
+        </tr>
+        <tr>
+            <th> Phân loại đoàn ra/vào</th>
+            <td>@Html.DisplayFor(model => model.IdPhanLoaiDoanRaDoanVaoNavigation.IdPhanLoaiDoanRaDoanVao)</td>
+        </tr>
+        <tr>
+            <th>Quốc gia đoàn được cử</th>
+            <td>@Html.DisplayFor(model => model.IdQuocGiaDoanNavigation.IdQuocTich)</td>
+        </tr>
+
+
+    </table>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDoanCongTac" />

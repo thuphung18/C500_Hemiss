@@ -1,44 +1,138 @@
 ﻿@model C500Hemis.Models.TbLuuHocSinhSinhVienNn
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
 
-<h1>Create</h1>
-
-<h4>TbLuuHocSinhSinhVienNn</h4>
+<h1 style="text-align:center"> Tạo mới </h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<style>
+    body {
+        background-color: #f7f9fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #f7f9fc;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1, h4 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50; /* Green background */
+            color: #fff; /* White text */
+        }
+
+        table td {
+            background-color: #f2f2f2; /* Light grey background */
+        }
+
+        table tr:hover {
+            background-color: #ddd; /* Darker grey on hover */
+        }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            outline: none;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #05c46b;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
+    }
+
+        .btn-primary:hover {
+            background-color: #048a55;
+            transform: scale(1.05); /* Slightly bigger */
+        }
+</style>
+
+<div class="form-container">
+    <h4>Lưu học sinh, sinh viên nước ngoài</h4>
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+
+        <table>
+            <tr>
+                <td>
             <div class="form-group">
-                <label asp-for="IdLuuHocSinhSinhVienNn" class="control-label"></label>
+                <label asp-for="IdLuuHocSinhSinhVienNn" class="control-label"> Id Lưu học sinh, sinh viên nước ngoài </label>
                 <input asp-for="IdLuuHocSinhSinhVienNn" class="form-control" />
                 <span asp-validation-for="IdLuuHocSinhSinhVienNn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdNguoiHoc" class="control-label"></label>
+                        <label asp-for="IdNguoiHoc" class="control-label">Mã người học</label>
                 <input asp-for="IdNguoiHoc" class="form-control" />
                 <span asp-validation-for="IdNguoiHoc" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdNguonKinhPhiLuuHocSinh" class="control-label"></label>
+                        <label asp-for="IdNguonKinhPhiLuuHocSinh" class="control-label">Nguồn kinh phí</label>
                 <select asp-for="IdNguonKinhPhiLuuHocSinh" class ="form-control" asp-items="ViewBag.IdNguonKinhPhiLuuHocSinh"></select>
             </div>
             <div class="form-group">
-                <label asp-for="IdLoaiLuuHocSinh" class="control-label"></label>
+                        <label asp-for="IdLoaiLuuHocSinh" class="control-label">Loại lưu học sinh</label>
                 <select asp-for="IdLoaiLuuHocSinh" class ="form-control" asp-items="ViewBag.IdLoaiLuuHocSinh"></select>
             </div>
+                </td>
+            </tr>
+        </table>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo mới" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại </a>
 </div>
 
 @section Scripts {

@@ -17,7 +17,8 @@ public partial class TbDanhHieuThiDuaGiaiThuongKhenThuongCanBo
     public int? SoQuyetDinh { get; set; }
 
     public int? IdPhuongThucKhenThuong { get; set; }
-   
+    [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
+
     public DateTime? NamKhenThuong { get; set; }
 
     public int? IdCapKhenThuong { get; set; }

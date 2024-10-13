@@ -35,9 +35,9 @@ public partial class TbHopDongThinhGiang
 
     [DisplayName(displayName: "Tỷ lệ thời gian giảng dạy")]
     public int? TyLeThoiGianGiangDay { get; set; }
-    [DisplayName(displayName: "Mã định vị Cán Bộ")]
+    [DisplayName(displayName: "ID định vị Cán Bộ")]
     public virtual TbCanBo? IdCanBoNavigation { get; set; }
 
-    [DisplayName(displayName: "Mã định vị trạng thái hợp đồng")]
+    [DisplayName(displayName: "ID định vị trạng thái hợp đồng")]
     public virtual DmTrangThaiHopDong? IdTrangThaiHopDongNavigation { get; set; }
 }

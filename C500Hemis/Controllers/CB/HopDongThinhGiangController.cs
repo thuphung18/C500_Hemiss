@@ -48,7 +48,8 @@ namespace C500Hemis.Controllers.CB
         // GET: HopDongThinhGiang/Create
         public IActionResult Create()
         {
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
+            //
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
             ViewData["IdTrangThaiHopDong"] = new SelectList(_context.DmTrangThaiHopDongs, "IdTrangThaiHopDong", "IdTrangThaiHopDong");
             return View();
         }

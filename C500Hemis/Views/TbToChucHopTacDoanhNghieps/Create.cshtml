@@ -4,64 +4,167 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<style>
+    body {
+        background-color: #f7f9fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
 
-<h4>TbToChucHopTacDoanhNghiep</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdToChucHopTacDoanhNghiep" class="control-label"></label>
-                <input asp-for="IdToChucHopTacDoanhNghiep" class="form-control" />
-                <span asp-validation-for="IdToChucHopTacDoanhNghiep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaToChucHopTacDoanhNghiep" class="control-label"></label>
-                <input asp-for="MaToChucHopTacDoanhNghiep" class="form-control" />
-                <span asp-validation-for="MaToChucHopTacDoanhNghiep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenToChucHopTacDoanhNghiep" class="control-label"></label>
-                <input asp-for="TenToChucHopTacDoanhNghiep" class="form-control" />
-                <span asp-validation-for="TenToChucHopTacDoanhNghiep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDungHopTac" class="control-label"></label>
-                <input asp-for="NoiDungHopTac" class="form-control" />
-                <span asp-validation-for="NoiDungHopTac" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayKyKet" class="control-label"></label>
-                <input asp-for="NgayKyKet" class="form-control" />
-                <span asp-validation-for="NgayKyKet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KetQuaHopTac" class="control-label"></label>
-                <input asp-for="KetQuaHopTac" class="form-control" />
-                <span asp-validation-for="KetQuaHopTac" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdLoaiDeAn" class="control-label"></label>
-                <select asp-for="IdLoaiDeAn" class ="form-control" asp-items="ViewBag.IdLoaiDeAn"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="GiaTriGiaoDichCuaThiTruong" class="control-label"></label>
-                <input asp-for="GiaTriGiaoDichCuaThiTruong" class="form-control" />
-                <span asp-validation-for="GiaTriGiaoDichCuaThiTruong" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #f7f9fc;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1, h4 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50; /* Green background */
+            color: #fff; /* White text */
+        }
+
+        table td {
+            background-color: #f2f2f2; /* Light grey background */
+        }
+
+        table tr:hover {
+            background-color: #ddd; /* Darker grey on hover */
+        }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            outline: none;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #05c46b;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
+    }
+
+        .btn-primary:hover {
+            background-color: #048a55;
+            transform: scale(1.05); /* Slightly bigger */
+        }
+</style>
+
+
+<div class="form-container">
+    <h4>Tạo thông tin tổ chức doanh nghiệp</h4>
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label asp-for="IdToChucHopTacDoanhNghiep">Id Tổ chức hợp tác doanh nghiệp</label>
+                        <input asp-for="IdToChucHopTacDoanhNghiep" class="form-control" />
+                        <span asp-validation-for="IdToChucHopTacDoanhNghiep" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MaToChucHopTacDoanhNghiep">Mã tổ chức hợp tác doanh nghiệp</label>
+
+
+
+                        <input asp-for="MaToChucHopTacDoanhNghiep" class="form-control" />
+                        <span asp-validation-for="MaToChucHopTacDoanhNghiep" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TenToChucHopTacDoanhNghiep">Tên tổ chức hợp tác doanh nghiệp</label>
+                        <input asp-for="TenToChucHopTacDoanhNghiep" class="form-control" />
+                        <span asp-validation-for="TenToChucHopTacDoanhNghiep" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NoiDungHopTac">Nội dung hợp tác</label>
+                        <input asp-for="NoiDungHopTac" class="form-control" />
+                        <span asp-validation-for="NoiDungHopTac" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NgayKyKet">Ngày ký kết</label>
+                        <input asp-for="NgayKyKet" class="form-control" />
+                        <span asp-validation-for="NgayKyKet" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="KetQuaHopTac">Kết quả hợp tác</label>
+                        <input asp-for="KetQuaHopTac" class="form-control" />
+                        <span asp-validation-for="KetQuaHopTac" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IdLoaiDeAn">Loại đề án</label>
+                        <select asp-for="IdLoaiDeAn" class="form-control" asp-items="ViewBag.IdLoaiDeAn"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GiaTriGiaoDichCuaThiTruong">Giá trị giao dịch của thị trường</label>
+                        <input asp-for="GiaTriGiaoDichCuaThiTruong" class="form-control" />
+                        <span asp-validation-for="GiaTriGiaoDichCuaThiTruong" class="text-danger"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

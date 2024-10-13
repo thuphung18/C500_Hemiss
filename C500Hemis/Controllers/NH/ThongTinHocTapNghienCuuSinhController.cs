@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.NH
         // GET: ThongTinHocTapNghienCuuSinh
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbThongTinHocTapNghienCuuSinhs.Include(t => t.IdChuongTrinhDaoTaoNavigation).Include(t => t.IdDoiTuongDauVaoNavigation).Include(t => t.IdHocVienNavigation).Include(t => t.IdLoaiHinhDaoTaoNavigation).Include(t => t.IdLoaiTotNghiepNavigation).Include(t => t.IdNguoiHuongDanChinhNavigation).Include(t => t.IdNguoiHuongDanPhuNavigation).Include(t => t.IdSinhVienNamNavigation).Include(t => t.IdTrangThaiHocNavigation);
+            var hemisContext = _context.TbThongTinHocTapNghienCuuSinhs.Include(t => t.IdChuongTrinhDaoTaoNavigation).Include(t => t.IdDoiTuongDauVaoNavigation).Include(t => t.IdHocVienNavigation).Include(t => t.IdLoaiHinhDaoTaoNavigation).Include(t => t.IdLoaiTotNghiepNavigation).Include(t => t.IdNguoiHuongDanChinhNavigation).ThenInclude(h=>h.IdNguoiNavigation).Include(t => t.IdNguoiHuongDanPhuNavigation).ThenInclude(h => h.IdNguoiNavigation).Include(t => t.IdSinhVienNamNavigation).Include(t => t.IdTrangThaiHocNavigation);
             return View(await hemisContext.ToListAsync());
         }
 
@@ -40,7 +40,9 @@ namespace C500Hemis.Controllers.NH
                 .Include(t => t.IdLoaiHinhDaoTaoNavigation)
                 .Include(t => t.IdLoaiTotNghiepNavigation)
                 .Include(t => t.IdNguoiHuongDanChinhNavigation)
+                .ThenInclude(h=>h.IdNguoiNavigation)
                 .Include(t => t.IdNguoiHuongDanPhuNavigation)
+                .ThenInclude(h => h.IdNguoiNavigation)
                 .Include(t => t.IdSinhVienNamNavigation)
                 .Include(t => t.IdTrangThaiHocNavigation)
                 .FirstOrDefaultAsync(m => m.IdThongTinHocTapNghienCuuSinh == id);
@@ -55,15 +57,15 @@ namespace C500Hemis.Controllers.NH
         // GET: ThongTinHocTapNghienCuuSinh/Create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao");
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "ChuongTrinhDaoTao");
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao");
             ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien");
-            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "IdLoaiHinhDaoTao");
-            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "IdLoaiTotNghiep");
-            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "IdSinhVienNam");
-            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "IdTrangThaiHoc");
+            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "LoaiHinhDaoTao");
+            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "LoaiTotNghiep");
+            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos.Include(h=>h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "SinhVienNam");
+            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "TrangThaiHoc");
             return View();
         }
 
@@ -80,15 +82,15 @@ namespace C500Hemis.Controllers.NH
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "ChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
             ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbThongTinHocTapNghienCuuSinh.IdHocVien);
-            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "IdLoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
-            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "IdLoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
-            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
-            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
-            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "IdSinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
-            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "IdTrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
+            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "LoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
+            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "LoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
+            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
+            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
+            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "SinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
+            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "TrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
             return View(tbThongTinHocTapNghienCuuSinh);
         }
 
@@ -105,15 +107,15 @@ namespace C500Hemis.Controllers.NH
             {
                 return NotFound();
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "ChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
             ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbThongTinHocTapNghienCuuSinh.IdHocVien);
-            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "IdLoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
-            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "IdLoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
-            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
-            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
-            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "IdSinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
-            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "IdTrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
+            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "LoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
+            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "LoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
+            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
+            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
+            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "SinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
+            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "TrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
             return View(tbThongTinHocTapNghienCuuSinh);
         }
 
@@ -149,15 +151,15 @@ namespace C500Hemis.Controllers.NH
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.DmChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "ChuongTrinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdChuongTrinhDaoTao);
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbThongTinHocTapNghienCuuSinh.IdDoiTuongDauVao);
             ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbThongTinHocTapNghienCuuSinh.IdHocVien);
-            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "IdLoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
-            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "IdLoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
-            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
-            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
-            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "IdSinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
-            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "IdTrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
+            ViewData["IdLoaiHinhDaoTao"] = new SelectList(_context.DmLoaiHinhDaoTaos, "IdLoaiHinhDaoTao", "LoaiHinhDaoTao", tbThongTinHocTapNghienCuuSinh.IdLoaiHinhDaoTao);
+            ViewData["IdLoaiTotNghiep"] = new SelectList(_context.DmLoaiTotNghieps, "IdLoaiTotNghiep", "LoaiTotNghiep", tbThongTinHocTapNghienCuuSinh.IdLoaiTotNghiep);
+            ViewData["IdNguoiHuongDanChinh"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanChinh);
+            ViewData["IdNguoiHuongDanPhu"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThongTinHocTapNghienCuuSinh.IdNguoiHuongDanPhu);
+            ViewData["IdSinhVienNam"] = new SelectList(_context.DmSinhVienNams, "IdSinhVienNam", "SinhVienNam", tbThongTinHocTapNghienCuuSinh.IdSinhVienNam);
+            ViewData["IdTrangThaiHoc"] = new SelectList(_context.DmTrangThaiHocs, "IdTrangThaiHoc", "TrangThaiHoc", tbThongTinHocTapNghienCuuSinh.IdTrangThaiHoc);
             return View(tbThongTinHocTapNghienCuuSinh);
         }
 
@@ -176,7 +178,9 @@ namespace C500Hemis.Controllers.NH
                 .Include(t => t.IdLoaiHinhDaoTaoNavigation)
                 .Include(t => t.IdLoaiTotNghiepNavigation)
                 .Include(t => t.IdNguoiHuongDanChinhNavigation)
+                .ThenInclude(h => h.IdNguoiNavigation)
                 .Include(t => t.IdNguoiHuongDanPhuNavigation)
+                .ThenInclude(h => h.IdNguoiNavigation)
                 .Include(t => t.IdSinhVienNamNavigation)
                 .Include(t => t.IdTrangThaiHocNavigation)
                 .FirstOrDefaultAsync(m => m.IdThongTinHocTapNghienCuuSinh == id);

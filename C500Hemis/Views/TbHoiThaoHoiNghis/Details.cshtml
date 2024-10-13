@@ -1,84 +1,84 @@
 ﻿@model C500Hemis.Models.TbHoiThaoHoiNghi
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Thông tin chi tiết";
 }
 
-<h1>Details</h1>
+<h1>Thông tin chi tiết</h1>
+
+<style>
+    table {
+        width: 100%; /* Chiều rộng bảng 100% */
+        border-collapse: collapse; /* Gộp đường viền ô */
+    }
+
+    th, td {
+        border: 1px solid #000; /* Đường viền đen cho các ô */
+        text-align: left;
+        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    }
+
+    th {
+        font-weight: bold; /* Chữ đậm cho tiêu đề */
+    }
+
+    tr:hover {
+        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+</style>
+
+<div class="container">
+    <h4 style="text-align:center">Hội thảo hội nghị</h4>
+    <hr />
+    <table>
+    <tr>
+        <th>Mã hội thao hội nghị</th>
+        <td>@Html.DisplayFor(model => model.MaHoiThaoHoiNghi)</td>
+    </tr>
+    <tr>
+        <th>Tên hội thao hội nghị</th>
+        <td>@Html.DisplayFor(model => model.TenHoiThaoHoiNghi)</td>
+    </tr>
+    <tr>
+        <th>Cơ quan có thẩm quyền cấp phép</th>
+        <td>@Html.DisplayFor(model => model.CoQuanCoThamQuyenCapPhep)</td>
+    </tr>
+    <tr>
+        <th>Mục tiêu</th>
+        <td>@Html.DisplayFor(model => model.MucTieu)</td>
+    </tr>
+    <tr>
+        <th>Nội dung</th>
+        <td>@Html.DisplayFor(model => model.NoiDung)</td>
+    </tr>
+    <tr>
+        <th>Số lượng đại biểu tham dự</th>
+        <td>@Html.DisplayFor(model => model.SoLuongDaiBieuThamDu)</td>
+    </tr>
+    <tr>
+        <th>Số lượng đại biểu quốc tế tham dự</th>
+        <td>@Html.DisplayFor(model => model.SoLuongDaiBieuQuocTeThamDu)</td>
+    </tr>
+    <tr>
+        <th>Thời gian tổ chức</th>
+        <td>@Html.DisplayFor(model => model.ThoiGianToChuc)</td>
+    </tr>
+    <tr>
+        <th>Địa điểm tổ chức</th>
+        <td>@Html.DisplayFor(model => model.DiaDiemToChuc)</td>
+    </tr>
+    <tr>
+        <th>Đơn vị chủ trì</th>
+        <td>@Html.DisplayFor(model => model.DonViChuTri)</td>
+    </tr>
+    <tr>
+        <th>Nguồn kinh phí hội thao</th>
+        <td>@Html.DisplayFor(model => model.IdNguonKinhPhiHoiThaoNavigation.IdNguonKinhPhi)</td>
+    </tr>
+</table>
+</div>
 
 <div>
-    <h4>TbHoiThaoHoiNghi</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaHoiThaoHoiNghi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaHoiThaoHoiNghi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenHoiThaoHoiNghi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenHoiThaoHoiNghi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoQuanCoThamQuyenCapPhep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoQuanCoThamQuyenCapPhep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucTieu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucTieu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoLuongDaiBieuThamDu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoLuongDaiBieuThamDu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoLuongDaiBieuQuocTeThamDu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoLuongDaiBieuQuocTeThamDu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianToChuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianToChuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiaDiemToChuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiaDiemToChuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DonViChuTri)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DonViChuTri)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNguonKinhPhiHoiThaoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNguonKinhPhiHoiThaoNavigation.IdNguonKinhPhi)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHoiThaoHoiNghi">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdHoiThaoHoiNghi">Sửa</a> |
+    <a asp-action="Index">Quay lại danh sách</a>
 </div>
