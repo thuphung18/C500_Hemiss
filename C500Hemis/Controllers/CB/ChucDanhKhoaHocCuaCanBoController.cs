@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +18,27 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: ChucDanhKhoaHocCuaCanBo
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string IDCB, string SapXep)
         {
-            var hemisContext = _context.TbChucDanhKhoaHocCuaCanBos.Include(t => t.IdCanBoNavigation).Include(t => t.IdChucDanhKhoaHocNavigation).Include(t => t.IdThamQuyenQuyetDinhNavigation);
-            return View(await hemisContext.ToListAsync());
+            ViewBag.IdCanBo = IDCB;
+            var danhSach = _context.TbChucDanhKhoaHocCuaCanBos
+                .Include(item => item.IdCanBoNavigation)
+                .Include(item => item.IdChucDanhKhoaHocNavigation)
+                .Include(item => item.IdThamQuyenQuyetDinhNavigation)
+                .Where(item => string.IsNullOrEmpty(IDCB) || item.IdCanBo.ToString() == IDCB)
+                .ToList();
+
+            var sapXepDanhSach = danhSach;
+
+            if (SapXep == "SapXep")
+            {
+                sapXepDanhSach = danhSach.OrderBy(x => x.NgayQuyetDinh).ToList();
+            }
+
+            ViewBag.KqTimKiem = danhSach;
+            ViewBag.KqSapXep = sapXepDanhSach;
+
+            return View(sapXepDanhSach);
         }
 
         // GET: ChucDanhKhoaHocCuaCanBo/Details/5
@@ -38,6 +54,7 @@ namespace C500Hemis.Controllers.CB
                 .Include(t => t.IdChucDanhKhoaHocNavigation)
                 .Include(t => t.IdThamQuyenQuyetDinhNavigation)
                 .FirstOrDefaultAsync(m => m.IdChucDanhKhoaHocCuaCanBo == id);
+
             if (tbChucDanhKhoaHocCuaCanBo == null)
             {
                 return NotFound();
@@ -47,79 +64,51 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: ChucDanhKhoaHocCuaCanBo/Create
-        /// Hàm khởi tạo thông tin Chức Danh Khoa Học của Cán Bộ
         public IActionResult Create()
         {
-            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            //Lấy danh sách Chức danh khoa học, hiển thị cụ thể chức danh khoa học
-            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc");
-            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "IdLoaiQuyetDinh");
+            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "ChucDanhKhoaHoc");
+            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "LoaiQuyetDinh");
             return View();
         }
 
         // POST: ChucDanhKhoaHocCuaCanBo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        // gửi dữ liệu về server xử lí sau khi người dùng nhập thông tin vào form và thực hiện submit
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> Create([Bind("IdChucDanhKhoaHocCuaCanBo,IdCanBo,IdChucDanhKhoaHoc,IdThamQuyenQuyetDinh,SoQuyetDinh,NgayQuyetDinh")] TbChucDanhKhoaHocCuaCanBo tbChucDanhKhoaHocCuaCanBo)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Add(tbChucDanhKhoaHocCuaCanBo);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    // Xử lý lỗi khi lưu vào database
-                    ModelState.AddModelError(string.Empty, "Có lỗi xảy ra khi lưu dữ liệu: " + ex.Message);
-                }
+                _context.Add(tbChucDanhKhoaHocCuaCanBo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            // Kiểm tra xem các trường bắt buộc có bị thiếu hay không
-            if (string.IsNullOrEmpty(tbChucDanhKhoaHocCuaCanBo.SoQuyetDinh))
-            {
-                ModelState.AddModelError("SoQuyetDinh", "Số quyết định là bắt buộc.");
-            }
-
-            if (tbChucDanhKhoaHocCuaCanBo.NgayQuyetDinh == default(DateTime))
-            {
-                ModelState.AddModelError("NgayQuyetDinh", "Ngày quyết định là bắt buộc.");
-            }
-
-            if (!tbChucDanhKhoaHocCuaCanBo.IdCanBo.HasValue)
-            {
-                ModelState.AddModelError("IdCanBo", "Cán bộ là bắt buộc.");
-            }
-
-            if (!tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc.HasValue)
-            {
-                ModelState.AddModelError("IdChucDanhKhoaHoc", "Chức danh khoa học là bắt buộc.");
-            }
-
-            if (!tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh.HasValue)
-            {
-                ModelState.AddModelError("IdThamQuyenQuyetDinh", "Thẩm quyền quyết định là bắt buộc.");
-            }
-
-            // Nếu có lỗi, trả lại view với dữ liệu hiện tại
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "TenCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
-            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "TenChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
-            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "TenLoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
-
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
+            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "ChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
+            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "LoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
             return View(tbChucDanhKhoaHocCuaCanBo);
         }
 
+        // GET: ChucDanhKhoaHocCuaCanBo/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tbChucDanhKhoaHocCuaCanBo = await _context.TbChucDanhKhoaHocCuaCanBos.FindAsync(id);
+            if (tbChucDanhKhoaHocCuaCanBo == null)
+            {
+                return NotFound();
+            }
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
+            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "ChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
+            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "LoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
+            return View(tbChucDanhKhoaHocCuaCanBo);
+        }
 
         // POST: ChucDanhKhoaHocCuaCanBo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdChucDanhKhoaHocCuaCanBo,IdCanBo,IdChucDanhKhoaHoc,IdThamQuyenQuyetDinh,SoQuyetDinh,NgayQuyetDinh")] TbChucDanhKhoaHocCuaCanBo tbChucDanhKhoaHocCuaCanBo)
@@ -150,8 +139,8 @@ namespace C500Hemis.Controllers.CB
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbChucDanhKhoaHocCuaCanBo.IdCanBo);
-            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "IdChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
-            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "IdLoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
+            ViewData["IdChucDanhKhoaHoc"] = new SelectList(_context.DmChucDanhKhoaHocs, "IdChucDanhKhoaHoc", "ChucDanhKhoaHoc", tbChucDanhKhoaHocCuaCanBo.IdChucDanhKhoaHoc);
+            ViewData["IdThamQuyenQuyetDinh"] = new SelectList(_context.DmLoaiQuyetDinhs, "IdLoaiQuyetDinh", "LoaiQuyetDinh", tbChucDanhKhoaHocCuaCanBo.IdThamQuyenQuyetDinh);
             return View(tbChucDanhKhoaHocCuaCanBo);
         }
 
@@ -168,6 +157,7 @@ namespace C500Hemis.Controllers.CB
                 .Include(t => t.IdChucDanhKhoaHocNavigation)
                 .Include(t => t.IdThamQuyenQuyetDinhNavigation)
                 .FirstOrDefaultAsync(m => m.IdChucDanhKhoaHocCuaCanBo == id);
+
             if (tbChucDanhKhoaHocCuaCanBo == null)
             {
                 return NotFound();
@@ -182,11 +172,7 @@ namespace C500Hemis.Controllers.CB
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tbChucDanhKhoaHocCuaCanBo = await _context.TbChucDanhKhoaHocCuaCanBos.FindAsync(id);
-            if (tbChucDanhKhoaHocCuaCanBo != null)
-            {
-                _context.TbChucDanhKhoaHocCuaCanBos.Remove(tbChucDanhKhoaHocCuaCanBo);
-            }
-
+            _context.TbChucDanhKhoaHocCuaCanBos.Remove(tbChucDanhKhoaHocCuaCanBo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

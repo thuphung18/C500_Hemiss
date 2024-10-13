@@ -3,62 +3,184 @@
 @{
     ViewData["Title"] = "XÓA HỒ SƠ";
 }
+@section Styles {
+    <style>
+        /* Về cơ bản giống form thông tin chi tiết */
+        /* Có sửa đổi cho phù hợp với form xóa hồ sơ */
+        /* Thiết lập cơ bản cho vùng xóa, làm cho bảng vào giữa */
+       .total{
+            display: flex;
+            justify-content: center;
+            margin-top:50px;
+            margin-bottom: 50px;
+       }
 
-<h1>XÓA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</h1>
+       /* Bảng thông tin */
+        .form_del {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            width:50%;
+        }
 
-<h3>Đồng chí có muốn xóa hồ sơ này không?
-</h3>
-<div>
-    
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Lý do bị kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LyDo)
-        </dd>
-        <dt class = "col-sm-2">
+        /* Đặt tiêu đề nổi "XÓA HỒ SƠ BỊ KỶ LUẬT */
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #e3342f; /* Đổi màu cho cảnh báo */
+            margin-bottom: 20px;
+        }
+
+        /* Lời nhắn, có muốn xóa hay không? */
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Định dạng cho bảng thông tin, ô nhỏ phía trong */
+        .row {
+            display: grid;
+            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% */
+            gap: 10px;                      /* Khoảng cách giữa các phần tử */
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+
+        /* Cột thông tin bên phải */
+        dt {
+            font-weight: bold;
+            color: #444;
+            white-space: nowrap; /* Tránh xuống dòng */
+            align-self: center; /* Canh giữa theo trục dọc */
+            text-align: right; /* Căn phải để khoảng cách giữa dt và dd đều đặn hơn */
+            padding-right: 10px; /* Thêm khoảng cách giữa dt và dd */
+            
+        }
+
+        /* Cột thông tin bên trái */
+        dd {
+            color: #555;
+            margin-bottom: 0;
+            align-self: center; /* Canh giữa theo trục dọc */
+        }
+
+        /* Núi xác nhận xóa */
+        .btn-danger {
+            background-color: #e3342f;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Khi di chuột vào núi xác nhận xóa */
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Nút quay lại */
+        .back {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Khi di chuột vào núi back */
+        .back:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+            color: white;
+            }
+
+        /* Núi xác nhận */
+        .submit {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Canh giữa cho nút xác nhận */
+        .submit_center{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+}
+
+
+<div class="total">
+    <div class="form_del">
+        <h1><b>XÓA HỒ SƠ CÁN BỘ BỊ KỶ LUẬT</b></h1>
+
+        <h3>Đồng chí có muốn xóa hồ sơ này không?</h3>
+
+        <dl class="row">
+            <dt class="col-sm-2">
+            Lý do
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LyDo)
+            </dd>
+            <dt class="col-sm-2">
             Ngày nhận quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayThangNamQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayThangNamQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
             Số quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            Năm bị kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamBiKyLuat)
-        </dd>
-        <dt class = "col-sm-2">
-            ID cán bộ
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name)
-        </dd>
-        <dt class = "col-sm-2">
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoQuyetDinh)
+            </dd>
+            <dt class="col-sm-2">
+             Năm bị kỷ luật
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NamBiKyLuat)
+            </dd>
+            <dt class="col-sm-2">
+                Họ tên cán bộ
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name)
+            </dd>
+            <dt class="col-sm-2">
             Cấp quyết định
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            Hình thức kỷ luật
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdKyLuatCanBo" />
-        <input type="submit" value="Xác nhận xóa" class="btn btn-danger" /> |
-        <a asp-action="Index">Quay lại</a>
-    </form>
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.CapKhenThuong)
+            </dd>
+            <dt class="col-sm-2">
+             Hình thức kỷ luật
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.LoaiKyLuat)
+            </dd>
+        </dl>
+        <div class="submit_center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdKyLuatCanBo" />
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                
+            </form>
+        </div>
+        <a asp-action="Index" class="back">Quay lại</a>
+    </div>
 </div>
+

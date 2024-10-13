@@ -1,76 +1,110 @@
 ﻿@model C500Hemis.Models.TbHoiThaoHoiNghi
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
+
+<h1 style="text-align:center"> Tạo mới </h1>
+<hr />
+
 <style>
-    div{
-        margin:auto
-    }
     body {
-        background-color: #05c46b;
-        font-family: Verdana;
+        background-color: #f7f9fc;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
     }
 
-    /* Căn giữa toàn bộ nội dung */
-    .center-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Chiều cao toàn màn hình */
-    }
-
-    form {
-        background-color: #fff;
-        max-width: 500px;
-        padding: 30px 20px;
-        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #f7f9fc;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
 
     h1, h4 {
         text-align: center;
+        color: #333;
+        margin-bottom: 20px;
     }
 
-    .form-group {
-        margin-bottom: 15px;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
     }
 
-        .form-group label {
-            margin-bottom: 5px;
-            display: block;
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
         }
+
+        table th {
+            background-color: #4CAF50; /* Green background */
+            color: #fff; /* White text */
+        }
+
+        table td {
+            background-color: #f2f2f2; /* Light grey background */
+        }
+
+        table tr:hover {
+            background-color: #ddd; /* Darker grey on hover */
+        }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
 
     .form-control {
         width: 100%;
         padding: 10px;
-        border: 1px solid #ccc;
+        border: 1px solid #d1d1d1;
         border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
     }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            outline: none;
+        }
 
     .btn-primary {
         width: 100%;
-        padding: 10px;
+        padding: 12px;
         background-color: #05c46b;
         border: none;
         color: #fff;
+        font-weight: bold;
         border-radius: 5px;
         cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
     }
 
         .btn-primary:hover {
             background-color: #048a55;
+            transform: scale(1.05); /* Slightly bigger */
         }
 </style>
 
-<center><h1 style="background-color:white;">Create</h1></center>
+<div class="form-container">
+    <h4>Hội thảo hội nghị  </h4>
+    <hr />
 
-<center><h4 style="background-color:white;">TbHoiThaoHoiNghi</h4></center>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+
+        <table>
+            <tr>
+                <td>
+
             <div class="form-group">
                 <label asp-for="IdHoiThaoHoiNghi" class="control-label">Hội thảo Hội nghị</label>
                 <input asp-for="IdHoiThaoHoiNghi" class="form-control" />
@@ -130,8 +164,11 @@
                 <input asp-for="DonViChuTri" class="form-control" />
                 <span asp-validation-for="DonViChuTri" class="text-danger"></span>
             </div>
+            </td>
+            </tr>
+            </table>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo mới " class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -139,7 +176,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại </a>
 </div>
 
 @section Scripts {

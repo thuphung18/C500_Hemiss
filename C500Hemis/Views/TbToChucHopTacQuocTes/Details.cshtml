@@ -1,7 +1,7 @@
 ﻿@model C500Hemis.Models.TbToChucHopTacQuocTe
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Thông tin chi tiết";
 }
 
 <h1>Thông tin chi tiết</h1>
@@ -28,8 +28,8 @@
 </style>
 
 
-<div>
-    <h4>Tổ chức hợp tác quốc tế</h4>
+<div class="container">
+    <h4 style="text-align:center">Tổ chức hợp tác quốc tế</h4>
     <hr />
     <table>
         <tr>
@@ -64,9 +64,10 @@
 
     </table>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdToChucHopTacQuocTe" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-action="Index">Quay lại </a>
-    </form>
+</div>
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdToChucHopTacQuocTe"> Sửa </a> |
+    <a asp-action="Index">Quay lại </a>
 </div>

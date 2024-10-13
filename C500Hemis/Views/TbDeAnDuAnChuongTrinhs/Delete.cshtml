@@ -23,12 +23,10 @@
         background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
     }
 </style>
+<h1>Bạn có chắc chắn muốn xóa </h1>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Đề án, dự án, chương trình</h4>
+    <h4>Đề án/Dự án chương trình</h4>
     <hr />
     <table>
         <tr>
@@ -65,9 +63,11 @@
         </tr>
     </table>
 
+
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDeAnDuAnChuongTrinh" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Xóa" class="btn btn-danger" /> 
+        <a asp-action="Index">Quay lại </a>
     </form>
 </div>
