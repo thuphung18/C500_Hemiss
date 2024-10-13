@@ -1,0 +1,36 @@
+﻿@model C500Hemis.Models.TbNhomNganhDaoTao
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TbNhomNganhDaoTao</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdLinhVucDaoTaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdLinhVucDaoTaoNavigation.IdLinhVucDaoTao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNganhDaoTaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdNganhDaoTaoNavigation.IdNganhDaoTao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNhomNganhNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdNhomNganhNavigation.IdNhomNganh)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdNhomNganhDaoTao">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

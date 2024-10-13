@@ -1,0 +1,113 @@
+﻿@model IEnumerable<C500Hemis.Models.TbDanhSachVanBangChungChi>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenVanBang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDonViBangCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayCap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamTotNghiep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoQuyetDinhCongNhanTotNghiep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayQuyetDinhCongNhanTotNghiep)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoHieuVanBang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoVaoSoGocCapVanBang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayBaoVe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkFileScan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiTotNghiepNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenVanBang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDonViBangCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamTotNghiep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoQuyetDinhCongNhanTotNghiep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayQuyetDinhCongNhanTotNghiep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoHieuVanBang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoVaoSoGocCapVanBang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBaoVe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkFileScan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdHocVien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiTotNghiepNavigation.IdLoaiTotNghiep)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdDanhSachVanBangChungChi">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdDanhSachVanBangChungChi">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdDanhSachVanBangChungChi">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model C500Hemis.Models.TbLoaiHinhDaoTaoKhacDuocChoPhepMoNganh
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TbLoaiHinhDaoTaoKhacDuocChoPhepMoNganh</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoQuyetDinhChoPhep)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoQuyetDinhChoPhep)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhChoPhep)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayBanHanhQuyetDinhChoPhep)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdLoaiHinhDaoTaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdLoaiHinhDaoTaoNavigation.IdLoaiHinhDaoTao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNganhDaoTaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdNganhDaoTaoNavigation.IdNganhDaoTao)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdLoaiHinhDaoTaoKhacDuocChoPhepMoNganh">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
