@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<C500Hemis.Models.HemisContext>(options =>
     //options.UseSqlServer("Server=tcp:c500.database.windows.net,1433;Database=dbHemisC500;User Id=c500;Password=@Abc1234")
-    options.UseSqlServer("Server=tcp:ctphongtest.database.windows.net,1433;Database=dbHemisC500;User Id=zoo1123;Password=@dbHemisC5001")
+    options.UseSqlServer("Server=tcp:c500sv.database.windows.net,1433;Database=dbHemisC500;User Id=c500;Password=@Abc1234")
     );
 
 
