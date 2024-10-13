@@ -4,16 +4,18 @@
 ViewData["Title"] = "Index";
     }
     @section Heads {
-        <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     }
 
     <h1>Index</h1>
 
-    <p>
-        <a asp-action="Create">Create New</a>
+    <p style="text-align: center; font-size: 25px; margin-bottom: 30px;">
+            <a asp-action="Create" style="color: #3498db; text-decoration: none; font-weight: bold; border: 2px solid #3498db; padding: 10px 20px; border-radius: 5px;">Tạo Mới</a>
     </p>
-    <table class="table" id="view_table">
+    <table class="table" id="ntable">
         <thead>
             <tr>
                 <th>
@@ -61,40 +63,33 @@ ViewData["Title"] = "Index";
 }
         </tbody>
     </table>
-    @section Scripts {
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
-        <script>
-        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
-        var table = new DataTable("#view_table", {
-            language: {
-                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
-                search: "Tìm kiếm",
-                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
-                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+    <script>
+
+    new DataTable('#ntable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        processing: true,
+        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
             },
-            createdRow: (row, data, index) => {
-            },
-            layout: {//Layout: https://datatables.net/examples/layout/index.html
-                topStart: {
-                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
-                        {
-                            className: 'btn btn-primary', //Thêm class cho button
-                            text: 'Tạo mới',
-                            action: function (e, dt, node, config) {//Hành động của button
-                                window.location.href = '@Url.Action("Create")';
-                            }
-                        }
-                    ]
-                }
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
             }
-        });
-        //HTMLDOM Element: https://developer.mozilla.org/en-US/docs/Web/API/Element
-        //Datatables API: https://datatables.net/reference/api/table().header()
-        var row = table.table().header().lastElementChild;
-        row.lastElementChild.remove();
-        row.appendChild(document.createElement('th'));
-        console.log(row.lastElementChild);
-        </script>
-    }
+        },
+    });
+</script>
