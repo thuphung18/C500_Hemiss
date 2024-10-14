@@ -1,42 +1,129 @@
 ﻿@model C500Hemis.Models.TbKhoanTrichLapQuy
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết";
 }
 
-<h1>Details</h1>
+<style>
+    body {
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        margin: 0;
+    }
 
-<div>
-    <h4>TbKhoanTrichLapQuy</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaKhoanTrichLapQuy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenKhoanTrichLapQuy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamTaiChinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamTaiChinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoTien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoTien)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKhoanTrichLapQuy">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    h1 {
+        font-size: 36px;
+        color: #c0392b;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    h4 {
+        font-size: 24px;
+        color: #00796b;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    hr {
+        border-top: 1px solid #bdc3c7;
+        margin-bottom: 20px;
+    }
+
+    .row {
+        margin: 0;
+        padding: 0;
+    }
+
+    .col-sm-2 {
+        width: 35%;
+        font-weight: bold;
+        color: #00796b;
+        margin-bottom: 10px;
+    }
+
+    .col-sm-10 {
+        color: #7f8c8d;
+        margin-bottom: 10px;
+    }
+
+    .action-links {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+        .action-links a {
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .action-links a{
+                background-image: linear-gradient(to right, #8360c3, #2ebf91);
+            }
+
+            .action-links a:hover {
+                background-image: linear-gradient(to left, #8360c3, #2ebf91);
+            }
+</style>
+
+    <div class="container">
+        <h1>Chi tiết</h1>
+
+        <h4>Khoản Trích Lập Quỹ</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MaKhoanTrichLapQuy)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TenKhoanTrichLapQuy)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NamTaiChinh)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NamTaiChinh)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SoTien)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SoTien)
+            </dd>
+        </dl>
+
+        <div class="action-links">
+            <a asp-action="Edit" asp-route-id="@Model?.IdKhoanTrichLapQuy">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>

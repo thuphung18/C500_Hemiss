@@ -34,7 +34,7 @@
                 <span asp-validation-for="SoTien" class="text-danger"></span>
             </div>
             <div class="form-group" style="text-align: center;">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn-primary" />
             </div>
         </form>
     </div>
@@ -52,22 +52,25 @@
 
 <style>
     body {
-        background-color: #e0f7fa;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
     }
 
     h1 {
-        font-size: 50px;
-        color: #c0392b;
+        font-size: 63px;
+        color: #FFFFE0;
         text-align: center;
         margin-bottom: 20px;
     }
 
     h4 {
         font-size: 24px;
-        color: #2c3e50;
+        color: #CD2626;
         text-align: center;
         margin-bottom: 10px;
     }
@@ -124,7 +127,7 @@
 
     .btn-primary {
         padding: 12px 30px;
-        background-color: #3498db;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
         border: none;
         color: white;
         border-radius: 5px;
@@ -132,13 +135,22 @@
         font-size: 16px;
     }
 
+    .btn-primary:hover {
+        background-image: linear-gradient(to left, #8360c3, #2ebf91);
+    }
+
     .btn-back {
-        color: #3498db;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
         text-decoration: none;
         font-size: 18px;
         padding: 10px 20px;
-        background-color: #ecf0f1;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+
+    .btn-back:hover {
+            background-image: linear-gradient(to left, #8360c3, #2ebf91);
+            color: white;
     }
 </style>
