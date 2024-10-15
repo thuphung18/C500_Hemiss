@@ -7,7 +7,7 @@
 <h1 align="center"><strong>Chi tiết hoạt động tài chính</strong></h1>
 
 <div>
-    <h4 align="centre">Hoạt động tài chính</h4>
+    <h4 align="centre"><strong>Hoạt động tài chính</strong></h4>
     <hr />
     <table class="table table-bordered" style="border: 2px solid black;">
         <tr>
@@ -29,60 +29,59 @@
         </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHoatDongTaiChinh">Chỉnh sửa</a> |
-    <a asp-action="Index">Quay lại danh sách</a>
-</div>
-<style>
-    body {
-        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #ccffcc;
-    }
-
-    .btn-red, .btn-blue {
-        display: inline-block;
-        padding: 10px 20px;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-
-    .btn-red {
-        background-color: red;
-    }
-
-        .btn-red:hover {
-            background-color: darkred;
+    <a class='btn-red' asp-action="Edit" asp-route-id="@Model?.IdHoatDongTaiChinh">Chỉnh sửa</a> |
+    <a class='btn-blue' asp-action="Index">Quay lại danh sách</a>
+    <style>
+        body {
+            background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #ccffcc;
         }
 
-    .btn-blue {
-        background-color: blue;
-    }
-
-        .btn-blue:hover {
-            background-color: darkblue;
+        .btn-red, .btn-blue {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
         }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+        .btn-red {
+            background-color: red;
+        }
 
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border: 2px solid black;
-        width: 100px;
-    }
+            .btn-red:hover {
+                background-color: darkred;
+            }
 
-    div {
-        background-color: #eeffe6;
-    }
+        .btn-blue {
+            background-color: blue;
+        }
 
-    tr {
-        width: 400px;
-    }
-</style>
+            .btn-blue:hover {
+                background-color: darkblue;
+            }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 2px solid black;
+            width: 100px;
+        }
+
+        div {
+            background-color: #eeffe6;
+        }
+
+        tr {
+            width: 400px;
+        }
+    </style>

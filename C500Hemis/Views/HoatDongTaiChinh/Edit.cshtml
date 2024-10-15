@@ -5,57 +5,114 @@
 }
 
 <style>
-    body{
+    body {
         background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
         background-position: center;
         background-repeat: no-repeat;
         background-color: #ccffcc;
     }
 
-    .form group {
-        margin-left: 300px;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #ccffcc; /* Set table background color */
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 2px solid black;
+    }
+
+    .form-group {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px; /* Spacing between buttons */
+    }
+
+    .btn-primary {
+        background-color: blue;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: darkblue;
+        }
+
+    .btn-red {
+        background-color: red;
+        color: white;
+        text-decoration: none;
+    }
+
+        .btn-red:hover {
+            background-color: darkred;
+        }
+
+    .btn-container {
+        text-align: center;
     }
 </style>
+
 <h1 align="center">Chỉnh Sửa Thông Tin</h1>
 
 <h4 style="text-align:center">Hoạt Động Tài Chính</h4>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 offset-md-3">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdHoatDongTaiChinh" />
-            <div class="form-group">
-                <label asp-for="IdLoaiHoatDongTaiChinh" class="control-label"><strong> ID Loại hoạt động tài chính</strong></label>
-                <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
-                <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NamTaiChinh" class="control-label"><strong>Năm tài chính</strong></label>
-                <input asp-for="NamTaiChinh" class="form-control" />
-                <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KinhPhi" class="control-label"><strong>Kinh phí</strong></label>
-                <input asp-for="KinhPhi" class="form-control" />
-                <span asp-validation-for="KinhPhi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDung" class="control-label"><strong>Nội dung</strong></label>
-                <input asp-for="NoiDung" class="form-control" />
-                <span asp-validation-for="NoiDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+
+            <table>
+                <tr>
+                    <th><strong>ID Loại hoạt động tài chính</strong></th>
+                    <td>
+                        <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
+                        <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>Năm tài chính</strong></th>
+                    <td>
+                        <input asp-for="NamTaiChinh" class="form-control" />
+                        <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>Kinh phí</strong></th>
+                    <td>
+                        <input asp-for="KinhPhi" class="form-control" />
+                        <span asp-validation-for="KinhPhi" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>Nội dung</strong></th>
+                    <td>
+                        <input asp-for="NoiDung" class="form-control" />
+                        <span asp-validation-for="NoiDung" class="text-danger"></span>
+                    </td>
+                </tr>
+                <!-- Add a row for the buttons -->
+                <tr>
+                    <td colspan="2" class="btn-container">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-red">Quay lại danh sách</a>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Quay lại danh sách</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
