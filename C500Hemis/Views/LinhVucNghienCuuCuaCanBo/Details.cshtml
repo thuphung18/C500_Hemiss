@@ -6,78 +6,107 @@
 
 <h1>Xem chi tiết</h1>
 
-<div>
+<div class="container">
     <h4>Lĩnh Vực Nghiên Cứu Của Cán Bộ</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="details-section">
+        <dt>
             @Html.DisplayNameFor(model => model.LaLinhVucNghienCuuChuyenSau)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.LaLinhVucNghienCuuChuyenSau)
         </dd>
-        <dt class = "col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.SoNamNghienCuu)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.SoNamNghienCuu)
         </dd>
-        <dt class = "col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.IdCanBoNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
         </dd>
-        <dt class = "col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdLinhVucNghienCuuCuaCanBo">Edit</a> |
+<div class="action-buttons">
+    <a asp-action="Edit" asp-route-id="@Model?.IdLinhVucNghienCuuCuaCanBo">Chỉnh sửa</a> |
     <a asp-action="Index">Trở về danh sách</a>
 </div>
+
 <style>
-/* Định dạng container chính */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    /* Định dạng tiêu đề chính */
+    h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
 
-h4 {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #343a40;
-}
+    /* Định dạng vùng chứa nội dung */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-dl {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    h4 {
+        font-size: 1.8rem;
+        color: #34495e;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-dt {
-    font-weight: bold;
-    color: #343a40;
-}
+    hr {
+        border: none;
+        height: 2px;
+        background-color: #34495e;
+        margin-bottom: 20px;
+    }
 
-dd {
-    margin-left: 10px;
-}
+    /* Định dạng danh sách */
+    .details-section {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        gap: 15px;
+    }
 
-/* Định dạng nút hành động */
-a {
-    color: #007bff;
-    text-decoration: none;
-    margin-right: 10px;
-}
+    dt {
+        font-weight: bold;
+        font-size: 1rem;
+        color: #2980b9;
+        padding-top: 10px;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
-</style>
+    dd {
+        font-size: 1rem;
+        color: #2c3e50;
+        margin: 0;
+        padding-top: 10px;
+    }
+
+    /* Định dạng nút hành động */
+    .action-buttons {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+        .action-buttons a {
+            font-size: 1rem;
+            color: white;
+            background-color: #2980b9;
+            padding: 10px 20px;
+            margin-right: 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
