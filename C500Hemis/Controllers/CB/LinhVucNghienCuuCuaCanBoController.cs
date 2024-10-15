@@ -42,21 +42,24 @@ namespace C500Hemis.Controllers.CB
             {
                 return NotFound();
             }
-         
-            ViewBag.Hoten =
-                _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbLinhVucNghienCuuCuaCanBo.IdCanBoNavigation.IdNguoi).Ho;
-                 
+            ViewBag.Hoten = _context.TbNguois.FirstOrDefault(p => p.IdNguoi == tbLinhVucNghienCuuCuaCanBo.IdCanBoNavigation.IdNguoi).Ho;
             return View(tbLinhVucNghienCuuCuaCanBo);
         }
 
-        // GET: LinhVucNghienCuuCuaCanBo/Create
+
+        /// <summary>
+        /// Hàm khởi tạo dữ liệu lĩnh vực nghiên cứu của cán bộ 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu");
+            //Lấy danh sách cán bộ truyền cho selectbox cán bộ bên view
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(t => t.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+
+            //Lấy danh sách linh vực nghiên cứu, hiện thị cụ thể lĩnh vực nghiên cứu
+            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu");
             return View();
         }
-
         // POST: LinhVucNghienCuuCuaCanBo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,17 +67,27 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdLinhVucNghienCuuCuaCanBo,IdCanBo,IdLinhVucNghienCuu,LaLinhVucNghienCuuChuyenSau,SoNamNghienCuu")] TbLinhVucNghienCuuCuaCanBo tbLinhVucNghienCuuCuaCanBo)
         {
+            // Kiểm tra dữ liệu có chuẩn không
+            // Đối sánh với lớp tbLinhVucNghienCuuCuaCanBo
             if (ModelState.IsValid)
             {
+                //Thêm đối tượng vào context
                 _context.Add(tbLinhVucNghienCuuCuaCanBo);
+                //Lưu vào CSDL
                 await _context.SaveChangesAsync();
+                // Nếu thành công quay về index
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
-            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
+            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
             return View(tbLinhVucNghienCuuCuaCanBo);
         }
-
+            
+        /// <summary>
+        /// Khởi tạo thông tin sửa dữ liệu nghiên cứu của cán bộ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Views tạo</returns>
         // GET: LinhVucNghienCuuCuaCanBo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -88,8 +101,8 @@ namespace C500Hemis.Controllers.CB
             {
                 return NotFound();
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
-            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
+            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
             return View(tbLinhVucNghienCuuCuaCanBo);
         }
 
@@ -125,8 +138,8 @@ namespace C500Hemis.Controllers.CB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
-            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbLinhVucNghienCuuCuaCanBo.IdCanBo);
+            ViewData["IdLinhVucNghienCuu"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbLinhVucNghienCuuCuaCanBo.IdLinhVucNghienCuu);
             return View(tbLinhVucNghienCuuCuaCanBo);
         }
 
@@ -140,6 +153,7 @@ namespace C500Hemis.Controllers.CB
 
             var tbLinhVucNghienCuuCuaCanBo = await _context.TbLinhVucNghienCuuCuaCanBos
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(t => t.IdNguoiNavigation)
                 .Include(t => t.IdLinhVucNghienCuuNavigation)
                 .FirstOrDefaultAsync(m => m.IdLinhVucNghienCuuCuaCanBo == id);
             if (tbLinhVucNghienCuuCuaCanBo == null)

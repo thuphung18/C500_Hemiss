@@ -1,86 +1,156 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbDuLieuTrungTuyen>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dữ liệu trúng tuyển";
 }
 
-<h1>Index</h1>
+@section Heads
+{
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <style>
+        /* Hình nền cho toàn bộ trang */
+        body {
+            background-color: palegreen;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url('https://static.wixstatic.com/media/9d8ed5_80206ab61cf14532924c2295418701a0~mv2.jpg/v1/fit/w_1000%2Ch_710%2Cal_c%2Cq_80/file.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+        .h1 {
+            position: relative;
+            color: black;
+        }
+
+        .text_mau {
+            color: black;
+        }
+
+        /* Phần chỉnh frontend cho bảng */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            color: black;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: center;
+                border-bottom: 2px solid #ddd;
+            }
+
+        /* Nút SỬA, XÓA, CHI TIẾT */
+        .button_edit, .button_del, .button_details {
+            border-style: solid;
+            border-width: 0.5px;
+            font-size: 14px;
+            display: inline-block;
+            padding: 4px 12px; /* Chỉnh kích thước padding để nút lớn hơn */
+            text-decoration: none;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            margin: 5px; /* Khoảng cách giữa các nút */
+        }
+
+        /* Màu mặc định của các nút */
+        .button_edit {
+            background-color: #f0ad4e;
+            border-color: #eea236;
+        }
+
+        .button_details {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+        .button_del {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+
+        /* Khi di chuột vào các nút */
+        .button_edit:hover {
+            background-color: darkgoldenrod;
+            color: white;
+        }
+
+        .button_details:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .button_del:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Bố cục khối chứa các nút */
+        .edit_del {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+}
+
+<h1 class="text-center my-4">Dữ liệu trúng tuyển</h1>
+
+<table class="table table-striped table-hover" id="view_table">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cccd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoVaTen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaTuyenSinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TruongThpt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiemMon1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiemMon2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiemMon3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiemUuTien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TongDiemXetTuyen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdDoiTuongUuTienNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHinhThucTuyenSinhNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdKhuVucNavigation)
-            </th>
-            <th></th>
+            <th>STT</th>
+            <th>Số Cccd/ Hộ Chiếu</th>
+            <th>Họ và tên</th>
+            <th>Mã tuyển sinh</th>
+            <th>Khóa đào tạo trúng tuyển</th>
+            <th>Đối tượng tuyển sinh</th>
+            <th>Đối tượng ưu tiên</th>
+            <th>Hình thức tuyển sinh</th>
+            <th>Khu vực tuyển sinh</th>
+            <th>Trường THPT</th>
+            <th>Tổ hợp môn trúng tuyển</th>
+            <th>Điểm môn 1</th>
+            <th>Điểm môn 2</th>
+            <th>Điểm môn 3</th>
+            <th>Điểm ưu tiên</th>
+            <th>Tổng điểm xét tuyển</th>
+            <th>Số quyết định trúng tuyển</th>
+            <th>Ngày ban hành quyết định trúng tuyển</th>
+            <th>Chương trình đào tạo đã tốt nghiệp trình độ đại học</th>
+            <th>Ngành đã tốt nghiệp trình độ đại học</th>
+            <th>Chương trình đào tạo đã tốt nghệp trình độ thạc sĩ</th>
+            <th>Ngành đã tốt nghiệp trình độ thạc sĩ</th>
+            <th>Hành Động</th>
         </tr>
     </thead>
-    <tbody>
+    </thead>
+</div>    
+    
+ <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDuLieuTrungTuyen)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cccd)
             </td>
@@ -93,6 +163,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.KhoaDaoTaoTrungTuyen)
             </td>
+             <td>
+                    @Html.DisplayFor(modelItem => item.IdDoiTuongDauVaoNavigation.IdDoiTuongDauVao)
+             </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDoiTuongUuTienNavigation.IdDoiTuongUuTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHinhThucTuyenSinhNavigation.IdHinhThucTuyenSinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdKhuVucNavigation.IdKhuVuc)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TruongThpt)
             </td>
@@ -132,24 +215,129 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NganhDaTotNghiepTrinhDoThacSi)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDoiTuongDauVaoNavigation.IdDoiTuongDauVao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDoiTuongUuTienNavigation.IdDoiTuongUuTien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHinhThucTuyenSinhNavigation.IdHinhThucTuyenSinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdKhuVucNavigation.IdKhuVuc)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDuLieuTrungTuyen">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDuLieuTrungTuyen">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDuLieuTrungTuyen">Delete</a>
-            </td>
+
+                <td class="edit_del">
+                    <a asp-action="Edit" asp-route-id="@item.IdDuLieuTrungTuyen" class="button_edit">
+                        <i class="fas fa-edit"></i> Sửa
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.IdDuLieuTrungTuyen" class="button_details">
+                        <i class="fas fa-info-circle"></i> Chi tiết
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.IdDuLieuTrungTuyen" class="button_del">
+                        <i class="fas fa-trash-alt"></i> Xóa
+                    </a>
+                </td>
         </tr>
 }
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script> <!-- FontAwesome -->
+
+    <script>
+        // Datatable initialization
+        var table = new DataTable("#view_table",
+            {
+                language: {
+                    search: "Tìm kiêm",
+                    info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+                    paginate: {
+                        first: "Trang đầu",
+                        previous: "Trang trước",
+                        next: "Trang sau",
+                        last: "Trang cuối"
+                    },
+                    infoEmpty: "Không có bản ghi nào",
+                    lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
+                    zeroRecords: "Không tìm thấy kết quả nào phù hợp",
+                    infoFiltered: "(lọc từ _MAX_ tổng bản ghi)",
+                    
+
+                },
+                createdRow: (row, data, index) => {
+                },
+                layout: {
+                    topStart: {
+                        buttons: [
+                            {
+                                className: 'btn btn-primary',
+                                text: '<i class="fas fa-plus"></i> Thêm mới dữ liệu cán bộ nghiên cứu',
+                                action: function (e, dt, node, config) {
+                                    window.location.href = '@Url.Action("Create")';
+                                }
+                            }
+                        ]
+                    }
+                }
+            });
+    </script>
+
+    <style>
+        /* Tùy chỉnh phần phân trang */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            color: #007bff;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            /* Nút hiện tại */
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+                background-color: #007bff;
+                color: navajowhite;
+                border-color: #007bff;
+            }
+
+            /* Hiệu ứng hover */
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: #007bff;
+                color: navajowhite;
+            }
+
+        /* Căn giữa phần phân trang */
+        .dataTables_wrapper .dataTables_paginate {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Căn chỉnh thông tin số lượng trang */
+        .dataTables_info {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Tùy chỉnh nút thêm mới với màu forestgreen */
+        .btn.btn-primary {
+            background-color: forestgreen;
+            border-color: forestgreen;
+            font-size: 16px;
+            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            /* Tùy chỉnh FontAwesome icon */
+            .btn.btn-primary i {
+                margin-right: 5px;
+            }
+
+            /* Hiệu ứng hover cho nút thêm mới */
+            .btn.btn-primary:hover {
+                background-color: #228b22; /* Màu xanh forestgreen đậm hơn khi hover */
+                border-color: #228b22;
+                transform: scale(1.05); /* Phóng to nhẹ nút khi di chuột */
+            }
+
+    </style>
     </tbody>
 </table>
+}
+

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using C500Hemis.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.TS
 {
@@ -50,32 +46,117 @@ namespace C500Hemis.Controllers.TS
         // GET: TbDuLieuTrungTuyens/Create
         public IActionResult Create()
         {
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao");
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien");
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh");
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc");
+            // Thêm thủ công giá trị cho IdDoiTuongDauVao
+            var doiTuongDauVaoList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
+        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
+        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
+        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
+        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
+        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
+        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
+        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
+        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
+    };
+            ViewData["IdDoiTuongDauVao"] = new SelectList(doiTuongDauVaoList, "Value", "Text");
+
+            // Thêm thủ công giá trị cho IdDoiTuongUuTien
+            var doiTuongUuTienList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
+        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
+        // Thêm các giá trị khác nếu cần
+    };
+            ViewData["IdDoiTuongUuTien"] = new SelectList(doiTuongUuTienList, "Value", "Text");
+
+            // Thêm thủ công giá trị cho IdHinhThucTuyenSinh
+            var hinhThucTuyenSinhList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
+        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
+        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
+        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
+        // Thêm các giá trị khác nếu cần
+    };
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(hinhThucTuyenSinhList, "Value", "Text");
+
+            // Thêm thủ công giá trị cho IdKhuVuc
+            var khuVucList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
+        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
+        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
+        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
+        // Thêm các giá trị khác nếu cần
+    };
+            ViewData["IdKhuVuc"] = new SelectList(khuVucList, "Value", "Text");
+
             return View();
         }
 
+
         // POST: TbDuLieuTrungTuyens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
             if (ModelState.IsValid)
             {
+                // Tính tổng điểm xét tuyển
+                tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+
                 _context.Add(tbDuLieuTrungTuyen);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+            // Nếu ModelState không hợp lệ, gán thủ công giá trị cho dropdowns
+
+            // Gán thủ công giá trị cho IdDoiTuongDauVao
+            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
+        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
+        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
+        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
+        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
+        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
+        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
+        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
+        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+
+            // Gán thủ công giá trị cho IdDoiTuongUuTien
+            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
+        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+
+            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
+        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
+        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
+        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+
+            // Gán thủ công giá trị cho IdKhuVuc
+            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
+        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
+        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
+        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
+
             return View(tbDuLieuTrungTuyen);
         }
+
 
         // GET: TbDuLieuTrungTuyens/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -90,19 +171,57 @@ namespace C500Hemis.Controllers.TS
             {
                 return NotFound();
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+
+            // Gán thủ công giá trị cho IdDoiTuongDauVao
+            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
+        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
+        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
+        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
+        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
+        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
+        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
+        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
+        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+
+            // Gán thủ công giá trị cho IdDoiTuongUuTien
+            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
+        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+
+            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
+        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
+        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
+        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+
+            // Gán thủ công giá trị cho IdKhuVuc
+            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
+        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
+        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
+        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
+
             return View(tbDuLieuTrungTuyen);
         }
 
+
         // POST: TbDuLieuTrungTuyens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
             if (id != tbDuLieuTrungTuyen.IdDuLieuTrungTuyen)
             {
@@ -113,6 +232,9 @@ namespace C500Hemis.Controllers.TS
             {
                 try
                 {
+                    // Tính tổng điểm xét tuyển
+                    tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+
                     _context.Update(tbDuLieuTrungTuyen);
                     await _context.SaveChangesAsync();
                 }
@@ -129,12 +251,52 @@ namespace C500Hemis.Controllers.TS
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+            // Nếu ModelState không hợp lệ, hiển thị lại form cùng với các dropdown đã chọn trước đó
+            // Gán thủ công giá trị cho IdDoiTuongDauVao
+            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
+        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
+        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
+        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
+        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
+        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
+        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
+        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
+        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+
+            // Gán thủ công giá trị cho IdDoiTuongUuTien
+            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
+        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+
+            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
+        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
+        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
+        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+
+            // Gán thủ công giá trị cho IdKhuVuc
+            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
+        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
+        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
+        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
+        // Thêm các giá trị khác nếu cần
+    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
+
             return View(tbDuLieuTrungTuyen);
         }
+
 
         // GET: TbDuLieuTrungTuyens/Delete/5
         public async Task<IActionResult> Delete(int? id)

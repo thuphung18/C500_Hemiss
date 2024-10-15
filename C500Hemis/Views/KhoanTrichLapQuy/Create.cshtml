@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Tạo mới</h1>
+<h1>Create</h1>
 
 <h4>TbKhoanTrichLapQuy</h4>
 <hr />
@@ -49,5 +49,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
