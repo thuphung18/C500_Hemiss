@@ -1,12 +1,12 @@
 ﻿@model C500Hemis.Models.TbKhoanTrichLapQuy
 
 @{
-    ViewData["Title"] = "Chỉnh sửa";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Chỉnh sửa</h1>
+<h1>Edit</h1>
 
-<h4>Khoản Trích Lập Quỹ</h4>
+<h4>TbKhoanTrichLapQuy</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,15 +33,15 @@
                 <input asp-for="SoTien" class="form-control" />
                 <span asp-validation-for="SoTien" class="text-danger"></span>
             </div>
-            <div class="form-group" style="text-align: center;">
-                <input type="submit" value="Save" class="btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div style="text-align: center; margin-top: 30px;">
-    <a asp-action="Index" class="btn-back">Back to List</a>
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
@@ -49,108 +49,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-<style>
-    body {
-        background-image: linear-gradient(to right, #8360c3, #2ebf91);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 63px;
-        color: #FFFFE0;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    h4 {
-        font-size: 24px;
-        color: #CD2626;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    hr {
-        border: 0;
-        height: 1px;
-        background-color: #bdc3c7;
-        margin-bottom: 20px;
-    }
-
-    .row {
-        display: flex;
-        justify-content: center;
-    }
-
-    .col-md-4 {
-        background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        border-radius: 8px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        font-size: 18px;
-        color: #00796b;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #bdc3c7;
-        border-radius: 5px;
-        font-size: 16px;
-        color: #34495e;
-        background-color: #f9f9f9;
-    }
-
-        .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-        }
-
-    .text-danger {
-        color: #e74c3c;
-    }
-
-    .btn-primary {
-        padding: 12px 30px;
-        background-image: linear-gradient(to right, #8360c3, #2ebf91);
-        border: none;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .btn-primary:hover {
-        background-image: linear-gradient(to left, #8360c3, #2ebf91);
-    }
-
-    .btn-back {
-        background-image: linear-gradient(to right, #8360c3, #2ebf91);
-        text-decoration: none;
-        font-size: 18px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        color: white;
-    }
-
-    .btn-back:hover {
-            background-image: linear-gradient(to left, #8360c3, #2ebf91);
-            color: white;
-    }
-</style>
