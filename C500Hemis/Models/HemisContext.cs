@@ -4043,12 +4043,12 @@ public partial class HemisContext : DbContext
             entity.ToTable("tbThongTinHocTapNghienCuuSinh", "NH");
 
             entity.Property(e => e.IdThongTinHocTapNghienCuuSinh).ValueGeneratedNever();
-            entity.Property(e => e.QuyChuanNguoiHuongDan).HasColumnType("text");
+            entity.Property(e => e.QuyChuanNguoiHuongDan).HasColumnType("ntext");
             entity.Property(e => e.SoQuyetDinhCongNhan).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThanhLapHoiDongBaoVeCapTruong).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThoiHoc).HasMaxLength(50);
-            entity.Property(e => e.TenLuanVan).HasColumnType("text");
+            entity.Property(e => e.TenLuanVan).HasColumnType("ntext");
 
             entity.HasOne(d => d.IdChuongTrinhDaoTaoNavigation).WithMany(p => p.TbThongTinHocTapNghienCuuSinhs)
                 .HasForeignKey(d => d.IdChuongTrinhDaoTao)
