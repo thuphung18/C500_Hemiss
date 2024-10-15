@@ -12,101 +12,99 @@
         background-color: #ccffcc;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #ccffcc; /* Set table background color */
+    div .row {
+        background-color: #FFFFE0;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: auto;
+        padding: 20px;
+        font-weight: bold;
     }
 
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border: 2px solid black;
+    h1 {
+        font-family: Apice;
+        text-align: center;
+        color: #16423C;
     }
 
-    .form-group {
-        padding: 10px;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        margin-right: 10px; /* Spacing between buttons */
+    .control-label {
+        font-weight: bold;
+        color: #228B22;
     }
 
     .btn-primary {
-        background-color: blue;
-        color: white;
+        background-color: #2E8B57;
+        color: #E9EFEC;
     }
 
         .btn-primary:hover {
-            background-color: darkblue;
+            background-color: #6A9C89;
+            transform: scale(1.05);
         }
 
-    .btn-red {
-        background-color: red;
-        color: white;
-        text-decoration: none;
+    /* Flexbox container to align form fields on one row */
+    .form-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px; /* Add some spacing between fields */
     }
 
-        .btn-red:hover {
-            background-color: darkred;
-        }
+    .form-group {
+        flex: 1; /* Each field takes equal width */
+        margin-bottom: 15px; /* Add space below each field */
+    }
 
-    .btn-container {
-        text-align: center;
+    /* Adjust form size */
+    .form-container {
+        max-width: 1200px; /* Limit the maximum width of the form */
+        margin: 0 auto; /* Center the form */
     }
 </style>
 
 <h1 align="center">Chỉnh Sửa Thông Tin</h1>
-
 <h4 style="text-align:center">Hoạt Động Tài Chính</h4>
 <hr />
 
 <div class="row">
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdHoatDongTaiChinh" />
 
-            <table>
-                <tr>
-                    <th><strong>ID Loại hoạt động tài chính</strong></th>
-                    <td>
-                        <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
-                        <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Năm tài chính</strong></th>
-                    <td>
-                        <input asp-for="NamTaiChinh" class="form-control" />
-                        <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Kinh phí</strong></th>
-                    <td>
-                        <input asp-for="KinhPhi" class="form-control" />
-                        <span asp-validation-for="KinhPhi" class="text-danger"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th><strong>Nội dung</strong></th>
-                    <td>
-                        <input asp-for="NoiDung" class="form-control" />
-                        <span asp-validation-for="NoiDung" class="text-danger"></span>
-                    </td>
-                </tr>
-                <!-- Add a row for the buttons -->
-                <tr>
-                    <td colspan="2" class="btn-container">
-                        <input type="submit" value="Lưu" class="btn btn-primary" />
-                        <a asp-action="Index" class="btn btn-red">Quay lại danh sách</a>
-                    </td>
-                </tr>
-            </table>
+            <!-- Form fields on one row -->
+            <div class="form-container">
+                <div class="form-group">
+                    <label asp-for="IdLoaiHoatDongTaiChinh" class="control-label"></label>
+                    <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
+                    <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NamTaiChinh" class="control-label"></label>
+                    <input asp-for="NamTaiChinh" class="form-control" />
+                    <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="KinhPhi" class="control-label"></label>
+                    <input asp-for="KinhPhi" class="form-control" />
+                    <span asp-validation-for="KinhPhi" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NoiDung" class="control-label"></label>
+                    <input asp-for="NoiDung" class="form-control" />
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="text-center">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
         </form>
     </div>
 </div>
