@@ -177,11 +177,9 @@
                     lengthMenu: "Hiển thị _MENU_ dòng mỗi trang",
                     zeroRecords: "Không tìm thấy kết quả nào phù hợp",
                     infoFiltered: "(lọc từ _MAX_ tổng bản ghi)",
-                    
-
                 },
-                createdRow: (row, data, index) => {
-                },
+            dom: '<"top"f>rt<"bottom"lp><"clear">', // Điều chỉnh phần tìm kiếm
+            createdRow: (row, data, index) => { },
                 layout: {
                     topStart: {
                         buttons: [
@@ -194,7 +192,6 @@
                             }
                         ]
                     }
-                }
             });
     </script>
 
