@@ -3,9 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-@section Heads {
-    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<html lang="vi">
+    @section Heads {
+        <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 }
 <style>
        th{
@@ -16,7 +18,6 @@
 
        }
         body {
-            font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
            
@@ -56,6 +57,21 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSinhVienNamNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiHinhDaoTaoNavigation)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.DaoTaoTuNam)
             </th>
             <th>
@@ -63,6 +79,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NgayNhapHoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTrangThaiHocNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NgayChuyenTrangThai)
@@ -83,10 +102,19 @@
                 @Html.DisplayNameFor(model => model.QuyChuanNguoiHuongDan)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IdNguoiHuongDanChinhNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNguoiHuongDanPhuNavigation)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.SoQuyetDinhCongNhan)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NgayQuyetDinhCongNhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiTotNghiepNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo)
@@ -99,34 +127,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiHinhDaoTaoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiTotNghiepNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNguoiHuongDanChinhNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNguoiHuongDanPhuNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdSinhVienNamNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTrangThaiHocNavigation)
-            </th>
+            </th>          
+            
+            
             <th></th>
         </tr>
     </thead>
@@ -134,13 +137,39 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DaoTaoTuNam)
+                @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdNguoiNavigation.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDoiTuongDauVaoNavigation.DoiTuongDauVao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSinhVienNamNavigation.SinhVienNam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.ChuongTrinhDaoTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiHinhDaoTaoNavigation.LoaiHinhDaoTao)
+            </td>
+            <td>
+
+                    @if (item.DaoTaoTuNam.HasValue)
+                    {
+                        <span> @Html.DisplayFor(modelItem =>item.DaoTaoTuNam)</span>
+                    }
+                    else
+                    {
+                        <p>Chưa nhập ngày</p>
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DaoTaoDenNam)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NgayNhapHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTrangThaiHocNavigation.TrangThaiHoc)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NgayChuyenTrangThai)
@@ -161,10 +190,19 @@
                 @Html.DisplayFor(modelItem => item.QuyChuanNguoiHuongDan)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IdNguoiHuongDanChinhNavigation.IdNguoiNavigation.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNguoiHuongDanPhuNavigation.IdNguoiNavigation.name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SoQuyetDinhCongNhan)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NgayQuyetDinhCongNhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiTotNghiepNavigation.LoaiTotNghiep)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo)
@@ -177,33 +215,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.ChuongTrinhDaoTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDoiTuongDauVaoNavigation.DoiTuongDauVao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdHocVien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiHinhDaoTaoNavigation.LoaiHinhDaoTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiTotNghiepNavigation.LoaiTotNghiep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNguoiHuongDanChinhNavigation.IdNguoiNavigation.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNguoiHuongDanPhuNavigation.IdNguoiNavigation.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdSinhVienNamNavigation.SinhVienNam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTrangThaiHocNavigation.TrangThaiHoc)
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.IdThongTinHocTapNghienCuuSinh" style="background:#28a745; color: white ; padding: 10px 20px ; text-decoration: none ; border-radius: 5px ; font-weight: bold;" class="btn btn-edit">
@@ -257,3 +268,4 @@
         console.log(row.lastElementChild);
     </script>
 }
+</html>
