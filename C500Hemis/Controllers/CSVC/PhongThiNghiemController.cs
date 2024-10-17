@@ -50,8 +50,8 @@ namespace C500Hemis.Controllers.CSVC
         public IActionResult Create()
         {
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat");
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu");
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem");
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu");
+            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "LoaiPhongThiNghiem");
             return View();
         }
 
@@ -69,8 +69,8 @@ namespace C500Hemis.Controllers.CSVC
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThiNghiem.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
+            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "LoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
             return View(tbPhongThiNghiem);
         }
 
@@ -88,8 +88,8 @@ namespace C500Hemis.Controllers.CSVC
                 return NotFound();
             }
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThiNghiem.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
+            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "LoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
             return View(tbPhongThiNghiem);
         }
 

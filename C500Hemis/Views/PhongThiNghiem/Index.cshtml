@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbPhongThiNghiem>
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,87 +9,328 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pO8V9Z1JJ7qK36vq9ZxZH8Z1A+s0H91wlzUMgE7iIXEJ3tX6xYV0zrX1dp0x0ZTHzFgMqP1X2xY5xO3yXKfHlw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" /> *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pO8V9Z1JJ7qK36vq9ZxZH8Z1A+s0H91wlzUMgE7iIXEJ3tX6xYV0zrX1dp0x0ZTHzFgMqP1X2xY5xO3yXKfHlw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Thêm CSS của DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Thêm jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Thêm JS của DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
-        .create-new {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        /* Custom Background */
+        footer{
+            display: none;
+        }
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+            font-family: 'Arial', sans-serif; /* Custom font */
+        }
+
+            /* Đặt chung cho container */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tiêu đề chính */
+    .container h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Nút Tạo Mới */
+    .create-new {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745; /* Màu xanh lá */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .create-new:hover {
+        background-color: #218838;
+    }
+
+    /* Định dạng bảng */
+    #phongThiNghiemTable {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #phongThiNghiemTable thead {
+        background-color: #343a40; /* Màu đen đậm */
+        color: #fff;
+    }
+
+    #phongThiNghiemTable th, 
+    #phongThiNghiemTable td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    #phongThiNghiemTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #phongThiNghiemTable tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Định dạng các liên kết hành động */
+    .action-links a {
+        display: block;
+        padding: 5px 0;
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .action-links a:hover {
+        color: #0056b3;
+    }
+
+    .action-links hr {
+        margin: 5px 0;
+        border: none;
+        border-top: 1px solid #dee2e6;
+    }
+
+    /* Đảm bảo bảng phản hồi trên các thiết bị nhỏ */
+    @@media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        #phongThiNghiemTable thead {
+            display: none;
+        }
+
+        #phongThiNghiemTable, 
+        #phongThiNghiemTable tbody, 
+        #phongThiNghiemTable tr, 
+        #phongThiNghiemTable td {
+            display: block;
+            width: 100%;
+        }
+
+        #phongThiNghiemTable tr {
+            margin-bottom: 15px;
+        }
+
+        #phongThiNghiemTable td {
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+        }
+
+        #phongThiNghiemTable td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 15px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
         }
 
         .action-links a {
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #ffcccc;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 3px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-right: 10px;
         }
+
+        .action-links hr {
+            display: none;
+        }
+
+        /* Định dạng chung cho các nút hành động */
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* Căn chỉnh các nút để chúng nằm ngang trên màn hình lớn và dọc trên màn hình nhỏ */
+    @@media (max-width: 768px) {
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+            /* Định dạng các nút Edit */
+            .btn-edit {
+                padding: 8px 16px;
+                background-color: #007bff;
+                color: #fff;
+                border-radius: 4px;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                font-size: 14px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+                .btn-edit:hover {
+                    background-color: #0056b3;
+                    transform: scale(1.05); /* Phóng to khi hover */
+                }
+
+                .btn-edit:active {
+                    transform: scale(0.95); /* Thu nhỏ khi nhấp */
+                }
+            /* Định dạng các nút Details */
+            .btn-details {
+                padding: 8px 16px;
+                background-color: #17a2b8;
+                color: #fff;
+                border-radius: 4px;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                font-size: 14px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+                .btn-details:hover {
+                    background-color: #117a8b;
+                    transform: scale(1.05);
+                }
+
+                .btn-details:active {
+                    transform: scale(0.95);
+                }
+            /* Định dạng các nút Delete */
+            .btn-delete {
+                padding: 8px 16px;
+                background-color: #dc3545;
+                color: #fff;
+                border-radius: 4px;
+                border: none;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                font-size: 14px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+                .btn-delete:hover {
+                    background-color: #c82333;
+                    transform: scale(1.05);
+                }
+
+                .btn-delete:active {
+                    transform: scale(0.95);
+                }
+            /* Căn chỉnh biểu tượng */
+            .action-buttons i {
+                font-size: 16px;
+            }
+
+            /* Nếu bạn muốn các nút hành động cũng thích ứng tốt với các thiết bị di động, 
+            bạn có thể thêm một số tùy chỉnh trong phần CSS phản hồi (media queries): */
+    @@media (max-width: 768px) {
+    .action-buttons a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
     </style>
 </head>
-<body1>
+<body>
     <div class="container">
         <h1 align="center">Phòng Thí Nghiệm</h1>
         <p>
             <a class="create-new" asp-action="Create">Tạo Mới</a>
         </p>
-        <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MucDoDapUngNhuCauNckh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLinhVucNavigation.IdLinhVucNghienCuu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)
-            </td>
-            <td>
-                            <div class="action-links">
-                <a asp-action="Edit" asp-route-id="@item.IdPhongThiNghiem">Edit</a>
-                <hr>
-                <a asp-action="Details" asp-route-id="@item.IdPhongThiNghiem">Details</a>
-                <hr>
-                <a asp-action="Delete" asp-route-id="@item.IdPhongThiNghiem">Delete</a>
-                <hr>
-                </div>
-            </td>
-        </tr>
-}
-    </tbody>
-    </body1>
-</table>
+        <table id="phongThiNghiemTable" class="table display">
+            <thead>
+                <tr>                   
+                    <th>@Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdLinhVucNavigation)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)</th>
+                    <th>@Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)</th>
+                    <th>@Html.DisplayNameFor(model => model.NamDuaVaoSuDung)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        
+                        <td data-label="Công Trình CSVC">@Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)</td>
+                        <td data-label="Lĩnh Vực Nghiên Cứu">@Html.DisplayFor(modelItem => item.IdLinhVucNavigation.LinhVucNghienCuu)</td>
+                        <td data-label="Loại Phòng Thí Nghiệm">@Html.DisplayFor(modelItem => item.IdLoaiPhongThiNghiemNavigation.LoaiPhongThiNghiem)</td>
+                        <td data-label="Mức Độ Đáp Ứng Nhu Cầu NCKH">@Html.DisplayFor(modelItem => item.MucDoDapUngNhuCauNckh)</td>
+                        <td data-label="Năm Đưa Vào Sử Dụng">@Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)</td>
+                        <td data-label="Ghi chú">
+                            <div class="action-buttons">
+                                <a asp-action="Edit" asp-route-id="@item.IdPhongThiNghiem" class="btn btn-edit" title="Edit">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdPhongThiNghiem" class="btn btn-details" title="Details">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdPhongThiNghiem" class="btn btn-delete" title="Delete">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    
+</body>
 </html>
+
+<script>
+
+    new DataTable('#phongThiNghiemTable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        ordering: true, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn
+        paging: true, // Mặc định là true, set false để tắt chức năng phân trang
+        scrollX: 1300, // Nội dụng của table sẽ hiện thị với with 400px, Nếu quá thì sẽ có thanh scroll
+        scrollY: 527, // Nội dụng của table sẽ hiện thị với hieght 400px, Nếu quá thì sẽ có thanh scroll
+        processing: true,
+        info: true, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng cộng _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
+            }
+        },
+    });
+</script>
