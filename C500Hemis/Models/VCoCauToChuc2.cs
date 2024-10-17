@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace C500Hemis.Models;
 
-public partial class VCoCauToChuc
+public partial class VCoCauToChuc2
 {
     public int id { get; set; }
 

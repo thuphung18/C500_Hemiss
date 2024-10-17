@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using C500Hemis.Models.DM;
 using Microsoft.EntityFrameworkCore;
+using C500Hemis.Models;
 
 namespace C500Hemis.Models;
 
@@ -5508,4 +5509,8 @@ public partial class HemisContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<C500Hemis.Models.VCoCauToChuc2> VCoCauToChuc2 { get; set; } = default!;
+
+//public DbSet<C500Hemis.Models.VKhoaHoc2> VKhoaHoc2 { get; set; } = default!;
 }
