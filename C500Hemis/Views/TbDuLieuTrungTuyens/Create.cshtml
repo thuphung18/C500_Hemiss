@@ -1,134 +1,234 @@
 ﻿@model C500Hemis.Models.TbDuLieuTrungTuyen
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới dữ liệu trúng tuyển";
 }
 
-<h1>Create</h1>
+<h1>Tạo mới dữ liệu trúng tuyển</h1>
 
-<h4>TbDuLieuTrungTuyen</h4>
+<h4>Dữ liệu trúng tuyển</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="IdDuLieuTrungTuyen" class="control-label"></label>
                 <input asp-for="IdDuLieuTrungTuyen" class="form-control" />
                 <span asp-validation-for="IdDuLieuTrungTuyen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Cccd" class="control-label"></label>
                 <input asp-for="Cccd" class="form-control" />
                 <span asp-validation-for="Cccd" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="HoVaTen" class="control-label"></label>
                 <input asp-for="HoVaTen" class="form-control" />
                 <span asp-validation-for="HoVaTen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="MaTuyenSinh" class="control-label"></label>
                 <input asp-for="MaTuyenSinh" class="form-control" />
                 <span asp-validation-for="MaTuyenSinh" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="KhoaDaoTaoTrungTuyen" class="control-label"></label>
                 <input asp-for="KhoaDaoTaoTrungTuyen" class="form-control" />
                 <span asp-validation-for="KhoaDaoTaoTrungTuyen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdDoiTuongDauVao" class="control-label"></label>
-                <select asp-for="IdDoiTuongDauVao" class ="form-control" asp-items="ViewBag.IdDoiTuongDauVao"></select>
+                <select asp-for="IdDoiTuongDauVao" class="form-control" asp-items="ViewBag.IdDoiTuongDauVao"></select>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdDoiTuongUuTien" class="control-label"></label>
-                <select asp-for="IdDoiTuongUuTien" class ="form-control" asp-items="ViewBag.IdDoiTuongUuTien"></select>
+                <select asp-for="IdDoiTuongUuTien" class="form-control" asp-items="ViewBag.IdDoiTuongUuTien"></select>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdHinhThucTuyenSinh" class="control-label"></label>
-                <select asp-for="IdHinhThucTuyenSinh" class ="form-control" asp-items="ViewBag.IdHinhThucTuyenSinh"></select>
+                <select asp-for="IdHinhThucTuyenSinh" class="form-control" asp-items="ViewBag.IdHinhThucTuyenSinh"></select>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdKhuVuc" class="control-label"></label>
-                <select asp-for="IdKhuVuc" class ="form-control" asp-items="ViewBag.IdKhuVuc"></select>
+                <select asp-for="IdKhuVuc" class="form-control" asp-items="ViewBag.IdKhuVuc"></select>
             </div>
+
             <div class="form-group">
                 <label asp-for="TruongThpt" class="control-label"></label>
                 <input asp-for="TruongThpt" class="form-control" />
                 <span asp-validation-for="TruongThpt" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ToHopMonTrungTuyen" class="control-label"></label>
                 <input asp-for="ToHopMonTrungTuyen" class="form-control" />
                 <span asp-validation-for="ToHopMonTrungTuyen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DiemMon1" class="control-label"></label>
-                <input asp-for="DiemMon1" class="form-control" />
+                <input asp-for="DiemMon1" class="form-control" id="diemMon1" />
                 <span asp-validation-for="DiemMon1" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DiemMon2" class="control-label"></label>
-                <input asp-for="DiemMon2" class="form-control" />
+                <input asp-for="DiemMon2" class="form-control" id="diemMon2" />
                 <span asp-validation-for="DiemMon2" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DiemMon3" class="control-label"></label>
-                <input asp-for="DiemMon3" class="form-control" />
+                <input asp-for="DiemMon3" class="form-control" id="diemMon3" />
                 <span asp-validation-for="DiemMon3" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DiemUuTien" class="control-label"></label>
-                <input asp-for="DiemUuTien" class="form-control" />
+                <input asp-for="DiemUuTien" class="form-control" id="diemUuTien" />
                 <span asp-validation-for="DiemUuTien" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="TongDiemXetTuyen" class="control-label"></label>
-                <input asp-for="TongDiemXetTuyen" class="form-control" />
+                <input asp-for="TongDiemXetTuyen" class="form-control" id="tongDiemXetTuyen" readonly />
                 <span asp-validation-for="TongDiemXetTuyen" class="text-danger"></span>
-            </div>
+            </div
+
             <div class="form-group">
                 <label asp-for="SoQuyetDinhTrungTuyen" class="control-label"></label>
                 <input asp-for="SoQuyetDinhTrungTuyen" class="form-control" />
                 <span asp-validation-for="SoQuyetDinhTrungTuyen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="control-label"></label>
                 <input asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="form-control" />
                 <span asp-validation-for="NgayBanHanhQuyetDinhTrungTuyen" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="control-label"></label>
                 <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="form-control" />
                 <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="control-label"></label>
-                <input asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="form-control" />
+                <input asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="form-control"/>
                 <span asp-validation-for="NganhDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="control-label"></label>
                 <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="form-control" />
                 <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="NganhDaTotNghiepTrinhDoThacSi" class="control-label"></label>
                 <input asp-for="NganhDaTotNghiepTrinhDoThacSi" class="form-control" />
                 <span asp-validation-for="NganhDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lưu để tạo mới" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại trang dữ liệu trúng tuyển</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById('dateInput').addEventListener('input', function (e) {
+            var input = e.target.value;
+
+            // Xóa hết các ký tự không phải số để định dạng lại
+            input = input.replace(/\D/g, '');
+
+            // Chèn các dấu "/" khi nhập liệu
+            if (input.length >= 2 && input.length <= 4) {
+                input = input.slice(0, 2) + '/' + input.slice(2);
+            } else if (input.length > 4) {
+                input = input.slice(0, 2) + '/' + input.slice(2, 4) + '/' + input.slice(4, 8);
+            }
+
+            e.target.value = input;
+        });
+
+        document.getElementById('dateInput').addEventListener('keydown', function (e) {
+            var key = e.keyCode || e.charCode;
+            if (key === 8 || key === 46) { // Backspace hoặc Delete
+                var input = e.target.value;
+                if (input.length === 3 || input.length === 6) {
+                    e.target.value = input.slice(0, -1); // Xóa dấu "/" tự động khi người dùng xóa
+                }
+            }
+        });</script>
+        <script>
+    function isValidScore(score) {
+        // Kiểm tra xem điểm có trong khoảng từ 0 đến 10 và có tối đa 2 chữ số thập phân
+        return score >= 0 && score <= 10 && /^\d+(\.\d{1,2})?$/.test(score);
+    }
+
+    function calculateTongDiem() {
+        var diemMon1 = parseFloat(document.getElementById('diemMon1').value) || 0;
+        var diemMon2 = parseFloat(document.getElementById('diemMon2').value) || 0;
+        var diemMon3 = parseFloat(document.getElementById('diemMon3').value) || 0;
+        var diemUuTien = parseFloat(document.getElementById('diemUuTien').value) || 0;
+
+        // Kiểm tra điều kiện cho từng điểm
+        if (!isValidScore(diemMon1)) {
+            alert("Điểm môn 1 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
+            document.getElementById('diemMon1').focus();
+            return;
+        }
+        if (!isValidScore(diemMon2)) {
+            alert("Điểm môn 2 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
+            document.getElementById('diemMon2').focus();
+            return;
+        }
+        if (!isValidScore(diemMon3)) {
+            alert("Điểm môn 3 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
+            document.getElementById('diemMon3').focus();
+            return;
+        }
+        if (!isValidScore(diemUuTien)) {
+            alert("Điểm ưu tiên không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
+            document.getElementById('diemUuTien').focus();
+            return;
+        }
+
+        // Tính tổng điểm
+        var tongDiem = diemMon1 + diemMon2 + diemMon3 + diemUuTien;
+
+        // Hiển thị kết quả vào ô "TongDiemXetTuyen"
+        document.getElementById('tongDiemXetTuyen').value = tongDiem.toFixed(2); // Giới hạn 2 chữ số thập phân
+    }
+
+    // Gán sự kiện "input" cho các trường điểm để tính tổng điểm ngay khi người dùng nhập
+    document.getElementById('diemMon1').addEventListener('input', calculateTongDiem);
+    document.getElementById('diemMon2').addEventListener('input', calculateTongDiem);
+    document.getElementById('diemMon3').addEventListener('input', calculateTongDiem);
+    document.getElementById('diemUuTien').addEventListener('input', calculateTongDiem);
+</script>
+
 }
