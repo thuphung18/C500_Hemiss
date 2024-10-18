@@ -10,186 +10,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <style>
-        footer{
-            display: none;
+        body {
+            font-family: sans-serif;
+            background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
         }
-        /* Sử dụng gradient linear để tạo nền mịn màng và hiện đại. */
-            body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        margin: 0;
-        padding: 0;
-    }
 
-        /* Giới hạn chiều rộng và căn giữa trang.
-        Màu nền trắng với độ trong suốt nhẹ, bo góc và bóng đổ để tạo chiều sâu.
-        Hiệu ứng hover để nâng wrapper lên và tăng bóng đổ khi người dùng di chuột qua. */
-    .wrapper {
-        max-width: 800px;
-        margin: 50px auto;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .wrapper:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .main-function, .row {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #main-text {     /* Định dạng kích thước và màu sắc cho các tiêu đề chính để nổi bật. */
-        font-size: 2em;
-        color: #333;
-    }
-
-    #main-text-2 {
-        font-size: 1.5em;
-        color: #555;
-    }
-
-
-    hr {
-        border: none;
-        height: 2px;
-        background-color: #e0e0e0;
-        margin-bottom: 30px;
-    }
-
-        /* Các nhãn (labels) được định dạng để rõ ràng và dễ đọc.
-        Các trường nhập liệu (inputs) có padding, bo góc, và hiệu ứng focus để cải thiện trải nghiệm người dùng. */
-    .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-    }
-
-    .form-control:focus {
-        border-color: #66afe9;
-        outline: none;
-        box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
-    }
-    .form-button {
-        text-align: center;
-        margin-top: 30px;
-    }
-
-
-        /* Nút bấm có màu nền xanh dương, chữ trắng, padding hợp lý, bo góc và hiệu ứng hover làm tăng kích thước nhẹ. */
-    .button {
-        background-color: #3498db;
-        color: #fff;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .button:hover {
-        background-color: #2980b9;
-        transform: scale(1.05);
-    }
-
-        /* Liên kết trở lại có màu xanh dương, không gạch chân và hiệu ứng hover thay đổi màu sắc */
-    .back a {
-        display: inline-block;
-        margin-top: 20px;
-        color: #3498db;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s ease;
-    }
-
-    .back a:hover {
-        color: #2980b9;
-    }
-
-    /* Responsive Design */
-        /* Đảm bảo trang hiển thị tốt trên các thiết bị nhỏ hơn bằng cách điều chỉnh padding, margin và kích thước chữ.
-        Nút bấm rộng hơn để dễ thao tác trên màn hình nhỏ. */
-    @@media (max-width: 600px) {
         .wrapper {
-            padding: 20px;
-            margin: 20px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            color: black;
+            padding: 30px 40px;
+        }
+
+        .form-group {
+            /* display:table; */
+            padding-bottom: 30px;
+        }
+
+        .form-control {
+            padding: 40px;
+            background: rgba(255,255,255,.2);
+            height: 50px;
+            border: 10px;
+            border-radius: 20px;
+            outline: none;
+            transition: .2s ease;
+        }
+
+        .row {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            color: black;
+            padding: 30px 30px;
+        }
+
+        label {
+            display: flex;
+            font-size: 30px;
+            font-weight: 500;
+            padding-bottom: 20px;
         }
 
         #main-text {
-            font-size: 1.5em;
-        }
-
-        #main-text-2 {
-            font-size: 1.2em;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 45px;
+            font-weight: 600;
         }
 
         .button {
-            width: 100%;
-            padding: 10px;
+            border-radius: 24px;
+            border: none;
+            color: #fff;
+            font-weight: 24px;
+            font-size: 30px;
+            margin: 0 10px;
+            padding: 8px 24px;
+            background-color: #4070f4;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-    }
 
-    /* Định dạng cho form */
-    form {
-        animation: fadeIn 1s ease-in-out;
-    }
+            .button:hover {
+                background-color: #0e4bf1;
+            }
 
-    /* Keyframes cho hiệu ứng fadeIn */
-    @@keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+        .form-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    /* Thêm hiệu ứng khi di chuột vào các trường nhập liệu */
-    .form-control:hover {
-        border-color: #2980b9;
-    }
+        .main-function {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            color: black;
+            margin-bottom: 10px;
+        }
 
-    /* Thêm hiệu ứng cho các thông báo lỗi */
-    .text-danger {
-        color: #e74c3c;
-        font-weight: bold;
-    }
+        .back {
+            text-align: left;
+            font-size: 30px;
+            font-weight: 300;
+        }
 
-
-
-     /* Hiệu ứng underline động cho tiêu đề */
-    .main-function h1#main-text::after,
-    .row h1#main-text-2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: #3498db;
-            margin: 10px auto 0;
-            transition: width 0.5s;
-     }
-
-        .main-function h1#main-text:hover::after,
-        .row h1#main-text-2:hover::after {
-            width: 100px;
+        #main-text-2 {
+            text-align: center;
+            font-size: 70px;
+            font-weight: 600;
         }
     </style>
 </head>
