@@ -50,10 +50,10 @@ namespace C500Hemis.Controllers.KHCN
         // GET: BaiBaoKhdaCongBo/Create
         public IActionResult Create()
         {
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn");
-            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "IdTapChiKhoaHocQuocTe");
-            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "IdTapChiTrongNuoc");
-            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "IdXepHangQ");
+            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "TenNhiemVu");
+            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "TapChiKhoaHocQuocTe");
+            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "TapChiTrongNuoc");
+            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "XepHangQ");
             return View();
         }
 
@@ -64,16 +64,19 @@ namespace C500Hemis.Controllers.KHCN
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdBaiBaoKhdaCongBo,IdNhiemVuKhcn,MaBaiBaoKh,TenBaiBaoKh,TenTapChi,IdTapChiTrongNuoc,IdTapChiQuocTe,IdXepHangQ,GhiChuDuongDanBaiBao,TapSo,Trang,NamCongBo")] TbBaiBaoKhdaCongBo tbBaiBaoKhdaCongBo)
         {
+            
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(tbBaiBaoKhdaCongBo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
-            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "IdTapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
-            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "IdTapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
-            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "IdXepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
+            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "TenNhiemVu", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
+            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "TapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
+            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "TapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
+            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "XepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
             return View(tbBaiBaoKhdaCongBo);
         }
 
@@ -90,10 +93,10 @@ namespace C500Hemis.Controllers.KHCN
             {
                 return NotFound();
             }
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
-            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "IdTapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
-            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "IdTapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
-            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "IdXepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
+            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "TenNhiemVu", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
+            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "TapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
+            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "TapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
+            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "XepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
             return View(tbBaiBaoKhdaCongBo);
         }
 
@@ -129,10 +132,10 @@ namespace C500Hemis.Controllers.KHCN
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
-            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "IdTapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
-            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "IdTapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
-            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "IdXepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
+            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "TenNhiemVu", tbBaiBaoKhdaCongBo.IdNhiemVuKhcn);
+            ViewData["IdTapChiQuocTe"] = new SelectList(_context.DmTapChiKhoaHocQuocTes, "IdTapChiKhoaHocQuocTe", "TapChiKhoaHocQuocTe", tbBaiBaoKhdaCongBo.IdTapChiQuocTe);
+            ViewData["IdTapChiTrongNuoc"] = new SelectList(_context.DmTapChiTrongNuocs, "IdTapChiTrongNuoc", "TapChiTrongNuoc", tbBaiBaoKhdaCongBo.IdTapChiTrongNuoc);
+            ViewData["IdXepHangQ"] = new SelectList(_context.DmXepHangQs, "IdXepHangQ", "XepHangQ", tbBaiBaoKhdaCongBo.IdXepHangQ);
             return View(tbBaiBaoKhdaCongBo);
         }
 
@@ -177,5 +180,11 @@ namespace C500Hemis.Controllers.KHCN
         {
             return _context.TbBaiBaoKhdaCongBos.Any(e => e.IdBaiBaoKhdaCongBo == id);
         }
+        private bool checkexist(string check)
+        {
+            return _context.TbBaiBaoKhdaCongBos.Any(e => e.MaBaiBaoKh == check);
+            
+        }
+
     }
 }
