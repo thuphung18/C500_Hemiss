@@ -8,6 +8,7 @@ namespace C500Hemis.Models;
 
 public partial class TbBaiBaoKhdaCongBo
 {
+    /*Đặt tên cột*/
     [DisplayName(displayName:"ID Bài Báo KH Đã Công Bố")]
     public int IdBaiBaoKhdaCongBo { get; set; }
     [DisplayName(displayName: "Tên Nhiệm Vụ KHCN")]

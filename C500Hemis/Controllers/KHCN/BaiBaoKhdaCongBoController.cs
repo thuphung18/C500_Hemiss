@@ -60,7 +60,7 @@ namespace C500Hemis.Controllers.KHCN
         // POST: BaiBaoKhdaCongBo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost]//HTTP
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdBaiBaoKhdaCongBo,IdNhiemVuKhcn,MaBaiBaoKh,TenBaiBaoKh,TenTapChi,IdTapChiTrongNuoc,IdTapChiQuocTe,IdXepHangQ,GhiChuDuongDanBaiBao,TapSo,Trang,NamCongBo")] TbBaiBaoKhdaCongBo tbBaiBaoKhdaCongBo)
         {
