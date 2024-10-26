@@ -47,7 +47,7 @@ namespace C500Hemis.Controllers.CTDT
         // GET: GiaHanChuongTrinhDaoTao/Create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace C500Hemis.Controllers.CTDT
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 
@@ -81,7 +81,7 @@ namespace C500Hemis.Controllers.CTDT
             {
                 return NotFound();
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 
@@ -117,7 +117,7 @@ namespace C500Hemis.Controllers.CTDT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 

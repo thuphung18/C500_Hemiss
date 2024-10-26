@@ -4,46 +4,61 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center text-primary">Chỉnh Sửa Thông Tin</h1>
 
-<h4>TbGiaHanChuongTrinhDaoTao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdGiaHanChuongTrinhDaoTao" />
-            <div class="form-group">
-                <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
-                <select asp-for="IdChuongTrinhDaoTao" class="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
-                <span asp-validation-for="IdChuongTrinhDaoTao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoQuyetDinhGiaHan" class="control-label"></label>
-                <input asp-for="SoQuyetDinhGiaHan" class="form-control" />
-                <span asp-validation-for="SoQuyetDinhGiaHan" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayBanHanhVanBanGiaHan" class="control-label"></label>
-                <input asp-for="NgayBanHanhVanBanGiaHan" class="form-control" />
-                <span asp-validation-for="NgayBanHanhVanBanGiaHan" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GiaHanLanThu" class="control-label"></label>
-                <input asp-for="GiaHanLanThu" class="form-control" />
-                <span asp-validation-for="GiaHanLanThu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container mt-4">
+    <h4 class="text-center text-secondary">Thông tin chương trình đào tạo</h4>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Edit" class="border p-4 rounded shadow bg-light">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdGiaHanChuongTrinhDaoTao" />
+
+                <div class="form-group">
+                    <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
+                    <select asp-for="IdChuongTrinhDaoTao" class="form-control">
+                        <option value="">Chọn Chương Trình</option>
+                        @* Các tùy chọn sẽ được thêm từ ViewBag *@
+                        @foreach (var item in ViewBag.IdChuongTrinhDaoTao)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdChuongTrinhDaoTao" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SoQuyetDinhGiaHan" class="control-label"></label>
+                    <input asp-for="SoQuyetDinhGiaHan" class="form-control" />
+                    <span asp-validation-for="SoQuyetDinhGiaHan" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NgayBanHanhVanBanGiaHan" class="control-label"></label>
+                    <input asp-for="NgayBanHanhVanBanGiaHan" class="form-control" type="date" />
+                    <span asp-validation-for="NgayBanHanhVanBanGiaHan" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GiaHanLanThu" class="control-label"></label>
+                    <input asp-for="GiaHanLanThu" class="form-control" />
+                    <span asp-validation-for="GiaHanLanThu" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mt-3">
+                    <input type="submit" value="Lưu" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

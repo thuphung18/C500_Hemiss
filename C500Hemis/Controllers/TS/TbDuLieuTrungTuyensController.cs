@@ -7,6 +7,8 @@ namespace C500Hemis.Controllers.TS
 {
     public class TbDuLieuTrungTuyensController : Controller
     {
+        
+
         private readonly HemisContext _context;
 
         public TbDuLieuTrungTuyensController(HemisContext context)
@@ -35,6 +37,8 @@ namespace C500Hemis.Controllers.TS
                 .Include(t => t.IdHinhThucTuyenSinhNavigation)
                 .Include(t => t.IdKhuVucNavigation)
                 .FirstOrDefaultAsync(m => m.IdDuLieuTrungTuyen == id);
+            
+
             if (tbDuLieuTrungTuyen == null)
             {
                 return NotFound();
@@ -46,32 +50,42 @@ namespace C500Hemis.Controllers.TS
         // GET: TbDuLieuTrungTuyens/Create
         public IActionResult Create()
         {
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao");
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien");
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh");
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc");
+            // Dùng Dm có sẵn của IdDoiTuongDauVao để lấy dữ liệu sau đó dùng id truy xuất dữ liệu hiển thị ra bảng chọn
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao");
+            // DmDoiTuongUuTiens
+            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien");
+            // DmHinhThucTuyenSinh
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh");
+            // DmKhuVuc
+            ViewData["IdKhuvuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc");
             return View();
         }
-
         // POST: TbDuLieuTrungTuyens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
             if (ModelState.IsValid)
             {
+                // Tính tổng điểm xét tuyển
+                tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+
                 _context.Add(tbDuLieuTrungTuyen);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+
+            // Sử dụng Dm có sẵn của đối tượng đầu vào
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+            //
+            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+            //
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+            //
+            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
             return View(tbDuLieuTrungTuyen);
         }
+
 
         // GET: TbDuLieuTrungTuyens/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -86,22 +100,27 @@ namespace C500Hemis.Controllers.TS
             {
                 return NotFound();
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+
+            // Dùng Dm có sẵn của IdDoiTuongDauVao để lấy dữ liệu sau đó dùng id truy xuất dữ liệu hiển thị ra bảng chọn
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao");
+            // DmDoiTuongUuTiens
+            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien");
+            // DmHinhThucTuyenSinh
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh");
+            // DmKhuVuc
+            ViewData["IdKhuvuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc");
             return View(tbDuLieuTrungTuyen);
         }
 
-        // POST: TbDuLieuTrungTuyens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            // POST: TbDuLieuTrungTuyens/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
             if (id != tbDuLieuTrungTuyen.IdDuLieuTrungTuyen)
             {
+                Console.WriteLine(id);
+                Console.WriteLine(tbDuLieuTrungTuyen.IdDuLieuTrungTuyen + " dwadadwa\n\n\n");
                 return NotFound();
             }
 
@@ -109,6 +128,9 @@ namespace C500Hemis.Controllers.TS
             {
                 try
                 {
+                    // Tính tổng điểm xét tuyển
+                    tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+
                     _context.Update(tbDuLieuTrungTuyen);
                     await _context.SaveChangesAsync();
                 }
@@ -125,10 +147,15 @@ namespace C500Hemis.Controllers.TS
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "IdDoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "IdDoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "IdHinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "IdKhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+
+            // Sử dụng Dm có sẵn của đối tượng đầu vào
+            ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+            //
+            ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+            //
+            ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+            //
+            ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
             return View(tbDuLieuTrungTuyen);
         }
 

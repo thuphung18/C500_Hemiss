@@ -7,10 +7,10 @@ namespace C500Hemis.Models;
 
 public partial class TbThongTinHocTapNghienCuuSinh
 {
-    [Display(Name = "Thông tin học tập nghiên cứu sinh")]
+    [Display(Name = "ID Thông tin học tập nghiên cứu sinh")]
     public int IdThongTinHocTapNghienCuuSinh { get; set; }
 
-    [Display(Name = "ID học viên")]
+    [Display(Name = "Tên học viên")]
     public int? IdHocVien { get; set; }
 
     [Display(Name = "Đối tượng đầu vào")]
@@ -25,12 +25,12 @@ public partial class TbThongTinHocTapNghienCuuSinh
     [Display(Name = "Loại hình đào tạo")]
     public int? IdLoaiHinhDaoTao { get; set; }
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    [DisplayFormat(DataFormatString = "{0:yyyy}")]
 
     [Display(Name = "Đào tạo từ năm")]
     public DateOnly? DaoTaoTuNam { get; set; }
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+    [DisplayFormat(DataFormatString = "{0:yyyy}")]
 
     [Display(Name = "Đào tạo đến năm")]
     public DateOnly? DaoTaoDenNam { get; set; }
@@ -100,13 +100,13 @@ public partial class TbThongTinHocTapNghienCuuSinh
     [Display(Name = "Ngày quyết định thành lập hội đồng báo về cấp trường")]
     public DateOnly? NgayQuyetDinhThanhLapHoiDongBaoVeCapTruong { get; set; }
 
-    [Display(Name = "ID Chương trình đào tạo")]
+    [Display(Name = "Chương trình đào tạo")]
     public virtual DmChuongTrinhDaoTao? IdChuongTrinhDaoTaoNavigation { get; set; }
 
-    [Display(Name = "ID Đối tượng đầu vào")]
+    [Display(Name = "Đối tượng đầu vào")]
     public virtual DmDoiTuongDauVao? IdDoiTuongDauVaoNavigation { get; set; }
 
-    [Display(Name = "ID Học viên")]
+    [Display(Name = "Tên học viên")]
     public virtual TbHocVien? IdHocVienNavigation { get; set; }
 
     [Display(Name = "Loại Hình đào tạo")]
@@ -115,15 +115,15 @@ public partial class TbThongTinHocTapNghienCuuSinh
     [Display(Name = "Loại tốt nghiệp")]
     public virtual DmLoaiTotNghiep? IdLoaiTotNghiepNavigation { get; set; }
 
-    [Display(Name = "ID Người hướng dẫn chính")]
+    [Display(Name = "Người hướng dẫn chính")]
     public virtual TbCanBo? IdNguoiHuongDanChinhNavigation { get; set; }
 
-    [Display(Name = "ID Người hướng dẫn phụ")]
+    [Display(Name = "Người hướng dẫn phụ")]
     public virtual TbCanBo? IdNguoiHuongDanPhuNavigation { get; set; }
 
-    [Display(Name = "ID Sinh viên năm")]
+    [Display(Name = "Sinh viên năm")]
     public virtual DmSinhVienNam? IdSinhVienNamNavigation { get; set; }
 
-    [Display(Name = "ID Trạng thái học viên")]
+    [Display(Name = "Trạng thái học viên")]
     public virtual DmTrangThaiHoc? IdTrangThaiHocNavigation { get; set; }
 }

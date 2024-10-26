@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using C500Hemis.Models.DM;
 using Microsoft.EntityFrameworkCore;
+using C500Hemis.Models;
 
 namespace C500Hemis.Models;
 
@@ -3111,7 +3112,7 @@ public partial class HemisContext : DbContext
 
             entity.Property(e => e.IdHoatDongTaiChinh).ValueGeneratedNever();
             entity.Property(e => e.NamTaiChinh).HasColumnType("text");
-            entity.Property(e => e.NoiDung).HasColumnType("text");
+            entity.Property(e => e.NoiDung).HasColumnType("ntext");
 
             entity.HasOne(d => d.IdLoaiHoatDongTaiChinhNavigation).WithMany(p => p.TbHoatDongTaiChinhs)
                 .HasForeignKey(d => d.IdLoaiHoatDongTaiChinh)
@@ -4043,12 +4044,12 @@ public partial class HemisContext : DbContext
             entity.ToTable("tbThongTinHocTapNghienCuuSinh", "NH");
 
             entity.Property(e => e.IdThongTinHocTapNghienCuuSinh).ValueGeneratedNever();
-            entity.Property(e => e.QuyChuanNguoiHuongDan).HasColumnType("text");
+            entity.Property(e => e.QuyChuanNguoiHuongDan).HasColumnType("ntext");
             entity.Property(e => e.SoQuyetDinhCongNhan).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThanhLapHoiDongBaoVeCapCoSo).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThanhLapHoiDongBaoVeCapTruong).HasMaxLength(50);
             entity.Property(e => e.SoQuyetDinhThoiHoc).HasMaxLength(50);
-            entity.Property(e => e.TenLuanVan).HasColumnType("text");
+            entity.Property(e => e.TenLuanVan).HasColumnType("ntext");
 
             entity.HasOne(d => d.IdChuongTrinhDaoTaoNavigation).WithMany(p => p.TbThongTinHocTapNghienCuuSinhs)
                 .HasForeignKey(d => d.IdChuongTrinhDaoTao)
@@ -5508,4 +5509,8 @@ public partial class HemisContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<C500Hemis.Models.VCoCauToChuc2> VCoCauToChuc2 { get; set; } = default!;
+
+//public DbSet<C500Hemis.Models.VKhoaHoc2> VKhoaHoc2 { get; set; } = default!;
 }
