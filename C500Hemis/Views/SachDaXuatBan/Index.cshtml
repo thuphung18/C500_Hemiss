@@ -1,89 +1,506 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbSachDaXuatBan>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANH SÁCH</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.google.com/share?selection.family=Cormorant+Unicase:wght@300;400;500;600;700"
+    <style>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaSach)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenSach)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaChuanIsbn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoTrang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nxb)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamXuatBan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamViet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdDangTaiLieuNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiSachTapChiNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaChuanIsbn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoTrang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nxb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamXuatBan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamViet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdDangTaiLieuNavigation.IdDangTaiLieu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiSachTapChiNavigation.IdLoaiSachTapChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdSachDaXuatBan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdSachDaXuatBan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdSachDaXuatBan">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <style >
+        body {
+            background: linear-gradient(to bottom,darkolivegreen,#c6ebd5,white ); /* Màu nền toàn trang xanh lá nhạt */
+            font-family: Itim;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: darkolivegreen;
+            font-family: Itim;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 1), /* Độ sáng tối thiểu */
+            0 0 10px rgba(255, 255, 255, 1), /* Độ sáng mạnh hơn */
+            0 0 15px rgba(255, 255, 255, 0.8), /* Độ sáng giảm dần */
+            0 0 20px rgba(255, 255, 255, 0.6), /* Độ sáng giảm hơn nữa */
+            0 0 30px rgba(255, 255, 255, 0.4); /* Viền sáng nhẹ */
+        }
+        /* Đặt toàn bộ nội dung trong một "box" */
+        .content-box {
+            background-color: #c6ebd5; /* Màu nền trắng cho box */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            max-width: 1200px;
+            margin: 40px auto;
+            border: darkolivegreen solid 2px; /* Viền màu xanh lá nhạt */
+        }
+
+        .table {
+            border-collapse: separate; /* Ngăn cách các cell để áp dụng border-radius */
+            border-spacing: 0 15px; /* Khoảng cách giữa các hàng */
+            border-radius: 15px; /* Độ cong của viền bảng */
+            overflow: hidden; /* Ẩn các phần thừa để không bị lòi ra ngoài viền tròn */
+            border: darkolivegreen solid 1px;
+        }
+
+            .table th {
+                background-color: darkolivegreen;
+                color: floralwhite;
+                font-weight: bold;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .table td {
+                background-color: white;
+                vertical-align: middle;
+                padding: 15px;
+                text-align: center;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .table tbody tr:hover td {
+                background-color: #c6ebd5;
+            }
+
+            .table th:nth-child(2),
+            .table td:nth-child(2) {
+                width: 150px;
+            }
+
+            .table th:nth-child(4),
+            .table td:nth-child(4) {
+                width: 200px;
+            }
+
+        .btn-column::before {
+            transition: transform 0.2s ease;
+            margin-right: 5px;
+            border-radius: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007bff; /* Màu nền ban đầu */
+            color: white; /* Màu chữ */
+            padding: 10px 20px;
+            border: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        a {
+            color: white;
+            underline: none;
+        }
+
+        .btn1:hover {
+            background-color: red; /* Màu nền đổi sang đỏ khi di chuột */
+            box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white; /* Đổ bóng tạo hiệu ứng sáng nhấp nháy */
+        }
+
+        /* Hiệu ứng khi nhấn nút */
+        .btn1:active {
+            background-color: darkred; /* Màu nền đổi sang đỏ đậm khi nhấn */
+            box-shadow: 0 0 30px darkred, 0 0 40px darkred, 0 0 50px darkred; /* Đổ bóng mạnh hơn khi nhấn */
+        }
+
+        .btn2:hover {
+            background-color: red; /* Màu nền đổi sang đỏ khi di chuột */
+            box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white; /* Đổ bóng tạo hiệu ứng sáng nhấp nháy */
+        }
+
+        /* Hiệu ứng khi nhấn nút */
+        .btn2:active {
+            background-color: darkred; /* Màu nền đổi sang đỏ đậm khi nhấn */
+            box-shadow: 0 0 30px darkred, 0 0 40px darkred, 0 0 50px darkred; /* Đổ bóng mạnh hơn khi nhấn */
+        }
+
+        .btn3:hover {
+            background-color: red; /* Màu nền đổi sang đỏ khi di chuột */
+            box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white; /* Đổ bóng tạo hiệu ứng sáng nhấp nháy */
+        }
+
+        /* Hiệu ứng khi nhấn nút */
+        .btn3:active {
+            background-color: darkred; /* Màu nền đổi sang đỏ đậm khi nhấn */
+            box-shadow: 0 0 30px darkred, 0 0 40px darkred, 0 0 50px darkred; /* Đổ bóng mạnh hơn khi nhấn */
+        }
+
+        .btn-column {
+            width: 15%;
+        }
+
+        .btn1 {
+            background-color: orange;
+            padding: 5px;
+            font-size: 15px;
+            border-radius: 40%;
+        }
+
+        .btn2 {
+            background-color: blue;
+            padding: 5px;
+            color: white;
+            font-size: 15px;
+            border-radius: 40%;
+        }
+
+        .btn3 {
+            background-color: red;
+            padding: 5px;
+            color: white;
+            font-size: 15px;
+            border-radius: 40%;
+        }
+
+        .btn1 {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            /* Nội dung ẩn cho đến khi di chuột */
+            .btn1::after {
+                content: "chỉnh sửa"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn1:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .btn2 {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            /* Nội dung ẩn cho đến khi di chuột */
+            .btn2::after {
+                content: "chi tiết"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn2:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .btn3 {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            /* Nội dung ẩn cho đến khi di chuột */
+            .btn3::after {
+                content: "xóa"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn3:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .d-flex {
+            display: flex;
+            justify-content: flex-end; /* Đẩy thanh tìm kiếm sang bên phải */
+            align-items: center; /* Canh giữa theo chiều dọc */
+            margin-bottom: 20px;
+            /* transform: translateY(45px);*/
+        }
+
+            .d-flex input {
+                margin-right: 10px;
+            }
+
+        .btn-find {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            .btn-find::after {
+                content: "Tìm"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn-find:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .btn-create {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            .btn-create::after {
+                content: "Thêm mới"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn-create:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .btn-sort {
+            position: relative;
+            display: inline-block; /* Cho phép chèn ::after phía sau phần tử */
+            padding: 10px;
+            cursor: pointer; /* Thêm con trỏ chỉ tay khi hover */
+        }
+
+            .btn-sort::after {
+                content: "Sắp xếp"; /* Dòng chữ xuất hiện khi hover */
+                position: absolute;
+                bottom: 120%; /* Vị trí của chữ so với phần tử gốc */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: darkolivegreen;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                white-space: nowrap;
+                opacity: 0; /* Ẩn nội dung ban đầu */
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mượt khi xuất hiện */
+            }
+
+            /* Khi hover, hiển thị chữ */
+            .btn-sort:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .content-box .count {
+            color: darkolivegreen;
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <h1 class="text-center mb-4">Sách đã xuất bản</h1>
+        <h4 class="count">(Tổng số sách: @Model.Count())</h4><!--đếm số sách tổng-->
+        <form class="d-flex" method="get">
+            <input placeholder="tên sách cần tìm" type="text" name="TS" value="@ViewBag.TenSach" style="margin-right: 10px;" />
+            <button class="btn btn-find" style="margin-right: 10px;" class="btn-find">
+                <span class="bi-search"></span>
+            </button>
+            <a asp-action="Create" class="btn btn-create" style="margin-right: 10px;" class="btn-create">
+                <i class="bi bi-file-earmark-plus-fill"></i>
+            </a>
+            </a>
+            <button class="btn btn-sort" type="submit" name="SapXep" value="SapXep" class="btn-sort">
+                <i class="bi bi-sort-numeric-down"></i>
+            </button>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>
+                        Mã sách
+                    </th>
+                    <th>
+                        Tên sách
+                    </th>
+                    <th>
+                        Mã chuẩn ISBN
+                    </th>
+                    <th>
+                        Số trang
+                    </th>
+                    <th>
+                        Nhà xuất bản
+                    </th>
+                    <th>
+                        Năm xuất bản
+                    </th>
+                    <th>
+                        Năm viết
+                    </th>
+                    <th>
+                        Dạng tài liệu
+                    </th>
+                    <th>
+                        Loại sách / tạp chí
+                    </th>
+                    <th>
+                        Nhiệm vụ KHCN
+                    </th>
+                    <th class="btn-column">Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    int stt = 1;
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>
+                                @item.MaSach
+                            </td>
+                            <td>
+                                @item.TenSach
+                            </td>
+                            <td>
+                                @item.MaChuanIsbn
+                            </td>
+                            <td>
+                                @item.SoTrang
+                            </td>
+                            <td>
+                                @item.Nxb
+                            </td>
+                            <td>
+                                @item.NamXuatBan
+                            </td>
+                            <td>
+                                @item.NamViet
+                            </td>
+                            <td>
+                                @item.IdDangTaiLieuNavigation.DangTaiLieu
+                            </td>
+                            <td>
+                                @item.IdLoaiSachTapChiNavigation.LoaiSachTapChi
+                            </td>
+                            <td>
+                                @item.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn
+                            </td>
+                            <td class="btn-column">
+                                <a asp-action="Edit" asp-route-id="@item.IdSachDaXuatBan" class="btn1"><i class='bx bxs-edit'></i></a>
+                                <a asp-action="Details" asp-route-id="@item.IdSachDaXuatBan" class="btn2"><i class='bx bxs-user-detail'></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.IdSachDaXuatBan" class="btn3"><i class='bx bxs-message-alt-x'></i></a>
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" class="text-center">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "paging": true,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ mục mỗi trang",
+                    "zeroRecords": "Không tìm thấy dữ liệu",
+                    "info": "Trang _PAGE_ trong _PAGES_",
+                    "infoEmpty": "Không có dữ liệu",
+                    "infoFiltered": "(lọc từ _MAX_ tổng số mục)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

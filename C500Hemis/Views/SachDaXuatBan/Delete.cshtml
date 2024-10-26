@@ -2,80 +2,337 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = null;
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbSachDaXuatBan</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaSach)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaSach)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenSach)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenSach)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaChuanIsbn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaChuanIsbn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoTrang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoTrang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nxb)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nxb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamXuatBan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamXuatBan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamViet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamViet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDangTaiLieuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDangTaiLieuNavigation.IdDangTaiLieu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiSachTapChiNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiSachTapChiNavigation.IdLoaiSachTapChi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdSachDaXuatBan" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+    <!--
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEAEELNUeFwZZLqQWHeSokfJ/4m2Or" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEAEELNUeFwZZLqQWHeSokfJ/4m2Or" crossorigin="anonymous">
+    -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-dy+Dvhgi7KkKbP4qxFqDncdchCRO1GfBPOIQFxDb/WIOVQ5SWEphI8MNsxF9auhgGChlpS+nfsP24i7IbxNwOQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border box;
+        font-family: "Itim"; /* nền và font chữ border*/
+    }
+
+    body { /* css màu nèn và màu chữ body*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #a7dca5;
+        color: black;
+    }
+
+    .content-box { /* css box*/
+        position: relative;
+        width: 1200px;
+        height: 680px;
+        border: 2px solid white;
+        box-shadow: 0 0 25px white;
+        overflow: hidden;
+        background: #effdee;
+    }
+
+    .card-header {
+        height: 160px;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center;
+    }
+
+    h1 {
+        position: absolute;
+        top: 12%;
+        left: 30%;
+        transform: translate(-50%, -50%); /* Dịch chuyển để căn giữa */
+        color: green;
+    }
+
+    .content-box .details {
+        position: absolute;
+        top: 0;
+        width: 70%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: green;
+        transform: translateX(100px) translateY(50px);
+    }
+
+    .image-box {
+        background-color: #34be76;
+        box-shadow: 0 0 25px gray;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        height: 85%;
+        width: 32%;
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        color: white;
+        text-indent: 0; /* Loại bỏ lề thụt vào của đoạn văn */
+        margin: 0;
+        transform: translateX(720px) translateY(50px);
+    }
+
+    .btn-delete {
+        background-color: green; /* Màu nền */
+        color: white; /* Màu chữ */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-delete i {
+            margin-right: 5px;
+        }
+
+        .btn-delete:hover {
+            background-color: red; /* Màu khi di chuột */
+            transform: scale(1.05); /* Hiệu ứng phóng to khi di chuột */
+        }
+
+    /* CSS cho nút "Cancel" */
+    .btn-cancel {
+        background-color: blue; /* Màu nền đỏ cho Cancel */
+        color: white; /* Màu chữ */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-left: 15px;
+    }
+
+        .btn-cancel i {
+            margin-right: 5px;
+        }
+
+        .btn-cancel:hover {
+            background-color: blue; /* Màu khi di chuột */
+            transform: scale(1.05); /* Hiệu ứng phóng to khi di chuột */
+        }
+
+    /* Đặt 2 nút cùng hàng */
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    /* CSS cho link Cancel nếu không sử dụng button */
+    a.btn-cancel {
+        text-decoration: none;
+        color: white;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: blue;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        a.btn-cancel:hover {
+            background-color: blue;
+            transform: scale(1.05);
+        }
+
+    .img img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px;
+        justify-content: center;
+        transform: translateY(10px);
+        border: 2px solid white;
+        box-shadow: 0 0 25px white;
+        overflow: hidden;
+    }
+
+    .img {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .book-in4 hr {
+        width: 70%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 25px white;
+    }
+
+    .card-header hr {
+        width: 70%;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 25px white;
+    }
+
+    .book-in4 h2 {
+        margin-top: 2px;
+        margin-bottom: 10px;
+    }
+
+    .book-in4 {
+        margin: 0; /* Loại bỏ khoảng cách lề */
+        text-align: center;
+        padding: 10px;
+    }
+
+    .main-details {
+        border: 1px solid darkgreen; /* Đường viền màu trắng */
+        width: 50%;
+        padding: 10px 15px; /* Khoảng cách padding đã được cân đối hơn */
+        border-radius: 15px; /* Bo tròn góc bằng pixel thay vì phần trăm */
+        transform: translateX(40px);
+        line-height: 1; /* Đảm bảo khoảng cách dòng để viền không che mất nội dung */
+        display: inline-block; /* Đảm bảo đường viền liền với dòng */
+        background-color: whitesmoke;
+        z-index: 25%;
+    }
+
+    .main-details2 {
+        border: 1px solid whitesmoke;
+        width: 80%;
+        padding: 10px 15px;
+        border-radius: 15px;
+        line-height: 1;
+        display: inline-block;
+        background-color: whitesmoke;
+        color: darkgreen;
+        text-align: center; /* Đảm bảo căn giữa nội dung */
+        margin: 5px auto; /* Đảm bảo nằm giữa và không có khoảng cách ngoài */
+    }
+
+    .head-details2 {
+        text-align: left;
+        margin-left: 8%;
+    }
+</style>
+<body>
+
+    <div class="content-box">
+        <div class="card-header">
+            <h1><i class='bx bx-question-mark'></i> Bạn muốn xóa thông tin sách đã xuất bản?</h1>
+            <hr>
+        </div>
+        <div class="details">
+            <dl class="row">
+                <dt class="head-details">
+                    <h3><b>1. Tên sách:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.TenSach)
+                </dd>
+                <dt class="head-details">
+                    <h3><b>2. Mã sách:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.MaSach)
+                </dd>
+
+                <dt class="head-details">
+                    <h3><b>3. Mã chuẩn ISBN:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.MaChuanIsbn)
+                </dd>
+                <dt class="head-details">
+                    <h3><b>4. Số trang:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.SoTrang)
+                </dd>
+                <dt class="head-details">
+                    <h3><b>5. Nhà xuất bản:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.Nxb)
+                </dd>
+
+
+                <dt class="head-details">
+                    <h3><b>6. Dạng tài liệu:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.IdDangTaiLieuNavigation.DangTaiLieu)
+                </dd>
+
+                <dt class="head-details">
+                    <h3><b>7. ID Nhiệm vụ Khoa học công nghệ:</b></h3>
+                </dt>
+                <dd class="main-details">
+                    @Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
+                </dd>
+            </dl>
+            <div class="form-group">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="IdSachDaXuatBan" />
+                    <button type="submit" value="Delete" class="btn-delete"><i class='bx bxs-message-alt-x'></i>Xóa thông tin</button>
+
+                </form>
+                <a asp-action="Index" class="btn-cancel">
+                    <i class='bx bx-minus-back'></i>Cancel
+                </a>
+            </div>
+        </div>
+        <div class="image-box">
+
+            <div class="img">
+
+                <img src="@Url.Content("https://photo.znews.vn/w660/Uploaded/natmts/2023_02_03/z4080571344877_dcc05eb033d9e910039ad77df6eb1b05.jpg")" alt="Sample Image" />
+
+            </div>
+            <div class="book-in4">
+                <h2>@Html.DisplayFor(model => model.TenSach)</h2>
+                <hr>
+                <p>
+                    <h3 class="head-details2"><b>Loại sách / tạp chí:</b></h3>
+                <p class="main-details2">@Html.DisplayFor(model => model.IdLoaiSachTapChiNavigation.LoaiSachTapChi)</p>
+                </p>
+                <p>
+                    <h3 class="head-details2"><b>Năm viết:</b></h3>
+                <p class="main-details2">@Html.DisplayFor(model => model.NamViet)</p>
+                </p>
+                <p>
+                    <h3 class="head-details2"><b>Năm xuất bản:</b></h3>
+                <p class="main-details2">@Html.DisplayFor(model => model.NamXuatBan)</p>
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
