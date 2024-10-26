@@ -80,7 +80,7 @@ public partial class TbChuyenGiaoCongNgheVaDaoTao
     public string? TenDuAn { get; set; }
 
     [Display(Name = "Giá trị Hợp Đồng")]
-    [Range(1, int.MaxValue, ErrorMessage = "Giá trị phải là một số nguyên dương.")]
+   // [Range(1, int.MaxValue, ErrorMessage = "Giá trị phải là một số nguyên dương.")]
     [RegularExpression(@"^[0-9]*$", ErrorMessage = "Chỉ được chứa ký tự số.")]
     public int? GiaTriHopDong { get; set; }
 
