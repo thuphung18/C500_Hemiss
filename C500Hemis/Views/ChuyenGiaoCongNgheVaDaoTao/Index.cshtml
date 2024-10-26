@@ -4,134 +4,537 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaSoHopDong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ten)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TongChiPhiThucHien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TongThoiGianThucHien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuongThucChuyenGiaoCongNghe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChuSoHuu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonViChuTri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonViPhoiHop)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonViNhanChuyenGiao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TomTat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenDuAn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaTriHopDong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoNguoiDuocDaoTaoChuyenGiaoCn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHinhThucChuyenGiaoCongNgheNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNganhKinhTeNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTrangThaiHopDongNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSoHopDong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TongChiPhiThucHien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TongThoiGianThucHien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuongThucChuyenGiaoCongNghe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChuSoHuu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonViChuTri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonViPhoiHop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonViNhanChuyenGiao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TomTat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenDuAn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GiaTriHopDong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoNguoiDuocDaoTaoChuyenGiaoCn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHinhThucChuyenGiaoCongNgheNavigation.IdHinhThucChuyenGiaoCongNghe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNganhKinhTeNavigation.IdNganhKinhTe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao">Delete</a>
-            </td>
-        </tr>
+@{
+    Layout = null;
 }
-    </tbody>
-</table>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANH SÁCH</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=emboss|shadow-multiple">
+    <style>
+
+        body {
+            position: relative; /* Đặt vị trí tương đối cho body */
+            background-image: url('https://e.khoahoc.tv/photos/image/2015/12/09/bau-troi-dem-1.jpg'); /* Ảnh nền */
+            background-size: cover; /* Che phủ toàn bộ trang */
+            background-position: center; /* Căn giữa ảnh */
+            background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn */
+            background-repeat: no-repeat; /* Không lặp lại ảnh */
+            padding-top: 70px; /* Khoảng cách từ đỉnh trang */
+            color: #333; /* Màu chữ */
+            height: 100vh; /* Chiều cao của body bằng chiều cao cửa sổ */
+            overflow: hidden; /* Ẩn thanh cuộn */
+        }
+
+        .table-custom {
+            border-collapse: separate; /* Giữ các đường viền riêng biệt */
+            border-spacing: 0 15px; /* Tạo khoảng cách giữa các hàng */
+            table-layout: fixed; /* Bố trí bảng với chiều rộng cố định */
+        }
+
+            .table-custom th, .table-custom td {
+                background-color: white; /* Màu nền trắng cho ô */
+                vertical-align: middle; /* Căn giữa theo chiều dọc */
+                padding: 15px; /* Khoảng cách bên trong ô */
+                text-align: center; /* Căn giữa văn bản */
+                white-space: nowrap; /* Ngăn văn bản xuống dòng */
+                position: relative; /* Vị trí tương đối cho các phần tử */
+            }
+
+            .table-custom th {
+                background-color: darkgrey; /* Màu nền xám đậm cho tiêu đề */
+                color: floralwhite; /* Màu chữ trắng */
+                font-weight: bold; /* Đậm chữ */
+                text-align: center; /* Căn giữa văn bản */
+                position: sticky; /* Giữ tiêu đề ở trên cùng khi cuộn */
+                top: 0;
+                z-index: 2; /* Xác định thứ tự xếp chồng */
+                color: floralwhite; /* Màu chữ trắng */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+            }
+
+            .table-custom td {
+                background-color: white; /* Nền trắng cho ô */
+                vertical-align: middle; /* Căn giữa theo chiều dọc */
+                padding: 15px; /* Khoảng cách bên trong ô */
+                text-align: center; /* Căn giữa văn bản */
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ô */
+            }
+
+            .table-custom tbody tr:hover td {
+                background-color: lightgray; /* Màu nền xám nhạt khi hover */
+                text-align: center; /* Căn giữa văn bản */
+            }
+
+        .btn-custom {
+            margin-right: 5px; /* Khoảng cách giữa các nút */
+            border-radius: 0.25rem; /* Bo góc nhẹ cho nút */
+            display: inline-flex; /* Sắp xếp nút theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+        }
+
+            .btn-custom i {
+                margin-right: 5px; /* Khoảng cách giữa icon và văn bản */
+            }
+
+        .btn-edit {
+            background-color: #ffcc00; /* Màu nền vàng cho nút chỉnh sửa */
+            color: black; /* Màu chữ đen */
+        }
+
+        .btn-details {
+            background-color: #00b3cc; /* Màu nền xanh cho nút chi tiết */
+            color: white; /* Màu chữ trắng */
+        }
+
+        .btn-delete {
+            background-color: #ff3300; /* Màu nền đỏ cho nút xoá */
+            color: white; /* Màu chữ trắng */
+        }
+
+        .action-buttons {
+            display: flex; /* Sắp xếp các nút theo chiều ngang */
+            justify-content: center; /* Căn giữa các nút */
+            gap: 5px; /* Khoảng cách giữa các nút */
+        }
+
+        .table-custom th:nth-child(3),
+        .table-custom td:nth-child(3) {
+            width: 150px; /* Chiều rộng cột thứ 3 */
+            position: sticky; /* Giữ cố định khi cuộn */
+            left: 0;
+            z-index: 3; /* Xác định thứ tự xếp chồng */
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        }
+
+        .table-custom th:last-child,
+        .table-custom td:last-child {
+            position: sticky; /* Giữ cột cuối cố định khi cuộn */
+            right: 0;
+            z-index: 3; /* Xác định thứ tự xếp chồng */
+            box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        }
+
+        .table-custom th:nth-child(4),
+        .table-custom td:nth-child(4) {
+            width: 200px; /* Chiều rộng cho cột thứ 4 */
+        }
+
+    
+        .table-responsive {
+            max-height: 500px; /* Giới hạn chiều cao để tạo cuộn */
+            overflow-y: auto; /* Cho phép cuộn dọc */
+            overflow-x: auto; /* Cho phép cuộn ngang */
+            -webkit-overflow-scrolling: touch; /* Cuộn mượt mà cho thiết bị di động */
+        }
+
+        .truncate-text {
+            max-width: 200px; /* Giới hạn chiều rộng */
+            white-space: nowrap; /* Ngăn văn bản xuống dòng */
+            overflow: hidden; /* Ẩn văn bản tràn ra ngoài */
+            text-overflow: ellipsis; /* Thêm dấu ba chấm cho văn bản quá dài */
+        }
+
+        h1 {
+            font-size: 60px; /* Kích thước lớn cho tiêu đề h1 */
+        }
+
+        .wrapper {
+            display: flex; /* Sắp xếp các nút theo chiều ngang */
+        }
+
+            .wrapper .button {
+                margin: 0 5px; /* Khoảng cách giữa các nút */
+            }
+
+              
+                .wrapper .button a {
+                    display: inline-block;
+                    align-items: center; /* Căn giữa theo chiều dọc */
+                    height: 30px;
+                    width: 30px;
+                    text-decoration: none; /* Loại bỏ gạch chân */
+                    overflow: hidden;
+                    background: #fff; /* Màu nền trắng */
+                    border-radius: 50px; /* Bo tròn nút */
+                    cursor: pointer;
+                    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nút */
+                    transition: all 0.3s ease-out; /* Hiệu ứng chuyển mượt */
+                    text-align: center; /* Căn giữa nội dung nút */
+                }
+
+              
+                .wrapper .button:hover a {
+                    width: 100px; /* Mở rộng nút khi hover */
+                }
+
+              
+                .wrapper .button a i {
+                    font-size: 16px;
+                    line-height: 30px;
+                    transition: all 0.3s ease-out;
+                }
+
+               
+                .wrapper .button a span {
+                    font-size: 15px;
+                    font-weight: 500;
+                    line-height: 30px;
+                    margin-left: 10px;
+                    transition: all 0.3s ease-out;
+                }
+
+                .wrapper .button:nth-child(1) a:hover {
+                    background: #fccc0f; /* Vàng nhạt khi hover */
+                }
+
+                .wrapper .button:nth-child(2) a:hover {
+                    background: #1DA1F2; /* Xanh khi hover */
+                }
+
+                .wrapper .button:nth-child(3) a:hover {
+                    background: #fc1616; /* Đỏ khi hover */
+                }
+
+                .wrapper .button:nth-child(1) a {
+                    color: black; /* Màu đen */
+                }
+
+                .wrapper .button:nth-child(2) a {
+                    color: black; /* Màu đen */
+                }
+
+                .wrapper .button:nth-child(3) a {
+                    color: black; /* Màu đen */
+                }
+
+                .wrapper .button a:hover i {
+                    color: #fff; /* Màu trắng khi hover */
+                }
+
+        #snowflakeContainer {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        .snowflake {
+            padding-left: 15px;
+            font-size: 14px;
+            line-height: 24px;
+            position: fixed;
+            color: white; /* Màu trắng cho bông tuyết */
+            user-select: none;
+            z-index: 1000;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+            .snowflake:hover {
+                cursor: default; /* Không thay đổi con trỏ chuột khi hover */
+            }
+
+        .dataTables_info {
+            color: white; /* Màu chữ trắng cho thông tin lọc */
+        }
+
+        .dataTables_paginate .paginate_button {
+            color: white; /* Màu trắng cho nút phân trang */
+        }
+
+        .dataTables_length label {
+            color: white; /* Màu trắng cho nhãn độ dài */
+        }
+
+        .dataTables_paginate .paginate_button.disabled {
+            color: grey; /* Màu xám cho nút bị vô hiệu hóa */
+        }
+
+        .hi {
+            box-shadow: 0 0 5px cyan, 0 0 25px cyan; /* Đổ bóng với ánh sáng cyan */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển mượt */
+            transform: translateZ(0); /* Đặt vị trí ban đầu */
+        }
+
+            .hi:hover {
+                box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan, 0 0 200px cyan; /* Ánh sáng lan rộng khi hover */
+                transform: translateY(-10px); /* Đẩy phần tử lên khi hover */
+                transition: all 0.3s ease; /* Hiệu ứng chuyển mượt */
+            }
+
+    </style>
+
+   
+  
+</head>
+
+<body>
+    <div class="container-fluid mt-5 ">
+        <h1 class="text-center mb-4 font-effect-shadow-multiple" style="color:darkgray">CHUYỂN GIAO CÔNG NGHỆ VÀ ĐÀO TẠO</h1>
+        <form class="d-flex ml-auto" method="get" style="justify-content: flex-end;">
+            <input placeholder="ID CGCN&DT" type="text" name="Id" value="@ViewBag.IdChuyenGiaoCongNgheVaDaoTao" style="margin-right: 10px; text-align: center;" />
+            <button class="btn btn-primary" style="margin-right: 10px;" data-bs-toggle="tooltip" title="Tìm kiếm theo ID CGCN&ĐT">
+                <span class="bi-search"></span> Tìm Kiếm
+            </button>
+           
+            <button class="btn btn-primary" type="submit" name="SapXep" value="SapXep" style="margin-right: 10px;" data-bs-toggle="tooltip" title="Sắp xếp theo Tổng chi phí thực hiện">
+                <i class="bi bi-sort-numeric-down"></i> Sắp xếp
+            </button>
+            <a href="#" class="btn btn-danger" id="delete-selected" style="margin-right :10px;">
+                <i class="fas fa-trash-alt"></i> Xoá nhiều
+            </a>
+
+            <!-- Nút chỉ hiển thị biểu tượng -->
+            <a href="/ChuyenGiaoCongNgheVaDaoTao/Create" class="btn btn-primary d-flex align-items-center justify-content-center hi" style="margin-right: 10px; width: 38px; height: 38px; padding: 0;" data-bs-toggle="tooltip" title="Thêm mới">
+                <i class="bi bi-file-earmark-plus-fill" style="font-size: 24px;"></i>
+            </a>
+
+
+        </form>
+       
+        <table class="table table-custom table-responsive ">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all"></th>
+                    <th>STT</th>
+                    <th>Id CGCN&DT</th>
+                    <th> Hình Thức CGCN</th>
+                    <th> Lĩnh Vực Nghiên Cứu</th>
+                    <th> Ngành Kinh Tế</th>
+                    <th> Nhiệm Vụ KHCN</th>
+                    <th>Trạng Thái Hợp Đồng</th>
+                    <th>Tổng chi phí thực hiện</th>
+                    <th>Giá trị hợp đồng</th>
+                    <th>Chủ sở hữu</th>
+                    <th>Số người được đào tạo</th>
+                    <th>Tên dự án</th>
+                    <th>Tên</th>
+                    <th>Đơn vị chủ trì</th>
+                    <th>Đơn vị nhận chuyển giao</th>
+                    <th>Đơn vị phối hợp</th>
+                    <th>Mã số hợp đồng</th>
+                    <th>Tổng thời gian thực hiện</th>
+                    <th>phương thức CGCN</th>
+                    <th>Tóm tắt</th>
+                    <th>Thao Tác</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @functions {
+                    public string TruncateWithEllipsis(string text, int maxLength)
+                    {
+                        if (string.IsNullOrEmpty(text)) return text;
+                        if (text.Length <= maxLength) return text;
+
+                        return $"<span>{text.Substring(0, maxLength)}<a href='#' onclick='showFullText(this)' data-fulltext=\"{text}\">...</a></span>";
+                    }
+                }
+
+                @if (Model != null && Model.Count() > 0)
+                {
+                    int stt = 1;
+                   
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><input type="checkbox" class="select-item" name="selectItem" value="@item.IdChuyenGiaoCongNgheVaDaoTao"></td>
+
+                            <td>@stt</td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdChuyenGiaoCongNgheVaDaoTao.ToString(), 20))
+                            </td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdHinhThucChuyenGiaoCongNgheNavigation?.HinhThucChuyenGiaoCongNghe, 20))
+                            </td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdLinhVucNghienCuuNavigation?.LinhVucNghienCuu, 20))
+                            </td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdNganhKinhTeNavigation?.NganhKinhTe, 20))
+                            </td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdNhiemVuKhcnNavigation?.TenNhiemVu, 20))
+                            </td>
+                            <td>
+                                @Html.Raw(TruncateWithEllipsis(item.IdTrangThaiHopDongNavigation?.TrangThaiHopDong, 20))
+                            </td>
+                            <td>@item.TongChiPhiThucHien</td>
+                            <td>@item.GiaTriHopDong</td>
+                            <td>@item.ChuSoHuu</td>
+                            <td>@item.SoNguoiDuocDaoTaoChuyenGiaoCn</td>
+                            <td>@item.TenDuAn</td>
+                            <td>@item.Ten</td>
+                            <td>@item.DonViChuTri</td>
+                            <td>@item.DonViNhanChuyenGiao</td>
+                            <td>@item.DonViPhoiHop</td>
+                            <td>@item.MaSoHopDong</td>
+                            <td>@item.TongThoiGianThucHien</td>
+                            <td>@item.PhuongThucChuyenGiaoCongNghe</td>
+                            <td>@item.TomTat</td>
+                          
+                            <td class="action-buttons">
+                                <div class="wrapper">
+                                    <div class="button">
+                                        <a asp-action="Edit" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao" class="icon">
+                                            <i class="fas fa-edit"></i>
+                                            <span>Chỉnh sửa</span>
+                                        </a>
+                                    </div>
+                                    <div class="button">
+                                        <a asp-action="Details" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao" class="icon">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span >Chi tiết</span>
+                                        </a>
+                                    </div>
+                                    <div class="button">
+                                        <a asp-action="Delete" asp-route-id="@item.IdChuyenGiaoCongNgheVaDaoTao" class="icon">
+                                            <i class="fas fa-trash-alt"></i>
+                                            <span >Xóa</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        stt++;
+                    }
+                }
+
+                else
+                {
+                    <tr>
+                        <td colspan="9" class="text-center">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.table-custom').DataTable({
+                "paging": true,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+             //  "scrollX": true, // Kích hoạt cuộn ngang              
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ mục mỗi trang",
+                    "zeroRecords": "Không tìm thấy dữ liệu",
+                    "info": "Trang _PAGE_ trong _PAGES_",
+                    "infoEmpty": "Không có dữ liệu",
+                    "infoFiltered": "(lọc từ _MAX_ tổng số mục)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    }
+                }
+
+            });
+        })
+        function showFullText(element) {
+            var fullText = element.getAttribute('data-fulltext');
+            element.parentNode.innerHTML = fullText;
+        }
+
+    </script>
+   
+   <script>
+        $(document).ready(function () {
+            // Chọn tất cả checkbox khi checkbox ở tiêu đề được chọn
+            $('#select-all').click(function () {
+                $('.select-item').prop('checked', this.checked);
+            });
+
+            // Nếu một checkbox trong danh sách bị bỏ chọn, bỏ chọn cả checkbox "chọn tất cả"
+            $('.select-item').click(function () {
+                if ($('.select-item:checked').length === $('.select-item').length) {
+                    $('#select-all').prop('checked', true);
+                } else {
+                    $('#select-all').prop('checked', false);
+                }
+            });
+
+            // Xử lý sự kiện khi nhấn nút "Xóa tất cả"
+            $('#delete-selected').click(function (e) {
+                e.preventDefault(); // Ngăn không cho form bị submit
+
+                var selectedIds = [];
+
+                // Lấy giá trị của các checkbox đã chọn
+                $('.select-item:checked').each(function () {
+                    selectedIds.push($(this).val());
+                });
+
+                if (selectedIds.length > 0) {
+                    if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+                        // Thực hiện gọi Ajax xóa
+                        deleteSelectedItems(selectedIds);
+                    }
+                } else {
+                    alert('Vui lòng chọn ít nhất một mục để xóa');
+                }
+            });
+
+            function deleteSelectedItems(selectedIds) {
+                // Duyệt qua danh sách ID đã chọn và gửi yêu cầu Ajax để xóa từng mục
+                selectedIds.forEach(function (id) {
+                    $.ajax({
+                        url: `/ChuyenGiaoCongNgheVaDaoTao/Delete/${id}`, // Đảm bảo URL đúng với controller và action
+                        type: 'DELETE',
+                        success: function (response) {
+                            // Xóa dòng khỏi giao diện sau khi server trả về kết quả thành công
+                            $('input[value="' + id + '"]').closest('tr').remove();
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Có lỗi xảy ra khi xóa mục ID: ' + id);
+                        }
+                    });
+                });
+            }
+        });
+   </script>
+      
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+    <div id='snowflakeContainer'>
+        <p class='snowflake'>❄</p>
+        </div>
+        <script style = 'text/javascript' >
+        //<![CDATA[
+        var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame; var transforms = ["transform", "msTransform", "webkitTransform", "mozTransform", "oTransform"]; var transformProperty = getSupportedPropertyName(transforms); var snowflakes = []; var browserWidth; var browserHeight; var numberOfSnowflakes =20; var resetPosition = false; function setup() { window.addEventListener("DOMContentLoaded", generateSnowflakes, false); window.addEventListener("resize", setResetFlag, false) } setup(); function getSupportedPropertyName(b) { for (var a = 0; a < b.length; a++) { if (typeof document.body.style[b[a]] != "undefined") { return b[a] } } return null } function Snowflake(b, a, d, e, c) { this.element = b; this.radius = a; this.speed = d; this.xPos = e; this.yPos = c; this.counter = 0; this.sign = Math.random() < 0.5 ? 1 : -1; this.element.style.opacity = 0.5 + Math.random(); this.element.style.fontSize = 4 + Math.random() * 15 + "px" } Snowflake.prototype.update = function () { this.counter += this.speed / 5000; this.xPos += this.sign * this.speed * Math.cos(this.counter) / 40; this.yPos += Math.sin(this.counter) / 40 + this.speed / 30; setTranslate3DTransform(this.element, Math.round(this.xPos), Math.round(this.yPos)); if (this.yPos > browserHeight) { this.yPos = -50 } }; function setTranslate3DTransform(a, c, b) { var d = "translate3d(" + c + "px, " + b + "px, 0)"; a.style[transformProperty] = d } function generateSnowflakes() { var b = document.querySelector(".snowflake"); var h = b.parentNode; browserWidth = document.documentElement.clientWidth; browserHeight = document.documentElement.clientHeight; for (var d = 0; d < numberOfSnowflakes; d++) { var j = b.cloneNode(true); h.appendChild(j); var e = getPosition(50, browserWidth); var a = getPosition(50, browserHeight); var c = 5 + Math.random() * 40; var g = 4 + Math.random() * 10; var f = new Snowflake(j, g, c, e, a); snowflakes.push(f) } h.removeChild(b); moveSnowflakes() } function moveSnowflakes() { for (var b = 0; b < snowflakes.length; b++) { var a = snowflakes[b]; a.update() } if (resetPosition) { browserWidth = document.documentElement.clientWidth; browserHeight = document.documentElement.clientHeight; for (var b = 0; b < snowflakes.length; b++) { var a = snowflakes[b]; a.xPos = getPosition(50, browserWidth); a.yPos = getPosition(50, browserHeight) } resetPosition = false } requestAnimationFrame(moveSnowflakes) } function getPosition(b, a) { return Math.round(-1 * b + Math.random() * (a + 2 * b)) } function setResetFlag(a) { resetPosition = true };
+        //]]>
+        </script>
+
+    <h4 class="font-effect-shadow-multiple" style="color:white">Tổng số bản ghi là : @Model.Count()</h4>
+</body>
+</html>
