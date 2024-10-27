@@ -4264,19 +4264,35 @@ public partial class HemisContext : DbContext
             entity.ToTable("tbThuVienTrungTamHocLieu", "CSVC");
 
             entity.Property(e => e.IdThuVienTrungTamHocLieu).ValueGeneratedNever();
-            entity.Property(e => e.IdTinhTrangCsvc).HasColumnName("IdTinhTrangCSVC");
-            entity.Property(e => e.MaThuVienTrungTamHocLieu).HasMaxLength(50);
-            entity.Property(e => e.NamDuaVaoSuDung).HasColumnType("text");
-            entity.Property(e => e.SoLuonngThuVienDienTuLienKetNn).HasColumnName("SoLuonngThuVienDienTuLienKetNN");
-            entity.Property(e => e.TenThuVienTrungTamHocLieu).HasMaxLength(200);
+            entity.Property(e => e.TenThuVienTrungTamHocLieu).HasColumnType("nvarchar(max)");
+            entity.Property(e => e.NamDuaVaoSuDung).HasMaxLength(2000000);
+            entity.Property(e => e.DienTich).HasMaxLength(2000000);
+            entity.Property(e => e.DienTichPhongDoc).HasMaxLength(2000000);
+            entity.Property(e => e.SoPhongDoc).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongMayTinh).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongChoNgoi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongSach).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongTapChi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongSachDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongTapChiDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuonngThuVienDienTuLienKetNn).HasMaxLength(2000000);
 
-            entity.HasOne(d => d.IdHinhThucSoHuuNavigation).WithMany()
-                .HasForeignKey(d => d.IdHinhThucSoHuu)
-                .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmHinhThucSoHuu");
+            entity.HasOne(d => d.IdHinhThucSoHuuNavigation).WithMany(p => p.TbThuVienTrungTamHocLieus)
+                 .HasForeignKey(d => d.IdHinhThucSoHuu)
+                 .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmHinhThucSoHuu");
 
-            entity.HasOne(d => d.IdTinhTrangCsvcNavigation).WithMany()
+            entity.HasOne(d => d.IdTinhTrangCsvcNavigation).WithMany(p => p.TbThuVienTrungTamHocLieus)
                 .HasForeignKey(d => d.IdTinhTrangCsvc)
                 .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmTinhTrangCoSoVatChat");
+
+
+
+
+
+            entity.Property(e => e.SoLuongDauSach).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauTapChi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauSachDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauTapChiDienTu).HasMaxLength(2000000);
         });
 
         modelBuilder.Entity<TbToChucHopTacDoanhNghiep>(entity =>
