@@ -3,185 +3,124 @@
 @{
     ViewData["Title"] = "Details";
 }
-<style>
-    body {
-        position: relative; /* Đặt vị trí tương đối cho body */
-        background-image: url('https://lh6.googleusercontent.com/wkeQrgK5pTamYY8M618pFEEAcuQJjfbpmIE-Mhp46LBwqYjNOqClsFFWYY-FxA46hjHkmzNIK7v8Dnhw0KSiTUcwoOKKDywa1eqwFXfVFNDfnK3fS3d6oVxCLwWqMraAorSa4ACL');
-        background-size: cover; /* Che phủ toàn bộ */
-        background-position: center; /* Căn giữa ảnh */
-        background-attachment: fixed; /* Giữ ảnh nền cố định */
-        background-repeat: no-repeat; /* Không lặp lại ảnh */
-        padding-top: 70px; /* Khoảng cách từ đầu trang */
-        color: #333; /* Màu chữ */
-        height: 100vh; /* Đặt chiều cao của body bằng 100% chiều cao cửa sổ */
-        overflow: hidden; /* Ẩn thanh cuộn */
-    }
 
-        body::before {
-            content: ""; /* Tạo nội dung rỗng cho pseudo-element */
-            position: absolute; /* Đặt vị trí tuyệt đối */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.2); /* Lớp phủ mờ với màu trắng và độ mờ 20% */
-            backdrop-filter: blur(10px); /* Thêm hiệu ứng mờ */
-            z-index: -1; /* Đặt lớp phủ dưới các nội dung khác */
-        }
+<h1>Details</h1>
 
-    .table-container {
-        background-color: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt cho bảng */
-        padding: 30px; /* Khoảng cách bên trong */
-        border-radius: 10px; /* Bo tròn góc */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
-        max-width: 800px; /* Giới hạn chiều rộng tối đa */
-        margin: auto; /* Căn giữa bảng */
-        overflow: hidden; /* Ẩn overflow */
-    }
-
-    .table-custom {
-        width: 100%; /* Đảm bảo bảng chiếm 100% chiều rộng */
-        border-collapse: collapse; /* Xóa khoảng cách giữa các ô */
-    }
-
-        .table-custom th,
-        .table-custom td {
-            padding: 10px; /* Thêm padding cho ô */
-            text-align: left; /* Căn trái nội dung */
-        }
-
-        .table-custom th {
-            background-color: lightslategray; /* Màu nền tiêu đề */
-            color: white; /* Màu chữ tiêu đề */
-        }
-
-        .table-custom tr:hover td {
-            background-color: #e9ecef; /* Màu nền khi hover */
-        }
-
-    h1 {
-        font-size: 45px;
-        text-align: center;
-        margin-bottom: 20px; /* Thêm khoảng cách dưới tiêu đề */
-    }
-
-    .btn-container {
-        display: flex; /* Sử dụng flexbox để căn chỉnh các nút */
-        justify-content: center; /* Căn giữa các nút */
-        margin-top: 20px; /* Khoảng cách trên */
-    }
-
-    .btn {
-        margin: 0 10px; /* Khoảng cách giữa các nút */
-    }
-
-</style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=emboss|shadow-multiple">
-
-<div class="table-container" style="width: 2000px;">
-    <h1 class="font-effect-shadow-multiple">CHI TIẾT</h1>
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Chi tiết CGCN&ĐT</h4>
-        <span class="badge bg-light text-primary fs-6" data-bs-toggle="tooltip" title="ID CHUYỂN GIAO CÔNG NGHỆ VÀ ĐÀO TẠO">ID: @Model.IdChuyenGiaoCongNgheVaDaoTao</span>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-custom table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <td class="fw-bold">Mã số hợp đồng</td>
-                        <td>@Html.DisplayFor(model => model.MaSoHopDong)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Tên CN&ĐT</td>
-                        <td>@Html.DisplayFor(model => model.Ten)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Tổng chi phí thực hiện</td>
-                        <td>@Html.DisplayFor(model => model.TongChiPhiThucHien)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Tổng thời gian thực hiện</td>
-                        <td>@Html.DisplayFor(model => model.TongThoiGianThucHien)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Phương thức chuyển giao</td>
-                        <td>@Html.DisplayFor(model => model.PhuongThucChuyenGiaoCongNghe)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Chủ sở hữu</td>
-                        <td>@Html.DisplayFor(model => model.ChuSoHuu)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Đơn vị chủ trì</td>
-                        <td>@Html.DisplayFor(model => model.DonViChuTri)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">ID Lĩnh vực nghiên cứu</td>
-                        <td>@Html.DisplayFor(model=>model.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">ID Ngành KT</td>
-                        <td>@Html.DisplayFor(model => model.IdNganhKinhTeNavigation.IdNganhKinhTe)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-md-6">
-            <table class="table table-custom table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <td class="fw-bold">Đơn vị phối hợp</td>
-                        <td>@Html.DisplayFor(model => model.DonViPhoiHop)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Đơn vị nhận chuyển giao</td>
-                        <td>@Html.DisplayFor(model => model.DonViNhanChuyenGiao)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Tóm tắt</td>
-                        <td>@Html.DisplayFor(model => model.TomTat)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Tên dự án</td>
-                        <td>@Html.DisplayFor(model => model.TenDuAn)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Giá trị hợp đồng</td>
-                        <td>@Html.DisplayFor(model => model.GiaTriHopDong)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">Số người được đào tạo</td>
-                        <td>@Html.DisplayFor(model => model.SoNguoiDuocDaoTaoChuyenGiaoCn)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">ID hình thức chuyển giao</td>
-                        <td>@Html.DisplayFor(model => model.IdHinhThucChuyenGiaoCongNgheNavigation.IdHinhThucChuyenGiaoCongNghe)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">ID Nhiệm vụ KHCN</td>
-                        <td>@Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)</td>
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">ID Trạng thái hợp đồng</td>
-                        <td>@Html.DisplayFor(model => model.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="btn-container">
-        <a asp-action="Edit" asp-route-id="@Model?.IdChuyenGiaoCongNgheVaDaoTao" class="btn btn-primary">Chỉnh sửa</a>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-    </div>
+<div>
+    <h4>TbChuyenGiaoCongNgheVaDaoTao</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaSoHopDong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaSoHopDong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ten)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ten)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TongChiPhiThucHien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TongChiPhiThucHien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TongThoiGianThucHien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TongThoiGianThucHien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhuongThucChuyenGiaoCongNghe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhuongThucChuyenGiaoCongNghe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuSoHuu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuSoHuu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViChuTri)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViChuTri)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViPhoiHop)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViPhoiHop)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DonViNhanChuyenGiao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DonViNhanChuyenGiao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TomTat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TomTat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenDuAn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenDuAn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaTriHopDong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GiaTriHopDong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoNguoiDuocDaoTaoChuyenGiaoCn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoNguoiDuocDaoTaoChuyenGiaoCn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHinhThucChuyenGiaoCongNgheNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHinhThucChuyenGiaoCongNgheNavigation.IdHinhThucChuyenGiaoCongNghe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNganhKinhTeNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdNganhKinhTeNavigation.IdNganhKinhTe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTrangThaiHopDongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)
+        </dd>
+    </dl>
 </div>
-
-
-<script>
-    // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdChuyenGiaoCongNgheVaDaoTao">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

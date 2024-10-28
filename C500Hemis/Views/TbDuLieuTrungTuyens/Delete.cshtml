@@ -1,168 +1,147 @@
 ﻿@model C500Hemis.Models.TbDuLieuTrungTuyen
 
 @{
-    ViewData["Title"] = "Xóa dữ liệu trúng tuyển";
+    ViewData["Title"] = "Delete";
 }
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<h1>Delete</h1>
 
-<style>
-    /* Màu nền tổng thể của trang */
-    body {
-        background-color: #f2f4f8;
-    }
-
-    /* Định dạng cho tiêu đề */
-    h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #dc3545; /* Màu đỏ đậm */
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        font-weight: normal;
-        color: #6c757d; /* Màu xám */
-    }
-
-    /* Định dạng phần chứa thông tin */
-    .info-container {
-        background-color: #f8d7da;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.4);
-    }
-
-    /* Định dạng cho dl (danh sách mô tả) */
-    dl.row {
-        margin-top: 20px;
-    }
-
-    dt {
-        font-weight: bold;
-        color: #343a40; /* Màu đen nhạt */
-    }
-
-    dd {
-        font-weight: normal;
-        color: #495057; /* Màu xám đậm */
-    }
-
-    hr {
-        border-top: 2px solid #dc3545; /* Đường kẻ đỏ đậm */
-    }
-
-    /* Hiệu ứng cho các nút hành động */
-    .btn {
-        transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-
-        /* Hiệu ứng hover */
-        .btn:hover {
-            transform: translateY(-3px); /* Di chuyển lên khi hover */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Bóng mờ khi hover */
-        }
-
-        /* Hiệu ứng active khi nhấn */
-        .btn:active {
-            transform: scale(0.95); /* Giảm kích thước nhẹ khi nhấn */
-        }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border-color: #6c757d;
-    }
-</style>
-
-<div class="container mt-5">
-    <h1 class="text-center">Xóa dữ liệu trúng tuyển</h1>
-    <h3 class="text-center mb-4">Bạn có chắc chắn muốn xóa dữ liệu trúng tuyển này không?</h3>
-
-    <div class="info-container">
-        <h4 class="text-center text-dark">Thông tin chi tiết</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdDuLieuTrungTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdDuLieuTrungTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cccd)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.Cccd)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.HoVaTen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.HoVaTen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.MaTuyenSinh)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.MaTuyenSinh)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.TruongThpt)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.TruongThpt)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.ToHopMonTrungTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiemMon1)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.DiemMon1)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiemMon2)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.DiemMon2)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiemMon3)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.DiemMon3)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DiemUuTien)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.DiemUuTien)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.TongDiemXetTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.TongDiemXetTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.SoQuyetDinhTrungTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoThacSi)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdDoiTuongDauVao)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.DoiTuongDauVao)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdDoiTuongUuTien)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdDoiTuongUuTienNavigation.DoiTuongUuTien)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdHinhThucTuyenSinh)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdHinhThucTuyenSinhNavigation.HinhThucTuyenSinh)</dd>
-
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdKhuVuc)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.IdKhuVucNavigation.KhuVuc)</dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="IdDuLieuTrungTuyen" />
-            <div class="text-center mt-4">
-                <input type="submit" value="Xóa" class="btn btn-danger px-4 py-2" style="font-size: 18px; box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.6);">
-                <a asp-action="Index" class="btn btn-secondary px-3 py-2" style="font-size: 16px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">Quay lại danh sách</a>
-            </div>
-        </form>
-    </div>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TbDuLieuTrungTuyen</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cccd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cccd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoVaTen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoVaTen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaTuyenSinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaTuyenSinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TruongThpt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TruongThpt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ToHopMonTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemUuTien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemUuTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TongDiemXetTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TongDiemXetTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoQuyetDinhTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.IdDoiTuongDauVao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDoiTuongUuTienNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDoiTuongUuTienNavigation.IdDoiTuongUuTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHinhThucTuyenSinhNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHinhThucTuyenSinhNavigation.IdHinhThucTuyenSinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdKhuVucNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdKhuVucNavigation.IdKhuVuc)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdDuLieuTrungTuyen" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>

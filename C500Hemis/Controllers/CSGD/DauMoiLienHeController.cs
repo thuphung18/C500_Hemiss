@@ -19,10 +19,51 @@ namespace C500Hemis.Controllers.CSGD
         }
 
         // GET: DauMoiLienHe
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var hemisContext = _context.TbDauMoiLienHes.Include(t => t.IdLoaiDauMoiLienHeNavigation);
-            return View(await hemisContext.ToListAsync());
+            // Biến giữ thứ tự sắp xếp hiện tại
+            ViewData["CurrentSort"] = sortOrder;
+
+            // Biến giữ trạng thái sắp xếp cho các cột
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PhoneSortParm"] = sortOrder == "Phone" ? "phone_desc" : "Phone";
+            ViewData["EmailSortParm"] = sortOrder == "Email" ? "email_desc" : "Email";
+
+            // Lấy dữ liệu từ cơ sở dữ liệu
+            var records = from r in _context.TbDauMoiLienHes.Include(t => t.IdLoaiDauMoiLienHeNavigation)
+                          select r;
+
+            // Tìm kiếm
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                records = records.Where(r => r.SoDienThoai.Contains(searchString)
+                                           || r.Email.Contains(searchString));
+            }
+
+            // Sắp xếp
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    records = records.OrderByDescending(r => r.IdLoaiDauMoiLienHeNavigation.DauMoiLienHe);
+                    break;
+                case "Phone":
+                    records = records.OrderBy(r => r.SoDienThoai);
+                    break;
+                case "phone_desc":
+                    records = records.OrderByDescending(r => r.SoDienThoai);
+                    break;
+                case "Email":
+                    records = records.OrderBy(r => r.Email);
+                    break;
+                case "email_desc":
+                    records = records.OrderByDescending(r => r.Email);
+                    break;
+                default:
+                    records = records.OrderBy(r => r.IdLoaiDauMoiLienHeNavigation.DauMoiLienHe);
+                    break;
+            }
+
+            return View(await records.ToListAsync());
         }
 
         // GET: DauMoiLienHe/Details/5
@@ -47,7 +88,7 @@ namespace C500Hemis.Controllers.CSGD
         // GET: DauMoiLienHe/Create
         public IActionResult Create()
         {
-            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "IdDauMoiLienHe");
+            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "DauMoiLienHe");
             return View();
         }
 
@@ -60,13 +101,38 @@ namespace C500Hemis.Controllers.CSGD
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbDauMoiLienHe);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(tbDauMoiLienHe);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                catch (DbUpdateException ex)
+                {
+                    // Kiểm tra nếu lỗi là do dữ liệu quá dài
+                    if (ex.InnerException != null && ex.InnerException.Message.Contains("String or binary data would be truncated"))
+                    {
+                        // Ghi log lỗi (tùy chọn)
+                        ModelState.AddModelError(string.Empty, "Dữ liệu bạn nhập quá dài. Vui lòng mô tả ngắn gọn");
+                    }
+                    else if (ex.InnerException != null && ex.InnerException.Message.Contains("PRIMARY KEY constraint"))
+                    {
+                        // Xử lý lỗi trùng khóa chính
+                        ModelState.AddModelError(string.Empty, "ID đã tồn tại");
+                    }
+                    else
+                    {
+                        // Ném lại lỗi để dễ debug các lỗi khác
+                        throw;
+                    }
+                }
             }
-            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "IdDauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
+            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "DauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
             return View(tbDauMoiLienHe);
         }
+
+
 
         // GET: DauMoiLienHe/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -81,7 +147,7 @@ namespace C500Hemis.Controllers.CSGD
             {
                 return NotFound();
             }
-            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "IdDauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
+            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "DauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
             return View(tbDauMoiLienHe);
         }
 
@@ -103,21 +169,22 @@ namespace C500Hemis.Controllers.CSGD
                 {
                     _context.Update(tbDauMoiLienHe);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException ex)
                 {
-                    if (!TbDauMoiLienHeExists(tbDauMoiLienHe.IdDauMoiLienHe))
+                    if (ex.InnerException != null && ex.InnerException.Message.Contains("String or binary data would be truncated"))
                     {
-                        return NotFound();
+                        // Ghi log lỗi (tùy chọn)
+                        ModelState.AddModelError(string.Empty, "Dữ liệu bạn nhập quá dài. Vui lòng kiểm tra lại độ dài các trường dữ liệu.");
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "IdDauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
+            ViewData["IdLoaiDauMoiLienHe"] = new SelectList(_context.DmDauMoiLienHes, "IdDauMoiLienHe", "DauMoiLienHe", tbDauMoiLienHe.IdLoaiDauMoiLienHe);
             return View(tbDauMoiLienHe);
         }
 

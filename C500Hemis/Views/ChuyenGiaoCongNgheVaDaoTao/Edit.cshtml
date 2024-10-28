@@ -1,293 +1,119 @@
 ﻿@model C500Hemis.Models.TbChuyenGiaoCongNgheVaDaoTao
 
-<head>
+@{
+    ViewData["Title"] = "Edit";
+}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEAEELNUeFwZZLqQWHeSokfJ/4m2Or" crossorigin="anonymous">
-    <title>Chỉnh sửa</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=emboss|shadow-multiple">
-    <style>
-        h1 {
-            font-size: 45px;
-        }
+<h1>Edit</h1>
 
-        body {
-            position: relative; /* Đặt vị trí tương đối cho body */
-            background-image: url('https://lh6.googleusercontent.com/wkeQrgK5pTamYY8M618pFEEAcuQJjfbpmIE-Mhp46LBwqYjNOqClsFFWYY-FxA46hjHkmzNIK7v8Dnhw0KSiTUcwoOKKDywa1eqwFXfVFNDfnK3fS3d6oVxCLwWqMraAorSa4ACL');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            padding-top: 70px;
-            color: #333;
-        }
-
-            body::before {
-                content: ""; /* Tạo nội dung rỗng cho pseudo-element */
-                position: absolute; /* Đặt vị trí tuyệt đối */
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(255, 255, 255, 0.2); /* Lớp phủ mờ với màu trắng và độ mờ 50% */
-                backdrop-filter: blur(10px); /* Thêm hiệu ứng mờ */
-                z-index: -1; /* Đặt lớp phủ dưới các nội dung khác */
-            }
-
-
-
-    </style>
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-    <!-- jQuery (nếu chưa có) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-</head>
-<h1 class="text-center mt-4 mb-4 font-effect-shadow-multiple">CHỈNH SỬA</h1>
-
-<div class="container">
-    <div class="card shadow-lg border-0 rounded-3 mb-5">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <h4 class="card-title mb-0">Cập nhật CGCN</h4>
-            <span class="badge bg-light text-primary fs-6" data-bs-toggle="tooltip" title="ID CHUYỂN GIAO CÔNG NGHỆ VÀ ĐÀO TẠO">ID: @Model.IdChuyenGiaoCongNgheVaDaoTao</span>
-        </div>
-        <div class="card-body">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                <input type="hidden" asp-for="IdChuyenGiaoCongNgheVaDaoTao" />
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="IdNhiemVuKhcn" class="form-label fw-bold">Nhiệm Vụ</label>
-                        <div class="input-group has-validation">
-                            <input list="nhiemVuOptions" id="nhiemVuKhcn" name="IdNhiemVuKhcn" class="form-control" placeholder="Gõ để tìm kiếm...">
-                            <datalist id="nhiemVuOptions">
-                                @foreach (var item in ViewBag.IdNhiemVuKhcn)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </datalist>
-                        </div>
-                        <span asp-validation-for="IdNhiemVuKhcn" class="text-danger small"></span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="IdLinhVucNghienCuu" class="form-label fw-bold">Lĩnh Vực</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"></span>
-                            <select asp-for="IdLinhVucNghienCuu" class="form-control" asp-items="ViewBag.IdLinhVucNghienCuu" data-bs-toggle="tooltip" title="Chọn Lĩnh Vực "></select>
-                        </div>
-                        <span asp-validation-for="IdLinhVucNghienCuu" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Field: Thi Đua -->
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="IdNganhKinhTe" class="form-label fw-bold">Ngành Kinh Tế</label>
-                        <div class="input-group has-validation">
-                            <input list="KtOptions" id="IdNganhKinhTe" name="IdNganhKinhTe" class="form-control" placeholder="Gõ để tìm kiếm...">
-                            <datalist id="KtOptions">
-                                @foreach (var item in ViewBag.IdNganhKinhTe)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </datalist>
-                        </div>
-                        <span asp-validation-for="IdNganhKinhTe" class="text-danger small"></span>
-                    </div>
-
-                 
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="IdHinhThucChuyenGiaoCongNghe" class="form-label fw-bold">Hình Thức</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-gift"></i></span>
-                            <select asp-for="IdHinhThucChuyenGiaoCongNghe" class="form-control" asp-items="ViewBag.IdHinhThucChuyenGiaoCongNghe" data-bs-toggle="tooltip" title="Chọn hình thức"></select>
-                        </div>
-                        <span asp-validation-for="IdHinhThucChuyenGiaoCongNghe" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="MaSoHopDong" class="form-label fw-bold">Mã Số Hợp Đồng</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-file-earmark-text"></i></span>
-                            <input asp-for="MaSoHopDong" class="form-control" placeholder="Nhập mã số hợp đồng" data-bs-toggle="tooltip" title="Nhập mã số hợp đồng" />
-                        </div>
-                        <span asp-validation-for="MaSoHopDong" class="text-danger small"></span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="Ten" class="form-label fw-bold">Tên</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="Ten" class="form-control" placeholder="Nhập Tên" data-bs-toggle="tooltip" title="Nhập Tên" />
-                        </div>
-                        <span asp-validation-for="Ten" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="TongChiPhiThucHien" class="form-label fw-bold">Tổng chi phí</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="TongChiPhiThucHien" class="form-control" placeholder="Nhập Tổng chi phí" data-bs-toggle="tooltip" title="Nhập Tổng Chi Phí" />
-                        </div>
-                        <span asp-validation-for="TongChiPhiThucHien" class="text-danger small"></span>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="TongThoiGianThucHien" class="form-label fw-bold">Tổng thời gian</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="TongThoiGianThucHien" class="form-control" placeholder="Nhập Tổng thời gian" data-bs-toggle="tooltip" title="Nhập tổng thời gian" />
-                        </div>
-                        <span asp-validation-for="TongThoiGianThucHien" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="PhuongThucChuyenGiaoCongNghe" class="form-label fw-bold">Phương thức chuyển giao công nghệ</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="PhuongThucChuyenGiaoCongNghe" class="form-control" placeholder="Nhập Phương thức" data-bs-toggle="tooltip" title="Nhập phương thức" />
-                        </div>
-                        <span asp-validation-for="PhuongThucChuyenGiaoCongNghe" class="text-danger small"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="ChuSoHuu" class="form-label fw-bold">Chủ sở hữu</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="ChuSoHuu" class="form-control" placeholder="Nhập Chủ sở hữu" data-bs-toggle="tooltip" title="Nhập chủ sở hữu" />
-                        </div>
-                        <span asp-validation-for="ChuSoHuu" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="DonViChuTri" class="form-label fw-bold">Đơn vị chủ trì</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="DonViChuTri" class="form-control" placeholder="Nhập Đơn vị chủ trì" data-bs-toggle="tooltip" title="Nhập Đơn vị chủ trì" />
-                        </div>
-                        <span asp-validation-for="DonViChuTri" class="text-danger small"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="DonViPhoiHop" class="form-label fw-bold">Đơn vị phối hợp</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="DonViPhoiHop" class="form-control" placeholder="Nhập Đơn vị phối hợp" data-bs-toggle="tooltip" title="Nhập đơn vị phối hợp" />
-                        </div>
-                        <span asp-validation-for="DonViPhoiHop" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="DonViNhanChuyenGiao" class="form-label fw-bold">Đơn vị nhận chuyển giao</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="DonViNhanChuyenGiao" class="form-control" placeholder="Nhập Đơn vị nhận chuyển giao" data-bs-toggle="tooltip" title="Nhập đơn vị nhận chuyển giao" />
-                        </div>
-                        <span asp-validation-for="DonViNhanChuyenGiao" class="text-danger small"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="TomTat" class="form-label fw-bold">Tóm tắt</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="TomTat" class="form-control" placeholder="Nhập tóm tắt" data-bs-toggle="tooltip" title="Nhập tóm tắt" />
-                        </div>
-                        <span asp-validation-for="TomTat" class="text-danger small"></span>
-                    </div>
-                </div>
-
-                <div class=" row">
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="TenDuAn" class="form-label fw-bold">Tên dự án</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="TenDuAn" class="form-control" placeholder="Nhập Tên dự án" data-bs-toggle="tooltip" title="Nhập Tên dự án" />
-                        </div>
-                        <span asp-validation-for="TenDuAn" class="text-danger small"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="GiaTriHopDong" class="form-label fw-bold">Giá trị hợp đồng</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="GiaTriHopDong" class="form-control" placeholder="Nhập giá trị hợp đồng" data-bs-toggle="tooltip" title="Nhập giá trị hợp đồng" />
-                        </div>
-                        <span asp-validation-for="GiaTriHopDong" class="text-danger small"></span>
-                    </div>
-                </div>
-
-
-                <div class="row">
-
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="IdTrangThaiHopDong" class="form-label fw-bold">Trạng Thái Hợp Đồng</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-diagram-3"></i></span>
-                            <select asp-for="IdTrangThaiHopDong" class="form-control" asp-items="ViewBag.IdTrangThaiHopDong" data-bs-toggle="tooltip" title="Chọn Trạng Thái"></select>
-                        </div>
-                        <span asp-validation-for="IdTrangThaiHopDong" class="text-danger small"></span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label asp-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="form-label fw-bold">Số người được đào tạo </label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text bg-light"><i class="bi bi-calendar-check"></i></span>
-                            <input asp-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="form-control" placeholder="Nhập số người" data-bs-toggle="tooltip" title="Nhập số người" />
-                        </div>
-                        <span asp-validation-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="text-danger small"></span>
-                    </div>
-                </div>
-    
-                <div class="d-flex justify-content-between mt-4">
-                    <a asp-action="Index" class="btn btn-secondary btn-lg mx-2 shadow-sm" data-bs-toggle="tooltip" title="Quay lại trang danh sách">
-                        <i class="bi bi-arrow-left-circle"></i> Quay lại
-                    </a>
-                    <button type="submit" class="btn btn-success btn-lg mx-2 shadow-sm" data-bs-toggle="tooltip" title="Lưu thay đổi">
-                        <i class="bi bi-save"></i> Lưu 
-                    </button>
-                </div>
-            </form>
-        </div>
+<h4>TbChuyenGiaoCongNgheVaDaoTao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdChuyenGiaoCongNgheVaDaoTao" />
+            <div class="form-group">
+                <label asp-for="IdNhiemVuKhcn" class="control-label"></label>
+                <select asp-for="IdNhiemVuKhcn" class="form-control" asp-items="ViewBag.IdNhiemVuKhcn"></select>
+                <span asp-validation-for="IdNhiemVuKhcn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaSoHopDong" class="control-label"></label>
+                <input asp-for="MaSoHopDong" class="form-control" />
+                <span asp-validation-for="MaSoHopDong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ten" class="control-label"></label>
+                <input asp-for="Ten" class="form-control" />
+                <span asp-validation-for="Ten" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TongChiPhiThucHien" class="control-label"></label>
+                <input asp-for="TongChiPhiThucHien" class="form-control" />
+                <span asp-validation-for="TongChiPhiThucHien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TongThoiGianThucHien" class="control-label"></label>
+                <input asp-for="TongThoiGianThucHien" class="form-control" />
+                <span asp-validation-for="TongThoiGianThucHien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdHinhThucChuyenGiaoCongNghe" class="control-label"></label>
+                <select asp-for="IdHinhThucChuyenGiaoCongNghe" class="form-control" asp-items="ViewBag.IdHinhThucChuyenGiaoCongNghe"></select>
+                <span asp-validation-for="IdHinhThucChuyenGiaoCongNghe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhuongThucChuyenGiaoCongNghe" class="control-label"></label>
+                <input asp-for="PhuongThucChuyenGiaoCongNghe" class="form-control" />
+                <span asp-validation-for="PhuongThucChuyenGiaoCongNghe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChuSoHuu" class="control-label"></label>
+                <input asp-for="ChuSoHuu" class="form-control" />
+                <span asp-validation-for="ChuSoHuu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonViChuTri" class="control-label"></label>
+                <input asp-for="DonViChuTri" class="form-control" />
+                <span asp-validation-for="DonViChuTri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonViPhoiHop" class="control-label"></label>
+                <input asp-for="DonViPhoiHop" class="form-control" />
+                <span asp-validation-for="DonViPhoiHop" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DonViNhanChuyenGiao" class="control-label"></label>
+                <input asp-for="DonViNhanChuyenGiao" class="form-control" />
+                <span asp-validation-for="DonViNhanChuyenGiao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TomTat" class="control-label"></label>
+                <input asp-for="TomTat" class="form-control" />
+                <span asp-validation-for="TomTat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenDuAn" class="control-label"></label>
+                <input asp-for="TenDuAn" class="form-control" />
+                <span asp-validation-for="TenDuAn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaTriHopDong" class="control-label"></label>
+                <input asp-for="GiaTriHopDong" class="form-control" />
+                <span asp-validation-for="GiaTriHopDong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNganhKinhTe" class="control-label"></label>
+                <select asp-for="IdNganhKinhTe" class="form-control" asp-items="ViewBag.IdNganhKinhTe"></select>
+                <span asp-validation-for="IdNganhKinhTe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTrangThaiHopDong" class="control-label"></label>
+                <select asp-for="IdTrangThaiHopDong" class="form-control" asp-items="ViewBag.IdTrangThaiHopDong"></select>
+                <span asp-validation-for="IdTrangThaiHopDong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="control-label"></label>
+                <input asp-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="form-control" />
+                <span asp-validation-for="SoNguoiDuocDaoTaoChuyenGiaoCn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdLinhVucNghienCuu" class="control-label"></label>
+                <select asp-for="IdLinhVucNghienCuu" class="form-control" asp-items="ViewBag.IdLinhVucNghienCuu"></select>
+                <span asp-validation-for="IdLinhVucNghienCuu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
 @section Scripts {
-    <script>
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-    </script>
-    <script>
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    </script>
-  
-
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2Kdpy8kP5xvw7LWqBOyntk54J2WW4xNp3Xnt7f0EWFa3jKpGk9XG9eoPe+3" crossorigin="anonymous"></script>
-
-
-
-
-
-
-
-
-
-
-
-

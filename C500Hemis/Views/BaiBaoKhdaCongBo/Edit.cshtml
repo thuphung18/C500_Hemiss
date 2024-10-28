@@ -4,172 +4,81 @@
     ViewData["Title"] = "Edit";
 }
 
-<!-- Bootstrap Icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+<h1>Edit</h1>
 
-<div class="container mt-5 d-flex justify-content-center align-items-center">
-    <div class="card neumorphic-card shadow-lg" style="max-width: 650px; width: 100%;">
-        <div class="card-header bg-gradient-primary text-white text-center">
-            <h3 class="mb-0">Chỉnh sửa Bài Báo</h3>
-        </div>
-        <div class="card-body p-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-                <input type="hidden" asp-for="IdBaiBaoKhdaCongBo" />
-
-                <div class="form-floating mb-3">
-                    <input asp-for="MaBaiBaoKh" class="form-control" placeholder="Nhập mã bài báo" />
-                    <label asp-for="MaBaiBaoKh">Mã Bài Báo</label>
-                    <span asp-validation-for="MaBaiBaoKh" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="TenBaiBaoKh" class="form-control" placeholder="Nhập tên bài báo" />
-                    <label asp-for="TenBaiBaoKh">Tên Bài Báo</label>
-                    <span asp-validation-for="TenBaiBaoKh" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="TenTapChi" class="form-control" placeholder="Nhập tên tạp chí" />
-                    <label asp-for="TenTapChi">Tên Tạp Chí</label>
-                    <span asp-validation-for="TenTapChi" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="GhiChuDuongDanBaiBao" type="number" class="form-control" placeholder="Nhập đường dẫn bài báo" />
-                    <label asp-for="GhiChuDuongDanBaiBao">Ghi chú đường dẫn bài báo</label>
-                    <span asp-validation-for="GhiChuDuongDanBaiBao" class="text-danger"></span>
-                </div>
-
-
-                <div class="form-floating mb-3">
-                    <input asp-for="TapSo" type="number" class="form-control" placeholder="Nhập tập số" />
-                    <label asp-for="TapSo">Tập số</label>
-                    <span asp-validation-for="TapSo" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="Trang" type="number" class="form-control" placeholder="Nhập trang" />
-                    <label asp-for="Trang">Trang</label>
-                    <span asp-validation-for="Trang" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="IdNhiemVuKhcn" class="form-control" placeholder="Nhập mã nhiệm vụ KHCN" />
-                    <label asp-for="IdNhiemVuKhcn">Mã nhiệm vụ KHCN</label>
-                    <span asp-validation-for="IdNhiemVuKhcn" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="NamCongBo" type="number" class="form-control" placeholder="Nhập năm công bố" />
-                    <label asp-for="NamCongBo">Năm Công Bố</label>
-                    <span asp-validation-for="NamCongBo" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <select asp-for="IdTapChiQuocTe" class="form-select" asp-items="ViewBag.IdTapChiQuocTe"></select>
-                    <label asp-for="IdTapChiQuocTe">Tạp chí quốc tế</label>
-                    <span asp-validation-for="IdTapChiQuocTe" class="text-danger"></span>
-                </div>
-
-                
-                <div class="form-floating mb-3">
-                    <select asp-for="IdTapChiTrongNuoc" class="form-select" asp-items="ViewBag.IdTapChiTrongNuoc"></select>
-                    <label asp-for="IdTapChiTrongNuoc">Tạp chí trong nước</label>
-                    <span asp-validation-for="IdTapChiTrongNuoc" class="text-danger"></span>
-                </div>
-
-
-
-                <div class="form-floating mb-3">
-                    <select asp-for="IdXepHangQ" class="form-select" asp-items="ViewBag.IdXepHangQ"></select>
-                    <label asp-for="IdXepHangQ"> Xếp hạng Q</label>
-                    <span asp-validation-for="IdXepHangQ" class="text-danger"></span>
-                </div>
-
-                <div class="d-flex justify-content-between mt-4">
-                    <a asp-action="Index" class="btn btn-gradient-secondary">
-                        <i class="bi bi-arrow-left"></i> Quay lại
-                    </a>
-                    <button type="submit" class="btn btn-gradient-primary">
-                        <i class="bi bi-save"></i> Lưu thay đổi
-                    </button>
-                </div>
-            </form>
-        </div>
+<h4>TbBaiBaoKhdaCongBo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdBaiBaoKhdaCongBo" />
+            <div class="form-group">
+                <label asp-for="IdNhiemVuKhcn" class="control-label"></label>
+                <select asp-for="IdNhiemVuKhcn" class="form-control" asp-items="ViewBag.IdNhiemVuKhcn"></select>
+                <span asp-validation-for="IdNhiemVuKhcn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaBaiBaoKh" class="control-label"></label>
+                <input asp-for="MaBaiBaoKh" class="form-control" />
+                <span asp-validation-for="MaBaiBaoKh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenBaiBaoKh" class="control-label"></label>
+                <input asp-for="TenBaiBaoKh" class="form-control" />
+                <span asp-validation-for="TenBaiBaoKh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenTapChi" class="control-label"></label>
+                <input asp-for="TenTapChi" class="form-control" />
+                <span asp-validation-for="TenTapChi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTapChiTrongNuoc" class="control-label"></label>
+                <select asp-for="IdTapChiTrongNuoc" class="form-control" asp-items="ViewBag.IdTapChiTrongNuoc"></select>
+                <span asp-validation-for="IdTapChiTrongNuoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTapChiQuocTe" class="control-label"></label>
+                <select asp-for="IdTapChiQuocTe" class="form-control" asp-items="ViewBag.IdTapChiQuocTe"></select>
+                <span asp-validation-for="IdTapChiQuocTe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdXepHangQ" class="control-label"></label>
+                <select asp-for="IdXepHangQ" class="form-control" asp-items="ViewBag.IdXepHangQ"></select>
+                <span asp-validation-for="IdXepHangQ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GhiChuDuongDanBaiBao" class="control-label"></label>
+                <input asp-for="GhiChuDuongDanBaiBao" class="form-control" />
+                <span asp-validation-for="GhiChuDuongDanBaiBao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TapSo" class="control-label"></label>
+                <input asp-for="TapSo" class="form-control" />
+                <span asp-validation-for="TapSo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trang" class="control-label"></label>
+                <input asp-for="Trang" class="form-control" />
+                <span asp-validation-for="Trang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NamCongBo" class="control-label"></label>
+                <input asp-for="NamCongBo" class="form-control" />
+                <span asp-validation-for="NamCongBo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-<!-- tùy chỉnh CSS -->
-<style>
-    /*hiệu ứng đổ bóng*/
-    .neumorphic-card {
-        background: #f0f0f3;
-        border-radius: 15px;
-        box-shadow: 9px 9px 16px #c7c7c7, -9px -9px 16px #ffffff;
-    }
-
-    /* Header Gradient */
-    .bg-gradient-primary {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    }
-
-    .btn-gradient-primary {
-        background: linear-gradient(135deg, #42a5f5 0%, #478ed1 100%);
-        color: white;
-        border: none;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-        .btn-gradient-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-    .btn-gradient-secondary {
-        background: linear-gradient(135deg, #b1bfd8 0%, #667292 100%);
-        color: white;
-        border: none;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-        .btn-gradient-secondary:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-    /* Form Floating Labels */
-    .form-floating .form-control {
-        border-radius: 10px;
-        background-color: #f5f5f5;
-        box-shadow: inset 3px 3px 8px #d9d9d9, inset -3px -3px 8px #ffffff;
-    }
-
-        .form-floating .form-control:focus {
-            border-color: #2575fc;
-            box-shadow: 0px 0px 8px rgba(37, 117, 252, 0.5);
-        }
-
-    /* Dark Mode Support */
-    body.dark-mode {
-        background-color: #121212;
-        color: white;
-    }
-
-    .dark-mode .neumorphic-card {
-        background: #1e1e1e;
-        box-shadow: 5px 5px 15px #0e0e0e, -5px -5px 15px #2a2a2a;
-    }
-
-    .dark-mode .form-control {
-        background-color: #2e2e2e;
-        box-shadow: inset 2px 2px 5px #1a1a1a, inset -2px -2px 5px #3e3e3e;
-        color: white;
-    }
-</style>

@@ -13,6 +13,7 @@ namespace C500Hemis.Controllers.CTDT
     {
         private readonly HemisContext _context;
 
+        // Constructor: Inject HemisContext để tương tác với cơ sở dữ liệu
         public ThongTinKiemDinhCuaChuongTrinhController(HemisContext context)
         {
             _context = context;
@@ -21,135 +22,229 @@ namespace C500Hemis.Controllers.CTDT
         // GET: ThongTinKiemDinhCuaChuongTrinh
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbThongTinKiemDinhCuaChuongTrinhs.Include(t => t.IdChuongTrinhDaoTaoNavigation).Include(t => t.IdKetQuaKiemDinhNavigation).Include(t => t.IdToChucKiemDinhNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                // Tải dữ liệu từ bảng TbThongTinKiemDinhCuaChuongTrinhs và các bảng liên quan
+                var hemisContext = _context.TbThongTinKiemDinhCuaChuongTrinhs
+                    .Include(t => t.IdChuongTrinhDaoTaoNavigation)
+                    .Include(t => t.IdKetQuaKiemDinhNavigation)
+                    .Include(t => t.IdToChucKiemDinhNavigation);
+
+                // Trả về view và hiển thị dữ liệu
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
         // GET: ThongTinKiemDinhCuaChuongTrinh/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                // Kiểm tra nếu id là null
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs
-                .Include(t => t.IdChuongTrinhDaoTaoNavigation)
-                .Include(t => t.IdKetQuaKiemDinhNavigation)
-                .Include(t => t.IdToChucKiemDinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdThongTinKiemDinhCuaChuongTrinh == id);
-            if (tbThongTinKiemDinhCuaChuongTrinh == null)
+                // Tìm thông tin kiểm định theo id và tải các bảng liên quan
+                var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs
+                    .Include(t => t.IdChuongTrinhDaoTaoNavigation)
+                    .Include(t => t.IdKetQuaKiemDinhNavigation)
+                    .Include(t => t.IdToChucKiemDinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdThongTinKiemDinhCuaChuongTrinh == id);
+
+                // Kiểm tra nếu không tìm thấy kết quả
+                if (tbThongTinKiemDinhCuaChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+
+                // Trả về view với chi tiết của thông tin kiểm định
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
             }
-
-            return View(tbThongTinKiemDinhCuaChuongTrinh);
         }
 
         // GET: ThongTinKiemDinhCuaChuongTrinh/Create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
-            ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "IdKetQuaKiemDinh");
-            ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "IdToChucKiemDinh");
-            return View();
+            try
+            {
+                // Tạo danh sách các SelectList cho các trường dropdown
+                ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh");
+                ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "KetQuaKiemDinh");
+                ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "ToChucKiemDinh");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
         // POST: ThongTinKiemDinhCuaChuongTrinh/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdThongTinKiemDinhCuaChuongTrinh,IdChuongTrinhDaoTao,IdToChucKiemDinh,IdKetQuaKiemDinh,SoQuyetDinh,NgayCapChungNhanKiemDinh,ThoiHanKiemDinh")] TbThongTinKiemDinhCuaChuongTrinh tbThongTinKiemDinhCuaChuongTrinh)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbThongTinKiemDinhCuaChuongTrinh);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Kiểm tra nếu IdThongTinKiemDinh đã tồn tại
+                //if (TbThongTinKiemDinhCuaChuongTrinhExists(tbThongTinKiemDinhCuaChuongTrinh.IdThongTinKiemDinhCuaChuongTrinh))
+                //    ModelState.AddModelError("IdThongTinKiemDinhCuaChuongTrinh", "Đã tồn tại Id này!");
+
+                // Nếu dữ liệu hợp lệ, lưu vào cơ sở dữ liệu
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbThongTinKiemDinhCuaChuongTrinh);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Nếu có lỗi, hiển thị lại form với thông báo lỗi
+                ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
+                ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "KetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
+                ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "ToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
-            ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "IdKetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
-            ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "IdToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
-            return View(tbThongTinKiemDinhCuaChuongTrinh);
+            catch (DbUpdateException dbEx)
+            {
+                // Lỗi liên quan đến cơ sở dữ liệu như khóa chính, khóa ngoại
+                ModelState.AddModelError("", "Không thể lưu dữ liệu vào cơ sở dữ liệu: " + dbEx.Message);
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
         // GET: ThongTinKiemDinhCuaChuongTrinh/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                // Kiểm tra nếu id là null
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs.FindAsync(id);
-            if (tbThongTinKiemDinhCuaChuongTrinh == null)
-            {
-                return NotFound();
+                // Tìm thông tin kiểm định theo id
+                var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs.FindAsync(id);
+                if (tbThongTinKiemDinhCuaChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+
+                // Tạo SelectList để hiển thị trong form chỉnh sửa
+                ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
+                ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "KetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
+                ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "ToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
-            ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "IdKetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
-            ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "IdToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
-            return View(tbThongTinKiemDinhCuaChuongTrinh);
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
         // POST: ThongTinKiemDinhCuaChuongTrinh/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdThongTinKiemDinhCuaChuongTrinh,IdChuongTrinhDaoTao,IdToChucKiemDinh,IdKetQuaKiemDinh,SoQuyetDinh,NgayCapChungNhanKiemDinh,ThoiHanKiemDinh")] TbThongTinKiemDinhCuaChuongTrinh tbThongTinKiemDinhCuaChuongTrinh)
         {
-            if (id != tbThongTinKiemDinhCuaChuongTrinh.IdThongTinKiemDinhCuaChuongTrinh)
+            try
             {
-                return NotFound();
-            }
+                // Kiểm tra nếu id không khớp
+                if (id != tbThongTinKiemDinhCuaChuongTrinh.IdThongTinKiemDinhCuaChuongTrinh)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                // Kiểm tra dữ liệu hợp lệ và cập nhật
+                if (ModelState.IsValid)
                 {
-                    _context.Update(tbThongTinKiemDinhCuaChuongTrinh);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbThongTinKiemDinhCuaChuongTrinhExists(tbThongTinKiemDinhCuaChuongTrinh.IdThongTinKiemDinhCuaChuongTrinh))
+                    try
                     {
-                        return NotFound();
+                        // Cập nhật thông tin kiểm định
+                        _context.Update(tbThongTinKiemDinhCuaChuongTrinh);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        // Xử lý lỗi nếu dữ liệu đã bị thay đổi từ nguồn khác
+                        if (!TbThongTinKiemDinhCuaChuongTrinhExists(tbThongTinKiemDinhCuaChuongTrinh.IdThongTinKiemDinhCuaChuongTrinh))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            // Ném lỗi nếu không xử lý được
+                            throw;
+                        }
                     }
+                    // Điều hướng trở về trang Index sau khi cập nhật thành công
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+
+                // Nếu dữ liệu không hợp lệ, hiển thị lại form với thông báo lỗi
+                ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
+                ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "KetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
+                ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "ToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbThongTinKiemDinhCuaChuongTrinh.IdChuongTrinhDaoTao);
-            ViewData["IdKetQuaKiemDinh"] = new SelectList(_context.DmKetQuaKiemDinhs, "IdKetQuaKiemDinh", "IdKetQuaKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdKetQuaKiemDinh);
-            ViewData["IdToChucKiemDinh"] = new SelectList(_context.DmToChucKiemDinhs, "IdToChucKiemDinh", "IdToChucKiemDinh", tbThongTinKiemDinhCuaChuongTrinh.IdToChucKiemDinh);
-            return View(tbThongTinKiemDinhCuaChuongTrinh);
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
         // GET: ThongTinKiemDinhCuaChuongTrinh/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                // Kiểm tra nếu id là null
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs
-                .Include(t => t.IdChuongTrinhDaoTaoNavigation)
-                .Include(t => t.IdKetQuaKiemDinhNavigation)
-                .Include(t => t.IdToChucKiemDinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdThongTinKiemDinhCuaChuongTrinh == id);
-            if (tbThongTinKiemDinhCuaChuongTrinh == null)
+                // Tìm thông tin kiểm định theo id và tải các bảng liên quan
+                var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs
+                    .Include(t => t.IdChuongTrinhDaoTaoNavigation)
+                    .Include(t => t.IdKetQuaKiemDinhNavigation)
+                    .Include(t => t.IdToChucKiemDinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdThongTinKiemDinhCuaChuongTrinh == id);
+
+                // Kiểm tra nếu không tìm thấy kết quả
+                if (tbThongTinKiemDinhCuaChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+
+                // Trả về view với chi tiết để xác nhận xóa
+                return View(tbThongTinKiemDinhCuaChuongTrinh);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
             }
-
-            return View(tbThongTinKiemDinhCuaChuongTrinh);
         }
 
         // POST: ThongTinKiemDinhCuaChuongTrinh/Delete/5
@@ -157,18 +252,34 @@ namespace C500Hemis.Controllers.CTDT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs.FindAsync(id);
-            if (tbThongTinKiemDinhCuaChuongTrinh != null)
+            try
             {
-                _context.TbThongTinKiemDinhCuaChuongTrinhs.Remove(tbThongTinKiemDinhCuaChuongTrinh);
-            }
+                // Tìm thông tin kiểm định theo id
+                var tbThongTinKiemDinhCuaChuongTrinh = await _context.TbThongTinKiemDinhCuaChuongTrinhs.FindAsync(id);
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                // Nếu tìm thấy, xóa bản ghi
+                if (tbThongTinKiemDinhCuaChuongTrinh != null)
+                {
+                    _context.TbThongTinKiemDinhCuaChuongTrinhs.Remove(tbThongTinKiemDinhCuaChuongTrinh);
+                }
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _context.SaveChangesAsync();
+
+                // Điều hướng trở về trang Index sau khi xóa thành công
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
+            }
         }
 
+        // Phương thức kiểm tra sự tồn tại của ThongTinKiemDinh dựa trên id
         private bool TbThongTinKiemDinhCuaChuongTrinhExists(int id)
         {
+            // Trả về true nếu IdThongTinKiemDinhCuaChuongTrinh tồn tại, ngược lại false
             return _context.TbThongTinKiemDinhCuaChuongTrinhs.Any(e => e.IdThongTinKiemDinhCuaChuongTrinh == id);
         }
     }
