@@ -1,20 +1,130 @@
 ﻿@model C500Hemis.Models.TbKyLuatNguoiHoc
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "SỬA";
 }
-<style>
-    h1, h4  {
-        text-align: center;
-    }
-    div {
-        margin:auto;
-    }
-</style>
+
+
+@section Styles {
+    <style>
+        /* Đặt hình nền cho phần body của trang */
+        body {
+            background-image: url("https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/cach-thiet-ke-background-dep-2.jpg");
+        }
+
+        /* Định dạng cho khối div chứa form, không phải vùng toàn thể (body) của web */
+        .row {
+            min-width: 500px; /* Kích thước tối thiểu của khối div, có thể cuộn nếu nội dung vượt quá */
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong */
+            justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+            margin-top: 20px; /* Khoảng cách phía trên */
+        }
+
+        /* Định dạng cho form */
+        form {
+            background-color: #f9f9f9; /* Màu nền cho form */
+            padding: 20px; /* Khoảng cách bên trong form */
+            border-radius: 10px; /* Bo góc cho form */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Tạo hiệu ứng bóng cho form, làm nổi bật trên nền */
+        }
+
+        /* Định dạng cho tiêu đề của form */
+        h1 {
+            font-size: 36px; /* Kích thước chữ */
+            text-align: center; /* Căn giữa tiêu đề */
+            color: #333; /* Màu chữ */
+            margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề */
+        }
+
+        /* Định dạng cho các nhãn (label) */
+        label {
+            font-weight: bold; /* Đậm chữ */
+            color: #444; /* Màu chữ cho nhãn */
+        }
+
+        /* Định dạng cho khối chứa các trường thông tin */
+        .form-group {
+            margin-bottom: 15px; /* Khoảng cách giữa các trường thông tin */
+        }
+
+        /* Định dạng cho các ô nhập liệu */
+        .form-control {
+            width: 100%; /* Chiều rộng 100% của phần tử cha */
+            padding: 10px; /* Khoảng cách bên trong ô nhập liệu */
+            font-size: 16px; /* Kích thước chữ trong ô nhập liệu */
+            border: 1px solid #ccc; /* Đường viền ô nhập liệu */
+            border-radius: 5px; /* Bo góc cho ô nhập liệu */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển tiếp khi thay đổi trạng thái */
+        }
+
+            /* Định dạng khi ô nhập liệu được chọn (focus) */
+            .form-control:focus {
+                border-color: #007bff; /* Đổi màu viền khi ô được chọn */
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Tạo hiệu ứng bóng khi ô được chọn */
+                outline: none; /* Ẩn outline mặc định */
+            }
+
+        /* Định dạng cho thông báo lỗi */
+        .text-danger {
+            color: #e3342f; /* Màu chữ cho thông báo lỗi */
+        }
+
+        /* Định dạng cho nút xác nhận */
+        .btn-primary {
+            background-color: #007bff;
+            border: none; /* Không có viền */
+            padding: 12px 20px; /* Khoảng cách bên trong nút */
+            color: white; /* Màu chữ */
+            font-size: 16px;
+            border-radius: 5px; /* Bo góc cho nút */
+            cursor: pointer; /* Hiển thị con trỏ khi di chuột qua nút */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi di chuột qua nút */
+        }
+
+            /* Định dạng khi di chuột vào nút xác nhận */
+            .btn-primary:hover {
+                background-color: #0056b3;
+                transform: scale(1.05); /* Tăng kích thước nút một chút */
+            }
+
+        /* Định dạng cho nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị nút như một khối inline */
+            padding: 10px 15px; /* Khoảng cách bên trong nút */
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px; /* Bo góc cho nút */
+            text-decoration: none; /* Bỏ gạch chân */
+            margin-top: 15px; /* Khoảng cách phía trên */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi di chuột qua */
+        }
+
+            /* Định dạng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Đổi màu nền khi di chuột qua */
+                transform: scale(1.05); /* Tăng kích thước nút một chút */
+                color: blue;
+            }
+
+        /* Căn giữa nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng Flexbox để căn giữa */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+        }
+
+        /* Định dạng cho thông báo lỗi tổng hợp */
+        .validation-summary-errors {
+            background-color: #f8d7da;
+            color: yellow; /* Màu chữ cho thông báo lỗi */
+            padding: 10px; /* Khoảng cách bên trong thông báo */
+            border-radius: 5px; /* Bo góc cho thông báo */
+            border: 1px solid #f5c6cb; /* Đường viền cho thông báo lỗi */
+            margin-bottom: 20px; /* Khoảng cách phía dưới thông báo lỗi */
+        }
+    </style>
+}
 <h1>Chỉnh sửa</h1>
 
-<h4>Kỷ luật người học<h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -55,20 +165,14 @@
                 <input asp-for="NamBiKyLuat" class="form-control" />
                 <span asp-validation-for="NamBiKyLuat" class="text-danger"></span>
             </div>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <input type="submit" value="Lưu" class="btn btn-primary" />
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary"</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+            <div class="sub_back">
+                <div class="submit">
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+
+                <a class="back" asp-action="Index">Quay lại</a>
+
+            </div>
         </form>
     </div>
 </div>
@@ -76,5 +180,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,0 +1,143 @@
+﻿@model C500Hemis.Models.TbThuVienTrungTamHocLieu
+@{
+    ViewData["Title"] = "Details";
+}
+<h1 align="center">Thông tin chi tiết</h1>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #000;
+        padding: 8px;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: transparent;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .grid-item {
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .background-section {
+        background-image: url("https://th.bing.com/th/id/R.aec8747cbcf158838fc62ce96cf15493?rik=AZkhRbjcOLLU0w&pid=ImgRaw&r=0");
+        background-size: cover; /* Hình ảnh sẽ phủ đầy khu vực */
+        background-position: center; /* Căn giữa hình ảnh */
+        height: 400px; /* Chiều cao của phần tử */
+        width: 100%; /* Chiều rộng của phần tử */
+    }
+</style>
+<body class="background-section">
+    <div class="container">
+        <h4 style="text-align:center">Thư Viện Trung Tâm Học Liệu</h4>
+        <hr />
+        <div class="grid-container">
+            <div class="grid-item">
+                <table>
+                    <tr>
+                        <th>Tên Thư Viện</th>
+                        <td>@Html.DisplayFor(model => model.TenThuVienTrungTamHocLieu)</td>
+                    </tr>
+                    <tr>
+                        <th>Năm Đưa Vào Sử Dụng</th>
+                        <td>@Html.DisplayFor(model => model.NamDuaVaoSuDung)</td>
+                    </tr>
+                    <tr>
+                        <th>Diện Tích</th>
+                        <td>@Html.DisplayFor(model => model.DienTich)</td>
+                    </tr>
+                    <tr>
+                        <th>Diện Tích Phòng Đọc</th>
+                        <td>@Html.DisplayFor(model => model.DienTichPhongDoc)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Phòng Đọc</th>
+                        <td>@Html.DisplayFor(model => model.SoPhongDoc)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Máy Tính</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongMayTinh)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Chỗ Ngồi</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongChoNgoi)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Sách</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongSach)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Tạp Chí</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongTapChi)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-item">
+                <table>
+
+                    <tr>
+                        <th>Số Lượng Sách Điện Tử</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongSachDienTu)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Tạp Chí Điện Tử</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongTapChiDienTu)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Thư Viện Điện Tử Liên Kết Nước Ngoài</th>
+                        <td>@Html.DisplayFor(model => model.SoLuonngThuVienDienTuLienKetNn)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Đầu Sách</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongDauSach)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Đầu Tạp Chí</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongDauTapChi)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Đầu Sách Điện Tử</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongDauSachDienTu)</td>
+                    </tr>
+                    <tr>
+                        <th>Số Lượng Đầu Tạp Chí Điện Tử</th>
+                        <td>@Html.DisplayFor(model => model.SoLuongDauTapChiDienTu)</td>
+                    </tr>
+                    <tr>
+                        <th>Hình Thức Sở Hữu</th>
+                        <td>@Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)</td>
+                    </tr>
+                    <tr>
+                        <th>Tình Trạng Cơ Sở Vật Chất</th>
+                        <td>@Html.DisplayFor(model => model.IdTinhTrangCsvcNavigation.IdTinhTrangCoSoVatChat)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <p></p>
+    </div>
+    <div class="text-center mb-3">
+        <a asp-action="Edit" asp-route-id="@Model?.IdThuVienTrungTamHocLieu" class="btn btn-primary mr-2">Sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</body>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

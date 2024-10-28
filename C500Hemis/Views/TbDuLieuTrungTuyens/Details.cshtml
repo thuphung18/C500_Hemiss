@@ -1,202 +1,144 @@
 ﻿@model C500Hemis.Models.TbDuLieuTrungTuyen
 
 @{
-    ViewData["Title"] = "Thông tin chi tiết dữ liệu trúng tuyển";
+    ViewData["Title"] = "Details";
 }
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-    /* Màu nền tổng thể của trang */
-    body {
-        background-color: #f0f4f7; /* Màu nền phía sau */
-    }
+<h1>Details</h1>
 
-    /* Định dạng header cho thẻ card */
-    .card-header {
-        background-color: #007bff; /* Màu xanh đậm hơn */
-        color: white;
-        text-transform: uppercase; /* Chữ hoa */
-        letter-spacing: 1px; /* Tăng khoảng cách giữa các chữ */
-    }
-
-    /* Định dạng cho các bảng (card) */
-    .card {
-        background-color: #ffffff; /* Màu nền cho từng bảng */
-        border: 1px solid #ddd; /* Đường viền nhẹ */
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Bóng cho thẻ card */
-    }
-
-    /* Các dòng trong bảng */
-    .card-body .d-flex {
-        border-bottom: 1px solid #dee2e6; /* Thêm đường kẻ giữa các hàng */
-        padding: 10px 0; /* Thêm khoảng cách giữa các hàng */
-    }
-
-        /* Xóa đường kẻ cuối cùng */
-        .card-body .d-flex:last-child {
-            border-bottom: none;
-        }
-
-    /* Định dạng cho nhãn */
-    .font-weight-bold {
-        color: #333; /* Màu đen nhẹ cho nhãn */
-    }
-
-    /* Căn giữa dữ liệu */
-    .d-flex .data {
-        text-align: center;
-    }
-
-
-    /* Hiệu ứng cho các nút hành động */
-    .btn {
-        transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
-        border-radius: 5px; /* Bo tròn nhẹ cho nút */
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-
-        /* Hiệu ứng hover: thay đổi màu và bóng */
-        .btn:hover {
-            transform: translateY(-3px); /* Di chuyển nút lên một chút khi hover */
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Tạo bóng mờ khi hover */
-        }
-
-        /* Hiệu ứng khi nhấn nút (active) */
-        .btn:active {
-            transform: scale(0.95); /* Giảm kích thước nhẹ khi nhấn */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Giảm bóng khi nhấn */
-        }
-</style>
-
-<div class="container">
-    <h1 class="text-center my-4">Thông tin chi tiết dữ liệu trúng tuyển</h1>
-
-    <div class="row">
-        <!-- Bảng 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center">
-                    Thông Tin Cá Nhân
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">ID dữ liệu trúng tuyển:</span>
-                        <span class="data">@Html.DisplayFor(model => model.IdDuLieuTrungTuyen)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Số Cccd/ Hộ Chiếu:</span>
-                        <span class="data">@Html.DisplayFor(model => model.Cccd)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Họ và Tên:</span>
-                        <span class="data">@Html.DisplayFor(model => model.HoVaTen)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Mã Tuyển Sinh:</span>
-                        <span class="data">@Html.DisplayFor(model => model.MaTuyenSinh)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Khoa Đào Tạo Trúng Tuyển:</span>
-                        <span class="data">@Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Đối Tượng Đầu Vào:</span>
-                        <span class="data">@Html.DisplayFor(model => model.IdDoiTuongDauVao)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bảng 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center">
-                    Thông Tin Trúng Tuyển
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Tổ Hợp Môn Trúng Tuyển:</span>
-                        <span class="data">@Html.DisplayFor(model => model.ToHopMonTrungTuyen)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Điểm Môn 1:</span>
-                        <span class="data">@Html.DisplayFor(model => model.DiemMon1)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Điểm Môn 2:</span>
-                        <span class="data">@Html.DisplayFor(model => model.DiemMon2)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Điểm Môn 3:</span>
-                        <span class="data">@Html.DisplayFor(model => model.DiemMon3)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Điểm Ưu Tiên:</span>
-                        <span class="data">@Html.DisplayFor(model => model.DiemUuTien)</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Tổng Điểm Xét Tuyển:</span>
-                        <span class="data">@Model.TongDiemXetTuyen</span>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Số Quyết Định Trúng Tuyển:</span>
-                        <span class="data">
-                            @(Model.SoQuyetDinhTrungTuyen != null ? Model.SoQuyetDinhTrungTuyen : "Chưa được nhập")
-                        </span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Ngày Ban Hành Quyết Định:</span>
-                        <span class="data">
-                            @(Model.NgayBanHanhQuyetDinhTrungTuyen.HasValue
-                                ? Model.NgayBanHanhQuyetDinhTrungTuyen.Value.ToString("dd/MM/yyyy")
-                                : "Chưa được nhập")
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bảng 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header text-center">
-                    Thông Tin Khác
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Chương Trình Đào Tạo Đã Tốt Nghiệp Trình Độ Đại Học:</span>
-                        <span class="data">
-                            @(Model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc != null ? Model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc : "Chưa được nhập")
-                        </span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Ngành Đào Tạo Đại Học:</span>
-                        <span class="data">
-                            @(Model.NganhDaTotNghiepTrinhDoDaiHoc != null ? Model.NganhDaTotNghiepTrinhDoDaiHoc : "Chưa được nhập")
-                        </span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Chương Trình Đào Tạo Đã Tốt Nghiệp Trình Độ Thạc Sĩ:</span>
-                        <span class="data">
-                            @(Model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc != null ? Model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc : "Chưa được nhập")
-                        </span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="font-weight-bold">Ngành Đào Tạo Thạc Sĩ:</span>
-                        <span class="data">
-                            @(Model.NganhDaTotNghiepTrinhDoThacSi != null ? Model.NganhDaTotNghiepTrinhDoThacSi : "Chưa được nhập")
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Các nút hành động -->
-    <div class="d-flex justify-content-center mt-4">
-        <a class="btn btn-warning mx-2" asp-action="Edit" asp-route-id="@Model?.IdDuLieuTrungTuyen">Chỉnh sửa thông tin</a>
-        <a class="btn btn-danger mx-2" asp-action="Delete" asp-route-id="@Model?.IdDuLieuTrungTuyen">Xóa thông tin</a>
-        <a class="btn btn-info mx-2" asp-action="Index">Quay lại trang dữ liệu trúng tuyển</a>
-    </div>
+<div>
+    <h4>TbDuLieuTrungTuyen</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cccd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cccd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoVaTen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoVaTen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaTuyenSinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaTuyenSinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TruongThpt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TruongThpt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ToHopMonTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemMon3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemMon3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DiemUuTien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DiemUuTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TongDiemXetTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TongDiemXetTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoQuyetDinhTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.IdDoiTuongDauVao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdDoiTuongUuTienNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdDoiTuongUuTienNavigation.IdDoiTuongUuTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdHinhThucTuyenSinhNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdHinhThucTuyenSinhNavigation.IdHinhThucTuyenSinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdKhuVucNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdKhuVucNavigation.IdKhuVuc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdDuLieuTrungTuyen">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>
