@@ -2,16 +2,162 @@
 
 @{
     ViewData["Title"] = "Index";
+        <link href="~/themify-icons/themify-icons.css" rel="stylesheet" />
 }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=DynaPuff:wght@400..700&family=Honk&family=Lilita+One&family=Lobster&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Pacifico&family=Spicy+Rice&display=swap" rel="stylesheet">
+<style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: content-box;
+    }
 
-<h1>Index</h1>
+    label {
+        display: inline-block;
+        margin: 16px 0;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    body {
+        background-image: url('images/tailocqualon.jpg');
+    }
+
+    .action-create{
+        margin-right: 32px;
+        padding: 35px 20px; /* Tăng padding để các nút có kích thước đồng đều */
+        border-radius: 5px; /* Bo góc cho nút */
+        color: white;
+        background-color: #4CAF50;
+        text-decoration: none
+    }
+
+    .action-create:hover{
+         transform: scale(1.1) !important;
+         background-color: #b0d4b8; /* Ví dụ hover cho Chỉnh sửa */
+         transition: background-color 0.3s ease; /* Hiệu ứng chuyển mượt mà */
+    }
+    .action-link {
+        padding: 5px 10px; /* Tăng padding để các nút có kích thước đồng đều */
+        border-radius: 5px; /* Bo góc cho nút */
+        white-space: nowrap; /*Không cho phép xuống dòng các cột */
+        text-decoration: none;
+        display: flex;
+        justify-content: center; /* Căn đều khoảng cách giữa các nút */
+        align-items: baseline; /* Căn giữa theo chiều dọc */
+    }
+
+    .action-link:hover {
+        transform: scale(1.1);
+        background-color: #90CAF9; /* Ví dụ hover cho Chỉnh sửa */
+        transition: background-color 0.3s ease; /* Hiệu ứng chuyển mượt mà */
+    }
+
+    th{
+        white-space: nowrap; /* Đảm bảo nội dung không bị xuống dòng */
+        background-color: #31473a !important;
+        color: #edf4f2;
+        text-align: center;
+    }
+
+    td{
+        text-align: center;
+    }
+
+    h1 {
+        /* text-align: center;
+        margin-bottom: 50px; */
+        text-shadow: 2px 2px 4px #e3d5d5;
+        font-family: "Lobster", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 68px;
+    }
+
+    #edit{
+        color: white;
+        background-color: #42A5F5;
+    }
+
+    #detail{
+        color: black;
+        background-color: #81C784;
+    }
+
+    #delete{
+        color: #edf4f2;
+        background-color: #F44336;
+    }
+
+    /* Đặt màu nền cho các hàng chẵn */
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2; /* Màu nền cho hàng chẵn */
+    }
+
+    /* Đặt màu nền cho các hàng lẻ */
+    table.dataTable tbody tr:nth-child(odd) {
+        background-color: #ffffff; /* Màu nền cho hàng lẻ */
+    }
+
+    /* Hiệu ứng hover với transition */
+    table.dataTable tbody tr {
+        transition: background-color 0.3s ease; /* Hiệu ứng mượt khi hover */
+    }
+
+    table.dataTable tbody tr:hover {
+        background-color: #d4edda; /* Màu hover */
+    }
+
+        /* Tùy chọn thêm để thay đổi màu chữ */
+    table.dataTable tbody tr td {
+        padding: 8px; /* Thêm padding cho các ô */
+    }
+
+    [class^="ti-"], [class*=" ti-"] {
+        font-family: 'themify';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: normal;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Tùy chỉnh hộp tìm kiếm */
+        .dataTables_filter input {
+            padding: 10px; /* Thêm khoảng cách bên trong */
+            border-radius: 5px; /* Bo góc cho ô tìm kiếm */
+            border: 2px solid #4CAF50; /* Màu viền */
+            width: 300px; /* Đặt chiều rộng cho ô tìm kiếm */
+        }
+
+            .dataTables_filter input:focus {
+                outline: none; /* Bỏ viền khi ô được chọn */
+                border-color: #81C784; /* Đổi màu viền khi người dùng nhập liệu */
+            }
+
+    .d-flex {
+        display: flex !important;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        align-items: center;
+    }
+</style>
+
+
+
+<div class="d-flex justify-content-between" style="background-color: #32a3637d; padding: 16px;">
+    <h1>THÔNG TIN KIỂM ĐỊNH CỦA CHƯƠNG TRÌNH</h1>
+
+        <a class="action-create" asp-action="Create" title="Thêm bản ghi mới"><i class="ti-plus"></i> Thêm mới</a>
+</div>
+<table class="table table-bordered">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdThongTinKiemDinhCuaChuongTrinh)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.SoQuyetDinh)
             </th>
@@ -30,36 +176,81 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdToChucKiemDinhNavigation)
             </th>
-            <th></th>
+            <th>THÊM</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoQuyetDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayCapChungNhanKiemDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiHanKiemDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdKetQuaKiemDinhNavigation.IdKetQuaKiemDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdToChucKiemDinhNavigation.IdToChucKiemDinh)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdThongTinKiemDinhCuaChuongTrinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoQuyetDinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayCapChungNhanKiemDinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiHanKiemDinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.TenChuongTrinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdKetQuaKiemDinhNavigation.KetQuaKiemDinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdToChucKiemDinhNavigation.ToChucKiemDinh)
+                </td>
+                <td>
+                        <a class="action-link" asp-action="Edit" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh" id="edit" title="Chỉnh sửa bản ghi"><i class="ti-pencil-alt"></i> Chỉnh sửa</a>
+                        <a class="action-link" asp-action="Details" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh" id="detail" title="Xem thông tin chi tiết bản ghi"><i class="ti-info-alt"> Chi tiết</i></a>
+                        <a class="action-link" asp-action="Delete" asp-route-id="@item.IdThongTinKiemDinhCuaChuongTrinh" id="delete" title="Xóa bản ghi này"><i class="ti-trash" title="Xóa bản ghi này"></i> Xóa</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<script>
+    $(document).ready(function () {
+        var table = new DataTable('.table', {
+            lengthMenu: [5, 10, 15, 20, 25, 30], // Đặt các giá trị cho menu số bản ghi
+            language: {
+                processing: "Đang tải dữ liệu", // Thông báo khi dữ liệu đang được xử lý
+                search: "Tìm nhanh: ", // Văn bản cho ô tìm kiếm
+                lengthMenu: "Số bản ghi hiển thị trên trang _MENU_ ", // Tùy chọn số bản ghi hiển thị
+                info: "Tổng bản ghi: _TOTAL_", // Hiển thị thông tin tổng số bản ghi
+                infoEmpty: "Chưa có nội dung nào trong danh sách", // Thông báo khi không có dữ liệu
+                infoFiltered: "",
+                loadingRecords: "Đang tải...", // Thông báo khi đang tải dữ liệu
+                zeroRecords: "Không tìm thấy dữ liệu!", // Thông báo khi không tìm thấy dữ liệu
+                emptyTable: "Không có dữ liệu nào!", // Thông báo khi không có dữ liệu trong bảng
+                paginate: {
+                    first: "Trang đầu", // Nút chuyển đến trang đầu
+                    previous: "Trang trước", // Nút chuyển về trang trước
+                    next: "Trang sau", // Nút chuyển đến trang sau
+                    last: "Trang cuối" // Nút chuyển đến trang cuối
+                },
+                aria: {
+                    sortAscending: ": Đang sắp xếp tăng dần", // Thông báo khi sắp xếp tăng dần
+                    sortDescending: ": Đang sắp xếp giảm dần" // Thông báo khi sắp xếp giảm dần
+                }
+            } // Đóng đối tượng language
+        }); // Đóng hàm DataTable
+
+        // Di chuyển ô tìm kiếm lên trên tiêu đề
+        $('.dataTables_filter').detach().appendTo('.d-flex');
+    }); // Đóng hàm ready
+
+</script>

@@ -6,43 +6,40 @@
 
 @section Heads {
     <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #fafbed;
+        }
+    </style>
 }
 
 <div class="container mt-4">
-    <h4 class="text-left">Xác Nhận Xoá Thông Tin</h4>
+    <h2 class="text-left">Xác Nhận Xoá Thông Tin</h2>
     <hr />
-    <dl class="row g-0 text-left">
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.IdChuongTrinhDaoTao)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.IdGiaHanChuongTrinhDaoTao)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.IdGiaHanChuongTrinhDaoTao)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.NgayBanHanhVanBanGiaHan)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.GiaHanLanThu)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.GiaHanLanThu)
-        </dd>
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
-        </dd>
-    </dl>
+    <table class="table ">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdGiaHanChuongTrinhDaoTao)</th>
+                <td>@Html.DisplayFor(model => model.IdGiaHanChuongTrinhDaoTao)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)</th>
+                <td>@Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.TenChuongTrinh)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)</th>
+                <td>@Html.DisplayFor(model => model.SoQuyetDinhGiaHan)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)</th>
+                <td>@Html.DisplayFor(model => model.NgayBanHanhVanBanGiaHan)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.GiaHanLanThu)</th>
+                <td>@Html.DisplayFor(model => model.GiaHanLanThu)</td>
+            </tr>
+        </tbody>
+    </table>
 
     <div class="text-left mt-4">
         <form asp-action="Delete" class="d-inline">

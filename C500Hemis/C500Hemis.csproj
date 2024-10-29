@@ -22,10 +22,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\KHCN\" />
+    <Folder Include="Controllers\CSGD\" />
     <Folder Include="Controllers\TS\" />
     <Folder Include="Controllers\NH\" />
     <Folder Include="TaiLieu\" />
-    <Folder Include="Views\CSGD\" />
   </ItemGroup>
 
 </Project>
