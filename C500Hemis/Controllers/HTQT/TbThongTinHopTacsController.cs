@@ -18,50 +18,31 @@ namespace C500Hemis.Controllers.HTQT
             _context = context;
         }
 
-        // GET: TbThongTinHopTacs
-        public async Task<IActionResult> Index()
+        // GET: TbThongTinHopTac
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var hemisContext = _context.TbThongTinHopTacs
-            .Include(t => t.IdHinhThucHopTacNavigation)
-            .Include(t => t.IdToChucHopTacNavigation);
-            return View(await hemisContext.ToListAsync());
-        }
+            // Lấy danh sách thông tin hợp tác
+            IQueryable<TbThongTinHopTac> query = _context.TbThongTinHopTacs
+                .Include(t => t.IdToChucHopTacNavigation)
+                .Include(t => t.IdHinhThucHopTacNavigation);
 
-        //Chức năng tìm kiếm
-        [HttpGet("index-search")]
-        public async Task<IActionResult> Index(string searchString)
-        {
-            try
+            // Nếu có giá trị tìm kiếm, lọc theo các trường thông tin
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                // Lấy toàn bộ dữ liệu từ bảng
-                var query = _context.TbThongTinHopTacs
-                    .Include(t => t.IdHinhThucHopTacNavigation)
-                    .Include(t => t.IdToChucHopTacNavigation)
-                   
-                    .AsQueryable(); // Chuyển đổi thành IQueryable để có thể lọc dữ liệu
-
-                // Nếu có tham số tìm kiếm, lọc dữ liệu theo từ khóa
-                if (!string.IsNullOrEmpty(searchString))
-                {
-                    query = query.Where(t => t.TenThoaThuan.Contains(searchString) ||
-                                             t.ThongTinLienHeDoiTac.Contains(searchString) ||
-                                             t.IdThongTinHopTac.ToString().Contains(searchString));
-                }
-
-                ViewData["CurrentFilter"] = searchString; // Truyền lại từ khóa tìm kiếm cho View
-                return View(await query.ToListAsync()); // Trả về kết quả sau khi lọc
+                query = query.Where(r =>
+                    r.IdThongTinHopTac.ToString().Contains(searchTerm)); // Tìm theo Id tổ chức hợp tác quốc tế                 
+                /*r.TenThoaThuan.Contains(searchTerm) || // Tìm theo Tên thỏa thuận
+                r.ThongTinLienHeDoiTac.Contains(searchTerm) || // Tìm theo Thông tin liên hệ đối tác
+                r.MucTieu.Contains(searchTerm) || // Tìm theo Mục tiêu
+                r.DonViTrienKhai.Contains(searchTerm) || // Tìm theo Đơn vị triển khai
+                r.SanPhamChinh.Contains(searchTerm)); // Tìm theo Sản phẩm chính*/
             }
-            catch (Exception ex)
-            {
-                return BadRequest();
-            }
+
+            // Trả về view với danh sách đã lọc
+            var result = await query.ToListAsync();
+            return View(result);
+
         }
-
-
-
-
-
-
 
         // GET: TbThongTinHopTacs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -104,7 +85,7 @@ namespace C500Hemis.Controllers.HTQT
                     if (await _context.TbThongTinHopTacs.AnyAsync(t => t.IdThongTinHopTac == tbThongTinHopTac.IdThongTinHopTac))
                     {
                         // Nếu có bản ghi trùng lặp, thêm thông báo lỗi vào ModelState
-                        ModelState.AddModelError("IdThongTinHopTac", "Đã có bản ghi với Id này. Vui lòng nhập Id khác.");
+                        ModelState.AddModelError("IdThongTinHopTac", "Đã trùng ID vui lòng nhập Id khác.");
                     }
                     else
                     {
@@ -133,7 +114,7 @@ namespace C500Hemis.Controllers.HTQT
                 {
                     // Xử lý ngoại lệ liên quan đến việc cập nhật cơ sở dữ liệu
                     ModelState.AddModelError("", "Không thể thêm bản ghi vào cơ sở dữ liệu. Vui lòng thử lại.");
-                  
+                    // Log the exception if needed (e.g., using a logging framework)
                 }
             }
 
@@ -142,6 +123,7 @@ namespace C500Hemis.Controllers.HTQT
             ViewData["IdToChucHopTac"] = new SelectList(_context.TbToChucHopTacQuocTes, "IdToChucHopTacQuocTe", "IdToChucHopTacQuocTe", tbThongTinHopTac.IdToChucHopTac);
             return View(tbThongTinHopTac);
         }
+
 
         // GET: TbThongTinHopTacs/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -161,9 +143,8 @@ namespace C500Hemis.Controllers.HTQT
             return View(tbThongTinHopTac);
         }
 
+
         // POST: TbThongTinHopTacs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdThongTinHopTac,IdToChucHopTac,ThoiGianHopTacTu,ThoiGianHopTacDen,TenThoaThuan,ThongTinLienHeDoiTac,MucTieu,DonViTrienKhai,IdHinhThucHopTac,SanPhamChinh")] TbThongTinHopTac tbThongTinHopTac)
@@ -179,6 +160,7 @@ namespace C500Hemis.Controllers.HTQT
                 {
                     _context.Update(tbThongTinHopTac);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -191,8 +173,9 @@ namespace C500Hemis.Controllers.HTQT
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
+            // If there's a validation error, return to Edit view instead of Create view
             ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "IdHinhThucHopTac", tbThongTinHopTac.IdHinhThucHopTac);
             ViewData["IdToChucHopTac"] = new SelectList(_context.TbToChucHopTacQuocTes, "IdToChucHopTacQuocTe", "IdToChucHopTacQuocTe", tbThongTinHopTac.IdToChucHopTac);
             return View(tbThongTinHopTac);
@@ -221,6 +204,7 @@ namespace C500Hemis.Controllers.HTQT
         // POST: TbThongTinHopTacs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tbThongTinHopTac = await _context.TbThongTinHopTacs.FindAsync(id);

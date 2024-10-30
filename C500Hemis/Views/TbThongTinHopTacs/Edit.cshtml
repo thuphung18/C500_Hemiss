@@ -4,95 +4,134 @@
     ViewData["Title"] = "Chỉnh sửa";
 }
 
-<h1 style="text-align:center; color:aliceblue">Chỉnh sửa </h1>
+<h1 style="text-align:center; color:white">Chỉnh sửa </h1>
 
 
 <style>
     body {
-        background-image: url('/images/nen2.jpg');
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a1a; /* Nền tối */
+        color: #f0f0f0; /* Màu chữ sáng hơn để dễ đọc */
+        font-family: Arial, sans-serif; /* Font chữ dễ đọc */
+        position: center;
     }
 
-    .form-container {
-        max-width: 800px;
-        margin: auto;
-        background-color: #f7f9fc;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-    }
+        /* Hiệu ứng nền mờ */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/images/subtle-prism.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* Đặt nền phía sau nội dung */
+        }
 
-    h1, h4 {
+    h2 {
+        color: #ffffff; /* Màu chữ sáng cho tiêu đề */
         text-align: center;
-        color: #333;
-        margin-bottom: 20px;
+    }
+    /* Định dạng cho container của form */
+    .form-container {
+        max-width: 750px; /* Giới hạn chiều rộng tối đa của form */
+        margin: auto; /* Căn giữa form trên trang */
+        background-color: rgba(255, 255, 255, 0.2); /* Nền mờ với độ trong suốt */
+        backdrop-filter: blur(10px); /* Hiệu ứng làm mờ nền phía sau form */
+        padding: 30px; /* Khoảng cách bên trong container */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Đổ bóng nhẹ để tạo chiều sâu */
+        border-radius: 10px; /* Bo góc mềm mại */
+        color: #f0f0f0; /* Màu chữ sáng hơn để dễ đọc */
     }
 
+
+    /* Định dạng cho các tiêu đề */
+    h1, h4 {
+        text-align: center; /* Căn giữa các tiêu đề */
+        color: #333; /* Màu chữ cho tiêu đề */
+        margin-bottom: 20px; /* Khoảng cách dưới để tạo khoảng trống */
+    }
+
+    /* Định dạng cho bảng */
     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
+        width: 100%; /* Chiếm toàn bộ chiều rộng của container */
+        border-collapse: collapse; /* Xóa khoảng cách giữa các ô */
+        margin-bottom: 20px; /* Khoảng cách dưới bảng */
+        z-index: -1;
     }
 
+        /* Định dạng cho ô tiêu đề và ô dữ liệu của bảng */
         table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+            padding: 10px; /* Khoảng cách bên trong các ô */
+            border: 1px solid #ddd; /* Đường viền cho ô */
+            text-align: left; /* Căn trái nội dung */
         }
 
+        /* Định dạng cho ô tiêu đề của bảng */
         table th {
-            background-color: #4CAF50; /* màu nền */
-            color: #fff; /* màu  */
+            background-color: #4CAF50; /* Màu nền cho tiêu đề */
+            color: #fff; /* Màu chữ cho tiêu đề */
         }
 
+        /* Định dạng cho ô dữ liệu của bảng */
         table td {
-            background-color: #f2f2f2; 
+            background-color: #f2f2f2; /* Màu nền nhạt cho ô dữ liệu */
         }
 
+        /* Hiệu ứng khi hover trên dòng của bảng */
         table tr:hover {
-            background-color: #ddd; /* hiệu ứng */
+            background-color: #ddd; /* Đổi màu nền khi hover */
         }
-
+        /* Định dạng cho label trong form */
     .form-group label {
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
+        font-weight: bold; /* In đậm tiêu đề của trường */
+        color: #333; /* Màu chữ của tiêu đề */
+        display: block; /* Đảm bảo label chiếm toàn bộ chiều ngang */
+        margin-bottom: 5px; /* Khoảng cách dưới tiêu đề */
     }
 
+    /* Định dạng cho input của form */
     .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #d1d1d1;
-        border-radius: 5px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+        width: 100%; /* Input chiếm toàn bộ chiều ngang */
+        padding: 10px; /* Khoảng cách bên trong input */
+        border: 1px solid #d1d1d1; /* Đường viền mặc định của input */
+        border-radius: 5px; /* Bo góc nhẹ nhàng */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
     }
 
+        /* Hiệu ứng khi input được focus */
         .form-control:focus {
-            border-color: #05c46b;
-            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); 
-            outline: none;
+            border-color: #05c46b; /* Đổi màu viền khi focus */
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Tạo hiệu ứng ánh sáng mờ quanh input */
+            outline: none; /* Bỏ viền mặc định của trình duyệt */
         }
 
+    /* Định dạng cho nút bấm chính */
     .btn-primary {
-        width: 100%;
-        padding: 12px;
-        background-color: #05c46b;
-        border: none;
-        color: #fff;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp và nhấn nút mượt mà */
+        width: 100%; /* Nút bấm chiếm toàn bộ chiều ngang */
+        padding: 12px; /* Khoảng cách bên trong nút */
+        background-color: #000000; /* Màu nền của nút */
+        border: none; /* Bỏ viền cho nút */
+        color: white; /* Màu chữ trắng */
+        font-weight: bold; /* In đậm chữ */
+        border-radius: 5px; /* Bo góc nhẹ nhàng */
+        cursor: pointer; /* Đổi con trỏ thành con trỏ chuột */
+        margin-top: 20px; /* Khoảng cách phía trên của nút */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi và phóng to khi hover */
     }
 
+        /* Hiệu ứng khi hover trên nút */
         .btn-primary:hover {
-            background-color: #048a55;
-            transform: scale(1.05); /*Lớn hơn một chút*/
+            background-color: #949093; /* Đổi màu nền khi hover */
+            transform: scale(1.05); /* Tăng kích thước một chút khi hover */
         }
 </style>
+
+
+
 
 
 <div class="form-container">
@@ -106,10 +145,15 @@
             <tr>
                 <td>
 
-                    
                     <div class="form-group">
-                        <label asp-for="IdToChucHopTac" class="control-label"> Id Tổ chức hợp tác </label>
-                        <select asp-for="IdToChucHopTac" class="form-control" asp-items="ViewBag.IdToChucHopTac"></select>
+                        <label asp-for="IdThongTinHopTac" class="control-label"> ID Thông tin hợp tác </label>
+                        <input asp-for="IdThongTinHopTac" class="form-control" />
+                        <span asp-validation-for="IdThongTinHopTac" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdToChucHopTac" class="control-label">Mã hợp tác</label>
+                        <input asp-for="IdToChucHopTac" class="form-control" />
+                        <span asp-validation-for="IdToChucHopTac" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="ThoiGianHopTacTu" class="control-label"> Thời gian hợp tác từ </label>
@@ -141,7 +185,10 @@
                         <input asp-for="DonViTrienKhai" class="form-control" />
                         <span asp-validation-for="DonViTrienKhai" class="text-danger"></span>
                     </div>
-                   
+                    <div class="form-group">
+                        <label asp-for="IdHinhThucHopTac" class="control-label"> ID Hình thức hợp tác </label>
+                        <select asp-for="IdHinhThucHopTac" class="form-control" asp-items="ViewBag.IdHinhThucHopTac"></select>
+                    </div>
                     <div class="form-group">
                         <label asp-for="SanPhamChinh" class="control-label"> Sản phẩm chính </label>
                         <input asp-for="SanPhamChinh" class="form-control" />
@@ -152,17 +199,20 @@
             </tr>
         </table>
 
-            <div class="form-group">
-                <input type="submit" value="Lưu" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 </div>
 
 <div>
+
     <a asp-action="Index"> Quay lại </a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
