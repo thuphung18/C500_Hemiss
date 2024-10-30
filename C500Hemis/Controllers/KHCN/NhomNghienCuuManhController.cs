@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.KHCN
-   
 {
     public class NhomNghienCuuManhController : Controller
     {
