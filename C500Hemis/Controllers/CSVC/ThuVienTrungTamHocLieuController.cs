@@ -46,47 +46,38 @@ namespace C500Hemis.Controllers.CSVC
                 return BadRequest();
             }
         }
+
         // GET: ThuVienTrungTamHocLieu/Details/5
-        // Phương thức hiển thị chi tiết thư viện
         public async Task<IActionResult> Details(int? id)
         {
-           
-                // Kiểm tra id có null hay không
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                if (id == null)
-                {
-                    return NotFound();
-                }
+            var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus
+                .Include(t => t.IdHinhThucSoHuuNavigation)
+                .Include(t => t.IdTinhTrangCsvcNavigation)
+                .FirstOrDefaultAsync(m => m.IdThuVienTrungTamHocLieu == id);
+            if (tbThuVienTrungTamHocLieu == null)
+            {
+                return NotFound();
+            }
 
-                var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus
-                    .Include(t => t.IdHinhThucSoHuuNavigation)
-                    .Include(t => t.IdTinhTrangCsvcNavigation)
-                    .FirstOrDefaultAsync(m => m.IdThuVienTrungTamHocLieu == id);
-                // Kiểm tra nếu không tìm thấy
-                if (tbThuVienTrungTamHocLieu == null)
-                {
-                    return NotFound();// Trả về NotFound
-                }
-
-                return View(tbThuVienTrungTamHocLieu);// Trả về view với thông tin chi tiết
-          }
-          
-
+            return View(tbThuVienTrungTamHocLieu);
+        }
 
         // GET: ThuVienTrungTamHocLieu/Create
-        // Phương thức hiển thị form mới thư viện
         public IActionResult Create()
         {
-            // Chuẩn bị dữ liệu cho các dropdown list trong form
-                ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "HinhThucSoHuu");
-                ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "TinhTrangCoSoVatChat");
-                return View();
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu");
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat");
+            return View();
         }
-           
+
         // POST: ThuVienTrungTamHocLieu/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // Phương thức xử lý việc tạo mới thư viện (thêm vào context và lưu nếu model hợp lệ)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdThuVienTrungTamHocLieu,TenThuVienTrungTamHocLieu,NamDuaVaoSuDung,DienTich,...")] TbThuVienTrungTamHocLieu tbThuVienTrungTamHocLieu)
@@ -114,118 +105,101 @@ namespace C500Hemis.Controllers.CSVC
             {
                 ModelState.AddModelError("", "Có lỗi xảy ra khi tạo thư viện mới.");
             }
-
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbThuVienTrungTamHocLieu.IdHinhThucSoHuu);
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbThuVienTrungTamHocLieu.IdTinhTrangCsvc);
             return View(tbThuVienTrungTamHocLieu);
         }
 
-
-
         // GET: ThuVienTrungTamHocLieu/Edit/5
-        // Phương thức hiển thị form chỉnh sửa thư viện
         public async Task<IActionResult> Edit(int? id)
         {
-           
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus.FindAsync(id);
-                if (tbThuVienTrungTamHocLieu == null)
-                {
-                    return NotFound();
-                }
-                ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbThuVienTrungTamHocLieu.IdHinhThucSoHuu);
-                ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbThuVienTrungTamHocLieu.IdTinhTrangCsvc);
-                return View(tbThuVienTrungTamHocLieu);
+            var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus.FindAsync(id);
+            if (tbThuVienTrungTamHocLieu == null)
+            {
+                return NotFound();
+            }
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbThuVienTrungTamHocLieu.IdHinhThucSoHuu);
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbThuVienTrungTamHocLieu.IdTinhTrangCsvc);
+            return View(tbThuVienTrungTamHocLieu);
         }
 
         // POST: ThuVienTrungTamHocLieu/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // Phương thức xử lý việc chỉnh sửa thư viện( thêm vào context và lưu nếu model hợp lệ)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdThuVienTrungTamHocLieu,TenThuVienTrungTamHocLieu,NamDuaVaoSuDung,DienTich,DienTichPhongDoc,SoPhongDoc,SoLuongMayTinh,SoLuongChoNgoi,SoLuongSach,SoLuongTapChi,SoLuongSachDienTu,SoLuongTapChiDienTu,SoLuonngThuVienDienTuLienKetNn,SoLuongDauSach,SoLuongDauTapChi,SoLuongDauSachDienTu,SoLuongDauTapChiDienTu,IdHinhThucSoHuu,IdTinhTrangCsvc")] TbThuVienTrungTamHocLieu tbThuVienTrungTamHocLieu)
         {
-         
-                if (id != tbThuVienTrungTamHocLieu.IdThuVienTrungTamHocLieu)
-                {
-                    return NotFound();
-                }
+            if (id != tbThuVienTrungTamHocLieu.IdThuVienTrungTamHocLieu)
+            {
+                return NotFound();
+            }
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    try
-                    {
-                        _context.Update(tbThuVienTrungTamHocLieu);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!TbThuVienTrungTamHocLieuExists(tbThuVienTrungTamHocLieu.IdThuVienTrungTamHocLieu))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
+                    _context.Update(tbThuVienTrungTamHocLieu);
+                    await _context.SaveChangesAsync();
                 }
-                ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbThuVienTrungTamHocLieu.IdHinhThucSoHuu);
-                ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbThuVienTrungTamHocLieu.IdTinhTrangCsvc);
-                return View(tbThuVienTrungTamHocLieu);
-         }
-            
-       
-
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TbThuVienTrungTamHocLieuExists(tbThuVienTrungTamHocLieu.IdThuVienTrungTamHocLieu))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbThuVienTrungTamHocLieu.IdHinhThucSoHuu);
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbThuVienTrungTamHocLieu.IdTinhTrangCsvc);
+            return View(tbThuVienTrungTamHocLieu);
+        }
 
         // GET: ThuVienTrungTamHocLieu/Delete/5
-        //Lấy chi tiết một thư viện cụ thể theo id để xóa
         public async Task<IActionResult> Delete(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                if (id == null)
-                {
-                    return NotFound();
-                }
+            var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus
+                .Include(t => t.IdHinhThucSoHuuNavigation)
+                .Include(t => t.IdTinhTrangCsvcNavigation)
+                .FirstOrDefaultAsync(m => m.IdThuVienTrungTamHocLieu == id);
+            if (tbThuVienTrungTamHocLieu == null)
+            {
+                return NotFound();
+            }
 
-                var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus
-                    .Include(t => t.IdHinhThucSoHuuNavigation)
-                    .Include(t => t.IdTinhTrangCsvcNavigation)
-                    .FirstOrDefaultAsync(m => m.IdThuVienTrungTamHocLieu == id);
-                if (tbThuVienTrungTamHocLieu == null)
-                {
-                    return NotFound();
-                }
-
-                return View(tbThuVienTrungTamHocLieu);
-         }
-           
-          
-
+            return View(tbThuVienTrungTamHocLieu);
+        }
 
         // POST: ThuVienTrungTamHocLieu/Delete/5
-        // Xử lý việc gửi form để xóa.Xóa khỏi context và lưu thay đổi
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
-                var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus.FindAsync(id);
-                if (tbThuVienTrungTamHocLieu != null)
-                {
-                    _context.TbThuVienTrungTamHocLieus.Remove(tbThuVienTrungTamHocLieu);
-                }
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            var tbThuVienTrungTamHocLieu = await _context.TbThuVienTrungTamHocLieus.FindAsync(id);
+            if (tbThuVienTrungTamHocLieu != null)
+            {
+                _context.TbThuVienTrungTamHocLieus.Remove(tbThuVienTrungTamHocLieu);
             }
-           
-        // Phương thức kiểm tra xem thư viện có tồn tại hay không
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool TbThuVienTrungTamHocLieuExists(int id)
         {
             return _context.TbThuVienTrungTamHocLieus.Any(e => e.IdThuVienTrungTamHocLieu == id);
