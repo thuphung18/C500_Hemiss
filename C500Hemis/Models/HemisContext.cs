@@ -624,8 +624,7 @@ public partial class HemisContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-       // => optionsBuilder.UseSqlServer("Server=172.20.10.2\\SQLEXPRESS;Encrypt=false;Database=dbHemisC500;User ID=sa;Password=@Abc123");
-            //=> optionsBuilder.UseSqlServer("Server=tcp:c500.database.windows.net,1433;Encrypt=false;Database=dbHemisC500;User ID=c500;Password=@Abc1234");
+            // => optionsBuilder.UseSqlServer("Server=172.20.10.2\\SQLEXPRESS;Encrypt=false;Database=dbHemisC500;User ID=sa;Password=@Abc123");
             => optionsBuilder.UseSqlServer("Server=tcp:c500sv.database.windows.net,1433;Encrypt=false;Database=dbHemisC500;User ID=c500;Password=@Abc1234");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -3334,7 +3333,7 @@ public partial class HemisContext : DbContext
             entity.ToTable("tbKyLuatNguoiHoc", "NH");
 
             entity.Property(e => e.IdKyLuatNguoiHoc).ValueGeneratedNever();
-            entity.Property(e => e.LyDo).HasColumnType("text");
+            entity.Property(e => e.LyDo).HasColumnType("ntext");
             entity.Property(e => e.NamBiKyLuat).HasColumnType("text");
             entity.Property(e => e.SoQuyetDinh).HasMaxLength(50);
 

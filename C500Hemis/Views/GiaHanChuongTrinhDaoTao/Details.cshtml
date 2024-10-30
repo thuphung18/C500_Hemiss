@@ -3,36 +3,45 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<style>
+    body {
+        background-color: #fafbed;
+    }
+</style>
 <h1 class="text-center text-primary">Chi Tiết Thông Tin</h1>
 
 <div class="container mt-4">
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)</th>
-                    <td>@Html.DisplayFor(model => model.SoQuyetDinhGiaHan)</td>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)</th>
-                    <td>@Html.DisplayFor(model => model.NgayBanHanhVanBanGiaHan)</td>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.GiaHanLanThu)</th>
-                    <td>@Html.DisplayFor(model => model.GiaHanLanThu)</td>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)</th>
-                    <td>@Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="d-flex justify-content-center">
+        <div class="table-responsive w-50">
+            <table class=" table  table-borderless">
+                <tbody>
+                    <tr>
+                        <th class="col-6">@Html.DisplayNameFor(model => model.IdGiaHanChuongTrinhDaoTao)</th>
+                        <td>@Html.DisplayFor(model => model.IdGiaHanChuongTrinhDaoTao)</td>
+                    </tr>
+                    <tr>
+                        <th class="col-6">@Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)</th>
+                        <td>@Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.TenChuongTrinh)</td>
+                    </tr>
+                    <tr>
+                        <th class="col-6">@Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)</th>
+                        <td>@Html.DisplayFor(model => model.SoQuyetDinhGiaHan)</td>
+                    </tr>
+                    <tr>
+                        <th class="col-6">@Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)</th>
+                        <td>@Html.DisplayFor(model => model.NgayBanHanhVanBanGiaHan)</td>
+                    </tr>
+                    <tr>
+                        <th class="col-6">@Html.DisplayNameFor(model => model.GiaHanLanThu)</th>
+                        <td>@Html.DisplayFor(model => model.GiaHanLanThu)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <div class="text-center mt-4">
     <a asp-action="Edit" asp-route-id="@Model?.IdGiaHanChuongTrinhDaoTao" class="btn btn-primary">Chỉnh sửa</a>
-    <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+    <a asp-action="Index" class="btn btn-success">Quay Lại</a>
 </div>
-
