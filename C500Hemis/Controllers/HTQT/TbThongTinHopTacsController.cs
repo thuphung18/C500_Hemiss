@@ -21,9 +21,47 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbThongTinHopTacs
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbThongTinHopTacs.Include(t => t.IdHinhThucHopTacNavigation).Include(t => t.IdToChucHopTacNavigation);
+            var hemisContext = _context.TbThongTinHopTacs
+            .Include(t => t.IdHinhThucHopTacNavigation)
+            .Include(t => t.IdToChucHopTacNavigation);
             return View(await hemisContext.ToListAsync());
         }
+
+        //Chức năng tìm kiếm
+        [HttpGet("index-search")]
+        public async Task<IActionResult> Index(string searchString)
+        {
+            try
+            {
+                // Lấy toàn bộ dữ liệu từ bảng
+                var query = _context.TbThongTinHopTacs
+                    .Include(t => t.IdHinhThucHopTacNavigation)
+                    .Include(t => t.IdToChucHopTacNavigation)
+                   
+                    .AsQueryable(); // Chuyển đổi thành IQueryable để có thể lọc dữ liệu
+
+                // Nếu có tham số tìm kiếm, lọc dữ liệu theo từ khóa
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    query = query.Where(t => t.TenThoaThuan.Contains(searchString) ||
+                                             t.ThongTinLienHeDoiTac.Contains(searchString) ||
+                                             t.IdThongTinHopTac.ToString().Contains(searchString));
+                }
+
+                ViewData["CurrentFilter"] = searchString; // Truyền lại từ khóa tìm kiếm cho View
+                return View(await query.ToListAsync()); // Trả về kết quả sau khi lọc
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+
+
+
+
+
 
         // GET: TbThongTinHopTacs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,18 +92,52 @@ namespace C500Hemis.Controllers.HTQT
         }
 
         // POST: TbThongTinHopTacs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdThongTinHopTac,IdToChucHopTac,ThoiGianHopTacTu,ThoiGianHopTacDen,TenThoaThuan,ThongTinLienHeDoiTac,MucTieu,DonViTrienKhai,IdHinhThucHopTac,SanPhamChinh")] TbThongTinHopTac tbThongTinHopTac)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbThongTinHopTac);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Kiểm tra nếu IdThongTinHopTac đã tồn tại trong bảng
+                    if (await _context.TbThongTinHopTacs.AnyAsync(t => t.IdThongTinHopTac == tbThongTinHopTac.IdThongTinHopTac))
+                    {
+                        // Nếu có bản ghi trùng lặp, thêm thông báo lỗi vào ModelState
+                        ModelState.AddModelError("IdThongTinHopTac", "Đã có bản ghi với Id này. Vui lòng nhập Id khác.");
+                    }
+                    else
+                    {
+                        // Kiểm tra nếu IdToChucHopTac đã tồn tại trong bảng TbToChucHopTacQuocTe
+                        var existingToChuc = await _context.TbToChucHopTacQuocTes
+                                              .FirstOrDefaultAsync(t => t.IdToChucHopTacQuocTe == tbThongTinHopTac.IdToChucHopTac);
+
+                        // Nếu không tồn tại, thêm tổ chức mới vào TbToChucHopTacQuocTe
+                        if (existingToChuc == null)
+                        {
+                            var newToChuc = new TbToChucHopTacQuocTe
+                            {
+                                IdToChucHopTacQuocTe = (int)tbThongTinHopTac.IdToChucHopTac,
+                            };
+                            _context.TbToChucHopTacQuocTes.Add(newToChuc);
+                            await _context.SaveChangesAsync();
+                        }
+
+                        // Sau đó thêm dữ liệu vào bảng TbThongTinHopTac
+                        _context.Add(tbThongTinHopTac);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    // Xử lý ngoại lệ liên quan đến việc cập nhật cơ sở dữ liệu
+                    ModelState.AddModelError("", "Không thể thêm bản ghi vào cơ sở dữ liệu. Vui lòng thử lại.");
+                  
+                }
             }
+
+            // Nếu có lỗi, hiển thị lại form với thông tin lỗi
             ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "IdHinhThucHopTac", tbThongTinHopTac.IdHinhThucHopTac);
             ViewData["IdToChucHopTac"] = new SelectList(_context.TbToChucHopTacQuocTes, "IdToChucHopTacQuocTe", "IdToChucHopTacQuocTe", tbThongTinHopTac.IdToChucHopTac);
             return View(tbThongTinHopTac);

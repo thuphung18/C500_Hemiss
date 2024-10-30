@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.KHCN
+   
 {
     public class NhomNghienCuuManhController : Controller
     {
@@ -19,9 +20,26 @@ namespace C500Hemis.Controllers.KHCN
         }
 
         // GET: NhomNghienCuuManh
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.TbNhomNghienCuuManhs.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+
+            var nhomNghienCuuManhs = from n in _context.TbNhomNghienCuuManhs
+                                     select n;
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                nhomNghienCuuManhs = nhomNghienCuuManhs.Where(n => n.TenNhomNghienCuuManh.Contains(searchString)
+                                                            || n.MaNhomNghienCuuManh.Contains(searchString));
+            }
+            // Lấy tổng số bản ghi 
+            var totalRecords = await _context.TbNhomNghienCuuManhs.CountAsync();
+
+            // Chuyển tổng số bản ghi đến View
+            ViewData["TotalRecords"] = totalRecords;
+
+            return View(await nhomNghienCuuManhs.ToListAsync());
         }
 
         // GET: NhomNghienCuuManh/Details/5
@@ -49,8 +67,6 @@ namespace C500Hemis.Controllers.KHCN
         }
 
         // POST: NhomNghienCuuManh/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdNhomNghienCuuManh,MaNhomNghienCuuManh,TenNhomNghienCuuManh,SoQuyetDinhThanhLap,ToChucBanHanhQuyetDinh,NgayQuyetDinh,CacNhiemVuNckh,TomTatKetQuaDatDuoc")] TbNhomNghienCuuManh tbNhomNghienCuuManh)
@@ -71,7 +87,6 @@ namespace C500Hemis.Controllers.KHCN
             {
                 return NotFound();
             }
-
             var tbNhomNghienCuuManh = await _context.TbNhomNghienCuuManhs.FindAsync(id);
             if (tbNhomNghienCuuManh == null)
             {

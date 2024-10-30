@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
-
 public partial class TbThongTinHopTac
 {
     public int IdThongTinHopTac { get; set; }
 
     public int? IdToChucHopTac { get; set; }
-
+   
     public DateTime? ThoiGianHopTacTu { get; set; }
 
     public DateTime? ThoiGianHopTacDen { get; set; }
