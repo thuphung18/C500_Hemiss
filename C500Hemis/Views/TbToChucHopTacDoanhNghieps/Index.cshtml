@@ -1,8 +1,16 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbToChucHopTacDoanhNghiep>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tổ chức hợp tác doanh nghiệp";
 }
+
+
+
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 <h1 class="text-center">TỔ CHỨC HỢP TÁC DOANH NGHIỆP</h1>
 
@@ -84,10 +92,7 @@
     }
 </style>
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
-</head>
+
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -137,21 +142,23 @@
 </body>
 
 <script>
+
     new DataTable('#ntable', {
-        searching: true,
+        searching: true, // Mặc định là true, set false để tắt chức năng search
         processing: true,
-        info: false,
-        paging: true,
-        lengthMenu: [5, 10],
+        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        paging: true, // Bật chức năng phân trang
+        lengthMenu: [5, 10], // Số bản ghi hiển thị trên một trang
         language: {
-            processing: "Đang tải dữ liệu...",
+            processing: "Message khi đang tải dữ liệu",
             search: "Tìm kiếm",
-            lengthMenu: "Hiển thị _MENU_ bản ghi",
-            info: "Bản ghi từ _START_ đến _END_ trong tổng cộng _TOTAL_ bản ghi",
-            infoEmpty: "Không có dữ liệu",
-            infoFiltered: "(lọc từ _MAX_ bản ghi)",
-            loadingRecords: "Đang tải...",
-            zeroRecords: "Không tìm thấy bản ghi nào",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
             emptyTable: "Không có dữ liệu",
             paginate: {
                 first: "Trang đầu",
@@ -160,11 +167,9 @@
                 last: "Trang cuối"
             },
             aria: {
-                sortAscending: ": sắp xếp tăng dần",
-                sortDescending: ": sắp xếp giảm dần"
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
             }
         },
     });
 </script>
-
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
