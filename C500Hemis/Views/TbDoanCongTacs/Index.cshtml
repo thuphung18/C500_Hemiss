@@ -11,6 +11,10 @@
 </p>
 
 <style>
+    body{
+        background-image: url('images/mainback.jpg');
+    }
+
     th, td {
         text-align: center; 
         vertical-align: middle; 
@@ -125,11 +129,11 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TenDoanCongTac)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoQuyetDinh)
-                </td>
-                <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoQuyetDinh)
+                    </td>
+                    <td>
 
                         @String.Format("{0: dd/MM/yyyy }", item.NgayQuyetDinh)
                     </td>
@@ -146,10 +150,10 @@
                         @Html.DisplayFor(modelItem => item.KetQuaCongTac)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdPhanLoaiDoanRaDoanVaoNavigation.IdPhanLoaiDoanRaDoanVao)
+                        @Html.DisplayFor(modelItem => item.IdPhanLoaiDoanRaDoanVaoNavigation.PhanLoaiDoanRaDoanVao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdQuocGiaDoanNavigation.IdQuocTich)
+                        @Html.DisplayFor(modelItem => item.IdQuocGiaDoanNavigation.TenNuoc)
                     </td>
                     <td>
                         <div class="btn-group">
@@ -162,42 +166,75 @@
 
                     </td>
                 </tr>
-           }
+            }
         </tbody>
     </table>
 </body>
 
-<script>
-    new DataTable('#ntable', {
-        searching: true, // Mặc định là true, set false để tắt chức năng search
-        processing: true,
-        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
-        paging: true, // Bật chức năng phân trang
-        lengthMenu: [5, 10], // Số bản ghi hiển thị trên một trang
-        language: {
-            processing: "Message khi đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: " ",
-            info: "Bản ghi từ START đến END Tổng công TOTAL bản ghi",
-            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
-            infoFiltered: "(Message bổ sung cho info khi không search đc record nào MAX)",
+<!-- jQuery -->
 
-            loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
-            },
-            aria: {
-                sortAscending: ": Message khi đang sắp xếp theo column",
-                sortDescending: ": Message khi đang sắp xếp theo column",
-            }
-        },
-    });
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables CSS -->
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        var table = new DataTable('.table', {
+
+            lengthMenu: [5, 10, 15, 20, 25, 30], // Đặt các giá trị cho menu số bản ghi
+
+            language: {
+
+                processing: "Đang tải dữ liệu", // Thông báo khi dữ liệu đang được xử lý
+
+                search: "Tìm nhanh: ", // Văn bản cho ô tìm kiếm
+
+                lengthMenu: "Số bản ghi hiển thị trên trang _MENU_ ", // Tùy chọn số bản ghi hiển thị
+
+                info: "Tổng bản ghi: _TOTAL_", // Hiển thị thông tin tổng số bản ghi
+
+                infoEmpty: "Chưa có nội dung nào trong danh sách", // Thông báo khi không có dữ liệu
+
+                infoFiltered: "",
+
+                loadingRecords: "Đang tải...", // Thông báo khi đang tải dữ liệu
+
+                zeroRecords: "Không tìm thấy dữ liệu!", // Thông báo khi không tìm thấy dữ liệu
+                emptyTable: "Không có dữ liệu nào!", // Thông báo khi không có dữ liệu trong bảng
+
+                paginate: {
+
+                    first: "Trang đầu", // Nút chuyển đến trang đầu
+
+                    previous: "Trang trước", // Nút chuyển về trang trước
+
+                    next: "Trang sau", // Nút chuyển đến trang sau
+
+                    last: "Trang cuối" // Nút chuyển đến trang cuối
+
+                },
+
+                aria: {
+
+                    sortAscending: ": Đang sắp xếp tăng dần", // Thông báo khi sắp xếp tăng dần
+
+                    sortDescending: ": Đang sắp xếp giảm dần" // Thông báo khi sắp xếp giảm dần
+
+                }
+
+            } // Đóng đối tượng language
+
+        }); // Đóng hàm DataTable
+
+
+    }); // Đóng hàm ready
 
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

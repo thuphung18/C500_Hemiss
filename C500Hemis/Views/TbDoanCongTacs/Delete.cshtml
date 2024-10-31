@@ -4,9 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1 >Xóa</h1>
+<h1>Xóa</h1>
 
-<h3 > Bạn có chắc chắn muốn xóa?</h3>
+<h3> Bạn có chắc chắn muốn xóa?</h3>
 
 <style>
     table {
@@ -77,10 +77,10 @@
 
 
     </table>
-    
-    <form asp-action="Delete">
+
+    <form asp-action="Delete" style="text-align: center; margin-top: 30px;">
         <input type="hidden" asp-for="IdDoanCongTac" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-action="Index"> Quay lại</a>
+        <input type="submit" value="Xóa" class="btn btn-danger" style="padding: 12px 30px; background-color: #e74c3c; border: none; color: white; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;" />
+        <a asp-action="Index" style="color: #3498db; text-decoration: none; margin-left: 15px; font-size: 16px;">Quay về</a>
     </form>
 </div>
