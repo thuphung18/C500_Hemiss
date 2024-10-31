@@ -10,65 +10,51 @@
     <title>Thông tin cơ sở vật chất</title>
     <style>
         body {
-            align-items: center;
-            justify-content: center;
-            padding-top: 20px;
-            background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
-            background-size: cover;
-            background-position: center;
+            font-family: 'lato', sans-serif;
+            background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
         }
 
         .wrapper {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            color: black;
-            padding: 30px 40px;
-        }
-
-            .wrapper .button-csvc {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-
-        .button-csvc {
-            padding-top: 25px;
-        }
-
-        .h1 {
-            font-size: 50px;
-            font-weight: 500;
-            color: black;
-        }
-
-        .button-csvc .link {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            max-width: 500px;
-            width: 100%;
+            width: 936px;
             background-color: #fff;
             border-radius: 24px;
-            padding: 25px;
+            padding: 10px 20px;
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            margin-right: 20px;
-            font-size: 22px;
-            font-weight: 500;
-            color: black;
+            position: relative;
+            margin: auto;
+        }
+
+            .wrapper::before {
+                top: 0;
+                left: 0;
+                border-radius: 24px 24px 0 0;
+                content: "";
+                position: absolute;
+                height: 14.5%;
+                width: 100%;
+                background-color: #16a085;
+            }
+
+        h1 {
+            position: relative;
+            padding: 10px 15px;
+            width: 100%;
+        }
+
+        .main-text {
+            font-weight: 600;
+            text-align: center;
+            background-color: #16a085;
+            color: #fff;
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <h1 align="center">THÔNG TIN CƠ SỞ VẬT CHẤT </h1>
+        <h1 class="main-text">THÔNG TIN CƠ SỞ VẬT CHẤT </h1>
         <div class="text-center">
-            <h2>Nhóm 5_B9D55 </h2>
         </div>
         <div class="button-csvc">
             <a href="/DatDai" class="link">Đất Đai</a>
@@ -91,9 +77,10 @@
 
             <a href="/ThietBiPtnThtren500Tr" class="link">Thiết Bị Phòng</a>
             <hr />
-            <a href="/ThuVienTrungTamHocLieu" class="link">Thư Viện Trung Tâm Học Liệu
-                </a>
-                <hr />
+            <a href="/TbThuVienTrungTamHocLieux" class="link">
+                Thư Viện Trung Tâm Học Liệu
+            </a>
+            <hr />
         </div>
 
     </div>
