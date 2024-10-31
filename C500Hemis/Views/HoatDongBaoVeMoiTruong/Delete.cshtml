@@ -4,102 +4,182 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/HDBVMT.jpg');
+            background-size: cover; /* Giúp ảnh phủ toàn bộ màn hình */
+            background-repeat: no-repeat; /* Không lặp lại ảnh */
+            background-position: center; /* Căn giữa ảnh */
+        }
+.tieude {
+            color: rgb(199, 37, 62); /* Màu chữ cho tiêu đề */
+            padding-top: 3%; /* Khoảng cách trên của tiêu đề */
+            font-size: 100px; /* Kích cỡ chữ cho tiêu đề */
+            text-align: center; /* Căn giữa nội dung của tiêu đề */
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal; /* Font chữ trang trí */
+}
 
-<h3>Are you sure you want to delete this?</h3>
+b {
+    color: rgb(28, 99, 110); /* Màu chữ cho các thẻ in đậm */
+}
+
+        .arrow-button:hover {
+            background-color: rgb(237, 139, 111); /* Màu nền khi hover qua nút mũi tên */
+        }
+
+        .arrow-button {
+            background-color: rgb(199, 37, 62); /* Màu nền ban đầu của nút mũi tên */
+            color: white; /* Màu chữ trắng */
+            padding: 10px 40px; /* Khoảng cách bên trong nút */
+            font-size: 16px; /* Kích thước chữ */
+            font-weight: bold; /* Chữ in đậm */
+            border: none; /* Xóa viền */
+            cursor: pointer; /* Thay đổi con trỏ thành tay khi di chuột */
+            position: relative; /* Định vị phần tử tương đối để dễ căn chỉnh */
+            clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%); /* Tạo hình dạng cho nút, với đầu nhọn như mũi tên */
+            display: flex; /* Dùng Flexbox để căn chỉnh nội dung */
+            justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+            align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            height: 30px; /* Chiều cao của nút */
+            width: 150px; /* Chiều rộng của nút */
+            margin: auto; /* Căn giữa nút trên trang */
+            margin-top: 5px; /* Khoảng cách phía trên nút */
+            padding-top: 4px; /* Khoảng cách phía trên bên trong nút */
+        }
+
+        a {
+            text-decoration: none; /* Xóa gạch chân mặc định cho liên kết */
+            color: white; /* Màu chữ trắng cho liên kết */
+        }
+
+        .arrow-button a:hover {
+            color: white; /* Đảm bảo chữ trắng khi hover qua liên kết trong nút */
+        }
+
+
+.row dt {
+    text-align: right; /* Căn phải cho tiêu đề mô tả */
+    font-weight: bold; /* In đậm tiêu đề mô tả */
+}
+
+.row dt, dd {
+    font-size: 25px; /* Kích thước chữ cho tiêu đề và mô tả */
+            color: rgb(199, 37, 62); /* Màu chữ cho cả tiêu đề và mô tả */
+}
+
+
+
+    </style>
+</head>
+<h1 class="tieude">Delete</h1>
+
+<h3 class="text-center" style="color: rgb(171 31 31);">Are you sure you want to delete this?</h3>
 <div>
-    <h4>TbHoatDongBaoVeMoiTruong</h4>
+    
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-md-6">
             @Html.DisplayNameFor(model => model.TenNhiemVuBvmt)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.TenNhiemVuBvmt)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.CoQuanChuTri)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.CoQuanChuTri)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.TongKinhPhiCuaNhiemVu)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.TongKinhPhiCuaNhiemVu)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.ThoiGianBatDau)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.ThoiGianBatDau)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.ThoiGianKetThuc)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.DanhGiaKetQuaNhiemVu)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.DanhGiaKetQuaNhiemVu)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.SanPhamChinhCuaNhiemVu)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.SanPhamChinhCuaNhiemVu)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.DonViThucHienLuuTruSanPham)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.DonViThucHienLuuTruSanPham)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdCapQuanLyNhiemVuNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapQuanLyNhiemVuNavigation.IdPhanCapNhiemVu)
+        <dd class="col-md-6">
+            @Html.DisplayFor(model => model.IdCapQuanLyNhiemVuNavigation.PhanCapNhiemVu)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdCoQuanChuQuanNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCoQuanChuQuanNavigation.IdCoQuanChuQuan)
+        <dd class="col-md-6">
+            @Html.DisplayFor(model => model.IdCoQuanChuQuanNavigation.CoQuanChuQuan)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiNhiemVuBaoVeMoiTruongNavigation.IdLoaiNhiemVuBaoVeMoiTruong)
+        <dd class="col-md-6">
+            @Html.DisplayFor(model => model.IdLoaiNhiemVuBaoVeMoiTruongNavigation.LoaiNhiemVuBaoVeMoiTruong)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdNguonKinhPhiNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.IdNguonKinhPhi)
+        <dd class="col-md-6">
+            @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.NguonKinhPhi)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-md-6">
             @Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.IdTinhTrangNhiemVuNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTinhTrangNhiemVuNavigation.IdTinhTrangNhiemVu)
+        <dd class="col-md-6">
+            @Html.DisplayFor(model => model.IdTinhTrangNhiemVuNavigation.TinhTrangNhiemVu)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdHoatDongBaoVeMoiTruong" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn arrow-button" />
+        <div>
+
+            <p class="btn arrow-button back">
+                <a asp-action="Index">Back</a>
+            </p>
+
+        </div>
     </form>
+   
 </div>

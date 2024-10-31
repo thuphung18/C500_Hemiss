@@ -4,22 +4,102 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/HDBVMT.jpg');
+            background-size: cover; /* Giúp ảnh phủ toàn bộ màn hình */
+            background-repeat: no-repeat; /* Không lặp lại ảnh */
+            background-position: center; /* Căn giữa ảnh */
+        }
 
-<h4>TbHoatDongBaoVeMoiTruong</h4>
-<hr />
+.tieude {
+    color: rgb(199, 37, 62); /* Màu chữ cho tiêu đề */
+    padding-top: 3%; /* Khoảng cách trên của tiêu đề */
+    font-size: 80px; /* Kích cỡ chữ cho tiêu đề */
+    text-align: center; /* Căn giữa nội dung của tiêu đề */
+            font-family: "Dancing Script", cursive;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal; /* Font chữ trang trí */
+}
+
+b {
+    color: rgb(28, 99, 110); /* Màu chữ cho thẻ in đậm */
+}
+
+.arrow-button:hover {
+            background-color: rgb(237, 139, 111); /* Màu nền khi hover qua nút mũi tên */
+}
+
+.arrow-button {
+            background-color: rgb(199, 37, 62); /* Màu nền ban đầu của nút mũi tên */
+    color: white; /* Màu chữ trắng */
+    padding: 10px 40px; /* Khoảng cách bên trong nút */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ in đậm */
+    border: none; /* Xóa viền */
+    cursor: pointer; /* Thay đổi con trỏ thành tay khi di chuột */
+    position: relative; /* Định vị phần tử tương đối để dễ căn chỉnh */
+    clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%); /* Tạo hình dạng cho nút, với đầu nhọn như mũi tên */
+    display: flex; /* Dùng Flexbox để căn chỉnh nội dung */
+    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    height: 30px; /* Chiều cao của nút */
+    width: 150px; /* Chiều rộng của nút */
+    margin: auto; /* Căn giữa nút trên trang */
+    margin-top: 5px; /* Khoảng cách phía trên nút */
+    padding-top: 4px; /* Khoảng cách phía trên bên trong nút */
+}
+
+a {
+    text-decoration: none; /* Xóa gạch chân mặc định cho liên kết */
+    color: white; /* Màu chữ trắng cho liên kết */
+}
+
+.arrow-button a:hover {
+    color: white; /* Đảm bảo chữ trắng khi hover qua liên kết trong nút */
+}
+
+.form {
+    background-color: rgb(255, 198, 131, 0.8); /* Màu nền cho biểu mẫu */
+    border-radius: 15px; /* Bo tròn các góc của biểu mẫu */
+    padding-top: 40px; /* Khoảng cách trên của biểu mẫu */
+}
+
+.form-group {
+    padding: 0 30px; /* Khoảng cách bên trái và phải của nhóm biểu mẫu */
+}
+
+form {
+            border: 1px solid rgb(199, 37, 62); /* Đường viền cho biểu mẫu */
+    border-radius: 20px; /* Bo tròn các góc của biểu mẫu */
+}
+
+    </style>
+</head>
+
+
+
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6" style="position: relative;">
+        <h1 class="tieude" style=" position: fixed; top: 30%;">Create<br />Hoạt Động <br />Bảo Vệ Môi Trường</h1>
+    </div>
+    <div class="col-md-6 form">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group pt-3">
                 <label asp-for="IdHoatDongBaoVeMoiTruong" class="control-label"></label>
                 <input asp-for="IdHoatDongBaoVeMoiTruong" class="form-control" />
                 <span asp-validation-for="IdHoatDongBaoVeMoiTruong" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdNhiemVuKhcn" class="control-label"></label>
-                <select asp-for="IdNhiemVuKhcn" class ="form-control" asp-items="ViewBag.IdNhiemVuKhcn"></select>
+                <select asp-for="IdNhiemVuKhcn" class="form-control" asp-items="ViewBag.IdNhiemVuKhcn"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TenNhiemVuBvmt" class="control-label"></label>
@@ -28,11 +108,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdCapQuanLyNhiemVu" class="control-label"></label>
-                <select asp-for="IdCapQuanLyNhiemVu" class ="form-control" asp-items="ViewBag.IdCapQuanLyNhiemVu"></select>
+                <select asp-for="IdCapQuanLyNhiemVu" class="form-control" asp-items="ViewBag.IdCapQuanLyNhiemVu"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdCoQuanChuQuan" class="control-label"></label>
-                <select asp-for="IdCoQuanChuQuan" class ="form-control" asp-items="ViewBag.IdCoQuanChuQuan"></select>
+                <select asp-for="IdCoQuanChuQuan" class="form-control" asp-items="ViewBag.IdCoQuanChuQuan"></select>
             </div>
             <div class="form-group">
                 <label asp-for="CoQuanChuTri" class="control-label"></label>
@@ -41,7 +121,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdLoaiNhiemVuBaoVeMoiTruong" class="control-label"></label>
-                <select asp-for="IdLoaiNhiemVuBaoVeMoiTruong" class ="form-control" asp-items="ViewBag.IdLoaiNhiemVuBaoVeMoiTruong"></select>
+                <select asp-for="IdLoaiNhiemVuBaoVeMoiTruong" class="form-control" asp-items="ViewBag.IdLoaiNhiemVuBaoVeMoiTruong"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TongKinhPhiCuaNhiemVu" class="control-label"></label>
@@ -50,7 +130,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdNguonKinhPhi" class="control-label"></label>
-                <select asp-for="IdNguonKinhPhi" class ="form-control" asp-items="ViewBag.IdNguonKinhPhi"></select>
+                <select asp-for="IdNguonKinhPhi" class="form-control" asp-items="ViewBag.IdNguonKinhPhi"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ThoiGianBatDau" class="control-label"></label>
@@ -77,21 +157,31 @@
                 <input asp-for="DonViThucHienLuuTruSanPham" class="form-control" />
                 <span asp-validation-for="DonViThucHienLuuTruSanPham" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group pb-4">
                 <label asp-for="IdTinhTrangNhiemVu" class="control-label"></label>
-                <select asp-for="IdTinhTrangNhiemVu" class ="form-control" asp-items="ViewBag.IdTinhTrangNhiemVu"></select>
+                <select asp-for="IdTinhTrangNhiemVu" class="form-control" asp-items="ViewBag.IdTinhTrangNhiemVu"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group pb-3">
+                <input type="submit" value="Create" class="btn btn-primary arrow-button" />
             </div>
+            
         </form>
+        
+        <div class="pb-3">
+
+            <p class="btn arrow-button ">
+                <a asp-action="Index">Back</a>
+            </p>
+
+        </div>
     </div>
+    
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
