@@ -2,117 +2,304 @@
 
 @{
     ViewData["Title"] = "Index";
+    int i = 1;
 }
-
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<h1 align="center">Thông tin tổng quát</h1>
-<style>
-    .create-new {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-    .action-links a {
-        padding: 5px 10px;
-        margin-right: 5px;
-        background-color: #ffcccc;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 3px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-</style>
-    <div class="container">
-<p>
-    <a asp-action="Create" class="create-new">Tạo Mới</a>
-</p>
-<table class="table">  
-    <thead >
-            <th>@Html.DisplayNameFor(model => model.MaCongTrinh)</th>
-            <th>@Html.DisplayNameFor(model => model.TenCongTrinh)</th>
-            <th>@Html.DisplayNameFor(model => model.IdLoaiCongTrinh)</th>
-            <th>@Html.DisplayNameFor(model => model.IdMucDichSuDung)</th>
-            <th>@Html.DisplayNameFor(model => model.DoiTuongSuDung)</th>
-            <th>@Html.DisplayNameFor(model => model.DienTichSanXayDung)</th>
-            <th>@Html.DisplayNameFor(model => model.VonBanDau)</th>
-            <th>@Html.DisplayNameFor(model => model.VonDauTu)</th>
-            <th>@Html.DisplayNameFor(model => model.IdTinhTrangCsvc)</th>
-            <th>@Html.DisplayNameFor(model => model.IdHinhThucSoHuu)</th>
-            <th>@Html.DisplayNameFor(model => model.CongTrinhCsvctrongNha)</th>
-            <th>@Html.DisplayNameFor(model => model.SoPhongOcongVu)</th>
-            <th>@Html.DisplayNameFor(model => model.SoChoOchoCanBoGiangDay)</th>
-            <th>@Html.DisplayNameFor(model => model.NamDuaVaoSuDung)</th>
-            <th>
-                Actions
-            </th>
-        
-    </thead>
-    </div>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaCongTrinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenCongTrinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoiTuongSuDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DienTichSanXayDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VonBanDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VonDauTu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoPhongOcongVu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoChoOchoCanBoGiangDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CongTrinhCsvctrongNhaNavigation.IdTuyChon)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdLoaiCongTrinhNavigation.IdLoaiCongTrinhCoSoVatChat)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdMucDichSuDungNavigation.IdMucDichSuDungCsvc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdTinhTrangCsvcNavigation.IdTinhTrangCoSoVatChat)
-                </td>
-                <td>
-                    <div class="action-links">
-                        <a asp-action="Edit" asp-route-id="@item.IdCongTrinhCoSoVatChat">Edit</a>
-                        <hr>
-                        <a asp-action="Details" asp-route-id="@item.IdCongTrinhCoSoVatChat">Details</a>
-                        <hr>
-                        <a asp-action="Delete" asp-route-id="@item.IdCongTrinhCoSoVatChat">Delete</a>
-                        <hr>
-                    </div>
-                </td>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            body {
+                font-family: 'lato', sans-serif;
+                background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
+            }
+
+            .dt-type-numeric {
+                text-align: center !important; /* Căn phải cho số */
+            }
+
+            .create-new {
+                display: inline-block;
+                padding: 10px 15px;
+                background-color: rgb(60, 60, 176);
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: column;
+                width: 1600px;
+                max-width: 100%;
+                background-color: #fff;
+                border-radius: 24px;
+                padding: 10px 20px;
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+                margin: auto;
+            }
+
+                .row::before {
+                    top: 0;
+                    left: 0;
+                    border-radius: 24px 24px 0 0;
+                    content: "";
+                    position: absolute;
+                    height: 85px;
+                    width: 100%;
+                    background-color: #16a085;
+                }
+
+            table {
+                border: 1px solid #bdc3c7;
+                box-shadow: 2px 2px 12px rgba(0,0,0,.2), -1px -1px 8px rgba(0,0,0,.2);
+                text-align: center;
+            }
+
+            tr {
+                transition: all .2s ease-in;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            th, td {
+                padding: 12px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .table-header {
+                background-color: #16a085;
+                color: #fff;
+            }
+
+            h1 {
+                position: relative;
+                padding: 10px 15px;
+                width: 100%;
+            }
+
+            .main-text {
+                font-weight: 600;
+                text-align: center;
+                background-color: #16a085;
+                color: #fff;
+            }
+
+            .row tbody tr:hover {
+                background-color: #FEFAE0;
+                font-weight: bold;
+            }
+
+            .row thead th {
+                font-weight: 600;
+                text-align: center;
+                background-color: #16a085;
+                color: #fff;
+            }
+            /* MEDIA QUERY */
+            ::-webkit-scrollbar {
+                height: 5px;
+                width: 5px;
+            }
+
+            ::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+            }
+
+            .button-create {
+                margin-bottom: 10px;
+            }
+
+            .button {
+                border: none;
+                background: none;
+            }
+
+                .button a {
+                    text-decoration: none;
+                }
+                /* EDIT */
+                .button .icon1 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    color: white;
+                    height: 34px;
+                    width: 34px;
+                    border-radius: 50%;
+                    margin-bottom: 10px;
+                    text-decoration: none;
+                    background-color: #40A578;
+                }
+                /* DETAILS */
+                .button .icon2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    color: white;
+                    height: 34px;
+                    width: 34px;
+                    border-radius: 50%;
+                    margin-bottom: 10px;
+                    text-decoration: none;
+                    background-color: #FFC470;
+                }
+                /* DELETE */
+                .button .icon3 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    color: white;
+                    height: 34px;
+                    width: 34px;
+                    border-radius: 50%;
+                    margin-bottom: 10px;
+                    text-decoration: none;
+                    background-color: #DD5746;
+                }
+
+            .button {
+                width: 35px;
+            }
+
+            .btn btn-primary {
+                background-color: rgb(60, 60, 176);
+            }
+
+        </style>
+    </head>
+}
+<div class="row">
+    <h1 class="main-text">THÔNG TIN TỔNG QUÁT</h1>
+    <table id="view_table" class="table nowrap">
+        <thead class="">
+            <tr>
+                <th>STT</th>
+                <th class="_nonorder">
+                    Tùy chọn
+                </th>
+                <th>@Html.DisplayNameFor(model => model.MaCongTrinh)</th>
+                <th>@Html.DisplayNameFor(model => model.TenCongTrinh)</th>
+                <th>@Html.DisplayNameFor(model => model.IdLoaiCongTrinh)</th>
+                <th>@Html.DisplayNameFor(model => model.IdMucDichSuDung)</th>
+                <th>@Html.DisplayNameFor(model => model.DoiTuongSuDung)</th>
+                <th>@Html.DisplayNameFor(model => model.DienTichSanXayDung)</th>
+                <th>@Html.DisplayNameFor(model => model.VonBanDau)</th>
+                <th>@Html.DisplayNameFor(model => model.VonDauTu)</th>
+                <th>@Html.DisplayNameFor(model => model.IdTinhTrangCsvc)</th>
+                <th>@Html.DisplayNameFor(model => model.IdHinhThucSoHuu)</th>
+                <th>@Html.DisplayNameFor(model => model.CongTrinhCsvctrongNha)</th>
+                <th>@Html.DisplayNameFor(model => model.SoPhongOcongVu)</th>
+                <th>@Html.DisplayNameFor(model => model.SoChoOchoCanBoGiangDay)</th>
+                <th>@Html.DisplayNameFor(model => model.NamDuaVaoSuDung)</th>
+
             </tr>
-        }
-    </tbody>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td id="bold-text">@i</td>
+                    <td>
+                        <div class="action-links" style="white-space:nowrap">
+
+                            <button class="button">
+                                <a asp-action="Edit" asp-route-id="@item.IdCongTrinhCoSoVatChat">
+                                    <div class="icon1">
+                                        <i class='bx bx-edit'></i>
+                                    </div>
+                                </a>
+
+                            </button>
+
+                            <button class="button">
+                                <a asp-action="Details" asp-route-id="@item.IdCongTrinhCoSoVatChat">
+                                    <div class="icon2">
+                                        <i class='bx bx-info-circle'></i>
+                                    </div>
+                                </a>
+                            </button>
+
+                            <button class="button">
+                                <a asp-action="Delete" asp-route-id="@item.IdCongTrinhCoSoVatChat">
+                                    <div class="icon3">
+                                        <i class='bx bx-message-alt-x'></i>
+                                    </div>
+                                </a>
+                            </button>
+
+                        </div>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.MaCongTrinh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenCongTrinh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdLoaiCongTrinhNavigation.LoaiCongTrinhCoSoVatChat)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdMucDichSuDungNavigation.MucDichSuDungCsvc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DoiTuongSuDung)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DienTichSanXayDung)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VonBanDau)</td>
+                    <td>@Html.DisplayFor(modelItem => item.VonDauTu)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdTinhTrangCsvcNavigation.TinhTrangCoSoVatChat)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdHinhThucSoHuuNavigation.HinhThucSoHuu)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CongTrinhCsvctrongNhaNavigation.TuyChon)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoPhongOcongVu)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoChoOchoCanBoGiangDay)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)</td>
+                </tr>
+                i++;
+            }
+        </tbody>
     </table>
-    </div>
-</head>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#view_table", {
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: -1,
+                }
+            ],
+            scrollX: true,
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                search: "Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Hiển thị _MAX_ trong _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary', //Thêm class cho button
+                            text: 'Tạo mới',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+}

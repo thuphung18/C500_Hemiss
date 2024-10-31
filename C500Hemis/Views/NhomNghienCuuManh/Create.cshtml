@@ -1,68 +1,163 @@
 ﻿@model C500Hemis.Models.TbNhomNghienCuuManh
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
 
-<h1>Create</h1>
-
-<h4>TbNhomNghienCuuManh</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="form-container">
         <form asp-action="Create">
+            <h4 class="text-center form-title">Nhóm Nghiên Cứu Mạnh</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="IdNhomNghienCuuManh" class="control-label"></label>
+                <label asp-for="IdNhomNghienCuuManh" class="control-label">Mã nhóm nghiên cứu mạnh</label>
                 <input asp-for="IdNhomNghienCuuManh" class="form-control" />
                 <span asp-validation-for="IdNhomNghienCuuManh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MaNhomNghienCuuManh" class="control-label"></label>
+                <label asp-for="MaNhomNghienCuuManh" class="control-label">Mã nhóm</label>
                 <input asp-for="MaNhomNghienCuuManh" class="form-control" />
                 <span asp-validation-for="MaNhomNghienCuuManh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TenNhomNghienCuuManh" class="control-label"></label>
+                <label asp-for="TenNhomNghienCuuManh" class="control-label">Tên nhóm nghiên cứu mạnh</label>
                 <input asp-for="TenNhomNghienCuuManh" class="form-control" />
                 <span asp-validation-for="TenNhomNghienCuuManh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SoQuyetDinhThanhLap" class="control-label"></label>
+                <label asp-for="SoQuyetDinhThanhLap" class="control-label">Số quyết định thành lập</label>
                 <input asp-for="SoQuyetDinhThanhLap" class="form-control" />
                 <span asp-validation-for="SoQuyetDinhThanhLap" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ToChucBanHanhQuyetDinh" class="control-label"></label>
+                <label asp-for="ToChucBanHanhQuyetDinh" class="control-label">Tổ chức ban hành quyết định</label>
                 <input asp-for="ToChucBanHanhQuyetDinh" class="form-control" />
                 <span asp-validation-for="ToChucBanHanhQuyetDinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NgayQuyetDinh" class="control-label"></label>
-                <input asp-for="NgayQuyetDinh" class="form-control" />
+                <label asp-for="NgayQuyetDinh" class="control-label">Ngày quyết định</label>
+                <input asp-for="NgayQuyetDinh" class="form-control" type="text" id="ngay-quyet-dinh-picker" />
                 <span asp-validation-for="NgayQuyetDinh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CacNhiemVuNckh" class="control-label"></label>
+                <label asp-for="CacNhiemVuNckh" class="control-label">Các nhiệm vụ NCKH</label>
                 <input asp-for="CacNhiemVuNckh" class="form-control" />
                 <span asp-validation-for="CacNhiemVuNckh" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TomTatKetQuaDatDuoc" class="control-label"></label>
+                <label asp-for="TomTatKetQuaDatDuoc" class="control-label">Tóm tắt kết quả đạt được</label>
                 <input asp-for="TomTatKetQuaDatDuoc" class="form-control" />
                 <span asp-validation-for="TomTatKetQuaDatDuoc" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+
+            <div class="form-group text-center">
+                <a asp-action="Index" class="btn btn-secondary  btn-spacing">Quay lại</a> <!-- Thêm mx-2 để thêm khoảng cách giữa các nút -->
+                <input type="submit" value="Tạo mới" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <script>
+        $(function () {
+            $("#ngay-quyet-dinh-picker").datepicker({
+                dateFormat: "yy-mm-dd", // Định dạng ngày
+                showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 }
+
+<style>
+    body {
+        background: linear-gradient(to top right, #5357CE, #C850C0);
+        color: white;
+        font-family: sans-serif;
+        margin: 0;
+    }
+
+    .form-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 100px;
+    }
+
+    .form-control {
+        background-color: #f8f9fa;
+        color: black;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: black;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .d-flex {
+        display: flex;
+        min-height: 100vh; /* Đảm bảo chiều cao tối thiểu là 100% của chiều cao viewport */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+
+    .ml-2 {
+        margin-left: 8px;
+    }
+
+    .form-title {
+        text-transform: uppercase;
+        color: black;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    h4, hr {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-spacing {
+        margin-right: 10px;
+    }
+</style>

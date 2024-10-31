@@ -1,63 +1,126 @@
 ﻿@model C500Hemis.Models.TbNhomNghienCuuManh
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "XOÁ NHÓM NGHIÊN CỨU MẠNH";
 }
 
-<h1>Delete</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbNhomNghienCuuManh</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaNhomNghienCuuManh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaNhomNghienCuuManh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenNhomNghienCuuManh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenNhomNghienCuuManh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhThanhLap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToChucBanHanhQuyetDinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToChucBanHanhQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayQuyetDinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CacNhiemVuNckh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CacNhiemVuNckh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TomTatKetQuaDatDuoc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TomTatKetQuaDatDuoc)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdNhomNghienCuuManh" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<style>
+    body {
+        background: linear-gradient(to top right, #5357CE, #C850C0);
+        color: white;
+        margin: 0;
+        font-family: Arial, sans-serif; 
+    }
+
+    .container {
+        padding: 30px; 
+        border-radius: 10px;
+        max-width: 800px; 
+        margin: auto; 
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px; 
+        font-weight: bold;
+    }
+
+    h3 {
+        margin: 20px 0;
+        font-size: 24px;
+    }
+
+    .btn-group {
+        margin-top: 30px; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn {
+        margin: 0 15px; 
+        padding: 10px 20px; 
+        font-size: 16px; 
+    }
+
+    dl {
+        margin: 20px 0;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <h3>Bạn có chắc chắn muốn xóa không?</h3>
+    <div>
+        <h4>Thông tin Nhóm Nghiên Cứu Mạnh</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                Mã Nhóm
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.MaNhomNghienCuuManh)
+            </dd>
+            <dt class="col-sm-4">
+                Tên nhóm nghiên cứu mạnh
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.TenNhomNghienCuuManh)
+            </dd>
+            <dt class="col-sm-4">
+                Số quyết định thành lập
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SoQuyetDinhThanhLap)
+            </dd>
+            <dt class="col-sm-4">
+                Tổ chức ban hành quyết định
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.ToChucBanHanhQuyetDinh)
+            </dd>
+            <dt class="col-sm-4">
+                Ngày quyết định
+            </dt>
+            <dd class="col-sm-8">
+                @if (Model.NgayQuyetDinh.HasValue)
+                {
+                    @Model.NgayQuyetDinh.Value.ToString("dd/MM/yyyy")
+                }
+                else
+                {
+                    <span>Không có thông tin</span>
+                }
+            </dd>
+            <dt class="col-sm-4">
+                Các nhiệm vụ NCKH
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CacNhiemVuNckh)
+            </dd>
+            <dt class="col-sm-4">
+                Tóm tắt kết quả đạt được
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.TomTatKetQuaDatDuoc)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="btn-group footer">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdNhomNghienCuuManh" />
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+        </form>
+    </div>
 </div>
