@@ -65,17 +65,22 @@ public partial class TbThuVienTrungTamHocLieu
     public int? SoLuongDauTapChiDienTu { get; set; }
 
     [DisplayName(" Hình thức sở hữu")]
+    
     public int? IdHinhThucSoHuu { get; set; }
 
     [DisplayName("ID Hình thức sở hữu")]
+    [ForeignKey("IdHinhThucSoHuu")]
     public virtual DmHinhThucSoHuu? IdHinhThucSoHuuNavigation { get; set; }
 
 
 
     [DisplayName("Tình trạng cơ sở vật chất")]
+    
+    
     public int? IdTinhTrangCsvc { get; set; }
 
     [DisplayName("ID Tình trạng cơ sở vật chất")]
+    [ForeignKey("IdTinhTrangCsvc")]
     public virtual DmTinhTrangCoSoVatChat? IdTinhTrangCsvcNavigation { get; set; }
 
 }
