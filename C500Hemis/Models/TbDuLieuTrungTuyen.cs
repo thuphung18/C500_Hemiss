@@ -60,9 +60,8 @@ public partial class TbDuLieuTrungTuyen
     [Range(0, 10, ErrorMessage = "Điểm ưu tiên phải từ 0 đến 10")]
     [RegularExpression(@"\d{1,2}(\.\d{1,2})?", ErrorMessage = "Điểm ưu tiên chỉ được có tối đa 2 chữ số thập phân")]
     public double? DiemUuTien { get; set; }
-
     public double? TongDiemXetTuyen { get; set; }
-   
+
     [Display(Name = "Số quyết định trúng tuyển")]
     public string? SoQuyetDinhTrungTuyen { get; set; }
 
