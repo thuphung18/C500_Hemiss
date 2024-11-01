@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 
+
+
     int i = 1;
 }
 <link href="~/css/ThuVienTrungTamHocLieu(Index).css" rel="stylesheet">
@@ -94,7 +96,7 @@
                     <th>STT</th>
                     <th>Chức năng</th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TenThuVienTrungTamHocLieu)
+@Html.DisplayNameFor(model => model.TenThuVienTrungTamHocLieu)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
@@ -223,10 +225,9 @@
 
                     </tr>
                     i++;
+
                 }
             </tbody>
         </table>
     </div>
 </body>
-
-
