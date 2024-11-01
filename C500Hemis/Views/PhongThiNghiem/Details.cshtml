@@ -4,45 +4,155 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Phòng Thí Nghiệm</title>
+    <style>
+        /* Tổng quan toàn trang */
+        footer {
+            display: none;
+        }
 
-<div>
-    <h4>TbPhongThiNghiem</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamDuaVaoSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdPhongThiNghiem">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        /* Nền tổng quan */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e3f2fd;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Wrapper chứa nội dung */
+        .wrapper {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            /* Hiệu ứng làm mờ nền */
+            .wrapper::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('https://hocvienanninh.com/public/kh/14102021/uploads/2021/18102021084227quang-truong-hoc-vien-an-ninh-0-0857.jpg') no-repeat center center;
+                background-size: cover;
+                filter: blur(8px);
+                z-index: -1;
+                opacity: 0.5;
+            }
+
+            /* Hiệu ứng hover cho wrapper */
+            .wrapper:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Tiêu đề chính với hiệu ứng underline động và căn giữa */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                font-size: 36px;
+                color: #1e88e5;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 10px; /* Khoảng cách giữa tiêu đề và underline */
+            }
+
+                .header h1::after {
+                    content: '';
+                    display: block;
+                    width: 50px;
+                    height: 3px;
+                    background-color: #1e88e5;
+                    margin: 0 auto; /* Căn giữa underline */
+                    transition: width 0.3s ease;
+                }
+
+                .header h1:hover::after {
+                    width: 100px; /* Mở rộng underline khi hover */
+                }
+
+        /* Nội dung chi tiết */
+        .details h4 {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .details dt {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .details dd {
+            margin-bottom: 15px;
+        }
+
+        /* Hiệu ứng cho các đường dẫn */
+        .action-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .action-links a {
+                text-decoration: none;
+                color: #007bff;
+                padding: 5px 10px;
+                border: 1px solid #007bff;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+                .action-links a:hover {
+                    background-color: #007bff;
+                    color: white;
+                }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Chi tiết Phòng Thí Nghiệm</h1>
+            <p>Xem thông tin chi tiết về phòng thí nghiệm</p>
+        </div>
+        <div class="details">
+            <h4>Thông Tin Phòng Thí Nghiệm</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NamDuaVaoSuDung)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NamDuaVaoSuDung)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdLinhVucNavigation)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)</dd>
+            </dl>
+        </div>
+        <div class="action-links">
+            <a asp-action="Edit" asp-route-id="@Model?.IdPhongThiNghiem">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>
