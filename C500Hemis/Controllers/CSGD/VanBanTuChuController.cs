@@ -55,13 +55,28 @@ namespace C500Hemis.Controllers.CSGD
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdVanBanTuChu,LoaiVanBan,NoiDungVanBan,QuyetDinhBanHanh,CoQuanQuyetDinhBanHanh")] TbVanBanTuChu tbVanBanTuChu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbVanBanTuChu);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbVanBanTuChu);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(tbVanBanTuChu);
             }
-            return View(tbVanBanTuChu);
+            catch (DbUpdateException dbEx)
+            {
+                // Lỗi liên quan đến cơ sở dữ liệu như khóa chính, khóa ngoại
+                ModelState.AddModelError("", "Không thể lưu dữ liệu vào cơ sở dữ liệu: " + dbEx.Message);
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                // Lỗi chung chung khác
+                return BadRequest();
+            }
+
         }
 
         // GET: VanBanTuChu/Edit/5

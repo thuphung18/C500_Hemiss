@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using C500Hemis.Models.DM;
-
+using System.ComponentModel.DataAnnotations;
 namespace C500Hemis.Models;
 
 public partial class TbNgonNguGiangDay
 {
-    [DisplayName(displayName: "Ngôn Ngữ Giảng Dạy")]
+    [DisplayName(displayName: "ID Ngôn Ngữ Giảng Dạy")]
+    [Required(ErrorMessage = "Bắt buộc phải nhập ID bằng số")]
     public int IdNgonNguGiangDay { get; set; }
     [DisplayName(displayName: "Chương Trình Đào Tạo")]
     public int? IdChuongTrinhDaoTao { get; set; }

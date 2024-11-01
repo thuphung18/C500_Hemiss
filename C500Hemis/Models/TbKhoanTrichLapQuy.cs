@@ -19,6 +19,7 @@ public partial class TbKhoanTrichLapQuy
     public string? TenKhoanTrichLapQuy { get; set; }
 
     [Display(Name = "Năm Tài Chính")]
+    [RegularExpression(@"\d{4}", ErrorMessage = "Năm tài chính phải có định dạng yyyy")]
     public string? NamTaiChinh { get; set; }
 
     [Display(Name = "Số Tiền")]
