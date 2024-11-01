@@ -4,39 +4,84 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 align="center"><strong>Chi tiết hoạt động tài chính</strong></h1>
 
 <div>
-    <h4>TbHoatDongTaiChinh</h4>
+    <h4 align="centre"><strong>Hoạt động tài chính</strong></h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamTaiChinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamTaiChinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KinhPhi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KinhPhi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiHoatDongTaiChinhNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation.IdHoatDongTaiChinh)
-        </dd>
-    </dl>
+    <table class="table table-bordered" style="border: 2px solid black;">
+        <tr>
+            <th style="border: 2px solid black;">Năm Tài Chính</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.NamTaiChinh)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Kinh Phí</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.KinhPhi)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Nội Dung</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.NoiDung)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">ID Loại Hoạt Động Tài Chính</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation)</td>
+        </tr>
+        </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHoatDongTaiChinh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <a class='btn-red' asp-action="Edit" asp-route-id="@Model?.IdHoatDongTaiChinh">Chỉnh sửa</a> |
+    <a class='btn-blue' asp-action="Index">Quay lại danh sách</a>
+    <style>
+        body {
+            background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #ccffcc;
+        }
+
+        .btn-red, .btn-blue {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-red {
+            background-color: red;
+        }
+
+            .btn-red:hover {
+                background-color: darkred;
+            }
+
+        .btn-blue {
+            background-color: blue;
+        }
+
+            .btn-blue:hover {
+                background-color: darkblue;
+            }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 2px solid black;
+            width: 100px;
+        }
+
+        div {
+            background-color: #eeffe6;
+        }
+
+        tr {
+            width: 400px;
+        }
+    </style>
