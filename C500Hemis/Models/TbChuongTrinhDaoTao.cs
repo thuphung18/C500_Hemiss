@@ -30,7 +30,7 @@ public partial class TbChuongTrinhDaoTao
 
     [DisplayName("Năm bắt đầu tuyển sinh")]
     [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
     public DateOnly? NamBatDauTuyenSinh { get; set; }
 
 

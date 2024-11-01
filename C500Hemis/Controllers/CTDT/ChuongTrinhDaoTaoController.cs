@@ -1,4 +1,9 @@
-﻿using System;
+﻿// Nguyễn Đăng Phúc 023-B8D55 (Bài kiểm tra giữa phần)
+// Các nội dung đã làm:
+//      + Sửa các khóa ngoài để hiển thị nội dung trong phần Views
+//      + Thêm các comment chi tiết phục vụ bảo trì và fix bug.
+//      + Bắt lỗi trùng Id, thông báo và gọi người dùng nhập lại.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
