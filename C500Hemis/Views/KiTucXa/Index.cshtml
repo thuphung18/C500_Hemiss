@@ -1,46 +1,20 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbKiTucXa>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Trang Chủ";
 }
-
-<h1 align="center">Kí Túc Xá</h1>
-<style>
-    .action-links a {
-        padding: 5px 10px;
-        margin-right: 5px;
-        background-color: #ffcccc;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 3px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-
-    .create-new {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-</style>
-
+@*Dương Minh Vũ*@
+<h1 style="text-align: center;">DANH SÁCH KÍ TÚC XÁ</h1>
+<br />
 <p>
-
-    <a asp-action="Create" class="create-new">Tạo Mới</a>
-
+    <a style="float: right;" class="btn btn-create" asp-action="Create"><i class="fas fa-plus"></i> Tạo mới</a>
 </p>
-<table class="table">
+<br />
+<table id="ntable" class="styled-table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.MaKyTucxa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHinhThucSoHuu)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TongChoO)
@@ -49,16 +23,19 @@
                 @Html.DisplayNameFor(model => model.TongDienTich)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdTinhTrangCsvc)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.SoPhong)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
             </th>
             <th>
-                Actions
+                @Html.DisplayNameFor(model => model.IdHinhThucSoHuuNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTinhTrangCsvcNavigation)
+            </th>
+            <th>
+                Thao Tác
             </th>
         </tr>
     </thead>
@@ -70,16 +47,10 @@
                     @Html.DisplayFor(modelItem => item.MaKyTucxa)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.TongChoO)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TongDienTich)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdTinhTrangCsvcNavigation.IdTinhTrangCoSoVatChat)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SoPhong)
@@ -88,13 +59,128 @@
                     @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
                 </td>
                 <td>
-                    <div class="action-links">
-                        <a asp-action="Edit" asp-route-id="@item.IdKiTucXa">Edit</a> <hr>
-                        <a asp-action="Details" asp-route-id="@item.IdKiTucXa">Details</a> <hr>
-                        <a asp-action="Delete" asp-route-id="@item.IdKiTucXa">Delete</a> <hr>
-                    </div>
+                    @Html.DisplayFor(modelItem => item.IdHinhThucSoHuuNavigation.HinhThucSoHuu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdTinhTrangCsvcNavigation.TinhTrangCoSoVatChat)
+                </td>
+                <td>
+                    <a class="btn btn-edit" asp-action="Edit" asp-route-id="@item.IdKiTucXa"><i class="fas fa-edit"></i> Sửa</a>
+                    <a class="btn btn-details" asp-action="Details" asp-route-id="@item.IdKiTucXa"><i class="fas fa-info-circle"></i> Chi tiết</a>
+                    <a class="btn btn-delete" asp-action="Delete" asp-route-id="@item.IdKiTucXa"><i class="fas fa-trash"></i> Xóa</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+<style>
+    body {
+        background-color: lightblue; /* Màu nền xanh nhẹ */
+    }
+    /* Các kiểu chung cho bảng */
+    .styled-table {
+        width: 100%; /* Đặt bảng chiếm toàn bộ chiều rộng của vùng chứa */
+        border-collapse: collapse; /* Gộp các đường biên */
+        margin: 20px auto; /* Căn giữa bảng với khoảng trống dọc ở trên và dưới */
+        font-size: 20px; /* Đặt kích thước phông chữ cho văn bản trong bảng */
+        border: 2px solid black; /* Đường viền cho toàn bộ bảng */
+        background-color: ghostwhite; /* Màu nền cho toàn bộ bảng */
+    }
+
+        .styled-table th, .styled-table td { /* Thêm kiểu cho ô tiêu đề và ô dữ liệu */
+            border: 1px solid black; /* Đường viền cho tất cả các ô */
+            padding: 8px; /* Thêm khoảng trống cho các ô */
+            text-align: center; /* Căn giữa chữ trong ô */
+        }
+
+        .styled-table th {
+            background-color: #007bff; /* Đặt nền màu xanh cho các ô tiêu đề */
+            color: white; /* Đổi màu chữ trong các ô tiêu đề thành trắng để tạo độ tương phản */
+        }
+
+        .styled-table tr:hover {
+            background-color: #f1f1f1; /* Thay đổi màu nền của hàng khi di chuột qua để tạo phản hồi trực quan */
+        }
+
+    /* Các kiểu cho nút bấm */
+    .btn {
+        display: inline-block; /* Cho phép nút hoạt động như một phần tử khối nhưng vẫn nằm ngang */
+        padding: 5px 12px; /* Thêm khoảng trống bên trong nút để dễ nhấn hơn */
+        margin: 5px; /* Thêm khoảng trống xung quanh nút */
+        border: none; /* Bỏ đường viền mặc định */
+        border-radius: 5px; /* Bo tròn các góc của nút */
+        color: white; /* Đặt màu chữ thành trắng */
+        text-decoration: none; /* Bỏ gạch chân cho các liên kết được định dạng như nút */
+        text-align: center; /* Căn giữa văn bản trong nút */
+        transition: background-color 0.1s; /* Hiệu ứng chuyển màu nền mượt mà khi di chuột */
+    }
+
+    .btn-create {
+        background-color: #28a745; /* Nền màu xanh cho nút tạo mới */
+    }
+
+        .btn-create:hover {
+            background-color: #0056b3; /* Màu xanh đậm hơn khi di chuột qua */
+        }
+
+    .btn-edit {
+        background-color: #007bff; /* Nền màu xanh lá cho nút sửa */
+    }
+
+        .btn-edit:hover {
+            background-color: #218838; /* Màu xanh lá đậm hơn khi di chuột qua */
+        }
+
+    .btn-details {
+        background-color: #17a2b8; /* Nền màu teal cho nút chi tiết */
+    }
+
+        .btn-details:hover {
+            background-color: #138496; /* Màu teal đậm hơn khi di chuột qua */
+        }
+
+    .btn-delete {
+        background-color: #dc3545; /* Nền màu đỏ cho nút xóa */
+    }
+
+        .btn-delete:hover {
+            background-color: #c82333; /* Màu đỏ đậm hơn khi di chuột qua */
+        }
+</style>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+</head>
+<script>
+    new DataTable('#ntable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        processing: true,
+        info: true, // Tắt thông tin về table
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ trong tổng công _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
+            }
+        },
+    });
+</script>
+

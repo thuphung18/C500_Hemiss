@@ -8,107 +8,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Thêm Thông Tin Phòng Thí Nghiệm</title>
     <style>
+        /* Tổng quan toàn trang */
+        footer {
+            display: none;
+        }
+
         body {
-            font-family: sans-serif;
-            background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e3f2fd;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
 
         .wrapper {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            color: black;
-            padding: 30px 40px;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
+            .wrapper::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('https://hocvienanninh.com/public/kh/14102021/uploads/2021/18102021084227quang-truong-hoc-vien-an-ninh-0-0857.jpg') no-repeat center center;
+                background-size: cover;
+                filter: blur(8px); /* Làm mờ ảnh */
+                z-index: -1; /* Đảm bảo ảnh nền nằm dưới nội dung */
+                opacity: 0.5; /* Độ trong suốt của ảnh nền */
+            }
+
+            .wrapper:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+
+        /* Tiêu đề chính */
+        .main-function h1 {
+            text-align: center;
+            color: #1e88e5; /* Màu xanh đậm */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Tiêu đề phụ */
+        .row h1 {
+            text-align: center;
+            color: #1565c0; /* Màu xanh dương chủ đạo */
+            font-size: 28px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* Hiệu ứng underline động cho tiêu đề */
+        .main-function h1::after, .row h1::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #1e88e5;
+            margin: 10px auto 0;
+            transition: width 0.3s ease;
+        }
+
+        .main-function h1:hover::after, .row h1:hover::after {
+            width: 100px; /* Mở rộng khi hover */
+        }
+
+        /* Định dạng form với hiệu ứng fadeIn */
+        form {
+            animation: fadeIn 1s ease-in-out;
+            opacity: 0; /* Ban đầu ẩn form */
+            animation-fill-mode: forwards; /* Đảm bảo form giữ nguyên trạng thái */
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px solid #90caf9; /* Đường viền màu xanh nhạt */
+            margin-bottom: 20px;
+        }
+
+        /* Định dạng form */
         .form-group {
-            /* display:table; */
-            padding-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1976d2; /* Màu xanh chữ */
+            font-weight: bold;
         }
 
         .form-control {
-            padding: 40px;
-            background: rgba(255,255,255,.2);
-            height: 50px;
-            border: 10px;
-            border-radius: 20px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #90caf9; /* Đường viền xanh nhạt */
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #1976d2; /* Đổi viền xanh đậm khi focus */
             outline: none;
-            transition: .2s ease;
+            box-shadow: 0 0 8px rgba(25, 118, 210, 0.2);
         }
 
-        .row {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            color: black;
-            padding: 30px 30px;
-        }
-
-        label {
-            display: flex;
-            font-size: 30px;
-            font-weight: 500;
-            padding-bottom: 20px;
-        }
-
-        #main-text {
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 45px;
-            font-weight: 600;
-        }
-
+        /* Nút submit với hiệu ứng hover */
         .button {
-            border-radius: 24px;
+            background-color: #1e88e5; /* Nút màu xanh đậm */
+            color: white;
+            padding: 12px 20px;
             border: none;
-            color: #fff;
-            font-weight: 24px;
-            font-size: 30px;
-            margin: 0 10px;
-            padding: 8px 24px;
-            background-color: #4070f4;
+            border-radius: 4px;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-            .button:hover {
-                background-color: #0e4bf1;
-            }
-
-        .form-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .button:hover {
+            background-color: #1565c0;
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
         }
 
-        .main-function {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            color: black;
-            margin-bottom: 10px;
-        }
-
+        /* Nút quay lại */
         .back {
-            text-align: left;
-            font-size: 30px;
-            font-weight: 300;
+            margin-top: 20px;
+            text-align: center;
         }
 
-        #main-text-2 {
-            text-align: center;
-            font-size: 70px;
-            font-weight: 600;
+        .back a {
+            color: #1565c0;
+            text-decoration: none;
+            font-size: 16px;
         }
+
+        .back a:hover {
+            text-decoration: underline;
+        }
+
+        /* Màu chữ lỗi */
+        .text-danger {
+            color: #d32f2f; /* Màu đỏ */
+        }
+
+
     </style>
 </head>
 <body>

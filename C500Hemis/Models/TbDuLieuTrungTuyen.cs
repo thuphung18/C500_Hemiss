@@ -8,7 +8,7 @@ namespace C500Hemis.Models;
 public partial class TbDuLieuTrungTuyen
 {
 
-    [Display(Name = "STT")]
+    [Display(Name = "Id dữ liệu trúng tuyển")]
     public int IdDuLieuTrungTuyen { get; set; }
 
     [Display(Name = "Số Cccd/ Hộ Chiếu")]
@@ -41,21 +41,28 @@ public partial class TbDuLieuTrungTuyen
     [Display(Name = "Tổ hợp môn trúng tuyển")]
     public string? ToHopMonTrungTuyen { get; set; }
 
-    [Display(Name ="Điểm môn 1")]
+    [Display(Name = "Điểm môn 1")]
+    [Range(0, 10, ErrorMessage = "Điểm môn 1 phải từ 0 đến 10")]
+    [RegularExpression(@"\d{1,2}(\.\d{1,2})?", ErrorMessage = "Điểm môn 1 chỉ được có tối đa 2 chữ số thập phân")]
     public double? DiemMon1 { get; set; }
 
     [Display(Name = "Điểm môn 2")]
+    [Range(0, 10, ErrorMessage = "Điểm môn 2 phải từ 0 đến 10")]
+    [RegularExpression(@"\d{1,2}(\.\d{1,2})?", ErrorMessage = "Điểm môn 2 chỉ được có tối đa 2 chữ số thập phân")]
     public double? DiemMon2 { get; set; }
 
     [Display(Name = "Điểm môn 3")]
+    [Range(0, 10, ErrorMessage = "Điểm môn 3 phải từ 0 đến 10")]
+    [RegularExpression(@"\d{1,2}(\.\d{1,2})?", ErrorMessage = "Điểm môn 3 chỉ được có tối đa 2 chữ số thập phân")]
     public double? DiemMon3 { get; set; }
 
     [Display(Name = "Điểm ưu tiên")]
+    [Range(0, 10, ErrorMessage = "Điểm ưu tiên phải từ 0 đến 10")]
+    [RegularExpression(@"\d{1,2}(\.\d{1,2})?", ErrorMessage = "Điểm ưu tiên chỉ được có tối đa 2 chữ số thập phân")]
     public double? DiemUuTien { get; set; }
 
-
     public double? TongDiemXetTuyen { get; set; }
-
+   
     [Display(Name = "Số quyết định trúng tuyển")]
     public string? SoQuyetDinhTrungTuyen { get; set; }
 

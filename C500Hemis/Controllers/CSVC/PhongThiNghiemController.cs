@@ -21,6 +21,7 @@ namespace C500Hemis.Controllers.CSVC
         // GET: PhongThiNghiem
         public async Task<IActionResult> Index()
         {
+
             var hemisContext = _context.TbPhongThiNghiems.Include(t => t.IdCongTrinhCsvcNavigation).Include(t => t.IdLinhVucNavigation).Include(t => t.IdLoaiPhongThiNghiemNavigation);
             return View(await hemisContext.ToListAsync());
         }
@@ -50,8 +51,8 @@ namespace C500Hemis.Controllers.CSVC
         public IActionResult Create()
         {
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat");
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu");
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem");
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu");
+            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "LoaiPhongThiNghiem");
             return View();
         }
 
@@ -62,16 +63,23 @@ namespace C500Hemis.Controllers.CSVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPhongThiNghiem,IdCongTrinhCsvc,IdLoaiPhongThiNghiem,IdLinhVuc,MucDoDapUngNhuCauNckh,NamDuaVaoSuDung")] TbPhongThiNghiem tbPhongThiNghiem)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbPhongThiNghiem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbPhongThiNghiem);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThiNghiem.IdCongTrinhCsvc);
+                ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
+                ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
+                return View(tbPhongThiNghiem);
             }
-            ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThiNghiem.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
-            return View(tbPhongThiNghiem);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Đã xảy ra lỗi khi nhập STT. Vui lòng thử lại." }); ;
+            }
         }
 
         // GET: PhongThiNghiem/Edit/5
@@ -88,8 +96,8 @@ namespace C500Hemis.Controllers.CSVC
                 return NotFound();
             }
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThiNghiem.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
-            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "IdLoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbPhongThiNghiem.IdLinhVuc);
+            ViewData["IdLoaiPhongThiNghiem"] = new SelectList(_context.DmLoaiPhongThiNghiems, "IdLoaiPhongThiNghiem", "LoaiPhongThiNghiem", tbPhongThiNghiem.IdLoaiPhongThiNghiem);
             return View(tbPhongThiNghiem);
         }
 
