@@ -12,7 +12,7 @@ namespace C500Hemis.Controllers.TCTS
 {
     public class KhoanNopNganSachController : Controller
     {
-        // Khởi tạo biến ngữ cảnh cơ sở dữ liệu
+        // Khởi tạo biến ngữ cảnh cơ sở dữ liệuu
         private readonly HemisContext _context;
 
         // Hàm dựng (constructor) để khởi tạo controller với ngữ cảnh cơ sở dữ liệu
