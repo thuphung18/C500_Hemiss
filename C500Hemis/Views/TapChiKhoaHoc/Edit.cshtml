@@ -4,15 +4,116 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+@section Heads {
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+}
+<style>
+    /*B8D55 AT13 Ca Kỳ Hòa*/
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: rgb(195,34,34);
+    }
 
-<h4>TbTapChiKhoaHoc</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    .khungchua {
+        min-height: 80vh;
+        width: 600px;
+        background-color: #FFF9;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
+    }
+
+    .grid-container {
+        padding-top: 20px;
+    }
+
+    h1 {
+        font-family: Apice;
+        text-align: center;
+    }
+
+    h4 {
+        text-align: center;
+        font-family: Apice;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center; /* Căn giữa */
+        margin-top: 20px; /* Khoảng cách phía trên */
+    }
+
+    .btn-primary {
+        background-color: #41B06E;
+        color: #E9EFEC;
+        margin: 0 10px; /* Khoảng cách giữa các nút */
+    }
+
+        .btn-primary:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        width: 46%;
+        font-size: 16px;
+    }
+
+    .proper {
+        flex-grow: 2;
+        margin-left: 15px;
+    }
+
+    .header {
+        background-color: #d5d1defe; /* Màu nền cho header */
+        border-radius: 10px 10px 0 0; /* Bo góc cho phần trên */
+        height: 100px;
+    }
+
+    .icon-container {
+        color: #41B06E;
+        font-size: 20px;
+        transition: transform 0.3s, color 0.3s;
+        cursor: pointer;
+    }
+
+        .icon-container:hover {
+            transform: scale(1.1);
+            color: orange;
+        }
+
+    .btn {
+        width: 85%;
+    }
+</style>
+
+<div class="khungchua">
+    <div class="header">
+        <h1>Chỉnh sửa</h1>
+        <h4>Chỉnh sửa tạp chí có ID số: @Model.IdTapChiKhoaHoc</h4>
+    </div>
+    <div class="grid-container position-relative">
+        <a asp-action="Index" style="position: absolute; right:10px">
+            <div class="icon-container">
+                <i class='bx bx-left-arrow-circle' style="font-size:36px;"></i>
+            </div>
+        </a>
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdTapChiKhoaHoc" />
+        <div class="d-flex p-4 flex-wrap justify-content-center gap-2">
             <div class="form-group">
                 <label asp-for="MaTapChi" class="control-label"></label>
                 <input asp-for="MaTapChi" class="form-control" />
@@ -34,12 +135,12 @@
                 <span asp-validation-for="MaChuanIssn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdLinhVucXuatBan" class="control-label"></label>
+                <label asp-for="IdLinhVucXuatBan" class="control-label">Lĩnh vực xuất bản</label>
                 <select asp-for="IdLinhVucXuatBan" class="form-control" asp-items="ViewBag.IdLinhVucXuatBan"></select>
                 <span asp-validation-for="IdLinhVucXuatBan" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdXepLoaiTapChi" class="control-label"></label>
+                <label asp-for="IdXepLoaiTapChi" class="control-label">Xếp loại tạp chí</label>
                 <select asp-for="IdXepLoaiTapChi" class="form-control" asp-items="ViewBag.IdXepLoaiTapChi"></select>
                 <span asp-validation-for="IdXepLoaiTapChi" class="text-danger"></span>
             </div>
@@ -48,15 +149,13 @@
                 <input asp-for="SoBaiBao1Nam" class="form-control" />
                 <span asp-validation-for="SoBaiBao1Nam" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+             <div class="d-flex justify-content-center btn-container mt-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
