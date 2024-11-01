@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using C500Hemis.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace C500Hemis.Controllers.CTDT
 {
@@ -49,11 +50,12 @@ namespace C500Hemis.Controllers.CTDT
         // GET: NgonNguGiangDay/Create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
-            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "IdNgoaiNgu");
-            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "IdKhungNangLucNgoaiNgu");
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh");
+            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "NgoaiNgu");
+            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "TenKhungNangLucNgoaiNgu");
             return View();
         }
+
 
         // POST: NgonNguGiangDay/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -62,15 +64,40 @@ namespace C500Hemis.Controllers.CTDT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdNgonNguGiangDay,IdChuongTrinhDaoTao,IdNgonNgu,IdTrinhDoNgonNguDauVao")] TbNgonNguGiangDay tbNgonNguGiangDay)
         {
+            //Kiểm tra dữ liệu nhập vào xem có giống dữ liệu khai báo không
             if (ModelState.IsValid)
             {
-                _context.Add(tbNgonNguGiangDay);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    //Nhập thêm 
+                    _context.Add(tbNgonNguGiangDay);
+                    //Lưu tất cả vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    //Chuyển hướng quay lại trang index sau khi lưu thành công
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    //Nếu xảy ra lỗi sẽ hiện ra dòng thông báo
+                    ModelState.AddModelError("", "Đã xảy ra lỗi khi tạo mới: " + ex.Message);
+                }
+
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
-            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "IdNgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
-            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "IdKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
+            else
+            {
+                //tạo một biến error1 sẽ chứa tất cả lỗi sai xác nhận từ ModelState
+                var error1 = ModelState.Values.SelectMany(h => h.Errors);
+                //Vòng lặp duyệt từng lỗi trong error1
+                foreach (var error in error1)
+                {
+                    //Mỗi lỗi sẽ được thêm vào ModelState
+                    ModelState.AddModelError("", error.ErrorMessage);
+                }
+            }
+
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
+            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "NgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
+            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "TenKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
             return View(tbNgonNguGiangDay);
         }
 
@@ -87,9 +114,9 @@ namespace C500Hemis.Controllers.CTDT
             {
                 return NotFound();
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
-            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "IdNgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
-            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "IdKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
+            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "NgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
+            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "TenKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
             return View(tbNgonNguGiangDay);
         }
 
@@ -125,9 +152,9 @@ namespace C500Hemis.Controllers.CTDT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
-            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "IdNgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
-            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "IdKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbNgonNguGiangDay.IdChuongTrinhDaoTao);
+            ViewData["IdNgonNgu"] = new SelectList(_context.DmNgoaiNgus, "IdNgoaiNgu", "NgoaiNgu", tbNgonNguGiangDay.IdNgonNgu);
+            ViewData["IdTrinhDoNgonNguDauVao"] = new SelectList(_context.DmKhungNangLucNgoaiNgus, "IdKhungNangLucNgoaiNgu", "TenKhungNangLucNgoaiNgu", tbNgonNguGiangDay.IdTrinhDoNgonNguDauVao);
             return View(tbNgonNguGiangDay);
         }
 

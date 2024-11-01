@@ -1,26 +1,89 @@
 ﻿@model C500Hemis.Models.TbThuVienTrungTamHocLieu
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
 
-<h1>Create</h1>
-
-<h4>TbThuVienTrungTamHocLieu</h4>
+<h1 style="text-align:center"> Tạo mới </h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<style>
+
+
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        background-color: #E1F0DA;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1, h4 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5);
+            outline: none;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #05c46b;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #048a55;
+            transform: scale(1.05);
+        }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Hai cột */
+        gap: 20px; /* Khoảng cách giữa các phần tử */
+    }
+
+</style>
+
+<div class="form-container">
+    <h4>Thư Viện Trung Tâm Học Liệu</h4>
+    <hr />
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-grid">
             <div class="form-group">
                 <label asp-for="IdThuVienTrungTamHocLieu" class="control-label"></label>
                 <input asp-for="IdThuVienTrungTamHocLieu" class="form-control" />
                 <span asp-validation-for="IdThuVienTrungTamHocLieu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaThuVienTrungTamHocLieu" class="control-label"></label>
-                <input asp-for="MaThuVienTrungTamHocLieu" class="form-control" />
-                <span asp-validation-for="MaThuVienTrungTamHocLieu" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TenThuVienTrungTamHocLieu" class="control-label"></label>
@@ -83,14 +146,6 @@
                 <span asp-validation-for="SoLuonngThuVienDienTuLienKetNn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdTinhTrangCsvc" class="control-label"></label>
-                <select asp-for="IdTinhTrangCsvc" class ="form-control" asp-items="ViewBag.IdTinhTrangCsvc"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdHinhThucSoHuu" class="control-label"></label>
-                <select asp-for="IdHinhThucSoHuu" class ="form-control" asp-items="ViewBag.IdHinhThucSoHuu"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="SoLuongDauSach" class="control-label"></label>
                 <input asp-for="SoLuongDauSach" class="form-control" />
                 <span asp-validation-for="SoLuongDauSach" class="text-danger"></span>
@@ -111,16 +166,25 @@
                 <span asp-validation-for="SoLuongDauTapChiDienTu" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="IdHinhThucSoHuu" class="control-label"></label>
+                <select asp-for="IdHinhThucSoHuu" class="form-control" asp-items="ViewBag.IdHinhThucSoHuu"></select>
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <label asp-for="IdTinhTrangCsvc" class="control-label"></label>
+                <select asp-for="IdTinhTrangCsvc" class="form-control" asp-items="ViewBag.IdTinhTrangCsvc"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            <p></p>
+            <a asp-action="Index" class="btn btn-primary">Quay lại danh sách</a>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

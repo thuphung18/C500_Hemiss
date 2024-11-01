@@ -2,14 +2,78 @@
 
 @{
     ViewData["Title"] = "Create";
+    <link href="~/themify-icons/themify-icons.css" rel="stylesheet" />
 }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=DynaPuff:wght@400..700&family=Honk&family=Lilita+One&family=Lobster&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Pacifico&family=Spicy+Rice&display=swap" rel="stylesheet">
+<style>
+    /* Container cho toàn bộ form */
+    .login-container {
+        display: flex;
+        justify-content: center;
+    }
 
-<h1>Create</h1>
+    h1, h3 {
+        font-family: "Lobster", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+    /* Hộp chứa form */
+    .login-box {
+        background: linear-gradient(135deg, #c8f7dc, #f7d6e0);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 5px 8px 16px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
 
-<h4>TbThongTinKiemDinhCuaChuongTrinh</h4>
+        /* Tiêu đề */
+        .login-box h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #444;
+            text-align: center;
+        }
+
+        /* Nhãn biểu tượng trước các ô input */
+        .login-box .form-group label {
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        /* Ô nhập liệu */
+        .login-box .form-control {
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+    .btn-signup {
+        background-color: #c8f7dc;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #444;
+        text-decoration: none;
+        margin-top: 16px;
+        border: 1px solid black;
+    }
+
+        .btn-signup i {
+            margin-left: 5px;
+        }
+</style>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="login-container">
+    <div class="login-box" style="width: 700px;">
+        <h1>Thêm thông tin mới</h1>
+
+        <h3 style="text-align: center">Thông tin kiểm định của chương trình</h3>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -19,15 +83,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
-                <select asp-for="IdChuongTrinhDaoTao" class ="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
+                <select asp-for="IdChuongTrinhDaoTao" class="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdToChucKiemDinh" class="control-label"></label>
-                <select asp-for="IdToChucKiemDinh" class ="form-control" asp-items="ViewBag.IdToChucKiemDinh"></select>
+                <select asp-for="IdToChucKiemDinh" class="form-control" asp-items="ViewBag.IdToChucKiemDinh"></select>
             </div>
             <div class="form-group">
                 <label asp-for="IdKetQuaKiemDinh" class="control-label"></label>
-                <select asp-for="IdKetQuaKiemDinh" class ="form-control" asp-items="ViewBag.IdKetQuaKiemDinh"></select>
+                <select asp-for="IdKetQuaKiemDinh" class="form-control" asp-items="ViewBag.IdKetQuaKiemDinh"></select>
             </div>
             <div class="form-group">
                 <label asp-for="SoQuyetDinh" class="control-label"></label>
@@ -44,17 +108,20 @@
                 <input asp-for="ThoiHanKiemDinh" class="form-control" />
                 <span asp-validation-for="ThoiHanKiemDinh" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="btn btn-signup">
+                <i class="ti-save"></i><input type="submit" value="Thêm mới" style="border: none; background-color: #c8f7dc;" />
+            </div>
+            <div>
+                <a class="btn btn-signup" asp-action="Index"><i class="ti-arrow-circle-left"></i> Trở về danh sách</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+

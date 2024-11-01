@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using C500Hemis.Models.DM;
 using Microsoft.EntityFrameworkCore;
-using C500Hemis.Models;
 
 namespace C500Hemis.Models;
 
@@ -625,8 +624,7 @@ public partial class HemisContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-       // => optionsBuilder.UseSqlServer("Server=172.20.10.2\\SQLEXPRESS;Encrypt=false;Database=dbHemisC500;User ID=sa;Password=@Abc123");
-            //=> optionsBuilder.UseSqlServer("Server=tcp:c500.database.windows.net,1433;Encrypt=false;Database=dbHemisC500;User ID=c500;Password=@Abc1234");
+            // => optionsBuilder.UseSqlServer("Server=172.20.10.2\\SQLEXPRESS;Encrypt=false;Database=dbHemisC500;User ID=sa;Password=@Abc123");
             => optionsBuilder.UseSqlServer("Server=tcp:c500sv.database.windows.net,1433;Encrypt=false;Database=dbHemisC500;User ID=c500;Password=@Abc1234");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -3112,7 +3110,7 @@ public partial class HemisContext : DbContext
 
             entity.Property(e => e.IdHoatDongTaiChinh).ValueGeneratedNever();
             entity.Property(e => e.NamTaiChinh).HasColumnType("text");
-            entity.Property(e => e.NoiDung).HasColumnType("ntext");
+            entity.Property(e => e.NoiDung).HasColumnType("text");
 
             entity.HasOne(d => d.IdLoaiHoatDongTaiChinhNavigation).WithMany(p => p.TbHoatDongTaiChinhs)
                 .HasForeignKey(d => d.IdLoaiHoatDongTaiChinh)
@@ -3335,7 +3333,7 @@ public partial class HemisContext : DbContext
             entity.ToTable("tbKyLuatNguoiHoc", "NH");
 
             entity.Property(e => e.IdKyLuatNguoiHoc).ValueGeneratedNever();
-            entity.Property(e => e.LyDo).HasColumnType("text");
+            entity.Property(e => e.LyDo).HasColumnType("ntext");
             entity.Property(e => e.NamBiKyLuat).HasColumnType("text");
             entity.Property(e => e.SoQuyetDinh).HasMaxLength(50);
 
@@ -4257,26 +4255,41 @@ public partial class HemisContext : DbContext
                 .HasForeignKey(d => d.IdViTriViecLam)
                 .HasConstraintName("FK_tbThongTinViecLamSauTotNghiep_dmViTriViecLam");
         });
-
         modelBuilder.Entity<TbThuVienTrungTamHocLieu>(entity =>
         {
             entity.HasKey(e => e.IdThuVienTrungTamHocLieu);
             entity.ToTable("tbThuVienTrungTamHocLieu", "CSVC");
 
             entity.Property(e => e.IdThuVienTrungTamHocLieu).ValueGeneratedNever();
-            entity.Property(e => e.IdTinhTrangCsvc).HasColumnName("IdTinhTrangCSVC");
-            entity.Property(e => e.MaThuVienTrungTamHocLieu).HasMaxLength(50);
-            entity.Property(e => e.NamDuaVaoSuDung).HasColumnType("text");
-            entity.Property(e => e.SoLuonngThuVienDienTuLienKetNn).HasColumnName("SoLuonngThuVienDienTuLienKetNN");
-            entity.Property(e => e.TenThuVienTrungTamHocLieu).HasMaxLength(200);
+            entity.Property(e => e.TenThuVienTrungTamHocLieu).HasColumnType("nvarchar(max)");
+            entity.Property(e => e.NamDuaVaoSuDung).HasMaxLength(2000000);
+            entity.Property(e => e.DienTich).HasMaxLength(2000000);
+            entity.Property(e => e.DienTichPhongDoc).HasMaxLength(2000000);
+            entity.Property(e => e.SoPhongDoc).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongMayTinh).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongChoNgoi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongSach).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongTapChi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongSachDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongTapChiDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuonngThuVienDienTuLienKetNn).HasMaxLength(2000000);
 
-            entity.HasOne(d => d.IdHinhThucSoHuuNavigation).WithMany()
-                .HasForeignKey(d => d.IdHinhThucSoHuu)
-                .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmHinhThucSoHuu");
+            entity.HasOne(d => d.IdHinhThucSoHuuNavigation).WithMany(p => p.TbThuVienTrungTamHocLieus)
+                 .HasForeignKey(d => d.IdHinhThucSoHuu)
+                 .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmHinhThucSoHuu");
 
-            entity.HasOne(d => d.IdTinhTrangCsvcNavigation).WithMany()
+            entity.HasOne(d => d.IdTinhTrangCsvcNavigation).WithMany(p => p.TbThuVienTrungTamHocLieus)
                 .HasForeignKey(d => d.IdTinhTrangCsvc)
                 .HasConstraintName("FK_tbThuVienTrungTamHocLieu_dmTinhTrangCoSoVatChat");
+
+
+
+
+
+            entity.Property(e => e.SoLuongDauSach).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauTapChi).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauSachDienTu).HasMaxLength(2000000);
+            entity.Property(e => e.SoLuongDauTapChiDienTu).HasMaxLength(2000000);
         });
 
         modelBuilder.Entity<TbToChucHopTacDoanhNghiep>(entity =>
@@ -5509,8 +5522,4 @@ public partial class HemisContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-public DbSet<C500Hemis.Models.VCoCauToChuc2> VCoCauToChuc2 { get; set; } = default!;
-
-//public DbSet<C500Hemis.Models.VKhoaHoc2> VKhoaHoc2 { get; set; } = default!;
 }
