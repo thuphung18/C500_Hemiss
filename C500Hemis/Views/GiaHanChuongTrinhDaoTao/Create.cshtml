@@ -1,52 +1,83 @@
 ﻿@model C500Hemis.Models.TbGiaHanChuongTrinhDaoTao
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo";
+}
+@section Heads {
+    <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script> @* fontawesome *@
 }
 
-<h1>Create</h1>
-
-<h4>TbGiaHanChuongTrinhDaoTao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container mt-5">
+    <div class="col-md-4 mx-auto border rounded p-4 shadow bg-light">
+        <h2 class="text-center mb-4 ">Tạo Mới Thông Tin</h2>
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
             <div class="form-group">
                 <label asp-for="IdGiaHanChuongTrinhDaoTao" class="control-label"></label>
-                <input asp-for="IdGiaHanChuongTrinhDaoTao" class="form-control" />
+                <input asp-for="IdGiaHanChuongTrinhDaoTao" class="form-control" min="0" placeholder="Nhập ID Chương trình đào tạo" />
                 <span asp-validation-for="IdGiaHanChuongTrinhDaoTao" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
-                <select asp-for="IdChuongTrinhDaoTao" class ="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
+                <select asp-for="IdChuongTrinhDaoTao" class="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao">
+                    <option value="">-- Chọn Chương Trình Đào Tạo --</option>
+                </select>
             </div>
+
             <div class="form-group">
                 <label asp-for="SoQuyetDinhGiaHan" class="control-label"></label>
-                <input asp-for="SoQuyetDinhGiaHan" class="form-control" />
+                <input asp-for="SoQuyetDinhGiaHan" class="form-control" placeholder="Nhập Số Quyết Định Gia Hạn" />
                 <span asp-validation-for="SoQuyetDinhGiaHan" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="NgayBanHanhVanBanGiaHan" class="control-label"></label>
-                <input asp-for="NgayBanHanhVanBanGiaHan" class="form-control" />
+                <input asp-for="NgayBanHanhVanBanGiaHan" class="form-control" type="date" />
                 <span asp-validation-for="NgayBanHanhVanBanGiaHan" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="GiaHanLanThu" class="control-label"></label>
-                <input asp-for="GiaHanLanThu" class="form-control" />
+                <input asp-for="GiaHanLanThu" class="form-control" placeholder="Nhập Gia Hạn Lần Thứ" />
                 <span asp-validation-for="GiaHanLanThu" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between mt-4">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> Tạo
+                    </button>
+                </div>
+                <div>
+                    <a class="btn btn-primary" asp-action="Index">
+                        <i class="fa-solid fa-arrow-left" style="margin-right:5px"></i>Quay lại
+                    </a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@section Styles {
+    <style>
+        body {
+            background-color: #fafbed;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
 }

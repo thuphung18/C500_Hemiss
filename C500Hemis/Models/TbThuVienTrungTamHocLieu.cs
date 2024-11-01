@@ -1,53 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
 
 public partial class TbThuVienTrungTamHocLieu
 {
+
+    [DisplayName("ID Thư viện trung tâm học liệu")]
     public int IdThuVienTrungTamHocLieu { get; set; }
 
-    public string? MaThuVienTrungTamHocLieu { get; set; }
-    [DisplayName("Mã Thư Viện Trung Tâm Học Liệu")]
+    [DisplayName("Tên Thư viện trung tâm học liệu")]
     public string? TenThuVienTrungTamHocLieu { get; set; }
-    [DisplayName("Tên Thư Viện")]
+
+    [DisplayName("Năm đưa vào sử dụng")]
+    [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
     public string? NamDuaVaoSuDung { get; set; }
-    [DisplayName("Năm Đưa Vào Sử Dụng")]
+
+    [DisplayName("Diện tích")]
     public double? DienTich { get; set; }
-    [DisplayName("Diện Tích")]
+
+
+    [DisplayName("Diện tích phòng đọc")]
     public double? DienTichPhongDoc { get; set; }
-    [DisplayName("Diện Tích Phòng Học")]
+
+    [DisplayName("Số phòng đọc")]
     public int? SoPhongDoc { get; set; }
-    [DisplayName("Số Phòng Đọc")]
+
+    [DisplayName("Số lượng máy tính")]
     public int? SoLuongMayTinh { get; set; }
-    [DisplayName("Số Lượng Máy Tính")]
+
+    [DisplayName("Số lượng chỗ ngồi đọc sách")]
     public int? SoLuongChoNgoi { get; set; }
-    [DisplayName("Số Lượng Chỗ")]
+
+    [DisplayName("Số lượng sách")]
     public int? SoLuongSach { get; set; }
-    [DisplayName("Số Lượng Sách")]
+
+    [DisplayName("Số lượng tạp chí")]
     public int? SoLuongTapChi { get; set; }
-    [DisplayName("Số Lượng Tạp Chí")]
+
+    [DisplayName("Số lượng sách điện tử")]
     public int? SoLuongSachDienTu { get; set; }
-    [DisplayName("Số Lượng Sách Điện Tử")]
+
+    [DisplayName("Số lượng tạp chí điện tử")]
     public int? SoLuongTapChiDienTu { get; set; }
-    [DisplayName("Số Lượng Tạp Chí Điện Tử")]
+
+
+    [DisplayName("Số lượng Thư viện điện tử liên kết nước ngoài")]
     public int? SoLuonngThuVienDienTuLienKetNn { get; set; }
-    [DisplayName("Số Lượng Thư Viện Điện Tử Liên Kết")]
-    public int? IdTinhTrangCsvc { get; set; }
-    [DisplayName("Tình Trạng Cơ Sở Vật Chất")]
-    public int? IdHinhThucSoHuu { get; set; }
-    [DisplayName("Hình Thức Sở Hữu")]
+
+    [DisplayName("Số lượng đầu sách")]
     public int? SoLuongDauSach { get; set; }
-    [DisplayName("Số Lượng Đầu Sách")]
+
+    [DisplayName("Số lượng đầu tạp chí")]
     public int? SoLuongDauTapChi { get; set; }
-    [DisplayName("Số Lượng Đầu Tạp Chí")]
+
+    [DisplayName("Số lượng đầu sách điện tử")]
     public int? SoLuongDauSachDienTu { get; set; }
-    [DisplayName("Số Lượng Sách Điện Tử")]
+
+    [DisplayName("Số lượng đầu tạp chí điện tử")]
     public int? SoLuongDauTapChiDienTu { get; set; }
-    [DisplayName("Số Lượng Đầu Tạp Chí Điện Tử")]
+
+    [DisplayName(" Hình thức sở hữu")]
+    
+    public int? IdHinhThucSoHuu { get; set; }
+
+    [DisplayName("ID Hình thức sở hữu")]
+    [ForeignKey("IdHinhThucSoHuu")]
     public virtual DmHinhThucSoHuu? IdHinhThucSoHuuNavigation { get; set; }
 
+
+
+    [DisplayName("Tình trạng cơ sở vật chất")]
+    
+    
+    public int? IdTinhTrangCsvc { get; set; }
+
+    [DisplayName("ID Tình trạng cơ sở vật chất")]
+    [ForeignKey("IdTinhTrangCsvc")]
     public virtual DmTinhTrangCoSoVatChat? IdTinhTrangCsvcNavigation { get; set; }
+
 }

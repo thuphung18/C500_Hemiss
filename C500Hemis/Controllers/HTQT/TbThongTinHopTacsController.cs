@@ -18,11 +18,30 @@ namespace C500Hemis.Controllers.HTQT
             _context = context;
         }
 
-        // GET: TbThongTinHopTacs
-        public async Task<IActionResult> Index()
+        // GET: TbThongTinHopTac
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var hemisContext = _context.TbThongTinHopTacs.Include(t => t.IdHinhThucHopTacNavigation).Include(t => t.IdToChucHopTacNavigation);
-            return View(await hemisContext.ToListAsync());
+            // Lấy danh sách thông tin hợp tác
+            IQueryable<TbThongTinHopTac> query = _context.TbThongTinHopTacs
+                .Include(t => t.IdToChucHopTacNavigation)
+                .Include(t => t.IdHinhThucHopTacNavigation);
+
+            // Nếu có giá trị tìm kiếm, lọc theo các trường thông tin
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(r =>
+                    r.IdThongTinHopTac.ToString().Contains(searchTerm)); // Tìm theo Id tổ chức hợp tác quốc tế                 
+                /*r.TenThoaThuan.Contains(searchTerm) || // Tìm theo Tên thỏa thuận
+                r.ThongTinLienHeDoiTac.Contains(searchTerm) || // Tìm theo Thông tin liên hệ đối tác
+                r.MucTieu.Contains(searchTerm) || // Tìm theo Mục tiêu
+                r.DonViTrienKhai.Contains(searchTerm) || // Tìm theo Đơn vị triển khai
+                r.SanPhamChinh.Contains(searchTerm)); // Tìm theo Sản phẩm chính*/
+            }
+
+            // Trả về view với danh sách đã lọc
+            var result = await query.ToListAsync();
+            return View(result);
+
         }
 
         // GET: TbThongTinHopTacs/Details/5
@@ -54,22 +73,57 @@ namespace C500Hemis.Controllers.HTQT
         }
 
         // POST: TbThongTinHopTacs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdThongTinHopTac,IdToChucHopTac,ThoiGianHopTacTu,ThoiGianHopTacDen,TenThoaThuan,ThongTinLienHeDoiTac,MucTieu,DonViTrienKhai,IdHinhThucHopTac,SanPhamChinh")] TbThongTinHopTac tbThongTinHopTac)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbThongTinHopTac);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Kiểm tra nếu IdThongTinHopTac đã tồn tại trong bảng
+                    if (await _context.TbThongTinHopTacs.AnyAsync(t => t.IdThongTinHopTac == tbThongTinHopTac.IdThongTinHopTac))
+                    {
+                        // Nếu có bản ghi trùng lặp, thêm thông báo lỗi vào ModelState
+                        ModelState.AddModelError("IdThongTinHopTac", "Đã trùng ID vui lòng nhập Id khác.");
+                    }
+                    else
+                    {
+                        // Kiểm tra nếu IdToChucHopTac đã tồn tại trong bảng TbToChucHopTacQuocTe
+                        var existingToChuc = await _context.TbToChucHopTacQuocTes
+                                              .FirstOrDefaultAsync(t => t.IdToChucHopTacQuocTe == tbThongTinHopTac.IdToChucHopTac);
+
+                        // Nếu không tồn tại, thêm tổ chức mới vào TbToChucHopTacQuocTe
+                        if (existingToChuc == null)
+                        {
+                            var newToChuc = new TbToChucHopTacQuocTe
+                            {
+                                IdToChucHopTacQuocTe = (int)tbThongTinHopTac.IdToChucHopTac,
+                            };
+                            _context.TbToChucHopTacQuocTes.Add(newToChuc);
+                            await _context.SaveChangesAsync();
+                        }
+
+                        // Sau đó thêm dữ liệu vào bảng TbThongTinHopTac
+                        _context.Add(tbThongTinHopTac);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    // Xử lý ngoại lệ liên quan đến việc cập nhật cơ sở dữ liệu
+                    ModelState.AddModelError("", "Không thể thêm bản ghi vào cơ sở dữ liệu. Vui lòng thử lại.");
+                    // Log the exception if needed (e.g., using a logging framework)
+                }
             }
+
+            // Nếu có lỗi, hiển thị lại form với thông tin lỗi
             ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "IdHinhThucHopTac", tbThongTinHopTac.IdHinhThucHopTac);
             ViewData["IdToChucHopTac"] = new SelectList(_context.TbToChucHopTacQuocTes, "IdToChucHopTacQuocTe", "IdToChucHopTacQuocTe", tbThongTinHopTac.IdToChucHopTac);
             return View(tbThongTinHopTac);
         }
+
 
         // GET: TbThongTinHopTacs/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -89,9 +143,8 @@ namespace C500Hemis.Controllers.HTQT
             return View(tbThongTinHopTac);
         }
 
+
         // POST: TbThongTinHopTacs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdThongTinHopTac,IdToChucHopTac,ThoiGianHopTacTu,ThoiGianHopTacDen,TenThoaThuan,ThongTinLienHeDoiTac,MucTieu,DonViTrienKhai,IdHinhThucHopTac,SanPhamChinh")] TbThongTinHopTac tbThongTinHopTac)
@@ -107,6 +160,7 @@ namespace C500Hemis.Controllers.HTQT
                 {
                     _context.Update(tbThongTinHopTac);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,8 +173,9 @@ namespace C500Hemis.Controllers.HTQT
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
+            // If there's a validation error, return to Edit view instead of Create view
             ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "IdHinhThucHopTac", tbThongTinHopTac.IdHinhThucHopTac);
             ViewData["IdToChucHopTac"] = new SelectList(_context.TbToChucHopTacQuocTes, "IdToChucHopTacQuocTe", "IdToChucHopTacQuocTe", tbThongTinHopTac.IdToChucHopTac);
             return View(tbThongTinHopTac);
@@ -149,6 +204,7 @@ namespace C500Hemis.Controllers.HTQT
         // POST: TbThongTinHopTacs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tbThongTinHopTac = await _context.TbThongTinHopTacs.FindAsync(id);
