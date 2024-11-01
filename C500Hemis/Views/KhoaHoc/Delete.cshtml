@@ -4,30 +4,94 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        background: pink; /* Đặt màu nền của toàn bộ trang web thành màu hồng */
+    }
 
-<h3>Are you sure you want to delete this?</h3>
+    div .row {
+        background-color: #C4DAD2; /* Đặt màu nền cho phần tử div có class là "row" là màu xanh nhạt */
+        justify-content: center; /* Căn giữa nội dung bên trong phần tử theo chiều ngang (áp dụng khi dùng Flexbox) */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc (áp dụng khi dùng Flexbox) */
+        padding: 20px; /* Tạo khoảng cách bên trong phần tử "row" là 20px */
+        font-weight: bold; /* Làm cho chữ bên trong phần tử có độ dày đậm */
+        border-radius: 10px; /* Bo tròn các góc của phần tử với bán kính là 10px */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng với bóng nằm dưới và có độ mờ nhẹ */
+        max-width: 600px; /* Giới hạn chiều rộng của phần tử là 600px */
+        margin: 0 auto; /* Căn giữa phần tử theo chiều ngang trong phần chứa nó */
+        border: 3px solid black; /* Tạo viền đen có độ dày 3px cho phần tử */
+    }
+
+    h1 {
+        font-family: Apice; /* Đặt kiểu chữ của tiêu đề h1 là Apice */
+        text-align: center; /* Căn giữa nội dung tiêu đề theo chiều ngang */
+        color: #16423C; /* Đặt màu chữ của tiêu đề h1 là xanh đậm (#16423C) */
+    }
+
+    dt {
+        font-weight: bold; /* Làm đậm chữ trong phần tử dt (dùng cho nhãn) */
+        color: #16423C; /* Đặt màu chữ của phần tử dt là xanh đậm (#16423C) */
+    }
+
+    dd {
+        white-space: normal; /* Cho phép nội dung trong phần tử dd ngắt dòng khi cần */
+    }
+
+    .btn {
+        background-color: #e74c3c; /* Đặt màu nền cho nút bấm (button) là màu đỏ (#e74c3c) */
+        color: White; /* Đặt màu chữ của nút bấm là trắng */
+        padding: 12px 20px; /* Tạo khoảng cách bên trong nút bấm (12px trên/dưới và 20px trái/phải) */
+        border: none; /* Xóa viền cho nút bấm */
+        border-radius: 5px; /* Bo tròn các góc của nút bấm với bán kính 5px */
+        text-decoration: none; /* Xóa gạch chân nếu nút bấm là liên kết */
+        transition: background-color 0.3s; /* Thêm hiệu ứng chuyển đổi màu nền trong 0.3 giây khi di chuột vào */
+    }
+
+        .btn:hover {
+            background-color: #c0392b; /* Khi người dùng di chuột vào nút, màu nền sẽ đổi thành màu đỏ đậm hơn (#c0392b) */
+        }
+
+    .btn-secondary {
+        background-color: #3498db; /* Đặt màu nền cho nút bấm có class là "btn-secondary" là màu xanh (#3498db) */
+        font-weight: bold; /* Làm đậm chữ của nút bấm */
+    }
+
+        .btn-secondary:hover {
+            background-color: #2980b9; /* Khi di chuột vào nút có class "btn-secondary", màu nền sẽ đổi thành xanh đậm hơn (#2980b9) */
+        }
+
+    .action-links {
+        display: flex; /* Đặt các nút bấm (hoặc liên kết) trong phần tử "action-links" thành hàng ngang bằng cách sử dụng Flexbox */
+        gap: 10px; /* Tạo khoảng cách 10px giữa các phần tử con trong "action-links" */
+        justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+        margin-top: 20px; /* Tạo khoảng trống phía trên "action-links" là 20px */
+    }
+
+</style>
+<h1>BẠN CÓ MUỐN XOÁ VĂN BẢN NÀY</h1>
 <div>
-    <h4>TbKhoaHoc</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.TuNam)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-7">
             @Html.DisplayFor(model => model.TuNam)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-5">
             @Html.DisplayNameFor(model => model.DenNam)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-7">
             @Html.DisplayFor(model => model.DenNam)
         </dd>
+        
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="IdKhoaHoc" />
+            <div class="action links">
+                <input type="submit" value="XOÁ" class="btn" />
+                <a asp-action="Index" class="btn btn-secondary">QUAY TRỞ LẠI DANH SÁCH</a>
+            </div>
+
+        </form>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdKhoaHoc" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
 </div>

@@ -1,53 +1,229 @@
 ﻿@model C500Hemis.Models.TbKhoanNopNganSach
+<script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
+<!-- Thêm vào phần <head> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>TbKhoanNopNganSach</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<h1>THÊM THÔNG TIN</h1>
+<body>
+<div class="container">
+    <div class="title">Thông tin chi tiết</div>
+    <div class="content">
+    
         <form asp-action="Create">
+                 <div class="user-details">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdKhoanNopNganSach" class="control-label"></label>
-                <input asp-for="IdKhoanNopNganSach" class="form-control" />
-                <span asp-validation-for="IdKhoanNopNganSach" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                    <div class="input-box">
+                        <label asp-for="IdKhoanNopNganSach" class="control-label"></label>
+                        <input asp-for="IdKhoanNopNganSach" class="form-control" type="text" />
+                        <span asp-validation-for="IdKhoanNopNganSach" class="text-danger"></span>
+                    </div>
+            <div class="input-box">
                 <label asp-for="MaKhoanNop" class="control-label"></label>
-                <input asp-for="MaKhoanNop" class="form-control" />
+                <input asp-for="MaKhoanNop" class="form-control" placeholder="#XXXX"/>
                 <span asp-validation-for="MaKhoanNop" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <label asp-for="TenKhoanNopNganSach" class="control-label"></label>
-                <input asp-for="TenKhoanNopNganSach" class="form-control" />
+                <input asp-for="TenKhoanNopNganSach" class="form-control" placeholder="Quỹ......" />
                 <span asp-validation-for="TenKhoanNopNganSach" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="input-box">
                 <label asp-for="SoTien" class="control-label"></label>
-                <input asp-for="SoTien" class="form-control" />
+                <input asp-for="SoTien" class="form-control" type="text" />
                 <span asp-validation-for="SoTien" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NamTaiChinh" class="control-label"></label>
-                <input asp-for="NamTaiChinh" class="form-control" />
-                <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+                    <div class="input-box">
+                        <label asp-for="NamTaiChinh" class="control-label"></label>
+                        <input asp-for="NamTaiChinh" class="form-control" placeholder="Nhập năm tài chính" />
+                        <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+                    </div>
+
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input class="btn-primary" type="submit" value="Thêm"  />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
+    <div>
+        <a class="btn-primary"  style="margin-right:auto;" asp-action="Index"><i style="margin-right:10px" class="fa-solid fa-arrow-left"></i>Quay lại</a>
+    </div>
+
+</body>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 }
+<style>
+    a {
+        text-decoration: none;
+    }
+    /* ========= common ======== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 130vh;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: #fafbed;
+      
+    }
+
+    .container {
+        max-width: 700px;
+        width: 100%;
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        
+       
+        padding: 25px 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+
+        .container .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+            .container .title::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 3px;
+                width: 60px;
+                border-radius: 5px;
+                
+            }
+
+    .content form .user-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px 0 12px 0;
+    }
+
+    form .user-details .input-box {
+        margin-bottom: 15px;
+        width: calc(100% / 2 - 20px);
+    }
+    /* ======= chỉnh sửa các option chọn ======== */
+    .user-details .input-box input,
+    .user-details .input-box select {
+        height: 45px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+        transition: all 0.3s ease;
+    }
+        /*  ===== hiệu ứng khi chọn vào ô  ========= */
+        .user-details .input-box input:focus,
+        .user-details .input-box select:focus,
+        .user-details .input-box select:valid,
+        .user-details .input-box input:valid {
+            border-color: #9b59b6;
+        }
+
+    .button-option {
+        display: flex;
+    }
+
+    /* ====== button ======== */
+    .btn1 {
+        border-radius: 6px;
+        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 16px;
+        min-height: 40px;
+        outline: 0;
+        padding: 10px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        background-color:#33cccc;
+    }
+    /* ============= add ========== */
+    #btn-add {
+        background: green;
+        border: 1px solid green;
+    }
+
+        #btn-add:hover,
+        #btn-add:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: green;
+        }
+
+        #btn-add:active {
+            opacity: .5;
+        }
+
+    /*  ====== back ====== */
+    #btn-back {
+        background: blue;
+        border: 1px solid blue;
+        margin-top: 10px;
+    }
+
+        #btn-back:hover,
+        #btn-back:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: blue;
+        }
+
+        #btn-back:active {
+            opacity: .5;
+        }
+
+    .btn-primary {
+        background-color: #ff6f61;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        width: 100%;
+        display: flex; /* Flexbox để căn giữa icon và text */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+    }
+
+        .btn-primary:hover {
+            background-color: #ff9270; /* Màu khi hover */
+        }
+
+</style>
