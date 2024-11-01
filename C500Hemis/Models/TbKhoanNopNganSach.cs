@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace C500Hemis.Models;
 //commit  
-
+ 
 public partial class TbKhoanNopNganSach
 {
     [Display(Name = "ID Khoản Nộp Ngân Sách")]
