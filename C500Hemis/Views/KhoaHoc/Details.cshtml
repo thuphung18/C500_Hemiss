@@ -4,10 +4,75 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>CHI TIẾT KHOÁ HỌC</h1>
+<style>
+    body {
+        background: pink; /* Đặt màu nền của body thành màu hồng */
+    }
+
+    div .row {
+        background-color: #C4DAD2; /* Màu nền xanh nhạt cho lớp .row */
+        justify-content: center; /* Căn giữa nội dung theo chiều ngang trong flex container */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc trong flex container */
+        padding: 20px; /* Thêm 20px padding bên trong lớp .row */
+        font-weight: bold; /* Làm cho font chữ in đậm */
+        border-radius: 10px; /* Bo góc cho hộp */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ để tạo chiều sâu */
+        max-width: 600px; /* Giới hạn chiều rộng tối đa của .row là 600px */
+        margin: 0 auto; /* Căn giữa lớp .row trong phần chứa */
+        border: 3px solid black; /* Thêm viền đen cho lớp .row */
+    }
+
+    h1 {
+        font-family: Apice; /* Đặt font chữ cho h1 là Apice */
+        text-align: center; /* Căn giữa văn bản */
+        color: #16423C; /* Đặt màu chữ cho h1 là màu xanh đậm */
+    }
+
+    dt {
+        font-weight: bold; /* Làm cho văn bản trong <dt> (term định nghĩa) in đậm */
+        color: #16423C; /* Đặt màu chữ cho <dt> là màu xanh đậm */
+        white-space: nowrap; /* Ngăn không cho ngắt dòng trong văn bản của <dt> */
+    }
+
+    dd {
+        white-space: normal; /* Cho phép văn bản trong <dd> (miêu tả định nghĩa) ngắt dòng bình thường */
+    }
+
+    .btn {
+        background-color: #3498db; /* Đặt màu nền của nút thành màu xanh */
+        color: White; /* Đặt màu chữ của nút thành màu trắng */
+        padding: 12px 20px; /* Thêm padding: 12px trên/dưới và 20px trái/phải */
+        border: none; /* Loại bỏ viền mặc định của nút */
+        border-radius: 5px; /* Bo góc cho nút */
+        text-decoration: none; /* Xóa gạch chân nếu có */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển đổi mượt mà cho màu nền khi thay đổi */
+    }
+
+        .btn:hover {
+            background-color: #2980b9; /* Thay đổi màu nền khi di chuột lên nút thành màu xanh đậm hơn */
+        }
+
+    .btn-secondary {
+        background-color: #e74c3c; /* Đặt màu nền cho nút thứ cấp là màu đỏ */
+        font-weight: bold; /* Làm cho chữ in đậm */
+    }
+
+        .btn-secondary:hover {
+            background-color: #c0392b; /* Thay đổi màu nền khi di chuột lên nút thứ cấp thành màu đỏ đậm hơn */
+        }
+
+    .action-links {
+        display: flex; /* Sử dụng flexbox để bố trí các phần tử */
+        gap: 10px; /* Thêm khoảng cách 10px giữa các phần tử */
+        justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+        margin-top: 20px; /* Thêm margin trên là 20px */
+    }
+
+</style>
 
 <div>
-    <h4>TbKhoaHoc</h4>
+   
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -22,9 +87,11 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DenNam)
         </dd>
+        <div class="action-links">
+            <a asp-action="Edit" asp-route-id="@Model?.IdKhoaHoc" class="btn">SỬA</a>
+            <a asp-action="Index" class="btn btn-secondary">QUAY LẠI DANH SÁCH</a>
+        </div>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKhoaHoc">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
