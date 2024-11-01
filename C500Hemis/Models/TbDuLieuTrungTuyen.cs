@@ -8,7 +8,7 @@ namespace C500Hemis.Models;
 public partial class TbDuLieuTrungTuyen
 {
 
-    [Display(Name = "STT")]
+    [Display(Name = "Id dữ liệu trúng tuyển")]
     public int IdDuLieuTrungTuyen { get; set; }
 
     [Display(Name = "Số Cccd/ Hộ Chiếu")]
@@ -52,8 +52,6 @@ public partial class TbDuLieuTrungTuyen
 
     [Display(Name = "Điểm ưu tiên")]
     public double? DiemUuTien { get; set; }
-
-
     public double? TongDiemXetTuyen { get; set; }
 
     [Display(Name = "Số quyết định trúng tuyển")]
