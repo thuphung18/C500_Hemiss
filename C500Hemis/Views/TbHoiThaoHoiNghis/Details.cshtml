@@ -1,84 +1,102 @@
 ﻿@model C500Hemis.Models.TbHoiThaoHoiNghi
 
 @{
-    ViewData["Title"] = "Thông tin chi tiết";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Thông tin chi tiết</h1>
-
 <style>
-    table {
-        width: 100%; /* Chiều rộng bảng 100% */
-        border-collapse: collapse; /* Gộp đường viền ô */
+    /*body*/
+    body {
+        background-color: #dacae3;
     }
-
+    /*thanh tiêu đề*/
+    h1 {
+        color: #433878;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'UVN Chim Bien Nang';
+    }
+    /*table*/
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    /*title*/
     th, td {
-        border: 1px solid #000; /* Đường viền đen cho các ô */
+        border: 2px solid #433878;
+        background-color: #F5EFFF;
         text-align: left;
-        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+        padding: 8px;
     }
 
     th {
-        font-weight: bold; /* Chữ đậm cho tiêu đề */
+        font-weight: bold;
+        accent-color: #433878;
+    }
+    /*button*/
+    .btn-primary {
+        margin-top: 5px;
+        background-color: #433878;
+        color: #FAF7F0;
+        border: solid #433878 0.5px;
     }
 
-    tr:hover {
-        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
-    }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #FAF7F0;
+            color: #433878;
+        }
 </style>
 
-<div class="container">
-    <h4 style="text-align:center">Hội thảo hội nghị</h4>
-    <hr />
-    <table>
+<h1>CHI TIẾT VỀ THÔNG TIN</h1>
+<table class="details-table">
     <tr>
-        <th>Mã hội thao hội nghị</th>
+        <th>@Html.DisplayNameFor(model => model.MaHoiThaoHoiNghi)</th>
         <td>@Html.DisplayFor(model => model.MaHoiThaoHoiNghi)</td>
     </tr>
     <tr>
-        <th>Tên hội thao hội nghị</th>
+        <th>@Html.DisplayNameFor(model => model.TenHoiThaoHoiNghi)</th>
         <td>@Html.DisplayFor(model => model.TenHoiThaoHoiNghi)</td>
     </tr>
     <tr>
-        <th>Cơ quan có thẩm quyền cấp phép</th>
+        <th>@Html.DisplayNameFor(model => model.CoQuanCoThamQuyenCapPhep)</th>
         <td>@Html.DisplayFor(model => model.CoQuanCoThamQuyenCapPhep)</td>
     </tr>
     <tr>
-        <th>Mục tiêu</th>
+        <th>@Html.DisplayNameFor(model => model.MucTieu)</th>
         <td>@Html.DisplayFor(model => model.MucTieu)</td>
     </tr>
     <tr>
-        <th>Nội dung</th>
+        <th>@Html.DisplayNameFor(model => model.NoiDung)</th>
         <td>@Html.DisplayFor(model => model.NoiDung)</td>
     </tr>
     <tr>
-        <th>Số lượng đại biểu tham dự</th>
+        <th>@Html.DisplayNameFor(model => model.SoLuongDaiBieuThamDu)</th>
         <td>@Html.DisplayFor(model => model.SoLuongDaiBieuThamDu)</td>
     </tr>
     <tr>
-        <th>Số lượng đại biểu quốc tế tham dự</th>
+        <th>@Html.DisplayNameFor(model => model.SoLuongDaiBieuQuocTeThamDu)</th>
         <td>@Html.DisplayFor(model => model.SoLuongDaiBieuQuocTeThamDu)</td>
     </tr>
     <tr>
-        <th>Thời gian tổ chức</th>
+        <th>@Html.DisplayNameFor(model => model.ThoiGianToChuc)</th>
         <td>@Html.DisplayFor(model => model.ThoiGianToChuc)</td>
     </tr>
     <tr>
-        <th>Địa điểm tổ chức</th>
+        <th>@Html.DisplayNameFor(model => model.DiaDiemToChuc)</th>
         <td>@Html.DisplayFor(model => model.DiaDiemToChuc)</td>
     </tr>
     <tr>
-        <th>Đơn vị chủ trì</th>
+        <th>@Html.DisplayNameFor(model => model.DonViChuTri)</th>
         <td>@Html.DisplayFor(model => model.DonViChuTri)</td>
     </tr>
     <tr>
-        <th>Nguồn kinh phí hội thao</th>
-        <td>@Html.DisplayFor(model => model.IdNguonKinhPhiHoiThaoNavigation.IdNguonKinhPhi)</td>
+        <th>@Html.DisplayNameFor(model => model.IdNguonKinhPhiHoiThaoNavigation)</th>
+        <td>@Html.DisplayFor(model => model.IdNguonKinhPhiHoiThaoNavigation.NguonKinhPhi)</td>
     </tr>
 </table>
-</div>
-
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHoiThaoHoiNghi">Sửa</a> |
-    <a asp-action="Index">Quay lại danh sách</a>
+    <a class="btn btn-primary" asp-action="Index">Quay lại danh sách</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdHoiThaoHoiNghi">Sửa</a>
 </div>
