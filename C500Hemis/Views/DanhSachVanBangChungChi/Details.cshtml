@@ -3,100 +3,170 @@
 @{
     ViewData["Title"] = "Details";
 }
+@*Bùi Văn Đạt*@
+<h1>TRANG THÔNG TIN CHI TIẾT VBCC</h1>
 
-<h1>Details</h1>
+<div class="toro">
+    <table class="tara">
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.TenVanBang)</th>
+            <td>@Html.DisplayFor(model => model.TenVanBang)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)</th>
+            <td>@Html.DisplayFor(model => model.IdChuongTrinhDaoTao)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.TenDonViBangCap)</th>
+            <td>@Html.DisplayFor(model => model.TenDonViBangCap)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.NgayCap)</th>
+            <td>@Html.DisplayFor(model => model.NgayCap)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.NamTotNghiep)</th>
+            <td>@Html.DisplayFor(model => model.NamTotNghiep)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.SoQuyetDinhCongNhanTotNghiep)</th>
+            <td>@Html.DisplayFor(model => model.SoQuyetDinhCongNhanTotNghiep)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.NgayQuyetDinhCongNhanTotNghiep)</th>
+            <td>@Html.DisplayFor(model => model.NgayQuyetDinhCongNhanTotNghiep)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.SoHieuVanBang)</th>
+            <td>@Html.DisplayFor(model => model.SoHieuVanBang)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.SoVaoSoGocCapVanBang)</th>
+            <td>@Html.DisplayFor(model => model.SoVaoSoGocCapVanBang)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)</th>
+            <td>@Html.DisplayFor(model => model.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.NgayBaoVe)</th>
+            <td>@Html.DisplayFor(model => model.NgayBaoVe)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.LinkFileScan)</th>
+            <td>@Html.DisplayFor(model => model.LinkFileScan)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.IdHocVienNavigation)</th>
+            <td>@Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)</td>
+        </tr>
+        <tr>
+            <th class="table-header">@Html.DisplayNameFor(model => model.IdLoaiTotNghiepNavigation)</th>
+            <td>@Html.DisplayFor(model => model.IdLoaiTotNghiepNavigation.LoaiTotNghiep)</td>
+        </tr>
+    </table>
+    <div class="action-buttons">
+        <a class="Nut1 Nut2" asp-action="Edit" asp-route-id="@Model?.IdDanhSachVanBangChungChi">SỬA</a>
+        <a class="Nut1 Nut3" asp-action="Index">TRANG CHỦ</a>
+    </div>
 
-<div>
-    <h4>TbDanhSachVanBangChungChi</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenVanBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenVanBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdChuongTrinhDaoTao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenDonViBangCap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenDonViBangCap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayCap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayCap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamTotNghiep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamTotNghiep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhCongNhanTotNghiep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhCongNhanTotNghiep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayQuyetDinhCongNhanTotNghiep)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayQuyetDinhCongNhanTotNghiep)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoHieuVanBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoHieuVanBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoVaoSoGocCapVanBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoVaoSoGocCapVanBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayBaoVe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayBaoVe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinkFileScan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LinkFileScan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHocVienNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiTotNghiepNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiTotNghiepNavigation.IdLoaiTotNghiep)
-        </dd>
-    </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdDanhSachVanBangChungChi">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    h1 {
+        text-align: center;
+        color: black;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 40px;
+    }
+    body {
+        background-color: lightblue;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 2px solid black;
+    }
+
+    th {
+        background-color: aliceblue;
+        text-align: left;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    td {
+        background-color: aliceblue;
+        color: #000000; /* Thêm màu chữ trắng để dễ đọc trên nền xanh lá */
+    }
+
+    tr:hover td {
+        background-color: beige;
+    }
+
+    .toro {
+        max-width: 800px; /* Tăng chiều rộng tối đa cho khung chứa */
+        margin-top: 10px;
+        margin: auto;
+        padding: 10px;
+        background-color: mintcream;
+        font-size: 15px;
+        border-radius: 10px;
+        border: 3px solid black;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng đổ bóng */
+        border-collapse: collapse; /* Đảm bảo các ô không có khoảng cách giữa các đường viền */
+    }
+
+   
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .Nut1 {
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .Nut2 {
+        background-color: blue;
+        color: white;
+    }
+
+        .Nut2:hover {
+            background-color: darkblue;
+            transform: scale(1.10);
+        }
+
+    .Nut3 {
+        background-color: chartreuse;
+        color: white;
+    }
+
+        .Nut3:hover {
+            background-color: mediumspringgreen;
+            color: red;
+            transform: scale(1.05);
+        }
+</style>
+<script>
+    document.querySelector('.Nut2 ').addEventListener('click', function (event) {
+        if (!confirm('Bạn có chắc chắn muốn CHỈNH SỬA thông tin này?')) {
+            event.preventDefault();
+        }
+    });
+</script>

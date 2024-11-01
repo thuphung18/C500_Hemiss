@@ -70,3 +70,38 @@
     <a asp-action="Edit" asp-route-id="@Model?.IdDatDai">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-header {
+        background-color: #007bff; /* Màu xanh dương */
+        color: white;
+        padding: 10px;
+    }
+
+    .table td {
+        padding: 10px;
+        border: 1px solid #dee2e6; /* Màu xám nhạt */
+        background-color: #f9f9f9; /* Màu nền nhạt */
+    }
+
+    .table tr:nth-child(even) td {
+        background-color: #e9ecef; /* Màu nền nhạt cho hàng chẵn */
+    }
+
+    .table tr:hover td {
+        background-color: #d6e9f9; /* Màu nền khi di chuột */
+    }
+
+    .action-buttons {
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin-right: 10px; /* Khoảng cách giữa các nút */
+    }
+
+</style>
