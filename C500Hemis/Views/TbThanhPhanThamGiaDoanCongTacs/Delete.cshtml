@@ -1,39 +1,86 @@
 ﻿@model C500Hemis.Models.TbThanhPhanThamGiaDoanCongTac
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xoá"; // Tiêu đề trang
 }
 
-<h1>Delete</h1>
+<style>
+    /* Kiểu cho tiêu đề */
+    h1, h3, h4 {
+        color: #6A9C89; /* Màu chữ */
+        background-color: rgb(230,241,216); /* Màu nền */
+        font-weight: bold; /* Đậm chữ */
+    }
 
-<h3>Are you sure you want to delete this?</h3>
+    /* Kiểu cho body */
+    body {
+        background-position: center; /* Căn giữa hình nền */
+        background-repeat: no-repeat; /* Không lặp hình nền */
+        background-color: rgb(230,241,216); /* Màu nền chính */
+    }
+
+    /* Kiểu cho hình ảnh */
+    .img {
+        opacity: 0.8; /* Độ trong suốt cho hình ảnh */
+    }
+
+    /* Kiểu cho bảng */
+    table {
+        width: 100%; /* Chiều rộng bảng 100% */
+        border-collapse: collapse; /* Gộp đường viền ô */
+    }
+
+    th, td {
+        border: 1px solid #000; /* Đường viền đen cho các ô */
+        text-align: left; /* Căn trái nội dung ô */
+        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    }
+
+    th {
+        font-weight: bold; /* Chữ đậm cho tiêu đề bảng */
+    }
+
+    td {
+        font-weight: bold; /* Chữ đậm cho ô dữ liệu */
+        text-align: center; /* Căn giữa nội dung ô */
+    }
+
+    tr:hover {
+        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+</style>
+
+<h1 align="center"><strong>Xoá</strong></h1> <!-- Tiêu đề chính -->
+
+<h3 align="center"><strong>Bạn có thật sự muốn xoá không</strong></h3> <!-- Câu hỏi xác nhận xoá -->
+<p style="text-align: center;">
+    <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Học viện An ninh nhân dân"> <!-- Logo -->
+</p>
+
 <div>
-    <h4>TbThanhPhanThamGiaDoanCongTac</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoanCongTacNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDoanCongTacNavigation.IdDoanCongTac)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdVaiTroThamGiaNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdVaiTroThamGiaNavigation.IdVaiTroThamGia)
-        </dd>
-    </dl>
-    
+    <h4 align="center"><strong>Thành phần tham gia đoàn công tác</strong></h4> <!-- Tiêu đề cho phần thông tin chi tiết -->
+
+    <table class="details-table">
+        <!-- Bảng hiển thị thông tin chi tiết -->
+        <tr>
+            <th>Tên cán bộ</th>
+            <td>@Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name) </td> <!-- Hiển thị mã cán bộ -->
+        </tr>
+        <tr>
+            <th>Mã đoàn công tác</th>
+            <td>@Html.DisplayFor(model => model.IdDoanCongTacNavigation.TenDoanCongTac)</td> <!-- Hiển thị mã đoàn công tác -->
+        </tr>
+        <tr>
+            <th>Vai trò tham gia</th>
+            <td>@Html.DisplayFor(model => model.IdVaiTroThamGiaNavigation.VaiTroThamGia)</td> <!-- Hiển thị vai trò tham gia -->
+        </tr>
+    </table>
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdThanhPhanThamGiaDoanCongTac" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <!-- Form để xác nhận xoá -->
+        <input type="hidden" asp-for="IdThanhPhanThamGiaDoanCongTac" /> <!-- Ẩn ID để gửi lên server -->
+        <input type="submit" value="Delete" class="btn btn-danger" /> <!-- Nút xoá -->
+        |
+        <a asp-action="Index">Back to List</a> <!-- Nút quay lại danh sách -->
     </form>
 </div>
