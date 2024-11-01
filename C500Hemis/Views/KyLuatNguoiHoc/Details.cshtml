@@ -1,122 +1,174 @@
 ﻿@model C500Hemis.Models.TbKyLuatNguoiHoc
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "CHI TIẾT";
 }
-<style>
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+@section Styles {
+    <style>
+        /* Đặt hình nền cho toàn bộ phần body của trang */
+        body {
+            background-image: url("https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/cach-thiet-ke-background-dep-2.jpg");
+        }
 
-    h3 {
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+        /* Thiết lập cho khối chứa form */
+        .total {
+            display: flex; /* Sử dụng Flexbox để sắp xếp phần tử */
+            justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+            margin-top: 50px; /* Khoảng cách phía trên */
+            margin-bottom: 50px; /* Khoảng cách phía dưới */
+        }
 
-    h4 {
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+        /* Định dạng cho form xoá */
+        .form_del {
+            background-color: #f9f9f9;
+            padding: 20px; /* Khoảng cách bên trong form */
+            border-radius: 10px; /* Bo góc cho form */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Tạo hiệu ứng bóng cho form */
+            width: 50%; /* Chiều rộng 50% của phần tử cha */
+            max-width: 800px; /* Giới hạn chiều rộng tối đa là 800px */
+            margin: 0 auto; /* Căn giữa form trong phần tử cha */
+            text-align: center; /* Căn giữa nội dung bên trong form */
+        }
 
-    .form-container {
-        padding: 30px;
-        margin: 0 auto;
-        width: 70%;
-    }
+        /* Định dạng cho tiêu đề chính */
+        h1 {
+            font-size: 36px; /* Kích thước chữ cho tiêu đề */
+            text-align: center; /* Căn giữa tiêu đề */
+            margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề */
+            color: #333; /* Màu chữ cho tiêu đề */
+        }
 
-    dl.row dt, dl.row dd {
-        margin-bottom: 10px;
-    }
+        /* Định dạng cho tiêu đề phụ */
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề phụ */
+        }
 
-    dt {
-        font-weight: bold;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+        /* Định dạng cho bảng thông tin (dl) */
+        dl {
+            padding: 20px; /* Khoảng cách bên trong bảng thông tin */
+            background-color: cadetblue;
+            border-radius: 8px; /* Bo góc cho bảng thông tin */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng bóng cho bảng thông tin */
+        }
 
-    dd {
-        margin-bottom: 10px;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+        /* Định dạng cho hàng trong bảng thông tin */
+        .row {
+            display: grid; /* Sử dụng Grid Layout để sắp xếp các phần tử */
+            grid-template-columns: 1fr 2fr; /* Định nghĩa tỷ lệ cột (1:2) */
+            gap: 15px; /* Khoảng cách giữa các phần tử trong hàng */
+            margin-bottom: 15px; /* Khoảng cách phía dưới hàng */
+        }
 
-    .btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-right: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
+        /* Định dạng cho thẻ định nghĩa (dt) */
+        dt {
+            font-weight: bold; /* Đậm chữ cho thẻ định nghĩa */
+            color: #444; /* Màu chữ cho thẻ định nghĩa */
+            white-space: nowrap; /* Ngăn không cho xuống dòng */
+            text-align: right; /* Căn phải thẻ định nghĩa để khoảng cách với thẻ định nghĩa bên dưới đều đặn hơn */
+            padding-right: 10px; /* Thêm khoảng cách bên phải giữa dt và dd */
+        }
 
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #dee2e6;
-    }
-    form{
-        padding-bottom: 50px;
-    }
-</style>
+        /* Định dạng cho thẻ định nghĩa (dd) */
+        dd {
+            color: #555; /* Màu chữ cho thẻ định nghĩa */
+            margin-bottom: 0; /* Không có khoảng cách phía dưới */
+        }
+
+        /* Định dạng cho nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị nút như một khối inline */
+            padding: 10px 15px; /* Khoảng cách bên trong nút */
+            background-color: #6c757d; /* Màu nền cho nút quay lại */
+            color: white; /* Màu chữ cho nút */
+            border-radius: 5px; /* Bo góc cho nút */
+            text-decoration: none; /* Bỏ gạch chân cho văn bản trong nút */
+            margin-left: 10px; /* Khoảng cách bên trái của nút */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển tiếp khi di chuột qua nút */
+        }
+
+            /* Định dạng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Đổi màu nền khi di chuột qua */
+                transform: scale(1.05); /* Tăng kích thước nút một chút */
+            }
+
+        /* Căn giữa khối chứa nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng Flexbox để căn giữa */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            margin-top: 20px; /* Khoảng cách phía trên */
+        }
+
+        /* Định dạng cho các thẻ định nghĩa (dd) */
+        dd {
+            padding: 10px; /* Khoảng cách bên trong thẻ định nghĩa */
+            background-color: #f1f1f1; /* Màu nền cho thẻ định nghĩa */
+            border-radius: 5px; /* Bo góc cho thẻ định nghĩa */
+        }
+    </style>
+
+}
+
 <h1>Chi tiết</h1>
 
-<div>
-    <h4>Kỷ luật người học</h4>
-    <hr />
+<div class="form_del">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt>
             @Html.DisplayNameFor(model => model.LyDo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.LyDo)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.SoQuyetDinh)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.SoQuyetDinh)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.NgayQuyetDinh)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.NgayQuyetDinh)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.NamBiKyLuat)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.NamBiKyLuat)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.IdCapQuyetDinhNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.IdCapQuyetDinhNavigation.IdCapKhenThuong)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.IdHocVienNavigation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+        <dd>
+            @Html.DisplayFor(model => model.IdHocVienNavigation.IdNguoiNavigation.name)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.IdLoaiKyLuatNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.IdLoaiKyLuatNavigation.IdLoaiKyLuat)
         </dd>
     </dl>
+
+    <div class="submit">
+        <a asp-action="Index" class="back">Quay lại</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKyLuatNguoiHoc"><input type="submit" value="Chỉnh sửa" class="btn btn-primary" /></a> |
-    <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary" /></a>
-</div>
+
+

@@ -3,45 +3,96 @@
 @{
     ViewData["Title"] = "Index";
 }
+<body style="background-image: url('images/xxx.jpg'); background-size: cover; background-position: center;">
+    <!-- Header trong body -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h1>Đầu mối liên hệ</h1>
 
-<h1>Index</h1>
+        <!-- Nút thêm mới -->
+        <div style="margin-left: 20px;">
+            <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+        </div>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SoDienThoai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiDauMoiLienHeNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoDienThoai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiDauMoiLienHeNavigation.IdDauMoiLienHe)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDauMoiLienHe">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDauMoiLienHe">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDauMoiLienHe">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-primary">
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.IdDauMoiLienHe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.IdLoaiDauMoiLienHeNavigation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.SoDienThoai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Email)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="action-links">
+                        <a asp-action="Edit" asp-route-id="@item.IdDauMoiLienHe">
+                            <i class="fas fa-edit"></i>
+                        </a> |
+                        <a asp-action="Details" asp-route-id="@item.IdDauMoiLienHe">
+                            <i class="fas fa-info-circle"></i>
+                        </a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdDauMoiLienHe">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.IdDauMoiLienHe)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdLoaiDauMoiLienHeNavigation.DauMoiLienHe)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SoDienThoai)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<script>
+    new DataTable('.table', {
+        lengthMenu: [5, 10, 15, 20],
+        language: {
+            processing: "Đang tải dữ liệu",
+            search: "Tìm kiếm: ",
+            lengthMenu: "Số dòng hiển thị trên trang _MENU_ ",
+            info: "Tổng bản ghi: _TOTAL_",
+            infoEmpty: "Chưa có nội dung nào trong danh sách",
+            infoFiltered: "",
+            infoPostFix: "", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Không tìm thấy dữ liệu",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "<<",
+                previous: "<",
+                next: ">",
+                last: ">>"
+            },
+            aria: {
+                sortAscending: ": Đang sắp xếp",
+                sortDescending: ": Đang sắp xếp",
+            }
+        },
+    });
+</script>

@@ -1,42 +1,136 @@
 ﻿@model C500Hemis.Models.TbKhoanTrichLapQuy
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết";
 }
 
-<h1>Details</h1>
+<style>
+    body {
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        margin: 0;
+    }
 
-<div>
-    <h4>TbKhoanTrichLapQuy</h4>
+    h1 {
+        font-size: 50px;
+        color: #c0392b;
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    h4 {
+        font-size: 24px;
+        color: #00796b;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    hr {
+        border-top: 1px solid #bdc3c7;
+        margin-bottom: 20px;
+    }
+
+    dl {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #00796b;
+        margin-bottom: 10px;
+        width: 30%; /* Chiếm 30% độ rộng */
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
+
+    dd {
+        color: #7f8c8d;
+        margin-bottom: 10px;
+        width: 70%; /* Chiếm 70% độ rộng */
+        margin-left: 0; /* Loại bỏ khoảng cách mặc định */
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+        .button-container a {
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        }
+
+            .button-container a:hover {
+                background-image: linear-gradient(to left, #8360c3, #2ebf91);
+            }
+</style>
+
+<div class="content-container">
+    <h1>Chi tiết</h1>
+
+    <p style="text-align: center;">
+        <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Logo Học viện An ninh nhân dân" width="125" />
+    </p>
+
+    <h4>Khoản Trích Lập Quỹ</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl>
+        <dt>
             @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.MaKhoanTrichLapQuy)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.TenKhoanTrichLapQuy)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.NamTaiChinh)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.NamTaiChinh)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt>
             @Html.DisplayNameFor(model => model.SoTien)
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.SoTien)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdKhoanTrichLapQuy">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+    <div class="button-container">
+        <a asp-action="Edit" asp-route-id="@Model?.IdKhoanTrichLapQuy">Chỉnh sửa</a> |
+        <a asp-action="Index">Trở lại</a>
+    </div>
 </div>

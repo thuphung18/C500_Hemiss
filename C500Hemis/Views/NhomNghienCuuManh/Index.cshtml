@@ -1,71 +1,239 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbNhomNghienCuuManh>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DANH SÁCH NHÓM NGHIÊN CỨU MẠNH";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary btn-circle" asp-action="Create">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" fill="currentColor" />
+        </svg>
+    </a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaNhomNghienCuuManh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenNhomNghienCuuManh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToChucBanHanhQuyetDinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayQuyetDinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CacNhiemVuNckh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TomTatKetQuaDatDuoc)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaNhomNghienCuuManh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNhomNghienCuuManh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoQuyetDinhThanhLap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToChucBanHanhQuyetDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayQuyetDinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CacNhiemVuNckh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TomTatKetQuaDatDuoc)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNhomNghienCuuManh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNhomNghienCuuManh">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNhomNghienCuuManh">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<form method="get" asp-action="Index">
+    <div class="search-box" style="display: flex; justify-content: flex-end;">
+        <input type="text" name="searchString" class="search-input" placeholder="Tìm kiếm nhóm nghiên cứu..." value="@ViewData["CurrentFilter"]" />
+    </div>
+</form>
+
+<style>
+    body {
+        background: linear-gradient(to top right, #5357CE, #C850C0);
+        color: white;
+    }
+
+    .btn-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        padding: 6px 0;
+        background-color: #007bff;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-circle:hover {
+            background-color: #0069d9;
+            transform: scale(1.1);
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .search-box {
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 30px;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        outline: none;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .search-input::placeholder {
+            color: #999;
+    }
+
+    .search-input:focus {
+            border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #ffffff;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family: 'Roboto', sans-serif;
+        table-layout: auto;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #e5e5e5;
+        white-space: nowrap;
+    }
+
+    thead {
+        background-color: #36304A;
+        color: white;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+
+    tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .btn-group a {
+        margin: 0 5px;
+        padding: 6px 10px;
+        font-size: 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-info {
+        background-color: #3498db;
+        color: white;
+        border: none;
+    }
+
+    .btn-warning {
+        background-color: #f39c12;
+        color: white;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+    }
+
+    .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+            opacity: 0.9;
+    }
+
+    thead th {
+        font-size: 12px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    th:nth-child(1), td:nth-child(1) {
+        width: 5%;
+    }
+    /* Mã nhóm */
+    th:nth-child(2), td:nth-child(2) {
+        width: 10%;
+    }
+    /* Tên nhóm */
+    th:nth-child(3), td:nth-child(3) {
+        width: 10%;
+    }
+    /* Số quyết định */
+    th:nth-child(4), td:nth-child(4) {
+        width: 15%;
+    }
+    /* Tổ chức ban hành */
+    th:nth-child(5), td:nth-child(5) {
+        width: 10%;
+    }
+    /* Ngày quyết định */
+    th:nth-child(6), td:nth-child(6) {
+        width: 15%;
+    }
+    /* Các nhiệm vụ NCKH */
+    th:nth-child(7), td:nth-child(7) {
+        width: 15%;
+    }
+    /* Tóm tắt kết quả */
+    th:nth-child(8), td:nth-child(8) {
+        width: 20%;
+    }
+    /* Hành động */
+
+    .btn-group {
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã nhóm</th>
+                <th>Tên nhóm</th>
+                <th>Số quyết định</th>
+                <th>Tổ chức ban hành</th>
+                <th>Ngày quyết định</th>
+                <th>Các nhiệm vụ NCKH</th>
+                <th>Tóm tắt kết quả</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaNhomNghienCuuManh</td>
+                    <td>@item.TenNhomNghienCuuManh</td>
+                    <td>@item.SoQuyetDinhThanhLap</td>
+                    <td>@item.ToChucBanHanhQuyetDinh</td>
+                    <td>@item.NgayQuyetDinh?.ToString("dd/MM/yyyy")</td>
+                    <td>@item.CacNhiemVuNckh</td>
+                    <td>@item.TomTatKetQuaDatDuoc</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdNhomNghienCuuManh"><i class="fa fa-pencil-alt"></i> Sửa</a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdNhomNghienCuuManh">Chi tiết</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdNhomNghienCuuManh">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>
+    <!-- Trình bày thống kê tổng số bản ghi ở đây -->
+    <strong>Tổng số nhóm nghiên cứu: </strong> @ViewData["TotalRecords"]
+</p>

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
     int stt = 0;
 }
-@section Heads{
+@section Heads {
     @* ======= nhúng datatable ========= *@
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
@@ -13,100 +13,174 @@
     <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
 }
 <h1>DANH SÁCH GIA HẠN CHƯƠNG TRÌNH ĐÀO TẠO</h1>
-<h4><strong style="color:red">@Model.Count()</strong> chương trình đào tạo đã được gia hạn</h4>
+<h4 style="font-size:200%"><strong style="color:red">@Model.Count()</strong> chương trình đào tạo đã được gia hạn</h4>
 <p>
-    <a class="btn btn-success" asp-action="Create">
+    <a class="btn btn-success mt-3" asp-action="Create">
         <i style="margin-right:10px" class="fas fa-plus"></i>
         Thêm mới
     </a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
+    <thead class="thead-dark">
+        <tr class="table-active">
             <th class="col-1">
                 STT
             </th>
             <th class="col-2">
-                @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
+                Tên CTĐT
             </th>
-            <th class ="col-3">
-                @Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)
+            <th class="col-3">
+                Số QĐ Gia Hạn
             </th>
             <th class="col-4">
-                @Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)
+                Ngày Ban Hành VB Gia Hạn
             </th>
             <th class="col-5">
                 @Html.DisplayNameFor(model => model.GiaHanLanThu)
             </th>
-            
+
             <th class="col-6"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-
-            <td class="col-1">
+        @foreach (var item in Model)
+        {
+            var text = stt % 2 == 0 ? "even" : "odd";    @* sử dụng toán tử ba ngôi để chọn class *@
+            <tr class="@text">
+                <td class="col-1">
                     @(++stt)
-            </td>
+                </td>
                 <td class="col-2">
-                    @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
-            </td>
+                    @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTaoNavigation.TenChuongTrinh)
+                </td>
                 <td class="col-3">
-                @Html.DisplayFor(modelItem => item.SoQuyetDinhGiaHan)
-            </td>
+                    @Html.DisplayFor(modelItem => item.SoQuyetDinhGiaHan)
+                </td>
                 <td class="col-4">
-                @Html.DisplayFor(modelItem => item.NgayBanHanhVanBanGiaHan)
-            </td>
+                    @Html.DisplayFor(modelItem => item.NgayBanHanhVanBanGiaHan)
+                </td>
                 <td class="col-5">
-                @Html.DisplayFor(modelItem => item.GiaHanLanThu)
-            </td>
-            
+                    @Html.DisplayFor(modelItem => item.GiaHanLanThu)
+                </td>
+
                 <td class="col-6">
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
-                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-circle-info"></b>Mô tả</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-trash"></b>Xoá</a>
-            </td>
-        </tr>
-}
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-user-pen"></b>Chỉnh sửa</a> |
+                    <a class="btn btn-sm btn-warning" asp-action="Details" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-circle-info"></b>Mô tả</a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.IdGiaHanChuongTrinhDaoTao"><b style="margin-right:10px" class="fa-solid fa-trash"></b>Xoá</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-@section Styles{
+@section Scripts {
+    <script>
+        new DataTable('.table', {
+            lengthMenu: [5, 10, 20, 50, 100],
+            language: {
+                processing: "Đang tải dữ liệu",
+                search: "Tìm kiếm",
+                lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+                info: "Tổng cộng _TOTAL_ bản ghi",
+                infoEmpty: "Chưa có giáo viên nào trong danh sách",
+                infoFiltered: "",
+                infoPostFix: "", // Cái này khi thêm vào nó sẽ đứng sau info
+                loadingRecords: "",
+                zeroRecords: "Không tìm thấy dữ liệu",
+                emptyTable: "Không có dữ liệu",
+                paginate: {
+                    first: "<<",
+                    previous: "<",
+                    next: ">",
+                    last: ">>"
+                },
+                aria: {
+                    sortAscending: ": Đang sắp xếp",
+                    sortDescending: ": Đang sắp xếp",
+                }
+            },
+        });
+    </script>
+}
+@section Styles {
     @* ======== common ======== *@
     <style>
-        a{
-            text-decoration:none;
+        a {
+            text-decoration: none;
         }
 
-        h1,h4{
-            text-align:center;
+        h1, h4 {
+            text-align: center;
+            font-size: 300%;
+        }
+
+        body {
+            background-color: #FAF7F0;
         }
 
         /* ======== chỉnh độ rộng của cột ======= */
-        .col-1{
-            width: 3%;
+        .col-1 {
+            width: 2%;
+            text-align: center !important;
         }
 
         .col-2 {
-            width: 17%;
+            width: 19%;
+            text-align: center !important;
         }
 
         .col-3 {
-            width: 18%;
+            width: 15%;
+            text-align: center !important;
         }
 
         .col-4 {
             width: 22%;
+            text-align: center !important;
         }
 
         .col-5 {
-            width: 12%;
+            width: 14%;
+            text-align: center !important;
         }
 
         .col-6 {
             width: 28%;
+            text-align: center !important;
+        }
+        /* ======== tuỳ chỉnh màu khác nhau giữa 2 dòng ===== */
+        .even {
+            background-color: #B17457 !important;
+            color: white;
         }
 
+        .odd {
+            background-color: #4A4947 !important;
+            color: white;
+        }
 
+        /* css cho datatable */
+        /* Tạo không gian cho icon bên trái ô input */
+        .dt-search .search-input {
+            padding-left: 30px; /* Dành cho không gian của icon */
+            border: 2px solid #4CAF50; /* Màu viền của ô input */
+            border-radius: 4px;
+            width: 250px;
+            padding: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+            /* Khi focus vào ô input */
+            .dt-search .search-input:focus {
+                border-color: #66bb6a;
+                background-color: #fff4;
+            }
+
+        .dt-paging-button.current{
+            border-radius:50%;
+        }
     </style>
 }
+
+@* ======== datatable ======== *@

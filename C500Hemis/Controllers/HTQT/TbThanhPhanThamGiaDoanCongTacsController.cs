@@ -21,7 +21,7 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbThanhPhanThamGiaDoanCongTacs
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbThanhPhanThamGiaDoanCongTacs.Include(t => t.IdCanBoNavigation).Include(t => t.IdDoanCongTacNavigation).Include(t => t.IdVaiTroThamGiaNavigation);
+            var hemisContext = _context.TbThanhPhanThamGiaDoanCongTacs.Include(t => t.IdCanBoNavigation).ThenInclude(h => h.IdNguoiNavigation).Include(t => t.IdDoanCongTacNavigation).Include(t => t.IdVaiTroThamGiaNavigation);
             return View(await hemisContext.ToListAsync());
         }
 

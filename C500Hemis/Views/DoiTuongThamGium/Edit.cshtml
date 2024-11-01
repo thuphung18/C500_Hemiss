@@ -1,54 +1,149 @@
-﻿@model C500Hemis.Models.TbDoiTuongThamGium
+﻿    @model C500Hemis.Models.TbDoiTuongThamGium
 
-@{
-    ViewData["Title"] = "Edit";
-}
+    @{
+        ViewData["Title"] = "Edit";
+    }
 
-<h1>Edit</h1>
+    @section Heads{
+        <style>
+        /*B8D55 AT13 Ca Kỳ Hòa*/
+            footer {
+                visibility: hidden;
+            }
+        </style>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    }
+    <style>
+        body {
+            background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgb(195,34,34);
+        }
 
-<h4>TbDoiTuongThamGium</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdDoiTuongThamGia" />
-            <div class="form-group">
-                <label asp-for="IdLoaiThamGia" class="control-label"></label>
-                <select asp-for="IdLoaiThamGia" class="form-control" asp-items="ViewBag.IdLoaiThamGia"></select>
-                <span asp-validation-for="IdLoaiThamGia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaLoaiThamGia" class="control-label"></label>
-                <input asp-for="MaLoaiThamGia" class="form-control" />
-                <span asp-validation-for="MaLoaiThamGia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNguoi" class="control-label"></label>
-                <select asp-for="IdNguoi" class="form-control" asp-items="ViewBag.IdNguoi"></select>
-                <span asp-validation-for="IdNguoi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdVaiTro" class="control-label"></label>
-                <select asp-for="IdVaiTro" class="form-control" asp-items="ViewBag.IdVaiTro"></select>
-                <span asp-validation-for="IdVaiTro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPhanLoai" class="control-label"></label>
-                <select asp-for="IdPhanLoai" class="form-control" asp-items="ViewBag.IdPhanLoai"></select>
-                <span asp-validation-for="IdPhanLoai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        .khungchua {
+            min-height: 80vh;
+            width: 600px;
+            background-color: #FFF9;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        .grid-container{
+        padding-top: 20px;
+        }
+
+        h1 {
+            font-family: Apice;
+            text-align: center;
+        }
+
+        h4 {
+            text-align: center;
+            font-family: Apice;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center; /* Căn giữa */
+            margin-top: 20px; /* Khoảng cách phía trên */
+        }
+
+        .btn-primary {
+            background-color: #41B06E;
+            color: #E9EFEC;
+            margin: 0 10px; /* Khoảng cách giữa các nút */
+        }
+
+            .btn-primary:hover {
+                background-color: #8DECB4;
+                transform: scale(1.05);
+            }
+
+        .control-label{
+            font-weight: bold;
+        }
+        .form-group{
+            width: 46%;
+            font-size: 16px;
+        }
+        .proper{
+            flex-grow: 2;
+            margin-left: 15px;
+        }
+
+        .header {
+            background-color: #d5d1defe; /* Màu nền cho header */
+            border-radius: 10px 10px 0 0; /* Bo góc cho phần trên */
+            height: 100px;
+        }
+
+        .icon-container{
+            color: #41B06E;
+            font-size: 20px;
+            transition: transform 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+        .icon-container:hover{
+            transform: scale(1.1);
+            color: orange;
+        }
+        .btn{
+            width: 85%;
+        }
+    </style>
+
+    <div class="khungchua">
+        <div class="header">
+        <h1>Chỉnh sửa</h1>
+        <h4>@Model.IdNguoiNavigation.name</h4>
+        </div>    
+        <div class="grid-container position-relative">
+                <a asp-action="Index" style="position: absolute; right:10px">
+                    <div class="icon-container">
+                    <i class='bx bx-left-arrow-circle' style="font-size:36px;"></i>
+                    </div>
+                </a>
+            <form asp-action="Edit">
+                <input hidden asp-for="IdDoiTuongThamGia"/>
+                <div class="d-flex p-4 flex-wrap justify-content-center gap-2">
+                        <div class="form-group">
+                            <label asp-for="IdLoaiThamGia" class="control-label"></label>
+                            <select asp-for="IdLoaiThamGia" class="form-control" asp-items="ViewBag.IdLoaiThamGia"></select>
+                            <span asp-validation-for="IdLoaiThamGia" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaLoaiThamGia" class="control-label"></label>
+                            <input asp-for="MaLoaiThamGia" class="form-control" />
+                            <span asp-validation-for="MaLoaiThamGia" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdNguoi" class="control-label"></label>
+                            <select asp-for="IdNguoi" class="form-control" asp-items="ViewBag.IdNguoi"></select>
+                            <span asp-validation-for="IdNguoi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdVaiTro" class="control-label"></label>
+                            <select asp-for="IdVaiTro" class="form-control" asp-items="ViewBag.IdVaiTro"></select>
+                            <span asp-validation-for="IdVaiTro" class="text-danger"></span>
+                        </div>
+                        <div class="proper">
+                        <div class="form-group" style="width:235.51px">
+                            <label asp-for="IdPhanLoai" class="control-label"></label>
+                            <select asp-for="IdPhanLoai" class="form-control" asp-items="ViewBag.IdPhanLoai"></select>
+                            <span asp-validation-for="IdPhanLoai" class="text-danger"></span>
+                        </div>
+                        </div>
+                </div>
+                <div class="d-flex justify-content-center btn-container mt-3">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        @section Scripts {
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        }
