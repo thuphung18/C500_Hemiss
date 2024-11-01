@@ -1,147 +1,491 @@
 ﻿@model C500Hemis.Models.TbDuLieuTrungTuyen
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xóa dữ liệu trúng tuyển";
 }
 
-<h1>Delete</h1>
+<style>
+    :root {
+        /* Khai báo các biến CSS dùng chung cho toàn trang */
+        --primary-color: #2563eb; /* Màu chính của trang (xanh đậm) */
+        --danger-color: #dc2626; /* Màu dùng cho các thông báo cảnh báo (đỏ) */
+        --background-color: #f8fafc; /* Màu nền tổng thể của trang (xám nhạt) */
+        --container-bg: #ffffff; /* Màu nền cho các khối chứa nội dung (trắng) */
+        --text-primary: #1e293b; /* Màu chính cho văn bản */
+        --text-secondary: #475569; /* Màu phụ cho văn bản, thường dùng cho các tiêu đề phụ */
+        --border-color: #e2e8f0; /* Màu viền cho các phần tử */
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Đổ bóng trung bình */
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Đổ bóng lớn */
+    }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbDuLieuTrungTuyen</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cccd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cccd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HoVaTen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HoVaTen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaTuyenSinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaTuyenSinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TruongThpt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TruongThpt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToHopMonTrungTuyen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiemMon1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiemMon1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiemMon2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiemMon2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiemMon3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiemMon3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiemUuTien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiemUuTien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongDiemXetTuyen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongDiemXetTuyen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhTrungTuyen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoThacSi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoiTuongDauVaoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.IdDoiTuongDauVao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoiTuongUuTienNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDoiTuongUuTienNavigation.IdDoiTuongUuTien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHinhThucTuyenSinhNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHinhThucTuyenSinhNavigation.IdHinhThucTuyenSinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdKhuVucNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdKhuVucNavigation.IdKhuVuc)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdDuLieuTrungTuyen" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    body {
+        /* Định dạng chung cho toàn trang */
+        background-color: var(--background-color); /* Đặt màu nền của trang */
+        color: var(--text-primary); /* Đặt màu chữ chính */
+        font-family: system-ui, -apple-system, sans-serif; /* Sử dụng font hệ thống */
+        line-height: 1.5; /* Khoảng cách giữa các dòng văn bản */
+        position: relative; /* Định vị tương đối cho các phần tử con */
+    }
+
+    .page-container {
+        /* Định dạng khung chứa chính của trang */
+        max-width: 1200px; /* Độ rộng tối đa của khung */
+        margin: 2rem auto; /* Căn giữa khung và tạo khoảng cách trên dưới */
+        padding: 0 1.5rem; /* Khoảng cách trong của khung */
+        padding-bottom: 100px; /* Tạo không gian cho thanh hành động nổi (floating action bar) */
+    }
+
+    .page-header {
+        /* Định dạng tiêu đề của trang */
+        text-align: center; /* Căn giữa tiêu đề */
+        margin-bottom: 2rem; /* Khoảng cách dưới tiêu đề */
+        animation: slideDown 0.5s ease-out; /* Thêm hoạt ảnh trượt xuống khi xuất hiện */
+    }
+
+    .page-title {
+        /* Định dạng tiêu đề chính */
+        font-size: 2.25rem; /* Kích thước font lớn cho tiêu đề */
+        font-weight: 700; /* Độ đậm của font */
+        color: var(--primary-color); /* Màu tiêu đề chính (xanh đậm) */
+        margin-bottom: 0.5rem; /* Khoảng cách dưới tiêu đề */
+    }
+
+    .page-subtitle {
+        /* Định dạng tiêu đề phụ */
+        font-size: 1.25rem; /* Kích thước nhỏ hơn tiêu đề chính */
+        color: var(--text-secondary); /* Màu văn bản phụ */
+        font-weight: 500; /* Độ đậm trung bình */
+    }
+
+    .warning-text {
+        /* Định dạng cho thông báo cảnh báo */
+        color: var(--danger-color); /* Màu đỏ để làm nổi bật cảnh báo */
+        font-weight: 500; /* Độ đậm của chữ cảnh báo */
+    }
+
+    .info-card {
+        /* Định dạng cho thẻ thông tin (card) */
+        background-color: var(--container-bg); /* Nền trắng cho thẻ */
+        border-radius: 1rem; /* Bo góc thẻ */
+        padding: 2rem; /* Khoảng cách bên trong thẻ */
+        box-shadow: var(--shadow-md); /* Đổ bóng trung bình cho thẻ */
+        border: 1px solid var(--border-color); /* Viền thẻ */
+        margin-top: 2rem; /* Khoảng cách trên thẻ */
+        animation: fadeIn 0.3s ease-out; /* Hoạt ảnh xuất hiện dần */
+    }
+
+    .card-header {
+        /* Định dạng phần tiêu đề của thẻ */
+        border-bottom: 2px solid var(--border-color); /* Viền dưới cho phần tiêu đề */
+        padding-bottom: 1rem; /* Khoảng cách dưới tiêu đề */
+        margin-bottom: 2rem; /* Khoảng cách dưới phần tiêu đề */
+    }
+
+    .card-title {
+        /* Định dạng tiêu đề của thẻ */
+        font-size: 1.5rem; /* Kích thước tiêu đề của thẻ */
+        color: var(--text-primary); /* Màu chữ tiêu đề */
+        font-weight: 600; /* Độ đậm của font chữ */
+        text-align: center; /* Căn giữa tiêu đề */
+    }
+
+    .info-grid {
+        /* Định dạng lưới thông tin */
+        display: grid; /* Sử dụng grid layout để hiển thị thông tin */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Các phần tử tự động thay đổi kích thước theo lưới */
+        gap: 2rem; /* Khoảng cách giữa các phần tử */
+    }
+
+    .info-item {
+        /* Định dạng từng mục thông tin */
+        margin-bottom: 1.5rem; /* Khoảng cách dưới mỗi mục */
+    }
+
+    .info-label {
+        /* Định dạng nhãn của từng mục thông tin */
+        font-weight: 600; /* Độ đậm của chữ nhãn */
+        color: var(--text-secondary); /* Màu chữ phụ cho nhãn */
+        margin-bottom: 0.5rem; /* Khoảng cách dưới nhãn */
+        font-size: 0.875rem; /* Kích thước nhỏ hơn cho nhãn */
+        text-transform: uppercase; /* Chuyển đổi chữ thường thành chữ in hoa */
+        letter-spacing: 0.05em; /* Tạo khoảng cách giữa các ký tự */
+    }
+
+    .info-value {
+        /* Định dạng giá trị của từng mục thông tin */
+        color: var(--text-primary); /* Màu chữ chính cho giá trị */
+        font-size: 1rem; /* Kích thước chữ */
+        padding: 0.5rem; /* Khoảng cách bên trong */
+        background-color: #f8fafc; /* Nền xám nhạt */
+        border-radius: 0.375rem; /* Bo góc nhẹ */
+        border: 1px solid var(--border-color); /* Viền */
+    }
+
+    /* Thanh hành động nổi */
+    .floating-actions {
+        position: fixed; /* Cố định vị trí thanh ở cuối trang */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.9); /* Nền trắng với độ trong suốt */
+        backdrop-filter: blur(10px); /* Làm mờ nền đằng sau thanh */
+        padding: 1rem; /* Khoảng cách bên trong */
+        box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1); /* Đổ bóng ở trên */
+        z-index: 1000; /* Đặt trên các phần tử khác */
+        transform: translateY(100%); /* Ẩn thanh khi chưa sử dụng */
+        animation: slideUp 0.3s ease-out forwards; /* Hoạt ảnh trượt lên khi xuất hiện */
+        display: flex; /* Hiển thị các mục con theo hàng ngang */
+        justify-content: center; /* Căn giữa các mục con */
+        gap: 1rem; /* Khoảng cách giữa các nút */
+    }
+
+        .floating-actions.visible {
+            transform: translateY(0); /* Hiển thị thanh hành động */
+        }
+
+    .btn {
+        /* Định dạng cho các nút */
+        display: inline-flex; /* Hiển thị các phần tử con theo hàng ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        padding: 0.75rem 1.5rem; /* Khoảng cách bên trong nút */
+        font-weight: 500; /* Độ đậm chữ */
+        border-radius: 0.5rem; /* Bo góc nút */
+        transition: all 0.2s ease; /* Hoạt ảnh khi hover */
+        cursor: pointer; /* Con trỏ khi hover là bàn tay */
+        font-size: 1rem; /* Kích thước chữ */
+        min-width: 150px; /* Độ rộng tối thiểu */
+    }
+
+    .btn-danger {
+        /* Định dạng nút nguy hiểm (dùng cho hành động xóa) */
+        background-color: var(--danger-color); /* Nền đỏ */
+        color: white; /* Chữ trắng */
+        border: none; /* Không có viền */
+    }
+
+        .btn-danger:hover {
+            /* Định dạng khi hover qua nút nguy hiểm */
+            background-color: #b91c1c; /* Đổi màu nền đỏ đậm hơn */
+            transform: translateY(-2px); /* Nút nổi lên khi hover */
+            box-shadow: var(--shadow-lg); /* Đổ bóng lớn hơn khi hover */
+        }
+
+    .btn-secondary {
+        /* Định dạng nút phụ */
+        background-color: #64748b; /* Nền xám xanh */
+        color: white; /* Chữ trắng */
+        border: none; /* Không viền */
+        text-decoration: none; /* Không gạch chân chữ */
+    }
+
+        .btn-secondary:hover {
+            /* Định dạng khi hover qua nút phụ */
+            background-color: #475569; /* Nền đậm hơn */
+            transform: translateY(-2px); /* Nút nổi lên khi hover */
+            box-shadow: var(--shadow-lg); /* Đổ bóng lớn hơn khi hover */
+        }
+
+    /* Hoạt ảnh */
+    keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px); /* Xuất hiện từ vị trí bên dưới */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Trở về vị trí bình thường */
+    }
+
+    }
+
+    keyframes slideDown {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(-20px); /* Xuất hiện từ vị trí bên trên */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Trở về vị trí bình thường */
+    }
+
+    }
+
+    keyframes slideUp {
+        from
+
+    {
+        transform: translateY(100%); /* Bắt đầu từ dưới */
+    }
+
+    to {
+        transform: translateY(0); /* Trượt lên để hiển thị */
+    }
+
+    }
+
+    /* Thanh tiến trình */
+    .progress-container {
+        position: fixed; /* Cố định thanh ở đầu trang */
+        top: 0;
+        left: 0;
+        width: 100%; /* Chiều rộng toàn trang */
+        height: 4px; /* Chiều cao của thanh tiến trình */
+        background: transparent; /* Nền trong suốt */
+        z-index: 1001; /* Đặt lên trên các phần tử khác */
+    }
+
+    .progress-bar {
+        height: 100%; /* Chiều cao đầy đủ */
+        background: var(--primary-color); /* Màu xanh cho thanh tiến trình */
+        width: 0%; /* Bắt đầu từ 0% và sẽ thay đổi khi cuộn trang */
+        transition: width 0.2s ease; /* Thay đổi chiều rộng mượt mà */
+    }
+
+    /* Thiết kế cho màn hình nhỏ hơn */
+    media (max-width: 768px) {
+        .page-container
+
+    {
+        margin: 1rem auto; /* Thu nhỏ khoảng cách bên ngoài */
+        padding: 0 1rem; /* Thu nhỏ khoảng cách bên trong */
+    }
+
+    .page-title {
+        font-size: 1.875rem; /* Giảm kích thước tiêu đề */
+    }
+
+    .page-subtitle {
+        font-size: 1.125rem; /* Giảm kích thước tiêu đề phụ */
+    }
+
+    .info-card {
+        padding: 1.5rem; /* Giảm khoảng cách bên trong thẻ */
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr; /* Hiển thị các phần tử theo một cột */
+        gap: 1rem; /* Thu nhỏ khoảng cách giữa các mục */
+    }
+
+    .floating-actions {
+        flex-direction: column; /* Hiển thị các nút theo cột thay vì hàng ngang */
+        padding: 1rem; /* Giảm khoảng cách bên trong */
+    }
+
+    .btn {
+        width: 100%; /* Nút sẽ chiếm toàn bộ chiều rộng của khung chứa */
+    }
+
+    }
+</style>
+
+@*  Thanh tiến trình (Progress Bar) *@
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
 </div>
+
+@* Tiêu đề trang và cảnh bảo*@
+<div class="page-container">
+    <header class="page-header">
+        <h1 class="page-title">Xóa dữ liệu trúng tuyển</h1>
+        <p class="page-subtitle">
+            Bạn có chắc chắn muốn xóa dữ liệu trúng tuyển này không?
+            <span class="warning-text">Hành động này không thể hoàn tác.</span>
+        </p>
+    </header>
+    @*     Bảng thông tin chi tiết *@
+    <div class="info-card">
+        <div class="card-header">
+            <h2 class="card-title">Thông tin chi tiết</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.IdDuLieuTrungTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.IdDuLieuTrungTuyen)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.Cccd)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.Cccd)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.HoVaTen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.HoVaTen)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.MaTuyenSinh)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.MaTuyenSinh)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.KhoaDaoTaoTrungTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.KhoaDaoTaoTrungTuyen)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.IdDoiTuongDauVao)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.IdDoiTuongDauVaoNavigation.DoiTuongDauVao)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.IdDoiTuongUuTien)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.IdDoiTuongUuTienNavigation.DoiTuongUuTien)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.IdHinhThucTuyenSinh)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.IdHinhThucTuyenSinhNavigation.HinhThucTuyenSinh)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.IdKhuVuc)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.IdKhuVucNavigation.KhuVuc)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.TruongThpt)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.TruongThpt)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.ToHopMonTrungTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.ToHopMonTrungTuyen)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.DiemMon1)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.DiemMon1)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.DiemMon2)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.DiemMon2)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.DiemMon3)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.DiemMon3)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.DiemUuTien)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.DiemUuTien)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.TongDiemXetTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.TongDiemXetTuyen)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.SoQuyetDinhTrungTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.SoQuyetDinhTrungTuyen)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.NgayBanHanhQuyetDinhTrungTuyen)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoDaiHoc)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi)</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">@Html.DisplayNameFor(model => model.NganhDaTotNghiepTrinhDoThacSi)</div>
+                <div class="info-value">@Html.DisplayFor(model => model.NganhDaTotNghiepTrinhDoThacSi)</div>
+            </div>
+        </div>
+    </div>
+    @* Bảng nút hành động*@
+    <form asp-action="Delete" id="deleteForm">
+        <input type="hidden" asp-for="IdDuLieuTrungTuyen" />
+        <div class="floating-actions" id="floatingActions">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const progressBar = document.getElementById('progressBar'); // Lấy đối tượng thanh tiến trình (progress bar)
+            const floatingActions = document.getElementById('floatingActions'); // Lấy đối tượng thanh hành động nổi (floating actions)
+
+            // Cập nhật chiều rộng của thanh tiến trình dựa vào vị trí cuộn trang
+            function updateProgressBar() {
+                const windowHeight = window.innerHeight; // Chiều cao của cửa sổ trình duyệt
+                const documentHeight = document.documentElement.scrollHeight - windowHeight; // Chiều cao của toàn bộ trang trừ đi chiều cao cửa sổ
+                const scrolled = window.scrollY; // Số pixel đã cuộn từ đầu trang
+                const progress = (scrolled / documentHeight) * 100; // Tính toán phần trăm của trang đã cuộn
+                progressBar.style.width = progress + '%'; // Cập nhật chiều rộng của thanh tiến trình dựa trên phần trăm
+            }
+
+            // Hiển thị/ẩn thanh hành động nổi dựa trên hướng cuộn trang
+            let lastScroll = 0; // Lưu lại vị trí cuộn cuối cùng
+
+            function updateFloatingActions() {
+                const currentScroll = window.scrollY; // Vị trí cuộn hiện tại
+
+                if (currentScroll > lastScroll) {
+                    // Nếu cuộn xuống
+                    floatingActions.style.transform = 'translateY(100%)'; // Ẩn thanh hành động (di chuyển xuống)
+                } else {
+                    // Nếu cuộn lên
+                    floatingActions.style.transform = 'translateY(0)'; // Hiển thị thanh hành động (di chuyển lên)
+                }
+
+                // Luôn hiển thị thanh hành động ở đầu và cuối trang
+                if (currentScroll < 100 || currentScroll + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+                    floatingActions.style.transform = 'translateY(0)'; // Hiển thị khi ở gần đầu hoặc cuối trang
+                }
+
+                lastScroll = currentScroll; // Cập nhật lại vị trí cuộn cuối cùng
+            }
+
+            // Kiểm tra xem người dùng có đang ở gần cuối trang không
+            function checkBottom() {
+                const bottomThreshold = 100; // Số pixel cách cuối trang để xác định "gần cuối"
+                const distanceFromBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight); // Khoảng cách từ đáy trang đến vị trí hiện tại của người dùng
+
+                if (distanceFromBottom < bottomThreshold) {
+                    floatingActions.style.transform = 'translateY(0)'; // Nếu gần cuối trang, hiển thị thanh hành động
+                }
+            }
+
+            // Giới hạn số lần xử lý sự kiện cuộn trang để tránh việc thực hiện quá nhiều lần (tăng hiệu suất)
+            let ticking = false;
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(function () {
+                        updateProgressBar(); // Cập nhật thanh tiến trình
+                        updateFloatingActions(); // Cập nhật trạng thái hiển thị của thanh hành động nổi
+                        checkBottom(); // Kiểm tra nếu đang gần cuối trang
+                        ticking = false; // Reset lại trạng thái xử lý
+                    });
+                    ticking = true; // Đánh dấu đã có một sự kiện cuộn đang xử lý
+                }
+            });
+
+            // Cập nhật ban đầu khi trang được tải
+            updateProgressBar(); // Cập nhật thanh tiến trình ngay khi trang tải
+            updateFloatingActions(); // Cập nhật thanh hành động nổi khi trang tải
+        });
+    </script>
