@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.TCTS
@@ -12,144 +12,141 @@ namespace C500Hemis.Controllers.TCTS
     public class ChiTietTaiSanDonViController : Controller
     {
         private readonly HemisContext _context;
+        private readonly ILogger<ChiTietTaiSanDonViController> _logger;
 
-        public ChiTietTaiSanDonViController(HemisContext context)
+        public ChiTietTaiSanDonViController(HemisContext context, ILogger<ChiTietTaiSanDonViController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: ChiTietTaiSanDonVi
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbChiTietTaiSanDonVis.Include(t => t.IdChuSoHuuNavigation).Include(t => t.IdTaiSanDonViNavigation).Include(t => t.IdTinhTrangThietBiNavigation);
-            return View(await hemisContext.ToListAsync());
+            var chiTietTaiSanList = await _context.TbChiTietTaiSanDonVis
+                .Include(t => t.IdChuSoHuuNavigation)
+                .Include(t => t.IdTaiSanDonViNavigation)
+                .Include(t => t.IdTinhTrangThietBiNavigation)
+                .ToListAsync();
+            return View(chiTietTaiSanList);
         }
 
         // GET: ChiTietTaiSanDonVi/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var tbChiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis
+            var chiTietTaiSan = await _context.TbChiTietTaiSanDonVis
                 .Include(t => t.IdChuSoHuuNavigation)
                 .Include(t => t.IdTaiSanDonViNavigation)
                 .Include(t => t.IdTinhTrangThietBiNavigation)
                 .FirstOrDefaultAsync(m => m.IdChiTietTaiSanDonVi == id);
-            if (tbChiTietTaiSanDonVi == null)
-            {
-                return NotFound();
-            }
 
-            return View(tbChiTietTaiSanDonVi);
+            if (chiTietTaiSan == null)
+                return NotFound();
+
+            return View(chiTietTaiSan);
         }
 
         // GET: ChiTietTaiSanDonVi/Create
         public IActionResult Create()
         {
-            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "IdChuSoHuu");
+            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "ChuSoHuu");
             ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi");
-            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "IdTinhTrangThietBi");
+            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "TinhTrangThietBi");
             return View();
         }
 
         // POST: ChiTietTaiSanDonVi/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdChiTietTaiSanDonVi,IdTaiSanDonVi,MaTaiSan,TenTaiSan,NguyenGia,IdTinhTrangThietBi,IdChuSoHuu")] TbChiTietTaiSanDonVi tbChiTietTaiSanDonVi)
+        public async Task<IActionResult> Create([Bind("IdChiTietTaiSanDonVi,IdTaiSanDonVi,MaTaiSan,TenTaiSan,NguyenGia,TinhTrangThietBi,ChuSoHuu")] TbChiTietTaiSanDonVi chiTietTaiSanDonVi)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbChiTietTaiSanDonVi);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(chiTietTaiSanDonVi);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException ex)
+                {
+                    _logger.LogError(ex, "Có lỗi xảy ra khi tạo tài sản.");
+                    ModelState.AddModelError("Id đã tồn tại", "Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+                }
             }
-            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "IdChuSoHuu", tbChiTietTaiSanDonVi.IdChuSoHuu);
-            ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi", tbChiTietTaiSanDonVi.IdTaiSanDonVi);
-            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "IdTinhTrangThietBi", tbChiTietTaiSanDonVi.IdTinhTrangThietBi);
-            return View(tbChiTietTaiSanDonVi);
+            PopulateDropdowns(chiTietTaiSanDonVi);
+            return View(chiTietTaiSanDonVi);
         }
 
         // GET: ChiTietTaiSanDonVi/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var tbChiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis.FindAsync(id);
-            if (tbChiTietTaiSanDonVi == null)
-            {
+            var chiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis.FindAsync(id);
+            if (chiTietTaiSanDonVi == null)
                 return NotFound();
-            }
-            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "IdChuSoHuu", tbChiTietTaiSanDonVi.IdChuSoHuu);
-            ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi", tbChiTietTaiSanDonVi.IdTaiSanDonVi);
-            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "IdTinhTrangThietBi", tbChiTietTaiSanDonVi.IdTinhTrangThietBi);
-            return View(tbChiTietTaiSanDonVi);
+
+            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "ChuSoHuu", chiTietTaiSanDonVi?.IdChuSoHuu);
+            ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi", chiTietTaiSanDonVi?.IdTaiSanDonVi);
+            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "TinhTrangThietBi", chiTietTaiSanDonVi?.IdTinhTrangThietBi);
+            return View(chiTietTaiSanDonVi);
         }
 
         // POST: ChiTietTaiSanDonVi/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdChiTietTaiSanDonVi,IdTaiSanDonVi,MaTaiSan,TenTaiSan,NguyenGia,IdTinhTrangThietBi,IdChuSoHuu")] TbChiTietTaiSanDonVi tbChiTietTaiSanDonVi)
+        public async Task<IActionResult> Edit(int id, [Bind("IdChiTietTaiSanDonVi,IdTaiSanDonVi,MaTaiSan,TenTaiSan,NguyenGia,IdTinhTrangThietBi,IdChuSoHuu")] TbChiTietTaiSanDonVi chiTietTaiSanDonVi)
         {
-            if (id != tbChiTietTaiSanDonVi.IdChiTietTaiSanDonVi)
-            {
+            if (id != chiTietTaiSanDonVi.IdChiTietTaiSanDonVi)
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(tbChiTietTaiSanDonVi);
+                    _context.Update(chiTietTaiSanDonVi);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!TbChiTietTaiSanDonViExists(tbChiTietTaiSanDonVi.IdChiTietTaiSanDonVi))
-                    {
+                    _logger.LogError(ex, "Có lỗi xảy ra khi cập nhật tài sản.");
+                    if (!TbChiTietTaiSanDonViExists(chiTietTaiSanDonVi.IdChiTietTaiSanDonVi))
                         return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+
+                    ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật. Vui lòng thử lại.");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Có lỗi không xác định xảy ra.");
+                    ModelState.AddModelError("", "Có lỗi xảy ra. Vui lòng thử lại.");
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "IdChuSoHuu", tbChiTietTaiSanDonVi.IdChuSoHuu);
-            ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi", tbChiTietTaiSanDonVi.IdTaiSanDonVi);
-            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "IdTinhTrangThietBi", tbChiTietTaiSanDonVi.IdTinhTrangThietBi);
-            return View(tbChiTietTaiSanDonVi);
+            PopulateDropdowns(chiTietTaiSanDonVi);
+            return View(chiTietTaiSanDonVi);
         }
 
         // GET: ChiTietTaiSanDonVi/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var tbChiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis
+            var chiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis
                 .Include(t => t.IdChuSoHuuNavigation)
                 .Include(t => t.IdTaiSanDonViNavigation)
                 .Include(t => t.IdTinhTrangThietBiNavigation)
                 .FirstOrDefaultAsync(m => m.IdChiTietTaiSanDonVi == id);
-            if (tbChiTietTaiSanDonVi == null)
-            {
-                return NotFound();
-            }
 
-            return View(tbChiTietTaiSanDonVi);
+            if (chiTietTaiSanDonVi == null)
+                return NotFound();
+
+            return View(chiTietTaiSanDonVi);
         }
 
         // POST: ChiTietTaiSanDonVi/Delete/5
@@ -157,19 +154,34 @@ namespace C500Hemis.Controllers.TCTS
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbChiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis.FindAsync(id);
-            if (tbChiTietTaiSanDonVi != null)
+            try
             {
-                _context.TbChiTietTaiSanDonVis.Remove(tbChiTietTaiSanDonVi);
+                var chiTietTaiSanDonVi = await _context.TbChiTietTaiSanDonVis.FindAsync(id);
+                if (chiTietTaiSanDonVi != null)
+                {
+                    _context.TbChiTietTaiSanDonVis.Remove(chiTietTaiSanDonVi);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Có lỗi xảy ra khi xóa tài sản.");
+                ModelState.AddModelError("", "Có lỗi xảy ra khi xóa dữ liệu. Vui lòng thử lại.");
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool TbChiTietTaiSanDonViExists(int id)
         {
             return _context.TbChiTietTaiSanDonVis.Any(e => e.IdChiTietTaiSanDonVi == id);
+        }
+
+        private void PopulateDropdowns(TbChiTietTaiSanDonVi chiTietTaiSanDonVi = null)
+        {
+            ViewData["IdChuSoHuu"] = new SelectList(_context.DmChuSoHuus, "IdChuSoHuu", "ChuSoHuu", chiTietTaiSanDonVi?.IdChuSoHuu);
+            ViewData["IdTaiSanDonVi"] = new SelectList(_context.TbTaiSanDonVis, "IdTaiSanDonVi", "IdTaiSanDonVi", chiTietTaiSanDonVi?.IdTaiSanDonVi);
+            ViewData["IdTinhTrangThietBi"] = new SelectList(_context.DmTinhTrangThietBis, "IdTinhTrangThietBi", "TinhTrangThietBi", chiTietTaiSanDonVi?.IdTinhTrangThietBi);
         }
     }
 }

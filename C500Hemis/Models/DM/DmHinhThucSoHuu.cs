@@ -16,4 +16,5 @@ public partial class DmHinhThucSoHuu
     public virtual ICollection<TbKiTucXa> TbKiTucXas { get; set; } = new List<TbKiTucXa>();
 
     public virtual ICollection<TbPhongHocGiangDuongHoiTruong> TbPhongHocGiangDuongHoiTruongs { get; set; } = new List<TbPhongHocGiangDuongHoiTruong>();
+    public virtual ICollection<TbThuVienTrungTamHocLieu> TbThuVienTrungTamHocLieus { get; set; } = new List<TbThuVienTrungTamHocLieu>();
 }

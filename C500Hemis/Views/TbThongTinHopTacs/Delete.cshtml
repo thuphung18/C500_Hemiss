@@ -4,82 +4,127 @@
     ViewData["Title"] = "Xóa";
 }
 <style>
+    /* Hiệu ứng nền mờ */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('/images/cornered-stairs.png');
+        background-size: cover;
+        background-position: center;
+        z-index: -1; /* Đặt nền phía sau nội dung */
+    }
+
+    /* Tùy chỉnh kiểu cho bảng */
     table {
-        width: 100%; /* Chiều rộng bảng 100% */
-        border-collapse: collapse; /* Gộp đường viền ô */
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        background-color: #333; /* Nền bảng tối hơn để nổi bật */
     }
 
-    th, td {
-        border: 1px solid #000; /* Đường viền đen cho các ô */
-        text-align: left;
-        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+    thead {
+        background-color: #444; /* Màu nền tiêu đề tối hơn */
+        color: #f0f0f0; /* Màu chữ sáng hơn */
     }
 
+    /* Định dạng cho các ô tiêu đề */
     th {
-        font-weight: bold; /* Chữ đậm cho tiêu đề */
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+        color: #ffffff; /* Màu chữ trắng */
+        border: 1px solid #dee2e6;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    tr:hover {
-        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+        /* Hiệu ứng lấp lánh khi hover trên tiêu đề */
+        th:hover {
+            background-color: #666; /* Màu nền khi hover vào tiêu đề */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+    /* Định dạng cho các ô dữ liệu */
+    td {
+        padding: 12px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #dee2e6;
+        background-color: #444; /* Nền ô dữ liệu tối hơn */
+        color: #f0f0f0; /* Màu chữ sáng hơn */
+        transition: background-color 0.3s ease;
+    }
+
+        /* Hiệu ứng khi hover vào ô dữ liệu */
+        td:hover {
+            background-color: #555; /* Màu nền khi hover vào ô dữ liệu */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+    /* Định dạng container */
+    .container {
+        padding: 20px;
+        border-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+
+    /* Định dạng nút */
+    .btn {
+        margin-right: 10px;
     }
 </style>
 
-<h1>Xóa </h1>
 
-<h3>Bạn có chắc chắn muốn xóa?</h3>
-
-
+<h1>Xóa</h1>
 
 <div class="container">
-    <h4 style="text-align:center">Thông tin hợp tác với tổ chức </h4>
+    <h4 style="text-align:center">Thông tin hợp tác với tổ chức</h4>
     <hr />
-    <table>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Mã hợp tác</th>
+                <th>Thời gian hợp tác từ</th>
+                <th>Thời gian hợp tác đến</th>
+                <th>Tên thỏa thuận</th>
+                <th>Thông tin liên hệ đối tác</th>
+                <th>Mục tiêu</th>
+                <th>Đơn vị triển khai</th>
+                <th>Hình thức hợp tác</th>
+                <th>Sản phẩm chính</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
 
-        <tr>
-            <th>Mã hợp tác</th>
-            <td>@Html.DisplayFor(model => model.IdToChucHopTacNavigation.IdToChucHopTacQuocTe)</td>
-        </tr>
-        <tr>
-            <th> Thời gian hợp tác từ </th>
-            <td>@Html.DisplayFor(model => model.ThoiGianHopTacTu)</td>
-        </tr>
-        <tr>
-            <th>  Thời gian hợp tác đến  </th>
-            <td>@Html.DisplayFor(model => model.ThoiGianHopTacDen)</td>
-        </tr>
-        <tr>
-            <th>Tên thỏa thuận</th>
-            <td>@Html.DisplayFor(model => model.TenThoaThuan)</td>
-        </tr>
-        <tr>
-            <th>Thông tin liên hệ đối tác</th>
-            <td>@Html.DisplayFor(model => model.ThongTinLienHeDoiTac)</td>
-        </tr>
-        <tr>
-            <th>Mục tiêu</th>
-            <td>@Html.DisplayFor(model => model.MucTieu)</td>
-        </tr>
-        <tr>
-            <th>Đơn vị triển khai</th>
-            <td>@Html.DisplayFor(model => model.DonViTrienKhai)</td>
-        </tr>
-        <tr>
-            <th> Hình thức hợp tác</th>
-            <td>@Html.DisplayFor(model => model.IdHinhThucHopTacNavigation.IdHinhThucHopTac)</td>
-        </tr>
-        <tr>
-            <th>Sản phẩm chính</th>
-            <td>@Html.DisplayFor(model => model.SanPhamChinh)</td>
-        </tr>
-
-
-
+                <td>@Html.DisplayFor(model => model.IdToChucHopTacNavigation.IdToChucHopTacQuocTe)</td>
+                <td>@Html.DisplayFor(model => model.ThoiGianHopTacTu)</td>
+                <td>@Html.DisplayFor(model => model.ThoiGianHopTacDen)</td>
+                <td>@Html.DisplayFor(model => model.TenThoaThuan)</td>
+                <td>@Html.DisplayFor(model => model.ThongTinLienHeDoiTac)</td>
+                <td>@Html.DisplayFor(model => model.MucTieu)</td>
+                <td>@Html.DisplayFor(model => model.DonViTrienKhai)</td>
+                <td>@Html.DisplayFor(model => model.IdHinhThucHopTacNavigation.IdHinhThucHopTac)</td>
+                <td>@Html.DisplayFor(model => model.SanPhamChinh)</td>
+            </tr>
+        </tbody>
     </table>
-
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdThongTinHopTac" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> |
-        <a asp-action="Index">Quay lại</a>
+    <form asp-action="Delete" method="post" onsubmit="return confirmDelete()">
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
     </form>
+
+
+
+    <script>
+        function confirmDelete() {
+            return confirm("Bạn có chắc chắn muốn xóa mục này?");
+        }
+    </script>
+
 </div>

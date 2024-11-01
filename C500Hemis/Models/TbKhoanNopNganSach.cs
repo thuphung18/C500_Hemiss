@@ -11,14 +11,18 @@ public partial class TbKhoanNopNganSach
     public int IdKhoanNopNganSach { get; set; }
 
     [Display(Name = "Mã Khoản Nộp")]
+
     public string? MaKhoanNop { get; set; }
 
     [Display(Name = "Tên Khoản Nộp Ngân Sách")]
+
     public string? TenKhoanNopNganSach { get; set; }
 
     [Display(Name = "Số Tiền")]
+
     public int? SoTien { get; set; }
 
     [Display(Name = "Năm Tài Chính")]
+
     public string? NamTaiChinh { get; set; }
 }

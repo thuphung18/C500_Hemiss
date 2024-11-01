@@ -1,53 +1,173 @@
 ﻿@model C500Hemis.Models.TbKhoanTrichLapQuy
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo mới";
 }
+<style>
+    /*Thiết lập font chữ và nền gradient cho trang*/
+    body {
+        font-family: Arial, sans-serif;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        height: 130vh;
+    }
 
-<h1>Create</h1>
+    /*Định dạng tiêu đề chính (h1) của trang*/
+    h1 {
+        text-align: center;
+        color: #00796b;
+        margin-top: 20px;
+    }
 
-<h4>TbKhoanTrichLapQuy</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdKhoanTrichLapQuy" class="control-label"></label>
-                <input asp-for="IdKhoanTrichLapQuy" class="form-control" />
-                <span asp-validation-for="IdKhoanTrichLapQuy" class="text-danger"></span>
+    /*Định dạng tiêu đề phụ (h4) của trang*/
+    h4 {
+        font-size: 24px;
+        color: #00796b;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /*Thiết lập đường kẻ ngang (hr) với màu gradient phù hợp*/
+    hr {
+        border: none;
+        border-top: 2px solid #8360c3;
+        margin-bottom: 20px;
+    }
+
+    /*Định dạng cho container chứa form, với nền trắng trong suốt*/
+    .container {
+        max-width: 600px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /*Thiết lập khoảng cách giữa các trường trong form*/
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    /*Thiết lập thuộc tính cho input form với kích thước 300%*/
+    .form-control {
+        width: 300%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /*Định dạng màu đỏ cho các thông báo lỗi*/
+    .text-danger {
+        color: #e74c3c;
+    }
+
+    /*Định dạng nút "Create"*/
+    .btn-primary {
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        justify-content: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 20px;
+        border-radius: 4px;
+    }
+
+    /*Hiệu ứng khi nút "Create" được hover (di chuột vào)*/
+    .btn-primary:hover {
+        background-image: linear-gradient(to left, #8360c3, #2ebf91);
+    }
+
+    /*Định dạng vùng chứa liên kết "Back to List"*/
+    .back-to-list {
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
+    /*Định dạng liên kết "Back to List" với màu nền và bo tròn*/
+    .back-to-list a {
+        color: #fff;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    /*Hiệu ứng khi liên kết "Back to List" được hover*/
+    .back-to-list a:hover {
+        background-image: linear-gradient(to left, #8360c3, #2ebf91);
+        margin-bottom: 50px;
+    }
+
+    /*Thiết lập nhãn (label) với kích thước và màu chữ*/
+    .control-label {
+        width: 150%;
+        color: #00796b;
+    }
+</style>
+<body>
+    <h1>Tạo mới</h1>
+    <div class="container">
+        <p style="text-align: center;">
+            <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Logo Học viện An ninh nhân dân" width="125" />
+        </p>
+        <h4>Khoản Trích Lập Quỹ</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="IdKhoanTrichLapQuy" class="control-label"></label>
+                        <input asp-for="IdKhoanTrichLapQuy" class="form-control" />
+                        <span asp-validation-for="IdKhoanTrichLapQuy" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MaKhoanTrichLapQuy" class="control-label"></label>
+                        <input asp-for="MaKhoanTrichLapQuy" class="form-control" />
+                        <span asp-validation-for="MaKhoanTrichLapQuy" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TenKhoanTrichLapQuy" class="control-label"></label>
+                        <input asp-for="TenKhoanTrichLapQuy" class="form-control" />
+                        <span asp-validation-for="TenKhoanTrichLapQuy" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NamTaiChinh" class="control-label"></label>
+                        <input asp-for="NamTaiChinh" class="form-control" />
+                        <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SoTien" class="control-label"></label>
+                        <input asp-for="SoTien" class="form-control" />
+                        <span asp-validation-for="SoTien" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="MaKhoanTrichLapQuy" class="control-label"></label>
-                <input asp-for="MaKhoanTrichLapQuy" class="form-control" />
-                <span asp-validation-for="MaKhoanTrichLapQuy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenKhoanTrichLapQuy" class="control-label"></label>
-                <input asp-for="TenKhoanTrichLapQuy" class="form-control" />
-                <span asp-validation-for="TenKhoanTrichLapQuy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NamTaiChinh" class="control-label"></label>
-                <input asp-for="NamTaiChinh" class="form-control" />
-                <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoTien" class="control-label"></label>
-                <input asp-for="SoTien" class="form-control" />
-                <span asp-validation-for="SoTien" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+    <div class="back-to-list">
+        <a asp-action="Index">Trở lại</a>
+    </div>
+</body>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

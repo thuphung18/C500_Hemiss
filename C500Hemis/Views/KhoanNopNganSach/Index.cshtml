@@ -1,69 +1,82 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbKhoanNopNganSach>
 
-    @{
-ViewData["Title"] = "Index";
-    }
-    @section Heads {
+@{
+    ViewData["Title"] = "Khoản nộp ngân sách";
+
+    int stt = 0;
+}
+@section Heads {
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    }
+}
 
-    <h1>Index</h1>
+<h1 style="text-align:center;font-family:Roboto Mono;font-size:70px;">Khoản nộp ngân sách</h1>
 
-    <p style="text-align: center; font-size: 25px; margin-bottom: 30px;">
-            <a asp-action="Create" style="color: #3498db; text-decoration: none; font-weight: bold; border: 2px solid #3498db; padding: 10px 20px; border-radius: 5px;">Tạo Mới</a>
-    </p>
+<h2 style="text-align:center;">@Model.Count() Khoản nộp ngân sách đã được tạo</h2>
+<a class="btn btn-success" asp-action="Create" style="border-color:black; text-align:center;"><i style="margin-right:10px;" class="fa-solid fa-user-plus fa-beat"></i>Tạo Mới</a>
+
+<body>
     <table class="table" id="ntable">
         <thead>
-            <tr>
-                <th>
+            <tr style="background-color:#19334d;color:white;">
+                <th>STT</th>
+
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.MaKhoanNop)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.TenKhoanNopNganSach)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.SoTien)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.NamTaiChinh)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaKhoanNop)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TenKhoanNopNganSach)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SoTien)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NamTaiChinh)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-primary" style="background-color: #3498db; color: white; text-decoration: none;">
-                        <i class="fas fa-edit"></i> Sửa
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-success" style="background-color: #456512; color: white; text-decoration: none;">
-                        <i class="fas fa-info-circle"></i> Chi tiết
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-danger" style="background-color: #e74c3c; color: white; text-decoration: none;">
-                        <i class="fas fa-trash"></i> Xóa
-                    </a>
-                </td>
-            </tr>
-}
+            @foreach (var item in Model)
+            {
+
+                stt++;
+
+                var text = stt % 2 == 0 ? "odd" : "even";    @* sử dụng toán tử ba ngôi để chọn class *@
+                <tr class="@text">
+                    <td>@stt</td>
+
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(modelItem => item.MaKhoanNop)
+                    </td>
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(modelItem => item.TenKhoanNopNganSach)
+                    </td>
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(modelItem => item.SoTien)
+                    </td>
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(modelItem => item.NamTaiChinh)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-primary" style="background-color:#3b5ba5    ; color: white; text-decoration: none;border-style:none">
+                            <i class="fa-solid fa-pen-to-square fa-beat"></i> Sửa
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-success" style="background-color: #e87a5d; color: black; text-decoration: none;border-style:none">
+                            <i class="fa-solid fa-circle-info fa-beat"></i> Chi tiết
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdKhoanNopNganSach" class="btn btn-danger" style="background-color:#f3b941; color: white; text-decoration: none;border-style:none">
+                            <i class="fa-solid fa-trash fa-beat"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
-    <script>
+</body>
+<script>
 
     new DataTable('#ntable', {
         searching: true, // Mặc định là true, set false để tắt chức năng search
@@ -78,7 +91,7 @@ ViewData["Title"] = "Index";
             infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
             infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
             loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
+            zeroRecords: "Không tìm thấy",
             emptyTable: "Không có dữ liệu",
             paginate: {
                 first: "Trang đầu",
@@ -93,3 +106,32 @@ ViewData["Title"] = "Index";
         },
     });
 </script>
+
+
+
+<style>
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            transform: scale(1.1); /* Tăng kích thước nút lên 10% khi hover */
+        }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9fbe7; /* Nền tổng thể màu vàng nhạt */
+        background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* Họa tiết nền */
+        background-size: cover; /* Kích thước hình ảnh nền */
+        padding: 20px;
+        background: linear-gradient(135deg, #5cd6d6, #c2f0f0);
+    }
+
+    .odd {
+        background-color: #d6f5f5 !important;
+    }
+
+    .even {
+        background-color: #99e6e6 !important;
+    }
+</style>

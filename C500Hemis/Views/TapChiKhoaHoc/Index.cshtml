@@ -1,17 +1,175 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbTapChiKhoaHoc>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Đối tượng tham gia";
+    int i = 1;
 }
+@section Heads{
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<style>
+    /*B8D55 AT13 Ca Kỳ Hòa*/
+    /*Tắt mũi tên sắp xếp*/
+    
+    .dataTables_wrapper .dataTable thead th.sorting:after,
+    .dataTables_wrapper .dataTable thead th.sorting_asc:after,
+    .dataTables_wrapper .dataTable thead th.sorting_desc:after {
+        display: none;
+    }
+    .dataTables_wrapper .dataTable thead th.sorting:before,
+    .dataTables_wrapper .dataTable thead th.sorting_asc:before,
+    .dataTables_wrapper .dataTable thead th.sorting_desc:before {
+        display: none;
+    }
+    
 
-<h1>Index</h1>
+    .dataTables_filter {
+        position: relative;
+        width: 24%; /* Use full width */
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+        .dataTables_filter input {
+            padding-left: 10px; /* Space for the icon */
+            width: 250px; /* Adjust as needed */
+            min-width: 150px; /* Ensure it doesn't get too small */
+            border: 1px solid #ccc; /* Optional: add a border */
+            border-radius: 5px; /* Optional: rounded corners */
+        }
+
+        .dataTables_filter::before {
+            content: '\1F50D'; /* Unicode for search icon */
+            position: absolute;
+            left: 10px; /* Position the icon */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px; /* Adjust icon size */
+            pointer-events: none; /* Prevent interaction with the icon */
+            color: #888; /* Optional: icon color */
+        }
+
+
+    body{
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: rgb(195,34,34);
+    }
+
+    h1{
+        font-family: Apice;
+    }
+
+    .khungchua {
+        min-height: 100vh;
+        height: auto;
+        background-color: #FFF5;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px;
+    }
+
+    table{
+        width: 82vw;
+        backdrop-filter: blur(7px);
+        border-radius: .8rem;
+        background-color: #FFF5;
+        box-shadow: 0 .4rem .8rem #0005;
+        overflow: hidden;
+        border: 0.2px
+    }
+    table thead{
+        width: 100%;
+        height: 10%;
+        background-color:#d5d1defe;
+        padding: .8rem 1rem;
+    }
+    table tbody{
+        width: 95%;
+        max-height: 89%;
+        background-color: #fffb;
+        overflow: auto;
+    }
+    
+    table tbody tr:nth-child(even){
+        background-color:#0000000b;
+    }
+    table tbody tr:hover{
+        background-color: #fff6;
+    }
+    .btn-edit {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-edit:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    .btn-details {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-details:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    .btn-delete {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+            background-color: red;
+        }
+
+    .btn-create {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-create:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    .btn-excel {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-excel:hover {
+            background-color: #8DECB4;
+            color: black;
+            transform: scale(1.05);
+        }
+</style>
+
+<div class="khungchua">
+
+<h1 style="text-align:center">Tạp chí khoa học (@Model.Count())</h1>
+
+<table class="table" id="views">
     <thead>
         <tr>
+            <th>STT</th>
             <th>
                 @Html.DisplayNameFor(model => model.MaTapChi)
             </th>
@@ -28,17 +186,18 @@
                 @Html.DisplayNameFor(model => model.SoBaiBao1Nam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdLinhVucXuatBanNavigation)
+                Lĩnh vực xuất bản
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdXepLoaiTapChiNavigation)
+                Xếp loại tạp chí
             </th>
-            <th></th>
+            <th style="text-align:center    ">Chức năng</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>@i</td>
             <td>
                 @Html.DisplayFor(modelItem => item.MaTapChi)
             </td>
@@ -55,17 +214,68 @@
                 @Html.DisplayFor(modelItem => item.SoBaiBao1Nam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdLinhVucXuatBanNavigation.IdLinhVucNghienCuu)
+                @Html.DisplayFor(modelItem => item.IdLinhVucXuatBanNavigation.LinhVucNghienCuu)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdXepLoaiTapChiNavigation.IdTapChiTrongNuoc)
+                @Html.DisplayFor(modelItem => item.IdXepLoaiTapChiNavigation.TapChiTrongNuoc)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTapChiKhoaHoc">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTapChiKhoaHoc">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTapChiKhoaHoc">Delete</a>
-            </td>
+                <td nowrap style="text-align: right; width: 200px">
+                    <a asp-action="Edit" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-edit"><i class='bx bx-edit-alt'></i> Chỉnh sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-details"><i class='bx bx-info-circle'></i> Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-delete"><i class='bx bx-trash-alt'></i> Xóa</a>
+                </td>
         </tr>
+        i++;
 }
     </tbody>
 </table>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/r-3.0.3/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#views", {
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: 8
+                },
+            ],
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                    search: "",
+                    searchPlaceholder:"Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Tổng cộng _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary btn-create', //Thêm class cho button
+                            text: 'Thêm tạp chí khoa học',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        },
+                        {
+                            extend: "excel",
+                            className: 'btn btn-primary btn-excel', //Thêm class cho button
+                            text: 'Xuất excel',
+                            exportOptions: {
+                                columns: function(idx, data, node) {
+                                    if (node.classList.contains("_nonorder")) return false;
+                                    return true;
+                                },
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+</script>
+}
