@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace C500Hemis.Models;
+//commit
 
 public partial class TbKhoanNopNganSach
 {
