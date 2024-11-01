@@ -35,6 +35,7 @@ namespace C500Hemis.Controllers.HTQT
 
             var tbThanhPhanThamGiaDoanCongTac = await _context.TbThanhPhanThamGiaDoanCongTacs
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(human => human.IdNguoiNavigation)
                 .Include(t => t.IdDoanCongTacNavigation)
                 .Include(t => t.IdVaiTroThamGiaNavigation)
                 .FirstOrDefaultAsync(m => m.IdThanhPhanThamGiaDoanCongTac == id);
@@ -49,9 +50,9 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbThanhPhanThamGiaDoanCongTacs/Create
         public IActionResult Create()
         {
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "IdDoanCongTac");
-            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "IdVaiTroThamGia");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name");
+            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "TenDoanCongTac");
+            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "VaiTroThamGia");
             return View();
         }
 
@@ -62,16 +63,46 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdThanhPhanThamGiaDoanCongTac,IdDoanCongTac,IdCanBo,IdVaiTroThamGia")] TbThanhPhanThamGiaDoanCongTac tbThanhPhanThamGiaDoanCongTac)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbThanhPhanThamGiaDoanCongTac);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Kiểm tra xem ID thành phần tham gia có bị trùng không
+                if (TbThanhPhanThamGiaDoanCongTacExists(tbThanhPhanThamGiaDoanCongTac.IdThanhPhanThamGiaDoanCongTac))
+                {
+                    ModelState.AddModelError("IdThanhPhanThamGiaDoanCongTac", "ID vừa nhập đã tồn tại, vui lòng nhập một ID khác.");
+                }
+
+                // Kiểm tra ID cán bộ có null không
+                if (tbThanhPhanThamGiaDoanCongTac.IdCanBo == 0)
+                {
+                    ModelState.AddModelError("IdCanBo", "Mã cán bộ không được để trống.");
+                }
+
+                // Kiểm tra ID đoàn công tác có null không
+                if (tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac == 0)
+                {
+                    ModelState.AddModelError("IdDoanCongTac", "Mã đoàn công tác không được để trống.");
+                }
+
+                // Kiểm tra ID vai trò tham gia có null không
+                if (tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia == 0)
+                {
+                    ModelState.AddModelError("IdVaiTroThamGia", "Vai trò tham gia không được để trống.");
+                }
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbThanhPhanThamGiaDoanCongTac);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
+                ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "TenDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
+                ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "VaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
+                return View(tbThanhPhanThamGiaDoanCongTac);
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
-            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "IdDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
-            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "IdVaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
-            return View(tbThanhPhanThamGiaDoanCongTac);
+            catch (Exception loi)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: TbThanhPhanThamGiaDoanCongTacs/Edit/5
@@ -87,9 +118,9 @@ namespace C500Hemis.Controllers.HTQT
             {
                 return NotFound();
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
-            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "IdDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
-            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "IdVaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
+            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "TenDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
+            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "VaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
             return View(tbThanhPhanThamGiaDoanCongTac);
         }
 
@@ -125,9 +156,9 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
-            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "IdDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
-            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "IdVaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos.Include(h => h.IdNguoiNavigation), "IdCanBo", "IdNguoiNavigation.name", tbThanhPhanThamGiaDoanCongTac.IdCanBo);
+            ViewData["IdDoanCongTac"] = new SelectList(_context.TbDoanCongTacs, "IdDoanCongTac", "TenDoanCongTac", tbThanhPhanThamGiaDoanCongTac.IdDoanCongTac);
+            ViewData["IdVaiTroThamGia"] = new SelectList(_context.DmVaiTroThamGia, "IdVaiTroThamGia", "VaiTroThamGia", tbThanhPhanThamGiaDoanCongTac.IdVaiTroThamGia);
             return View(tbThanhPhanThamGiaDoanCongTac);
         }
 
@@ -141,6 +172,7 @@ namespace C500Hemis.Controllers.HTQT
 
             var tbThanhPhanThamGiaDoanCongTac = await _context.TbThanhPhanThamGiaDoanCongTacs
                 .Include(t => t.IdCanBoNavigation)
+                .ThenInclude(human => human.IdNguoiNavigation)
                 .Include(t => t.IdDoanCongTacNavigation)
                 .Include(t => t.IdVaiTroThamGiaNavigation)
                 .FirstOrDefaultAsync(m => m.IdThanhPhanThamGiaDoanCongTac == id);
