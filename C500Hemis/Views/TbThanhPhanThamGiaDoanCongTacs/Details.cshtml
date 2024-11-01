@@ -1,36 +1,109 @@
 ﻿@model C500Hemis.Models.TbThanhPhanThamGiaDoanCongTac
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi Tiết"; // Tiêu đề trang
 }
 
-<h1>Details</h1>
+<style>
+    /* Kiểu cho body */
+    body {
+        background-position: center; /* Căn giữa hình nền */
+        background-repeat: no-repeat; /* Không lặp hình nền */
+        background-color: rgb(230,241,216); /* Màu nền */
+    }
 
-<div>
-    <h4>TbThanhPhanThamGiaDoanCongTac</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDoanCongTacNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDoanCongTacNavigation.IdDoanCongTac)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdVaiTroThamGiaNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdVaiTroThamGiaNavigation.IdVaiTroThamGia)
-        </dd>
-    </dl>
+    /* Kiểu cho tiêu đề */
+    h1 {
+        color: #6A9C89; /* Màu chữ cho tiêu đề */
+        background-color: rgba(230, 241, 216, 0.8); /* Màu nền cho tiêu đề */
+        font-weight: bold; /* Đậm chữ */
+    }
+
+    /* Kiểu cho các nút */
+    .btn-red, .btn-blue {
+        display: inline-block; /* Hiển thị nút dưới dạng inline-block */
+        padding: 10px 20px; /* Khoảng cách bên trong nút */
+        color: white; /* Màu chữ */
+        text-align: center; /* Căn giữa chữ trong nút */
+        text-decoration: none; /* Không gạch chân */
+        border-radius: 5px; /* Bo góc cho nút */
+        font-weight: bold; /* Đậm chữ */
+    }
+
+    /* Kiểu cho nút đỏ */
+    .btn-red {
+        background-color: red; /* Màu nền cho nút đỏ */
+    }
+
+        .btn-red:hover {
+            background-color: darkred; /* Màu nền khi hover */
+        }
+
+    /* Kiểu cho nút xanh */
+    .btn-blue {
+        background-color: blue; /* Màu nền cho nút xanh */
+    }
+
+        .btn-blue:hover {
+            background-color: darkblue; /* Màu nền khi hover */
+        }
+
+    /* Căn giữa cho div */
+    div {
+        text-align: center; /* Căn giữa nội dung trong div */
+    }
+
+    /* Kiểu cho bảng */
+    table {
+        border-collapse: collapse; /* Gộp viền bảng */
+        width: 80%; /* Chiều rộng bảng */
+        margin: 20px auto; /* Căn giữa bảng */
+    }
+
+    th, td {
+        padding: 10px; /* Khoảng cách bên trong ô */
+        text-align: left; /* Căn trái nội dung ô */
+        border: 2px solid black; /* Viền cho ô */
+        width: 100px; /* Chiều rộng tối đa cho ô */
+    }
+
+    /* Kiểu cho div nội dung */
+    div.content {
+        background-color: rgba(230, 241, 216, 0.65); /* Màu nền cho nội dung */
+    }
+
+    tr {
+        width: 400px; /* Chiều rộng tối đa cho hàng */
+    }
+</style>
+
+<h1><strong>Chi tiết</strong></h1>
+<p style="text-align: center;">
+    <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Học viện An ninh nhân dân"> <!-- Logo -->
+</p>
+
+<div class="content">
+    <!-- Div chứa nội dung chi tiết -->
+    <h4><strong>Thành phần tham gia đoàn công tác</strong></h4>
+
+    <table class="details-table">
+        <!-- Bảng hiển thị thông tin chi tiết -->
+        <tr>
+            <th>Mã cán bộ </th>
+            <td>@Html.DisplayFor(model => model.IdCanBoNavigation.IdNguoiNavigation.name) </td> <!-- Hiển thị mã cán bộ -->
+        </tr>
+        <tr>
+            <th> Mã đoàn công tác </th>
+            <td>@Html.DisplayFor(model => model.IdDoanCongTacNavigation.TenDoanCongTac)</td> <!-- Hiển thị mã đoàn công tác -->
+        </tr>
+        <tr>
+            <th>Vai trò tham gia</th>
+            <td>@Html.DisplayFor(model => model.IdVaiTroThamGiaNavigation.VaiTroThamGia)</td> <!-- Hiển thị vai trò tham gia -->
+        </tr>
+    </table>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdThanhPhanThamGiaDoanCongTac">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div style="text-align: center;">
+    <a class="btn btn-blue" asp-action="Edit" asp-route-id="@Model?.IdThanhPhanThamGiaDoanCongTac">Chi tiết</a> <!-- Nút chỉnh sửa -->
+    <a class="btn btn-red" asp-action="Index">Quay trở lại</a> <!-- Nút quay lại danh sách -->
 </div>
