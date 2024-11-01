@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using C500Hemis.Models;
+using System.Text;
+using System.IO;
 
 namespace C500Hemis.Controllers.HTQT
 {
@@ -47,10 +49,17 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbHoiThaoHoiNghis/Create
         public IActionResult Create()
         {
-            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi");
-            return View();
+            //chạy chương trình nếu xuất hiện một ngoại lệ sẽ dừng lại và hiển thị lỗi badrequest
+            try
+            {
+                ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "NguonKinhPhi");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
-
         // POST: TbHoiThaoHoiNghis/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,14 +67,45 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdHoiThaoHoiNghi,MaHoiThaoHoiNghi,TenHoiThaoHoiNghi,CoQuanCoThamQuyenCapPhep,MucTieu,NoiDung,SoLuongDaiBieuThamDu,SoLuongDaiBieuQuocTeThamDu,ThoiGianToChuc,DiaDiemToChuc,IdNguonKinhPhiHoiThao,DonViChuTri")] TbHoiThaoHoiNghi tbHoiThaoHoiNghi)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbHoiThaoHoiNghi);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //nếu nhập id trùng sẽ bắt nhập lại
+                if (TbHoiThaoHoiNghiExists(tbHoiThaoHoiNghi.IdHoiThaoHoiNghi)) ModelState.AddModelError("IdHoiThaoHoiNghi", "ID vừa nhập đã tồn tại, vui lòng nhập một ID khác");
+
+                // Kiểm tra Sl đại biểu phải lớn hơn 0
+                if (tbHoiThaoHoiNghi.SoLuongDaiBieuThamDu <= 0)
+                {
+                    ModelState.AddModelError("SoLuongDaiBieuThamDu", "Số lượng đại biểu phải lớn hơn 0.");
+                }
+                // Kiểm tra Sl đại biểu quốc tế phải lớn hơn 0
+                if (tbHoiThaoHoiNghi.SoLuongDaiBieuQuocTeThamDu <= 0)
+                {
+                    ModelState.AddModelError("SoLuongDaiBieuQuocTeThamDu", "Số lượng đại biểu quốc tế phải lớn hơn 0.");
+                }
+                // Kiểm tra xem mã HTHN có null hay không
+                if (string.IsNullOrWhiteSpace(tbHoiThaoHoiNghi.MaHoiThaoHoiNghi))
+                {
+                    ModelState.AddModelError("MaHoiThaoHoiNghi", "Tên hội thảo/hội nghị không được để trống.");
+                }
+                // Kiểm tra xem Tên HTHN có null hay không
+                if (string.IsNullOrWhiteSpace(tbHoiThaoHoiNghi.TenHoiThaoHoiNghi))
+                {
+                    ModelState.AddModelError("TenHoiThaoHoiNghi", "Tên hội thảo/hội nghị không được để trống.");
+                }
+                //chạy chương trình nếu xuất hiện một ngoại lệ sẽ dừng lại và hiển thị lỗi badrequest
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbHoiThaoHoiNghi);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "NguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
+                return View(tbHoiThaoHoiNghi);
             }
-            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
-            return View(tbHoiThaoHoiNghi);
+            catch (Exception Ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: TbHoiThaoHoiNghis/Edit/5
@@ -81,7 +121,7 @@ namespace C500Hemis.Controllers.HTQT
             {
                 return NotFound();
             }
-            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
+            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "NguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
             return View(tbHoiThaoHoiNghi);
         }
 
@@ -92,11 +132,30 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdHoiThaoHoiNghi,MaHoiThaoHoiNghi,TenHoiThaoHoiNghi,CoQuanCoThamQuyenCapPhep,MucTieu,NoiDung,SoLuongDaiBieuThamDu,SoLuongDaiBieuQuocTeThamDu,ThoiGianToChuc,DiaDiemToChuc,IdNguonKinhPhiHoiThao,DonViChuTri")] TbHoiThaoHoiNghi tbHoiThaoHoiNghi)
         {
+            // Kiểm tra Sl đại biểu phải lớn hơn 0
+            if (tbHoiThaoHoiNghi.SoLuongDaiBieuThamDu <= 0)
+            {
+                ModelState.AddModelError("SoLuongDaiBieuThamDu", "Số lượng đại biểu phải lớn hơn 0");
+            }
+            // Kiểm tra Sl đại biểu quốc tế phải lớn hơn 0
+            if (tbHoiThaoHoiNghi.SoLuongDaiBieuQuocTeThamDu <= 0)
+            {
+                ModelState.AddModelError("SoLuongDaiBieuQuocTeThamDu", "Số lượng đại biểu quốc tế phải lớn hơn 0");
+            }
+            // Kiểm tra xem mã HTHN có null hay không
+            if (string.IsNullOrWhiteSpace(tbHoiThaoHoiNghi.MaHoiThaoHoiNghi))
+            {
+                ModelState.AddModelError("MaHoiThaoHoiNghi", "Tên hội thảo/hội nghị không được để trống.");
+            }
+            // Kiểm tra xem Tên HTHN có null hay không
+            if (string.IsNullOrWhiteSpace(tbHoiThaoHoiNghi.TenHoiThaoHoiNghi))
+            {
+                ModelState.AddModelError("TenHoiThaoHoiNghi", "Tên hội thảo/hội nghị không được để trống.");
+            }
             if (id != tbHoiThaoHoiNghi.IdHoiThaoHoiNghi)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
@@ -117,7 +176,7 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
+            ViewData["IdNguonKinhPhiHoiThao"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "NguonKinhPhi", tbHoiThaoHoiNghi.IdNguonKinhPhiHoiThao);
             return View(tbHoiThaoHoiNghi);
         }
 
@@ -159,5 +218,7 @@ namespace C500Hemis.Controllers.HTQT
         {
             return _context.TbHoiThaoHoiNghis.Any(e => e.IdHoiThaoHoiNghi == id);
         }
+
+
     }
 }

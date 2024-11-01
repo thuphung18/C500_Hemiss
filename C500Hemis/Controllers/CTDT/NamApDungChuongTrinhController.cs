@@ -47,7 +47,7 @@ namespace C500Hemis.Controllers.CTDT
         // GET: NamApDungChuongTrinh/Create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh");
             return View();
         }
 

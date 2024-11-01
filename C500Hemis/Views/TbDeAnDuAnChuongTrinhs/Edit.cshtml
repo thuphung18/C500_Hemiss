@@ -3,25 +3,20 @@
 @{
     ViewData["Title"] = "Sửa";
 }
-<h1 > Sửa </h1>
-<head>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-    <!-- DateTimePicker CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
-</head>
+<h1> CHỈNH SỬA</h1>
+@*PHẠM XUÂN LONG LÀM VÀ COMMIT..*@
 <style>
     body {
-        background-color: #f7f9fc;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
+        background-color: rgb(250, 243, 240);
     }
 
     .form-container {
         max-width: 800px;
         margin: auto;
-        background-color: #f7f9fc;
+        background-color: rgb(156, 169, 134);
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png); /*ảnh nền */
+        background-position: center;
+        background-repeat: no-repeat;
         padding: 30px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
@@ -37,6 +32,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
+        border-radius: 20px;
     }
 
         table th, table td {
@@ -50,12 +46,12 @@
             color: #fff; /* White text */
         }
 
-        table td {
-            background-color: #f2f2f2; /* Light grey background */
+        table td { /*chỉnh sửa cho bảng k bao gồm padding*/
+            background-color: rgba(225,225,225,0.8); /* Light grey background */
         }
 
         table tr:hover {
-            background-color: #ddd; /* Darker grey on hover */
+            background-color: rgba(221,221,221,0.6); /* Darker grey on hover */
         }
 
     .form-group label {
@@ -65,24 +61,25 @@
         margin-bottom: 5px;
     }
 
-    .form-control {
+    .form-control { /*chỉnh sửa cho ô nhập dữ liệu*/
         width: 100%;
         padding: 10px;
         border: 1px solid #d1d1d1;
         border-radius: 5px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        background-color: rgba(255,255,255,0.5);
     }
 
         .form-control:focus {
             border-color: #05c46b;
-            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.6); /* Slight glow */
             outline: none;
         }
 
     .btn-primary {
         width: 100%;
         padding: 12px;
-        background-color: #05c46b;
+        background-color: rgb(95, 111, 101);
         border: none;
         color: #fff;
         font-weight: bold;
@@ -93,17 +90,23 @@
     }
 
         .btn-primary:hover {
-            background-color: #048a55;
+            background-color: rgb(105, 132, 116);
             transform: scale(1.05); /* Slightly bigger */
         }
+
+    .btn-back:hover {
+        background-color: rgb(105, 132, 116);
+        transform: scale(1.05);
+    }
 </style>
 
 
+
 <div class="form-container">
-    <h4>Đề án, dự án , chương trình </h4>
+    <h4>ĐỀ ÁN, DỰ ÁN, CHƯƠNG TRÌNH </h4>
     <hr />
-     @*Là sao edit tự nhiên đi create là sao*@
-    <form asp-action="Create">
+
+    <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
 
         <table>
@@ -146,7 +149,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="TongKinhPhi" class="control-label">Tổng kinh phí</label>
-                        <input asp-for="TongKinhPhi" class="form-control" />
+                        <input asp-for="TongKinhPhi" data-val-number="Chỉ nhập số" class="form-control" />
                         <span asp-validation-for="TongKinhPhi" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -165,12 +168,14 @@
 </div>
 
 <div>
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Index" class="btn btn-back" style="margin-top:10px; background-color:darkolivegreen; margin-left:250px">
+        <b style="color:ghostwhite">Quay lại</b>
+    </a>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-      
+
     }
 }
