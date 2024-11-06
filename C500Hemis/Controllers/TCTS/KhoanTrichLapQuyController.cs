@@ -55,12 +55,72 @@ namespace C500Hemis.Controllers.TCTS
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdKhoanTrichLapQuy,MaKhoanTrichLapQuy,TenKhoanTrichLapQuy,NamTaiChinh,SoTien")] TbKhoanTrichLapQuy tbKhoanTrichLapQuy)
         {
+            // Kiểm tra xem ModelState có hợp lệ không
             if (ModelState.IsValid)
             {
-                _context.Add(tbKhoanTrichLapQuy);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Kiểm tra xem MaKhoanTrichLapQuy có null hay không
+                    if (string.IsNullOrWhiteSpace(tbKhoanTrichLapQuy.MaKhoanTrichLapQuy))
+                    {
+                        ModelState.AddModelError("MaKhoanTrichLapQuy", "Mã Khoản Trích Lập Quỹ không được để trống.");
+                    }
+
+                    // Kiểm tra trùng lặp MaKhoanTrichLapQuy trong cơ sở dữ liệu
+                    if (await _context.TbKhoanTrichLapQuies.AnyAsync(x => x.MaKhoanTrichLapQuy == tbKhoanTrichLapQuy.MaKhoanTrichLapQuy))
+                    {
+                        throw new Exception("Mã Khoản Trích Lập Quỹ đã tồn tại.");
+                    }
+
+                    // Kiểm tra xem TenKhoanTrichLapQuy có null hay không
+                    if (string.IsNullOrWhiteSpace(tbKhoanTrichLapQuy.TenKhoanTrichLapQuy))
+                    {
+                        ModelState.AddModelError("TenKhoanTrichLapQuy", "Tên Khoản Trích Lập Quỹ không được để trống.");
+                    }
+
+                    // Kiểm tra NamTaiChinh là số dương, có 4 chữ số và nhỏ hơn hoặc bằng 2024
+                    if (!int.TryParse(tbKhoanTrichLapQuy.NamTaiChinh, out int namTaiChinh) || namTaiChinh <= 0 || tbKhoanTrichLapQuy.NamTaiChinh.Length != 4 || namTaiChinh > 2024)
+                    {
+                        ModelState.AddModelError("NamTaiChinh", "Năm Tài Chính phải là một số dương gồm 4 chữ số và nhỏ hơn hoặc bằng 2024.");
+                    }
+
+                    // Kiểm tra SoTien phải lớn hơn 0
+                    if (tbKhoanTrichLapQuy.SoTien <= 0)
+                    {
+                        ModelState.AddModelError("SoTien", "Số Tiền phải lớn hơn 0.");
+                    }
+
+                    // Kiểm tra trùng lặp TenKhoanTrichLapQuy
+                    var existsTenKhoanTrichLapQuy = await _context.TbKhoanTrichLapQuies
+                        .AnyAsync(x => x.TenKhoanTrichLapQuy == tbKhoanTrichLapQuy.TenKhoanTrichLapQuy);
+                    if (existsTenKhoanTrichLapQuy)
+                    {
+                        ModelState.AddModelError("TenKhoanTrichLapQuy", "Tên Khoản Trích Lập Quỹ đã tồn tại.");
+                    }
+
+                    // Nếu dữ liệu có lỗi thì trả về form để người dùng chỉnh sửa
+                    if (!ModelState.IsValid)
+                    {
+                        return View(tbKhoanTrichLapQuy);
+                    }
+
+                    // Thêm đối tượng vào DbContext
+                    _context.Add(tbKhoanTrichLapQuy);
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+
+                    // Chuyển hướng về trang danh sách
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Bắt lỗi nếu có ngoại lệ và thông báo lỗi
+                    ModelState.AddModelError("", "Đã có lỗi xảy ra: " + ex.Message);
+                }
             }
+
+            // Trả về view với dữ liệu để hiển thị lại form nếu có lỗi
             return View(tbKhoanTrichLapQuy);
         }
 
@@ -92,25 +152,67 @@ namespace C500Hemis.Controllers.TCTS
                 return NotFound();
             }
 
+            // Kiểm tra nếu dữ liệu hợp lệ
             if (ModelState.IsValid)
             {
                 try
                 {
+                    // Kiểm tra xem MaKhoanTrichLapQuy có null hay không
+                    if (string.IsNullOrWhiteSpace(tbKhoanTrichLapQuy.MaKhoanTrichLapQuy))
+                    {
+                        ModelState.AddModelError("MaKhoanTrichLapQuy", "Mã Trích Lập Quỹ không được để trống.");
+                    }
+
+                    // Kiểm tra xem TenKhoanTrichLapQuy có null hay không
+                    if (string.IsNullOrWhiteSpace(tbKhoanTrichLapQuy.TenKhoanTrichLapQuy))
+                    {
+                        ModelState.AddModelError("TenKhoanTrichLapQuy", "Tên Khoản Trích Lập Quỹ không được để trống.");
+                    }
+
+                    // Kiểm tra NamTaiChinh là số dương, có 4 chữ số và nhỏ hơn hoặc bằng 2024
+                    if (!int.TryParse(tbKhoanTrichLapQuy.NamTaiChinh, out int namTaiChinh) || namTaiChinh <= 0 || tbKhoanTrichLapQuy.NamTaiChinh.Length != 4 || namTaiChinh > 2024)
+                    {
+                        ModelState.AddModelError("NamTaiChinh", "Năm Tài Chính phải là một số dương gồm 4 chữ số và nhỏ hơn hoặc bằng 2024.");
+                    }
+
+                    // Kiểm tra SoTien phải lớn hơn 0
+                    if (tbKhoanTrichLapQuy.SoTien <= 0)
+                    {
+                        ModelState.AddModelError("SoTien", "Số Tiền phải lớn hơn 0.");
+                    }
+                    
+                    // Nếu có lỗi thì trả về view để người dùng chỉnh sửa
+                    if (!ModelState.IsValid)
+                    {
+                        return View(tbKhoanTrichLapQuy);
+                    }
+
+                    // Cập nhật đối tượng trong DbContext
                     _context.Update(tbKhoanTrichLapQuy);
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
                     await _context.SaveChangesAsync();
+
+                    // Chuyển hướng về trang danh sách
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Xử lý nếu có xung đột cập nhật trong cơ sở dữ liệu
                     if (!TbKhoanTrichLapQuyExists(tbKhoanTrichLapQuy.IdKhoanTrichLapQuy))
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", "Có sự xung đột trong việc cập nhật dữ liệu.");
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    // Bắt lỗi nếu có ngoại lệ và thông báo lỗi
+                    ModelState.AddModelError("", "Một lỗi xảy ra: " + ex.Message);
+                }
             }
             return View(tbKhoanTrichLapQuy);
         }

@@ -1,104 +1,178 @@
 ﻿@model C500Hemis.Models.TbThanhPhanThamGiaDoanCongTac
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo Mới"; // Tiêu đề trang
 }
 
-<h1>Create</h1>
+<h1 align="center"><strong>Tạo Mới</strong></h1> <!-- Tiêu đề chính -->
+
 <style>
-    div {
-        margin: auto
-    }
-
     body {
-        background-color: #05c46b;
-        font-family: Verdana;
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png); /* Hình nền */
+        background-position: center; /* Căn giữa hình nền */
+        background-repeat: no-repeat; /* Không lặp hình nền */
+        background-color: rgba(230, 241, 216, 0.85); /* Màu nền với độ trong suốt */
     }
 
-    /* Căn giữa toàn bộ nội dung */
-    .center-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Chiều cao toàn màn hình */
+    .row {
+        font-weight: bold; /* Đậm chữ trong hàng */
     }
 
-    form {
-        background-color: #fff;
-        max-width: 500px;
-        padding: 30px 20px;
-        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
+    .form-container {
+        max-width: 800px; /* Chiều rộng tối đa của form */
+        margin: auto; /* Căn giữa */
+        background-color: #f7f9fc; /* Màu nền cho form */
+        padding: 30px; /* Khoảng cách bên trong form */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho form */
+        border-radius: 10px; /* Bo góc cho form */
+    }
+
+    .information {
+        background-color: rgba(230, 241, 216, 0.85); /* Màu nền cho thông tin */
+    }
+
+    .image-container {
+        text-align: center; /* Căn giữa ảnh */
+        margin-bottom: 20px; /* Khoảng cách dưới ảnh */
     }
 
     h1, h4 {
-        text-align: center;
+        text-align: center; /* Căn giữa tiêu đề */
+        color: rgb(21, 179, 146); /* Màu chữ */
+        margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
     }
 
-    .form-group {
-        margin-bottom: 15px;
+    table {
+        width: 100%; /* Chiều rộng bảng */
+        border-collapse: collapse; /* Gộp đường viền ô */
+        margin-bottom: 20px; /* Khoảng cách dưới bảng */
     }
 
-        .form-group label {
-            margin-bottom: 5px;
-            display: block;
+        table th, table td {
+            padding: 10px; /* Khoảng cách giữa nội dung và đường viền ô */
+            border: 1px solid #ddd; /* Đường viền nhạt cho các ô */
+            text-align: left; /* Căn trái nội dung ô */
         }
 
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        table th {
+            background-color: #4CAF50; /* Màu nền xanh cho tiêu đề */
+            color: #fff; /* Màu chữ trắng cho tiêu đề */
+        }
+
+        table td {
+            background-color: #f2f2f2; /* Màu nền xám nhạt cho ô dữ liệu */
+        }
+
+        table tr:hover {
+            background-color: #ddd; /* Màu nền xám đậm khi di chuột qua hàng */
+        }
+
+    .form-group label {
+        font-weight: bold; /* Đậm chữ cho label */
+        color: #333; /* Màu chữ cho label */
+        display: block; /* Hiển thị label dưới dạng khối */
+        margin-bottom: 5px; /* Khoảng cách dưới label */
     }
 
+    .form-control {
+        width: 100%; /* Chiều rộng 100% cho ô nhập liệu */
+        padding: 10px; /* Khoảng cách bên trong ô nhập liệu */
+        border: 1px solid #d1d1d1; /* Đường viền nhạt cho ô nhập liệu */
+        border-radius: 5px; /* Bo góc cho ô nhập liệu */
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
+    }
+
+        .form-control:focus {
+            border-color: #05c46b; /* Màu viền khi ô nhập liệu được chọn */
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Hiệu ứng glow cho ô nhập liệu */
+            outline: none; /* Xóa viền mặc định */
+        }
+
     .btn-primary {
-        width: 100%;
-        padding: 10px;
-        background-color: #05c46b;
-        border: none;
-        color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
+        width: 100%; /* Chiều rộng 100% cho nút */
+        padding: 12px; /* Khoảng cách bên trong nút */
+        background-color: #05c46b; /* Màu nền cho nút */
+        border: none; /* Không có đường viền */
+        color: #fff; /* Màu chữ trắng */
+        font-weight: bold; /* Đậm chữ */
+        border-radius: 5px; /* Bo góc cho nút */
+        cursor: pointer; /* Con trỏ chuột khi di chuột qua nút */
+        margin-top: 20px; /* Khoảng cách trên nút */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển động mượt mà */
     }
 
         .btn-primary:hover {
-            background-color: #048a55;
+            background-color: #048a55; /* Màu nền khi di chuột qua nút */
+            transform: scale(1.05); /* Phóng to nút một chút */
         }
+    /* Kiểu cho nút quay lại */
+    .btn-red {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #ff4757;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .btn-red:hover {
+            background-color: #ff6b81;
+            transform: scale(1.02);
 </style>
-<h4>TbThanhPhanThamGiaDoanCongTac</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdThanhPhanThamGiaDoanCongTac" class="control-label"></label>
-                <input asp-for="IdThanhPhanThamGiaDoanCongTac" class="form-control" />
-                <span asp-validation-for="IdThanhPhanThamGiaDoanCongTac" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdDoanCongTac" class="control-label"></label>
-                <select asp-for="IdDoanCongTac" class ="form-control" asp-items="ViewBag.IdDoanCongTac"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCanBo" class="control-label"></label>
-                <select asp-for="IdCanBo" class ="form-control" asp-items="ViewBag.IdCanBo"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdVaiTroThamGia" class="control-label"></label>
-                <select asp-for="IdVaiTroThamGia" class ="form-control" asp-items="ViewBag.IdVaiTroThamGia"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+<div class="form-container">
+    <!-- Khung chứa form -->
+    <h4>(Hội thảo hội nghị)</h4>
+    <hr />
+
+    <form asp-action="Create">
+        <!-- Form để tạo mới -->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Hiển thị thông báo lỗi -->
+
+        <table>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label asp-for="IdThanhPhanThamGiaDoanCongTac" class="control-label"></label>
+                        <input asp-for="IdThanhPhanThamGiaDoanCongTac" class="form-control" /> <!-- Nhập ID thành phần tham gia -->
+                        <span asp-validation-for="IdThanhPhanThamGiaDoanCongTac" class="text-danger"></span> <!-- Hiển thị lỗi nếu có -->
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdDoanCongTac" class="control-label">Mã đoàn công tác</label>
+                        <select asp-for="IdDoanCongTac" class="form-control" asp-items="ViewBag.IdDoanCongTac"></select> <!-- Dropdown cho mã đoàn công tác -->
+                        <span asp-validation-for="IdDoanCongTac" class="text-danger"></span> <!-- Hiển thị lỗi nếu có -->
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IdCanBo" class="control-label">Tên cán bộ</label>
+                        <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select> <!-- Dropdown cho mã cán bộ -->
+                        <span asp-validation-for="IdCanBo" class="text-danger"></span> <!-- Hiển thị lỗi nếu có -->
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdVaiTroThamGia" class="control-label">Vai trò tham gia</label>
+                        <select asp-for="IdVaiTroThamGia" class="form-control" asp-items="ViewBag.IdVaiTroThamGia"></select> <!-- Dropdown cho vai trò tham gia -->
+                        <span asp-validation-for="IdVaiTroThamGia" class="text-danger"></span> <!-- Hiển thị lỗi nếu có -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <input type="submit" value="Tạo mới" class="btn btn-primary" /> <!-- Nút tạo mới -->
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div style="text-align: center;">
+    <a asp-action="Index" class="btn btn-red">Quay lại danh sách</a> <!-- Nút quay lại danh sách -->
 </div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial"); // Nhúng phần kiểm tra lỗi
+    }
 }

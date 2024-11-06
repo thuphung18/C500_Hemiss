@@ -3,63 +3,159 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@*PHẠM XUÂN lONG LÀM VÀ COMMIT..*@
+<h1 style="text-align:center">XÓA</h1>
+<hr />
 <style>
+    body {
+        background-color: rgb(250, 243, 240);
+    }
+
+    .form-container {
+        background-color: rgb(156, 169, 134);
+        max-width: 800px;
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png); /*ảnh nền */
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: auto;
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    h1, h4 {
+        text-align: center;
+    }
+
     table {
-        width: 100%; /* Chiều rộng bảng 100% */
-        border-collapse: collapse; /* Gộp đường viền ô */
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
     }
 
-    th, td {
-        border: 1px solid #000; /* Đường viền đen cho các ô */
-        text-align: left;
-        padding: 8px; /* Khoảng cách giữa nội dung và đường viền ô */
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50; /* Nền xanh lá */
+            color: #fff; /* chữ trắng */
+        }
+
+        table td {
+            background-color: rgba(225,225,225,0.8);
+        }
+
+        table tr:hover {
+            background-color: rgba(221,221,221,0.6);
+        }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
     }
 
-    th {
-        font-weight: bold; /* Chữ đậm cho tiêu đề */
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        background-color: rgba(225,225,225,0.5);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
     }
 
-    tr:hover {
-        background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.6); /* Slight glow */
+            outline: none;
+            background-color: rgba(225,225,225,0.5);
+        }
+
+    .btn-danger {
+        width: 100%;
+        padding: 12px;
+        background-color: darkred;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: rgb(105, 132, 116);
+        transform: scale(1.05);
     }
 </style>
-<h1>Bạn có chắc chắn muốn xóa </h1>
 
-<div>
-    <h4>Đề án/Dự án chương trình</h4>
+
+<div class="form-container">
+    <h4 style="text-align:center">ĐỀ ÁN, DỰ ÁN, CHƯƠNG TRÌNH</h4>
     <hr />
     <table>
         <tr>
-            <th>Mã đề án, dự án, chương trình</th>
-            <td>@Html.DisplayFor(model => model.MaDeAnDuAnChuongTrinh)</td>
-        </tr>
-        <tr>
-            <th>Tên đề án, dự án, chương trình</th>
-            <td>@Html.DisplayFor(model => model.TenDeAnDuAnChuongTrinh)</td>
-        </tr>
-        <tr>
-            <th>Nội dung tóm tắt</th>
-            <td>@Html.DisplayFor(model => model.NoiDungTomTat)</td>
-        </tr>
-        <tr>
-            <th>Mục tiêu</th>
-            <td>@Html.DisplayFor(model => model.MucTieu)</td>
-        </tr>
-        <tr>
-            <th>Thời gian hợp tác từ</th>
-            <td>@Html.DisplayFor(model => model.ThoiGianHopTacTu)</td>
-        </tr>
-        <tr>
-            <th>Thời gian hợp tác đến</th>
-            <td>@Html.DisplayFor(model => model.ThoiGianHopTacDen)</td>
-        </tr>
-        <tr>
-            <th>Tổng kinh phí</th>
-            <td>@Html.DisplayFor(model => model.TongKinhPhi)</td>
-        </tr>
-        <tr>
-            <th>Nguồn kinh phí đề án, dự án, chương trình</th>
-            <td> @Html.DisplayFor(model => model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation.IdNguonKinhPhiChoDeAn)</td>
+            <td>
+                <div class="form-group">
+                    <label asp-for="IdDeAnDuAnChuongTrinh" class="control-label">Đề án, dự án, chương trình</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.IdDeAnDuAnChuongTrinh)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaDeAnDuAnChuongTrinh" class="control-label">Mã đề án, dự án, chương trình</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.MaDeAnDuAnChuongTrinh)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TenDeAnDuAnChuongTrinh" class="control-label">Tên đề án, dự án, chương trình</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.TenDeAnDuAnChuongTrinh)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoiDungTomTat" class="control-label">Nội dung tóm tắt</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.NoiDungTomTat)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MucTieu" class="control-label">Mục tiêu</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.MucTieu)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThoiGianHopTacTu" class="control-label">Thời gian hợp tác từ</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.ThoiGianHopTacTu)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThoiGianHopTacDen" class="control-label">Thời gian hợp tác đến</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.ThoiGianHopTacTu)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TongKinhPhi" class="control-label">Tổng kinh phí</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.ThoiGianHopTacDen)" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdNguonKinhPhiDeAnDuAnChuongTrinh" class="control-label">Nguồn kinh phí đề án, dự án, chương trình</label>
+                    <div class="hi">
+                        <input type="text" class="form-control" value="@Html.DisplayFor(Model => Model.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation.NguonKinhPhiChoDeAn)" readonly />
+                    </div>
+                </div>
+            </td>
         </tr>
     </table>
 
@@ -67,7 +163,12 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDeAnDuAnChuongTrinh" />
-        <input type="submit" value="Xóa" class="btn btn-danger" /> 
-        <a asp-action="Index">Quay lại </a>
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+
     </form>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-back" style="margin-top:10px; background-color:darkolivegreen; margin-left:250px">
+        <b style="color:ghostwhite">Quay lại</b>
+    </a>
 </div>

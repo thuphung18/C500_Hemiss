@@ -3,89 +3,211 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@section Heads
+{
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+
+    <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script><!-- Liên kết đến Font Awesome để sử dụng các biểu tượng -->
+
+    <meta charset="UTF-8"><!-- Thiết lập mã hóa ký tự là UTF-8 -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Thiết lập trang để hiển thị tốt trên mọi thiết bị, đặc biệt là di động -->
+
+    <title>Index</title> <!-- Tiêu đề của trang -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMcV7zME5C3JyH/wd49CBOjlKCPli2CGrohk+jc" crossorigin="anonymous"> <!-- Liên kết tới Font Awesome qua CDN -->
     <style>
-        .create-new {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
+        a {
             text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
         }
 
-        .action-links a {
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #ffcccc;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 3px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+        body {
+            font-family: sans-serif;
+            background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff); /* Nền gradient: màu chuyển từ xanh nhạt sang trắng */
+            color: #333; /* Màu chữ chính là màu xám đậm */
+            border: 2px solid white; /* Viền trắng dày 2px cho toàn bộ trang */
+        }
+
+        .container {
+            width: 100%; /* Chiều rộng toàn màn hình */
+            margin: 0 auto; /* Căn giữa nội dung theo chiều ngang */
+        }
+
+        h1 {
+            text-align: center; /* Căn giữa tiêu đề */
+            color: black; /* Màu chữ đen cho tiêu đề */
+            background-color: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff); /* Nền gradient không hợp lệ vì không áp dụng trực tiếp vào background-color */
+            padding: 20px; /* Khoảng cách bên trong giữa chữ và viền của tiêu đề */
+            border-radius: 10px; /* Góc bo tròn cho khung tiêu đề */
+            border: 2px solid white; /* Viền trắng xung quanh tiêu đề */
+        }
+        /* Phong cách cho nút "Thêm mới phòng thực hành" */
+        .create-new {
+            display: inline-block; /* Hiển thị nút như một khối nhưng không chiếm toàn bộ chiều rộng */
+            padding: 10px 15px; /* Khoảng cách trong nút  */
+            background-color: #28a745; /* Màu nền xanh lá */
+            color: #fff; /* Màu chữ trắng */
+            border-radius: 5px; /* Bo tròn các góc nút */
+            margin-bottom: 20px; /* Khoảng cách dưới nút 20px */
+            font-size: 16px; /* Cỡ chữ 16px */
+        }
+            /* Hiệu ứng hover khi di chuột qua nút */
+            .create-new:hover {
+                background-color: #218838; /* Màu nền nút chuyển sang xanh đậm khi hover */
+            }
+        /* Cấu trúc bảng */
+        table {
+            width: 100%; /* Bảng chiếm toàn bộ chiều rộng */
+            border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô bảng */
+            background-color: #E0F7FA; /* Màu nền xanh nhạt */
+            color: #333; /* Màu chữ chính trong bảng là xám đậm */
+            border-radius: 10px; /* Bo tròn các góc của bảng */
+            overflow: hidden; /* Ẩn các phần tràn ra ngoài của bảng */
+            border: 2px solid white; /* Viền trắng dày 2px xung quanh bảng */
+        }
+
+        th, td {
+            padding: 20px; /* Khoảng cách trong giữa nội dung và viền của ô (trên-dưới, trái-phải) */
+            text-align: center !important; /* Căn giữa nội dung bảng, và !important để ghi đè các quy tắc khác */
+            border-bottom: 1px solid #ccc; /* Viền dưới của các ô bảng là màu xám nhạt */
+            white-space: nowrap; /* Giữ nội dung trong một dòng, không xuống dòng */
+        }
+
+        th {
+            background-color: #B2EBF2; /* Màu nền xanh nhạt cho tiêu đề bảng (ô th) */
+            color: #333; /* Màu chữ xám đậm cho tiêu đề bảng */
+        }
+        /* Màu nền xen kẽ cho các dòng chẵn của bảng */
+        tr:nth-child(even) {
+            background-color: #E0F2F1; /* Màu xanh nhạt hơn cho các dòng chẵn */
+        }
+        /* Các lớp nút tùy chỉnh */
+        .btn-custom {
+            border: none; /* Loại bỏ viền của nút */
+            padding: 8px 12px; /* Khoảng cách trong nút (trên-dưới 8px, trái-phải 12px) */
+            color: white; /* Màu chữ trắng */
+            cursor: pointer; /* Con trỏ chuột dạng nút bấm khi hover qua */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt trong 0.3 giây */
+        }
+        /* Nút với màu nền xanh dương */
+        .btn-primary-custom {
+            background-color: #3498db; /* Màu nền xanh dương nhạt */
+            color: white; /* Màu chữ trắng */
+        }
+        /* Nút với màu nền xanh lá */
+        .btn-success-custom {
+            background-color: #456512; /* Màu nền xanh lá đậm */
+            color: white; /* Màu chữ trắng */
+        }
+        /* Nút với màu nền đỏ */
+        .btn-danger-custom {
+            background-color: #e74c3c; /* Màu nền đỏ */
+            color: white; /* Màu chữ trắng */
+        }
+        /* Hiệu ứng khi hover qua nút */
+        .btn-custom:hover {
+            transform: translateY(-5px); /* Nút di chuyển lên trên 5px khi hover */
+            opacity: 0.8; /* Nút trở nên mờ đi (opacity giảm xuống 80%) khi hover */
+        }
+        /* Khoảng cách nhỏ giữa icon và văn bản trong nút */
+        a.btn-custom i {
+            margin-right: 5px; /* Khoảng cách phải 5px giữa icon và chữ trong nút */
         }
     </style>
 </head>
-<body1>
+<body>
     <div class="container">
-        <h1 align="center">Phòng Thực Hành</h1>
+        <h1>Phòng Thực Hành</h1>
         <p>
-            <a class="create-new" asp-action="Create">Tạo Mới</a>
+            <a class="create-new" asp-action="Create">+ Thêm mới</a>
         </p>
-        <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MucDoDapUngNhuCauNckh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLinhVucNavigation.IdLinhVucNghienCuu)
-            </td>
-            <td>
+        <table class="table table-bordered" id="ntable">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã công trình cơ sở vật chất</th>
+                    <th>Phục vụ ngành</th>
+                    <th>Mức độ đáp ứng nhu cầu NCKH</th>
+                    <th>Năm đưa vào sử dụng</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdPhongThucHanh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCongTrinhCsvcNavigation.MaCongTrinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdLinhVucNavigation.LinhVucNghienCuu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MucDoDapUngNhuCauNckh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NamDuaVaoSuDung)
+                        </td>
+                        <td>
+
                             <div class="action-links">
-                <a asp-action="Edit" asp-route-id="@item.IdPhongThucHanh">Edit</a>
-                <hr>
-                <a asp-action="Details" asp-route-id="@item.IdPhongThucHanh">Details</a>
-                <hr>
-                <a asp-action="Delete" asp-route-id="@item.IdPhongThucHanh">Delete</a>
-                <hr>
-                </div>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</div>
-</body1>
+                                <a asp-action="Edit" asp-route-id="@item.IdPhongThucHanh" class="btn btn-primary-custom btn-custom">
+                                    <i class="fas fa-edit"></i> Sửa
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.IdPhongThucHanh" class="btn btn-success-custom btn-custom">
+                                    <i class="fas fa-info-circle"></i> Chi tiết
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.IdPhongThucHanh" class="btn btn-danger-custom btn-custom">
+                                    <i class="fas fa-trash"></i> Xóa
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>
+
+<script>
+
+    new DataTable('#ntable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        processing: true,
+        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
+            }
+        },
+    });
+</script>

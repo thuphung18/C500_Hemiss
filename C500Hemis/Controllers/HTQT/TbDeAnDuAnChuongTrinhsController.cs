@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using C500Hemis.Models;
-
+//PHẠM XUÂN LONG LÀM VÀ COMMIT..
 namespace C500Hemis.Controllers.HTQT
 {
     public class TbDeAnDuAnChuongTrinhsController : Controller
@@ -21,34 +21,56 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbDeAnDuAnChuongTrinhs
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbDeAnDuAnChuongTrinhs.Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                var hemisContext = _context.TbDeAnDuAnChuongTrinhs.Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation);
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: TbDeAnDuAnChuongTrinhs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs
+                    .Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdDeAnDuAnChuongTrinh == id);
+                if (tbDeAnDuAnChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbDeAnDuAnChuongTrinh);
             }
 
-            var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs
-                .Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdDeAnDuAnChuongTrinh == id);
-            if (tbDeAnDuAnChuongTrinh == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            return View(tbDeAnDuAnChuongTrinh);
         }
 
         // GET: TbDeAnDuAnChuongTrinhs/Create
         public IActionResult Create()
         {
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn");
-            return View();
+            try
+            {
+                ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: TbDeAnDuAnChuongTrinhs/Create
@@ -56,33 +78,51 @@ namespace C500Hemis.Controllers.HTQT
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,NguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
+        public async Task<IActionResult> Create([Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,IdNguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbDeAnDuAnChuongTrinh);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //kiểm tra id đã tồn tại
+                if (TbDeAnDuAnChuongTrinhExists(tbDeAnDuAnChuongTrinh.IdDeAnDuAnChuongTrinh)) ModelState.AddModelError("IdDeAnDuAnChuongTrinh", "ID đã tồn tại");
+
+
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbDeAnDuAnChuongTrinh);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+                return View(tbDeAnDuAnChuongTrinh);
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
-            return View(tbDeAnDuAnChuongTrinh);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: TbDeAnDuAnChuongTrinhs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs.FindAsync(id);
-            if (tbDeAnDuAnChuongTrinh == null)
-            {
-                return NotFound();
+                var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs.FindAsync(id);
+                if (tbDeAnDuAnChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+                ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+                return View(tbDeAnDuAnChuongTrinh);
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
-            return View(tbDeAnDuAnChuongTrinh);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: TbDeAnDuAnChuongTrinhs/Edit/5
@@ -92,52 +132,69 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdDeAnDuAnChuongTrinh,MaDeAnDuAnChuongTrinh,TenDeAnDuAnChuongTrinh,NoiDungTomTat,MucTieu,ThoiGianHopTacTu,ThoiGianHopTacDen,TongKinhPhi,IdNguonKinhPhiDeAnDuAnChuongTrinh")] TbDeAnDuAnChuongTrinh tbDeAnDuAnChuongTrinh)
         {
-            if (id ==null)
+            //khối lệnh trong try là khối lệnh cần bắt lỗi khi khối lệnh đó có lỗi sẽ chuyển vào catch 
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(tbDeAnDuAnChuongTrinh);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbDeAnDuAnChuongTrinhExists(tbDeAnDuAnChuongTrinh.IdDeAnDuAnChuongTrinh))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(tbDeAnDuAnChuongTrinh);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!TbDeAnDuAnChuongTrinhExists(tbDeAnDuAnChuongTrinh.IdDeAnDuAnChuongTrinh))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
+
+
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
+                return View(tbDeAnDuAnChuongTrinh);
             }
-            ViewData["IdNguonKinhPhiDeAnDuAnChuongTrinh"] = new SelectList(_context.DmNguonKinhPhiChoDeAns, "IdNguonKinhPhiChoDeAn", "NguonKinhPhiChoDeAn", tbDeAnDuAnChuongTrinh.IdNguonKinhPhiDeAnDuAnChuongTrinh);
-            return View(tbDeAnDuAnChuongTrinh);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: TbDeAnDuAnChuongTrinhs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs
-                .Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdDeAnDuAnChuongTrinh == id);
-            if (tbDeAnDuAnChuongTrinh == null)
+                var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs
+                    .Include(t => t.IdNguonKinhPhiDeAnDuAnChuongTrinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdDeAnDuAnChuongTrinh == id);
+                if (tbDeAnDuAnChuongTrinh == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbDeAnDuAnChuongTrinh);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            return View(tbDeAnDuAnChuongTrinh);
         }
 
         // POST: TbDeAnDuAnChuongTrinhs/Delete/5
@@ -145,14 +202,21 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs.FindAsync(id);
-            if (tbDeAnDuAnChuongTrinh != null)
+            try
             {
-                _context.TbDeAnDuAnChuongTrinhs.Remove(tbDeAnDuAnChuongTrinh);
-            }
+                var tbDeAnDuAnChuongTrinh = await _context.TbDeAnDuAnChuongTrinhs.FindAsync(id);
+                if (tbDeAnDuAnChuongTrinh != null)
+                {
+                    _context.TbDeAnDuAnChuongTrinhs.Remove(tbDeAnDuAnChuongTrinh);
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         private bool TbDeAnDuAnChuongTrinhExists(int id)

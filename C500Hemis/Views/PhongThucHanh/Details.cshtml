@@ -1,42 +1,69 @@
 ﻿@model C500Hemis.Models.TbPhongThucHanh
-
 @{
     ViewData["Title"] = "Details";
 }
+<!-- CSS để định dạng nền toàn trang và bảng -->
+<style>
+    body {
+        background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
+        background-size: cover; /* Để nền phủ hết trang */
+        margin: 0;
+        padding: 0;
+    }
 
-<h1>Details</h1>
+    table {
+        background-color: #f9f9f9; /* Màu nền cho bảng */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng để bảng nổi bật */
+        border-radius: 8px; /* Làm bo tròn các góc của bảng */
 
+        width: 80%; /* chiều rộng của bảng  */
+        border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô trong bảng */
+        margin: 0 auto; /* Căn giữa bảng trên trang */
+    }
+
+    .table-bordered {
+        max-width: 600px;
+    }
+
+    th, td {
+        padding: 10px; /* khoảng cách bên trong ô */
+        border: 1px solid #ddd; /* Viền ô */
+        text-align: center; /* Căn trái nội dung */
+    }
+    /* Canh giữa các nút */
+    .action-buttons {
+        text-align: center;
+        margin-top: 20px;
+
+</style>
+<h1 style="text-align:center;">Chi Tiết</h1>
 <div>
-    <h4>TbPhongThucHanh</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamDuaVaoSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)
-        </dd>
-    </dl>
+    <h4 style="text-align:center;">Phòng Thực Hành</h4>
+    <table class="table-bordered" style="padding: 20px; border: 2px solid black; border-radius: 8px;  box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);">
+        <tbody>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)</td>
+                <td>@Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.NamDuaVaoSuDung)</td>
+                <td>@Html.DisplayFor(model => model.NamDuaVaoSuDung)</td>
+            </tr>
+            <tr>
+                <td>Mã Công Trình Cơ Sở Vật Chất</td>
+                <td>@Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)</td>
+            </tr>
+            <tr>
+                <td>Lĩnh Vực Nghiên Cứu</td>
+                <td>@Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdPhongThucHanh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<!-- Liên kết để chỉnh sửa hoặc thoát trang -->
+<div class="action-buttons">
+    <a asp-action="Edit" class="btn btn-success" asp-route-id="@Model?.IdPhongThucHanh">Chỉnh Sửa</a>
+    <a asp-action="Index" class="btn btn-secondary" style="text-decoration: none;">Thoát Trang</a>
 </div>
+

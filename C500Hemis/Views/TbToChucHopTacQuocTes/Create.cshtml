@@ -1,7 +1,7 @@
 ﻿@model C500Hemis.Models.TbToChucHopTacQuocTe
 
 @{
-    ViewData["Title"] = "Tạo mới";
+    ViewData["Title"] = "Create";
 }
 
 
@@ -9,6 +9,13 @@
 <hr />
 
 <style>
+    body { /*chèn màu vào backgruond, chỉnh sửa font chữ cách hiện*/
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif color: #673ab7; /* Purple */
+        text-align: left;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+    }
     body {
         background-color: #f7f9fc;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -124,20 +131,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdQuocGia" class="control-label"> Quốc gia </label>
-                <select asp-for="IdQuocGia" class ="form-control" asp-items="ViewBag.IdQuocGia"></select>
+                <select asp-for="IdQuocGiaNavigation.TenNuoc" class ="form-control" asp-items="ViewBag.IdQuocGia"></select>
             </div>
             <div class="form-group">
                 <label asp-for="NoiDung" class="control-label"> Nội dung </label>
                 <input asp-for="NoiDung" class="form-control" />
                 <span asp-validation-for="NoiDung" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ThoiGianKyKet" class="control-label"> Thời gian kí kết </label>
-                <input asp-for="ThoiGianKyKet" class="form-control datetimepicker" />
-
-                
-                <span asp-validation-for="ThoiGianKyKet" class="text-danger"></span>
-            </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ThoiGianKyKet" class="form-label"></label>
+                        <input asp-for="ThoiGianKyKet" class="form-control border-info" type="datetime-local" placeholder="Nhập Ngày Ký kết" />
+                        <span asp-validation-for="ThoiGianKyKet" class="text-danger"></span>
+                    </div>
             <div class="form-group">
                 <label asp-for="KetQuaHopTac" class="control-label"> Kết quả hợp tác </label>
                 <input asp-for="KetQuaHopTac" class="form-control" />
@@ -163,7 +168,16 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+   
+<script>
+    $(document).ready(function() {
+        $('.datetimepicker').datetimepicker({
+            format: 'dd-mm-yyyy ' // hoặc định dạng bạn muốn
+        });
+    });
+</script>
 
 

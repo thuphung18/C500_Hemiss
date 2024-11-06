@@ -1,13 +1,21 @@
 ﻿@model C500Hemis.Models.TbToChucHopTacQuocTe
 
 @{
-    ViewData["Title"] = "Xóa";
+    ViewData["Title"] = "Xóa thông tin tổ chức hợp tác quốc tế";
 }
 
-<h1>Xóa </h1>
+<h1>Xóa thông tin tổ chức hợp tác quốc tế </h1>
 
-<h3>Bạn có chắc chắn muốn xóa?</h3>
+<h3>Bạn hãy xem lại thông tin trước khi muốn xóa?</h3>
 <style>
+    body { /*chèn màu vào backgruond, chỉnh sửa font chữ cách hiện*/
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif color: #673ab7; /* Purple */
+        text-align: left;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+    }
+    
     table {
         width: 100%; /* Chiều rộng bảng 100% */
         border-collapse: collapse; /* Gộp đường viền ô */
@@ -25,6 +33,12 @@
 
     tr:hover {
         background-color: transparent; /* Không có màu nền khi di chuột qua hàng */
+    }
+
+    .warning-icon {
+        color: #f00;
+        font-size: 24px;
+        margin-right: 10px;
     }
 </style>
 
@@ -70,6 +84,7 @@
         <input type="hidden" asp-for="IdToChucHopTacQuocTe" />
         <input type="submit" value="Xóa" class="btn btn-danger" /> |
         <a asp-action="Index">Quay lại </a>
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
 
     </form>
 </div>

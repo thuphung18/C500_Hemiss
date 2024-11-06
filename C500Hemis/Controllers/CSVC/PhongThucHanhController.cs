@@ -49,7 +49,7 @@ namespace C500Hemis.Controllers.CSVC
         public IActionResult Create()
         {
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat");
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu");
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu");
             return View();
         }
 
@@ -60,15 +60,22 @@ namespace C500Hemis.Controllers.CSVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPhongThucHanh,IdCongTrinhCsvc,IdLinhVuc,MucDoDapUngNhuCauNckh,NamDuaVaoSuDung")] TbPhongThucHanh tbPhongThucHanh)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbPhongThucHanh);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbPhongThucHanh);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThucHanh.IdCongTrinhCsvc);
+                ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThucHanh.IdLinhVuc);
+                return View(tbPhongThucHanh);
             }
-            ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThucHanh.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThucHanh.IdLinhVuc);
-            return View(tbPhongThucHanh);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Đã xảy ra lỗi khi nhập STT. Vui lòng thử lại." }); ;
+            }
         }
 
         // GET: PhongThucHanh/Edit/5
@@ -85,7 +92,7 @@ namespace C500Hemis.Controllers.CSVC
                 return NotFound();
             }
             ViewData["IdCongTrinhCsvc"] = new SelectList(_context.TbCongTrinhCoSoVatChats, "IdCongTrinhCoSoVatChat", "IdCongTrinhCoSoVatChat", tbPhongThucHanh.IdCongTrinhCsvc);
-            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "IdLinhVucNghienCuu", tbPhongThucHanh.IdLinhVuc);
+            ViewData["IdLinhVuc"] = new SelectList(_context.DmLinhVucNghienCuus, "IdLinhVucNghienCuu", "LinhVucNghienCuu", tbPhongThucHanh.IdLinhVuc);
             return View(tbPhongThucHanh);
         }
 

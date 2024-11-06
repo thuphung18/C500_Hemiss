@@ -3,34 +3,103 @@
 @{
     ViewData["Title"] = "Details";
 }
+@section Heads
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-<h1>Details</h1>
 
-<div>
-    <h4>TbNgonNguGiangDay</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNgonNguNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNgonNguNavigation.IdNgoaiNgu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTrinhDoNgonNguDauVaoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTrinhDoNgonNguDauVaoNavigation.IdKhungNangLucNgoaiNgu)
-        </dd>
-    </dl>
+}
+
+<!-- Thêm container để căn giữa nội dung -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <h1 class="text-center" style="text-align:center;margin-bottom:20px;color:royalblue;font-size:50px;font-family:Arial"><b>Chi Tiết</b></h1>
+
+            <!-- Tiêu đề -->
+            <!-- Dùng Bootstrap để tạo bảng hiển thị chi tiết -->
+            <div class="row justify-content-center">
+                <div class="card mt-4 p-4" style="border:3px solid royalblue;padding: 20px; border-radius: 8px; box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th class="text-start col-6">
+                                    @Html.DisplayNameFor(model => model.IdChuongTrinhDaoTaoNavigation)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.IdChuongTrinhDaoTao)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="text-start col-6">
+                                    @Html.DisplayNameFor(model => model.IdNgonNguNavigation)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.IdNgonNguNavigation.IdNgoaiNgu)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="text-start col-6">
+                                    @Html.DisplayNameFor(model => model.IdTrinhDoNgonNguDauVaoNavigation)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.IdTrinhDoNgonNguDauVaoNavigation.IdKhungNangLucNgoaiNgu)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Các nút bấm -->
+                <form asp-action="Edit" asp-route-id="@Model?.IdNgonNguGiangDay" method="get" class="mt-4">
+                    <input type="hidden" asp-for="IdNgonNguGiangDay" />
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-pencil-alt"></i>Chỉnh Sửa
+                        </button>
+                        <a asp-action="Index" class="btn btn-primary">
+                            <i class="fa-solid fas fa-chevron-left">
+                            </i>
+                            Quay lại
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+
+
+
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdNgonNguGiangDay">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    th, td, tr {
+        border: 2px solid blue; /* Đổi màu viền của các ô thành màu đỏ */
+        padding: 8px;
+        text-align: center;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px); /* Nổi lên khi hover */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng đổ */
+    }
+
+    .btn {
+        border-radius: 20px; /* Bo góc nút */
+        transition: all 0.3s ease; /* Hiệu ứng chuyển động cho nút */
+    }
+
+    body {
+        /* Thiết lập màu nền đơn giản bằng mã RGB (màu hồng nhạt) */
+        background: rgb(238,174,202);
+        /* Thiết lập nền gradient từ màu hồng nhạt ở trên cùng xuống màu xanh nhạt ở dưới cùng */
+        background: linear-gradient(0deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        /* Đặt khoảng cách ngoài cho phần tử bằng 0, không có khoảng trống xung quanh */
+        margin: 0;
+        /* Đặt chiều cao của phần tử bằng 100% chiều cao của khung nhìn */
+        height: 100vh;
+        /* Thiết lập font chữ cho nội dung là Arial, nếu không có thì dùng font sans-serif mặc định */
+        font-family: Arial, sans-serif;
+    }
+</style>

@@ -3,43 +3,84 @@
 @{
     ViewData["Title"] = "Create";
 }
+@* // Thêm thư viện // *@
+@section Heads
+{
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-<h1>Create</h1>
 
-<h4>TbNgonNguGiangDay</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdNgonNguGiangDay" class="control-label"></label>
-                <input asp-for="IdNgonNguGiangDay" class="form-control" />
-                <span asp-validation-for="IdNgonNguGiangDay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
-                <select asp-for="IdChuongTrinhDaoTao" class ="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNgonNgu" class="control-label"></label>
-                <select asp-for="IdNgonNgu" class ="form-control" asp-items="ViewBag.IdNgonNgu"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdTrinhDoNgonNguDauVao" class="control-label"></label>
-                <select asp-for="IdTrinhDoNgonNguDauVao" class ="form-control" asp-items="ViewBag.IdTrinhDoNgonNguDauVao"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<h1 style="text-align:center;margin-bottom:20px;color:dodgerblue;font-size:50px"><b>Tạo mới</b></h1>
+
+<hr />
+<body>
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-md-4">
+            @* /* Khoảng cách 20px giữa nội dung và viền */ *@
+            @* /* Viền dày 2px, màu đen */ *@
+            @* /* Góc viền được làm tròn với bán kính 8px */ *@
+            @* /* Bóng đổ với độ dịch chuyển và độ mờ nhất định */ *@
+            <form asp-action="Create" style="margin-top:20px; padding: 20px; border: 2px solid black; border-radius: 8px;  box-shadow: 10px 10px 15px 5px rgba(0, 0, 0, 0.5);">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdNgonNguGiangDay" class="control-label"></label>
+                    <input asp-for="IdNgonNguGiangDay" class="form-control" />
+                    <span asp-validation-for="IdNgonNguGiangDay" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdChuongTrinhDaoTao" class="control-label"></label>
+                    <select asp-for="IdChuongTrinhDaoTao" class="form-control" asp-items="ViewBag.IdChuongTrinhDaoTao"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdNgonNgu" class="control-label"></label>
+                    <select asp-for="IdNgonNgu" class="form-control" asp-items="ViewBag.IdNgonNgu"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdTrinhDoNgonNguDauVao" class="control-label"></label>
+                    <select asp-for="IdTrinhDoNgonNguDauVao" class="form-control" asp-items="ViewBag.IdTrinhDoNgonNguDauVao"></select>
+                </div>
+                @* Các nút bấm *@
+                <div class="d-flex justify-content-between mt-4">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> Lưu Lại
+                        </button>
+                    </div>
+                    <div>
+                        <a class="btn btn-primary" asp-action="Index">
+                            <i class="fa-solid fas fa-chevron-left" style="margin-right:5px"></i>Quay lại
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<style>
+    .btn:hover {
+        transform: translateY(-5px); /* Nổi lên khi hover */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Tạo bóng đổ */
+    }
+
+    .btn {
+        border-radius: 20px; /* Bo góc nút */
+        transition: all 0.3s ease; /* Hiệu ứng chuyển động cho nút */
+    }
+    body{
+        /* Thiết lập màu nền đơn giản bằng mã RGB (màu hồng nhạt) */
+        background: rgb(238,174,202);
+        /* Thiết lập nền gradient từ màu hồng nhạt ở trên cùng xuống màu xanh nhạt ở dưới cùng */
+        background: linear-gradient(0deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        /* Đặt khoảng cách ngoài cho phần tử bằng 0, không có khoảng trống xung quanh */
+        margin: 0;
+        /* Đặt chiều cao của phần tử bằng 100% chiều cao của khung nhìn */
+        height: 100vh;
+        /* Thiết lập font chữ cho nội dung là Arial, nếu không có thì dùng font sans-serif mặc định */
+        font-family: Arial, sans-serif;
+    }
+</style>

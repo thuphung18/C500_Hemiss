@@ -1,17 +1,19 @@
 ﻿@model C500Hemis.Models.TbThanhPhanThamGiaDoanCongTac
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Sửa"; // Tiêu đề trang
 }
 
-<h1>Edit</h1>
+<h1 class="title"><strong>Sửa</strong></h1>
+
+<h4 style="text-align: center;"><strong>Thành phần tham gia công tác</strong></h4>
 <style>
     div {
         margin: auto
     }
 
     body {
-        background-color: #05c46b;
+        background-color: rgb(201, 233, 210);
         font-family: Verdana;
     }
 
@@ -33,6 +35,7 @@
 
     h1, h4 {
         text-align: center;
+        color: rgb(21, 179, 146);
     }
 
     .form-group {
@@ -64,40 +67,88 @@
         .btn-primary:hover {
             background-color: #048a55;
         }
+
+    /* Kiểu cho nút lưu */
+    .btn-primary {
+        width: 100%;
+        padding: 14px; /* Tăng kích thước nút */
+        background-color: #28a745;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px; /* Tăng kích thước chữ cho nút */
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            transform: scale(1.02);
+        }
+
+    /* Kiểu cho nút quay lại */
+    .btn-red {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #ff4757;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .btn-red:hover {
+            background-color: #ff6b81;
+            transform: scale(1.02);
+        }
 </style>
-<h4>TbThanhPhanThamGiaDoanCongTac</h4>
-<hr />
+
 <div class="row">
     <div class="col-md-4">
+        <!-- Cột chứa form -->
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdThanhPhanThamGiaDoanCongTac" />
+            <!-- Form gửi đến hành động "Edit" -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Hiển thị thông báo lỗi nếu có -->
+            <input type="hidden" asp-for="IdThanhPhanThamGiaDoanCongTac" /> <!-- Truyền ID thành phần tham gia -->
+            <!-- Trường cho Mã đoàn công tác -->
             <div class="form-group">
-                <label asp-for="IdDoanCongTac" class="control-label"></label>
+                <label asp-for="IdDoanCongTac" class="control-label">Mã đoàn công tác</label>
                 <select asp-for="IdDoanCongTac" class="form-control" asp-items="ViewBag.IdDoanCongTac"></select>
-                <span asp-validation-for="IdDoanCongTac" class="text-danger"></span>
+                <span asp-validation-for="IdDoanCongTac" class="text-danger"></span> <!-- Hiển thị thông báo lỗi -->
             </div>
+
+            <!-- Trường cho Mã cán bộ -->
             <div class="form-group">
-                <label asp-for="IdCanBo" class="control-label"></label>
+                <label asp-for="IdCanBo" class="control-label">Tên cán bộ</label>
                 <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
-                <span asp-validation-for="IdCanBo" class="text-danger"></span>
+                <span asp-validation-for="IdCanBo" class="text-danger"></span> <!-- Hiển thị thông báo lỗi -->
             </div>
+
+            <!-- Trường cho Vai trò tham gia -->
             <div class="form-group">
-                <label asp-for="IdVaiTroThamGia" class="control-label"></label>
+                <label asp-for="IdVaiTroThamGia" class="control-label">Vai trò tham gia</label>
                 <select asp-for="IdVaiTroThamGia" class="form-control" asp-items="ViewBag.IdVaiTroThamGia"></select>
-                <span asp-validation-for="IdVaiTroThamGia" class="text-danger"></span>
+                <span asp-validation-for="IdVaiTroThamGia" class="text-danger"></span> <!-- Hiển thị thông báo lỗi -->
             </div>
+
+            <!-- Nút gửi form -->
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" /> <!-- Nút lưu -->
             </div>
+
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div style="text-align: center;">
+    <a asp-action="Index" class="btn btn-red">Quay lại danh sách</a> <!-- Nút quay lại danh sách -->
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial"); // Kết nối với các script kiểm tra xác thực
+    }
 }

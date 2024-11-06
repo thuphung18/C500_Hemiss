@@ -4,48 +4,179 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xóa Phòng Thí Nghiệm</title>
+    <style>
+        footer {
+            display: none;
+        }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbPhongThiNghiem</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDoDapUngNhuCauNckh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamDuaVaoSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCongTrinhCsvcNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLinhVucNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiPhongThiNghiemNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdPhongThiNghiem" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #e3f2fd; /* Nền xanh dương nhạt */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Giới hạn chiều rộng và căn giữa trang */
+        .wrapper {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+            /* Hiệu ứng làm mờ nền */
+            .wrapper::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('https://hocvienanninh.com/public/kh/14102021/uploads/2021/18102021084227quang-truong-hoc-vien-an-ninh-0-0857.jpg') no-repeat center center;
+                background-size: cover;
+                filter: blur(8px);
+                z-index: -1;
+                opacity: 0.5;
+            }
+
+            /* Hiệu ứng hover cho wrapper */
+            .wrapper:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                font-size: 2.5em;
+                color: #007bff; /* Màu xanh chủ đạo */
+                position: relative; /* Để áp dụng hiệu ứng underline */
+                display: inline-block; /* Để đường gạch chân được căn chỉnh đúng */
+            }
+
+                .header h1::after {
+                    content: '';
+                    display: block;
+                    height: 3px; /* Độ dày của đường gạch chân */
+                    background: #007bff; /* Màu của đường gạch chân */
+                    width: 0; /* Bắt đầu với chiều rộng 0 */
+                    transition: width 0.3s ease; /* Hiệu ứng chuyển tiếp */
+                    position: absolute;
+                    bottom: -5px; /* Đặt đường gạch chân dưới tiêu đề */
+                    left: 0;
+                    margin: 0 auto; /* Căn giữa underline */
+                }
+
+                .header h1:hover::after {
+                    width: 100%; /* Mở rộng chiều rộng đến 100% khi hover */
+                }
+
+            .header p {
+                font-size: 1.2em;
+                color: #555;
+            }
+        .details h4 {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .details dt {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .details dd {
+            margin-bottom: 15px;
+        }
+
+        .action-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .action-links input {
+                background-color: #ff4d4d; /* Màu đỏ cho nút xóa */
+                border: none;
+                padding: 10px 20px;
+                color: white;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                .action-links input:hover {
+                    background-color: #ff3333; /* Màu đỏ đậm khi hover */
+                }
+
+            .action-links a {
+                text-decoration: none;
+                color: #007bff; /* Màu xanh cho liên kết */
+                padding: 5px 10px;
+                border: 1px solid #007bff;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+                .action-links a:hover {
+                    background-color: #007bff;
+                    color: white; /* Đổi màu chữ khi hover */
+                }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: #007bff; /* Đường viền xanh cho hr */
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Xóa Phòng Thí Nghiệm</h1>
+            <p>Bạn có chắc chắn muốn xóa không?</p>
+        </div>
+        <div class="details">
+            <h4>Thông Tin Phòng Thí Nghiệm</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">Mức Độ Đáp Ứng NCKH</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.MucDoDapUngNhuCauNckh)</dd>
+
+                <dt class="col-sm-4">Năm Đưa Vào Sử Dụng</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NamDuaVaoSuDung)</dd>
+
+                <dt class="col-sm-4">Công Trình CSVC</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdCongTrinhCsvcNavigation.IdCongTrinhCoSoVatChat)</dd>
+
+                <dt class="col-sm-4">Lĩnh Vực Nghiên Cứu</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdLinhVucNavigation.IdLinhVucNghienCuu)</dd>
+
+                <dt class="col-sm-4">Loại Phòng Thí Nghiệm</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdLoaiPhongThiNghiemNavigation.IdLoaiPhongThiNghiem)</dd>
+            </dl>
+        </div>
+        <div class="action-links">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdPhongThiNghiem" />
+                <input type="submit" value="Xóa" /> |
+                <a asp-action="Index">Trở lại danh sách</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
