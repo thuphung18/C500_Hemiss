@@ -2,94 +2,161 @@
 
 @{
     ViewData["Title"] = "Index";
+    var totalCount = Model.Count(); // Tổng số cán bộ
+    int i = 1;
 }
 
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<style>
+    /* Vùng header với nền trắng và chiều rộng bằng chiều rộng của bảng */
+    .header-container {
+        background-color: white;
+        padding: 20px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+    }
+    /* Định dạng bảng */
+    table {
+        border: 1px solid black; /* Đường viền bảng */
+        background-color: rgba(255, 255, 255, 0.2); /* Nền bảng với độ trong suốt */
+        border-radius: 0.5rem; /* Bo góc bảng */
+        overflow: hidden; /* Ẩn các phần thừa */
+        backdrop-filter: blur(5px); /* Thêm hiệu ứng làm mờ */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng cho bảng */
+    }
+
+    /* Định dạng thân bảng */
+    tbody tr:hover {
+        background-color: rgba(240, 240, 240, 0.5); /* Màu nền khi di chuột qua hàng */
+    }
+
+    body {
+        background-color: #f8f9fa; /* Màu nền cho body */
+        background-image: url('/images/ca7.jpg'); /* Hình nền */
+        background-size: cover; /* Hình nền phủ kín */
+        background-attachment: fixed; /* Hình nền cố định khi cuộn */
+    }
+
+    /* Định dạng các nút */
+    .button {
+        display: flex; /* Hiển thị linh hoạt */
+        align-items: center; /* Căn giữa icon và văn bản */
+        justify-content: center; /* Căn giữa nội dung */
+        width: 40px; /* Chiều rộng của nút */
+        height: 40px; /* Chiều cao của nút */
+        border-radius: 4px; /* Bo góc */
+        color: white; /* Màu chữ */
+        font-size: 20px; /* Kích thước biểu tượng */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+        text-decoration: none; /* Bỏ gạch chân */
+    }
+
+        .button:hover {
+            opacity: 0.9; /* Giảm độ mờ khi di chuột */
+        }
+
+    .search-button {
+        background-color: cadetblue; /* Màu nền cho nút tìm kiếm */
+        border: none; /* Bỏ viền */
+        padding: 8px 20px; /* Khoảng cách bên trong */
+        border-radius: 4px; /* Bo góc */
+        cursor: pointer; /* Con trỏ khi di chuột */
+        color: white; /* Màu chữ */
+        font-size: 16px; /* Kích thước chữ */
+        font-weight: bold; /* Đậm chữ */
+        text-align: center; /* Căn giữa chữ */
+        text-decoration: none; /* Bỏ gạch chân */
+        transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển màu nền và phóng to */
+    }
+
+        .search-button:hover {
+            background-color: darkcyan; /* Màu nền khi di chuột qua */
+            transform: scale(1.05); /* Phóng to một chút khi di chuột qua */
+        }
+
+    thead {
+        background-color: black; /* Màu nền cho phần đầu bảng */
+        color: white; /* Màu chữ cho phần đầu bảng */
+    }
+
+    .total-row {
+        font-weight: bold; /* Đậm chữ */
+        background-color: #f0f0f0; /* Màu nền cho hàng tổng */
+    }
+</style>
+
+<h1 class="text-center mb-4 header-container">PHỤ CẤP</h1>
+<form asp-controller="PhuCap" asp-action="Index" method="get" class="text-center mb-3">
+    <div class="input-group">
+        <input type="number" name="Search" placeholder="Tìm kiếm theo ID cán bộ" class="form-control" />
+        <button class="search-button" type="submit">Tìm kiếm</button>
+    </div>
+</form>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="button" style="width: 100px; color: black; background-color: cornflowerblue;" asp-action="Create">Tạo mới</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapThuHutNghe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapThamNien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapUuDaiNghe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapChucVu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapDocHai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhuCapKhac)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhanTramVuotKhung)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayThangNamHuongLuong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdBacLuongNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCanBoNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdHeSoLuongNavigation)
-            </th>
-            <th></th>
+            <th>STT</th>
+            <th>Cán Bộ</th>
+            <th>Phụ cấp</th>
+            <th>Phụ cấp thu hút nghề</th>
+            <th>Phụ cấp thâm niên (%)</th>
+            <th>Phụ cấp ưu đãi nghề  (%)</th>
+            <th>Phụ cấp chức vụ  (%)</th>
+            <th>Phụ cấp độc hại</th>
+            <th>Phụ cấp khác</th>
+            <th>Phần trăm vượt khung (%)</th>
+            <th>Ngày tháng năm hưởng lương</th>
+            <th>Bậc lương</th>
+            <th>Hệ số lương</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapThuHutNghe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapThamNien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapUuDaiNghe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapChucVu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapDocHai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhuCapKhac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhanTramVuotKhung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayThangNamHuongLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdBacLuongNavigation.IdBacLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCanBoNavigation.IdCanBo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHeSoLuongNavigation.IdHeSoLuong)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPhuCap">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdPhuCap">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPhuCap">Delete</a>
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr onclick="location.href='@Url.Action("Details", "PhuCap", new { id = item.IdPhuCap })'">
+                <td>@i</td>
+                <td>@Html.DisplayFor(modelItem => item.IdCanBo)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdPhuCap)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapThuHutNghe)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapThamNien)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapUuDaiNghe)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapChucVu)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapDocHai)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhuCapKhac)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhanTramVuotKhung)</td>
+                <td>@Html.DisplayFor(modelItem => item.NgayThangNamHuongLuong)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdBacLuongNavigation.BacLuong)</td>
+                <td>@Html.DisplayFor(modelItem => item.IdHeSoLuongNavigation.HeSoLuong)</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a class="button" style="background-color: yellowgreen" asp-action="Edit" asp-route-id="@item.IdPhuCap">
+                            <i class="fas fa-edit"></i> <!-- Biểu tượng chỉnh sửa -->
+                        </a>
+                        <a class="button" style="background-color: indianred" asp-action="Delete" asp-route-id="@item.IdPhuCap">
+                            <i class="fas fa-trash-alt"></i> <!-- Biểu tượng xóa -->
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+        <tr class="total-row">
+            <td colspan="13" style="text-align: right;">Tổng số cán bộ:</td>
+            <td>@totalCount</td>
         </tr>
-}
     </tbody>
+
 </table>
