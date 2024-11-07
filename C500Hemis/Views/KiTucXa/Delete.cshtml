@@ -1,63 +1,105 @@
 ﻿@model C500Hemis.Models.TbKiTucXa
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "XÓA";
 }
+@*Dương Minh Vũ*@
+<h1>Xóa Thông Tin Kí Túc Xá</h1>
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbKiTucXa</h4>
+<div class="form-container">
+    <h4>Thông tin Kí Túc Xá</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaKyTucxa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaKyTucxa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongChoO)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongChoO)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongDienTich)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongDienTich)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoPhong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoPhong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamDuaVaoSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamDuaVaoSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHinhThucSoHuuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTinhTrangCsvcNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTinhTrangCsvcNavigation.IdTinhTrangCoSoVatChat)
-        </dd>
-    </dl>
-    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.MaKyTucxa):</th>
+                <td>@Html.DisplayFor(model => model.MaKyTucxa)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdHinhThucSoHuu):</th>
+                <td>@Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.HinhThucSoHuu)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.TongChoO):</th>
+                <td>@Html.DisplayFor(model => model.TongChoO)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.TongDienTich):</th>
+                <td>@Html.DisplayFor(model => model.TongDienTich)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdTinhTrangCsvc):</th>
+                <td>@Html.DisplayFor(model => model.IdTinhTrangCsvcNavigation.TinhTrangCoSoVatChat)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SoPhong):</th>
+                <td>@Html.DisplayFor(model => model.SoPhong)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NamDuaVaoSuDung):</th>
+                <td>@Html.DisplayFor(model => model.NamDuaVaoSuDung)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group text-center" style="margin-top: 20px">
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdKiTucXa" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Xóa" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
     </form>
 </div>
+
+<head>
+    <style>
+        body {
+            background-color: lightblue; /* Màu nền nhẹ cho trang */
+        }
+
+        .form-container {
+            max-width: 600px; /* Đặt chiều rộng tối đa cho khung chứa biểu mẫu */
+            margin: auto; /* Căn giữa khung chứa */
+            padding: 20px; /* Thêm khoảng đệm cho khung chứa */
+            background-color: mintcream; /* Màu nền trắng cho khung chứa */
+            font-size: 20px;
+            border-radius: 10px; /* Bo góc cho khung chứa */
+            border: 3px solid black; /* Thêm đường viền cho các ô */
+            text-align: center; /* Căn giữa tiêu đề */
+        }
+
+        h1, h4 {
+            text-align: center; /* Căn giữa tiêu đề */
+        }
+
+        .btn {
+            display: inline-block; /* Để các nút xếp hàng ngang */
+            padding: 10px 20px; /* Khoảng đệm cho nút */
+            border-radius: 5px; /* Bo góc cho nút */
+            font-size: 16px; /* Kích thước font cho nút */
+            text-decoration: none; /* Bỏ gạch chân cho liên kết */
+            transition: background-color 0.3s, border-color 0.3s; /* Hiệu ứng chuyển màu nền và đường viền */
+            margin: 5px; /* Khoảng cách giữa các nút */
+        }
+
+        .btn-primary {
+            background-color: #dc3545; /* Màu nền cho nút xóa */
+            color: white; /* Màu chữ cho nút xóa */
+            border: none; /* Không có đường viền */
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3; /* Màu nền khi di chuột qua */
+            }
+
+        .btn-secondary {
+            background-color: dodgerblue; /* Màu nền cho nút quay lại */
+            color: white; /* Màu chữ cho nút quay lại */
+            border: none; /* Không có đường viền */
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268; /* Màu nền khi di chuột qua */
+            }
+    </style>
+</head>

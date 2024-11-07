@@ -51,8 +51,8 @@ namespace C500Hemis.Controllers.HTQT
         /// <returns></returns> 
         public IActionResult Create()
         {
-            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "IdPhanLoaiDoanRaDoanVao");
-            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich");
+            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "PhanLoaiDoanRaDoanVao");
+            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc");
             return View();
         }
 
@@ -63,33 +63,59 @@ namespace C500Hemis.Controllers.HTQT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdDoanCongTac,MaDoanCongTac,IdPhanLoaiDoanRaDoanVao,TenDoanCongTac,SoQuyetDinh,NgayQuyetDinh,IdQuocGiaDoan,ThoiGianBatDau,ThoiGianketThuc,MucDichCongTac,KetQuaCongTac")] TbDoanCongTac tbDoanCongTac)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbDoanCongTac);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbDoanCongTac);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "PhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
+
+                ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbDoanCongTac.IdQuocGiaDoan);
+                return View(tbDoanCongTac);
             }
-            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "IdPhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
-            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbDoanCongTac.IdQuocGiaDoan);
-            return View(tbDoanCongTac);
+            catch (DbUpdateException dbEx)
+            {
+                // Lỗi liên quan đến cơ sở dữ liệu như khóa chính, khóa ngoại
+                ModelState.AddModelError("", "Không thể lưu dữ liệu vào cơ sở dữ liệu: " + dbEx.Message);
+                return View(tbDoanCongTac);
+            }
+            catch (Exception ex)
+            {
+                // Lỗi chung chung khác
+                return BadRequest();
+            }
         }
+
+
 
         // GET: TbDoanCongTacs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var tbDoanCongTac = await _context.TbDoanCongTacs.FindAsync(id);
+                if (tbDoanCongTac == null)
+                {
+                    return NotFound();
+                }
+                ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "PhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
+                ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbDoanCongTac.IdQuocGiaDoan);
+                return View(tbDoanCongTac);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
             }
 
-            var tbDoanCongTac = await _context.TbDoanCongTacs.FindAsync(id);
-            if (tbDoanCongTac == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "IdPhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
-            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbDoanCongTac.IdQuocGiaDoan);
-            return View(tbDoanCongTac);
         }
 
         // POST: TbDoanCongTacs/Edit/5
@@ -124,29 +150,38 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "IdPhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
-            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbDoanCongTac.IdQuocGiaDoan);
+            ViewData["IdPhanLoaiDoanRaDoanVao"] = new SelectList(_context.DmPhanLoaiDoanRaDoanVaos, "IdPhanLoaiDoanRaDoanVao", "PhanLoaiDoanRaDoanVao", tbDoanCongTac.IdPhanLoaiDoanRaDoanVao);
+            ViewData["IdQuocGiaDoan"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbDoanCongTac.IdQuocGiaDoan);
             return View(tbDoanCongTac);
         }
 
         // GET: TbDoanCongTacs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var tbDoanCongTac = await _context.TbDoanCongTacs
+                    .Include(t => t.IdPhanLoaiDoanRaDoanVaoNavigation)
+                    .Include(t => t.IdQuocGiaDoanNavigation)
+                    .FirstOrDefaultAsync(m => m.IdDoanCongTac == id);
+                if (tbDoanCongTac == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbDoanCongTac);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu xảy ra ngoại lệ
+                return BadRequest();
             }
 
-            var tbDoanCongTac = await _context.TbDoanCongTacs
-                .Include(t => t.IdPhanLoaiDoanRaDoanVaoNavigation)
-                .Include(t => t.IdQuocGiaDoanNavigation)
-                .FirstOrDefaultAsync(m => m.IdDoanCongTac == id);
-            if (tbDoanCongTac == null)
-            {
-                return NotFound();
-            }
-
-            return View(tbDoanCongTac);
         }
 
         // POST: TbDoanCongTacs/Delete/5

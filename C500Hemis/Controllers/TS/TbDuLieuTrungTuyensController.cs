@@ -1,7 +1,8 @@
 ﻿using C500Hemis.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace C500Hemis.Controllers.TS
 {
@@ -17,307 +18,250 @@ namespace C500Hemis.Controllers.TS
         // GET: TbDuLieuTrungTuyens
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbDuLieuTrungTuyens.Include(t => t.IdDoiTuongDauVaoNavigation).Include(t => t.IdDoiTuongUuTienNavigation).Include(t => t.IdHinhThucTuyenSinhNavigation).Include(t => t.IdKhuVucNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                var hemisContext = _context.TbDuLieuTrungTuyens.Include(t => t.IdDoiTuongDauVaoNavigation).Include(t => t.IdDoiTuongUuTienNavigation).Include(t => t.IdHinhThucTuyenSinhNavigation).Include(t => t.IdKhuVucNavigation);
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi khi tải danh sách dữ liệu trúng tuyển: " + ex.Message);
+                return View();
+            }
         }
 
         // GET: TbDuLieuTrungTuyens/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens
-                .Include(t => t.IdDoiTuongDauVaoNavigation)
-                .Include(t => t.IdDoiTuongUuTienNavigation)
-                .Include(t => t.IdHinhThucTuyenSinhNavigation)
-                .Include(t => t.IdKhuVucNavigation)
-                .FirstOrDefaultAsync(m => m.IdDuLieuTrungTuyen == id);
-            if (tbDuLieuTrungTuyen == null)
+                var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens
+                    .Include(t => t.IdDoiTuongDauVaoNavigation)
+                    .Include(t => t.IdDoiTuongUuTienNavigation)
+                    .Include(t => t.IdHinhThucTuyenSinhNavigation)
+                    .Include(t => t.IdKhuVucNavigation)
+                    .FirstOrDefaultAsync(m => m.IdDuLieuTrungTuyen == id);
+
+                if (tbDuLieuTrungTuyen == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbDuLieuTrungTuyen);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Lỗi khi tải chi tiết dữ liệu trúng tuyển: " + ex.Message);
+                return BadRequest();
             }
-
-            return View(tbDuLieuTrungTuyen);
         }
 
         // GET: TbDuLieuTrungTuyens/Create
         public IActionResult Create()
         {
-            // Thêm thủ công giá trị cho IdDoiTuongDauVao
-            var doiTuongDauVaoList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
-        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
-        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
-        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
-        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
-        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
-        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
-        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
-        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
-    };
-            ViewData["IdDoiTuongDauVao"] = new SelectList(doiTuongDauVaoList, "Value", "Text");
-
-            // Thêm thủ công giá trị cho IdDoiTuongUuTien
-            var doiTuongUuTienList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
-        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
-        // Thêm các giá trị khác nếu cần
-    };
-            ViewData["IdDoiTuongUuTien"] = new SelectList(doiTuongUuTienList, "Value", "Text");
-
-            // Thêm thủ công giá trị cho IdHinhThucTuyenSinh
-            var hinhThucTuyenSinhList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
-        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
-        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
-        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
-        // Thêm các giá trị khác nếu cần
-    };
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(hinhThucTuyenSinhList, "Value", "Text");
-
-            // Thêm thủ công giá trị cho IdKhuVuc
-            var khuVucList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
-        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
-        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
-        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
-        // Thêm các giá trị khác nếu cần
-    };
-            ViewData["IdKhuVuc"] = new SelectList(khuVucList, "Value", "Text");
-
-            return View();
+            try
+            {
+                ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao");
+                ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien");
+                ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh");
+                ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi khi tải form tạo mới: " + ex.Message);
+                return BadRequest();
+            }
         }
-
 
         // POST: TbDuLieuTrungTuyens/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Create([Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Tính tổng điểm xét tuyển
-                tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+                // Kiểm tra các trường bắt buộc
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.Cccd))
+                {
+                    ModelState.AddModelError("Cccd", "Số CCCD/ Hộ chiếu là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.HoVaTen))
+                {
+                    ModelState.AddModelError("HoVaTen", "Họ và tên là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.MaTuyenSinh))
+                {
+                    ModelState.AddModelError("MaTuyenSinh", "Mã tuyển sinh là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.KhoaDaoTaoTrungTuyen))
+                {
+                    ModelState.AddModelError("KhoaDaoTaoTrungTuyen", "Mã chương trình đào tạo là bắt buộc.");
+                }
 
-                _context.Add(tbDuLieuTrungTuyen);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+                    _context.Add(tbDuLieuTrungTuyen);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+                ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+                ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+                ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+                return View(tbDuLieuTrungTuyen);
             }
-            // Nếu ModelState không hợp lệ, gán thủ công giá trị cho dropdowns
+            catch (Exception ex)
+            {
+                var errorMessage = "Lỗi khi tạo dữ liệu trúng tuyển: ";
+                if (ex.InnerException != null)
+                {
+                    string innerMessage = ex.InnerException.Message;
 
-            // Gán thủ công giá trị cho IdDoiTuongDauVao
-            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
-        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
-        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
-        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
-        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
-        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
-        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
-        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
-        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+                    if (innerMessage.Contains("PRIMARY KEY constraint"))
+                    {
+                        errorMessage += "Vi phạm ràng buộc khóa chính. ID dữ liệu trúng tuyển đã tồn tại. Vui lòng nhập ID khác.";
+                    }
+                    else if (innerMessage.Contains("UNIQUE constraint failed"))
+                    {
+                        errorMessage += "Dữ liệu đã tồn tại. Vui lòng kiểm tra lại.";
+                    }
+                    else if (innerMessage.Contains("Cannot insert NULL"))
+                    {
+                        errorMessage += "Một trường dữ liệu bắt buộc đang bị để trống. Vui lòng kiểm tra lại.";
+                    }
+                    else if (innerMessage.Contains("FOREIGN KEY constraint failed"))
+                    {
+                        errorMessage += "Không thể tạo dữ liệu do lỗi ràng buộc khóa ngoại. Vui lòng kiểm tra lại các trường liên kết.";
+                    }
+                    else
+                    {
+                        errorMessage += innerMessage;
+                    }
+                }
+                else
+                {
+                    errorMessage += ex.Message;
+                }
 
-            // Gán thủ công giá trị cho IdDoiTuongUuTien
-            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
-        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-
-            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
-        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
-        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
-        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-
-            // Gán thủ công giá trị cho IdKhuVuc
-            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
-        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
-        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
-        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
-
-            return View(tbDuLieuTrungTuyen);
+                ModelState.AddModelError("", errorMessage);
+                return View(tbDuLieuTrungTuyen);
+            }
         }
-
 
         // GET: TbDuLieuTrungTuyens/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens.FindAsync(id);
-            if (tbDuLieuTrungTuyen == null)
+                var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens.FindAsync(id);
+                if (tbDuLieuTrungTuyen == null)
+                {
+                    return NotFound();
+                }
+                ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+                ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+                ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+                ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+                return View(tbDuLieuTrungTuyen);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Lỗi khi tải form chỉnh sửa: " + ex.Message);
+                return BadRequest();
             }
-
-            // Gán thủ công giá trị cho IdDoiTuongDauVao
-            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
-        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
-        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
-        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
-        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
-        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
-        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
-        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
-        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-
-            // Gán thủ công giá trị cho IdDoiTuongUuTien
-            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
-        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-
-            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
-        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
-        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
-        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-
-            // Gán thủ công giá trị cho IdKhuVuc
-            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
-        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
-        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
-        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
-
-            return View(tbDuLieuTrungTuyen);
         }
-
 
         // POST: TbDuLieuTrungTuyens/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
+        public async Task<IActionResult> Edit(int id, [Bind("IdDuLieuTrungTuyen,Cccd,HoVaTen,MaTuyenSinh,KhoaDaoTaoTrungTuyen,IdDoiTuongDauVao,IdDoiTuongUuTien,IdHinhThucTuyenSinh,IdKhuVuc,TruongThpt,ToHopMonTrungTuyen,DiemMon1,DiemMon2,DiemMon3,DiemUuTien,TongDiemXetTuyen,SoQuyetDinhTrungTuyen,NgayBanHanhQuyetDinhTrungTuyen,ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc,NganhDaTotNghiepTrinhDoDaiHoc,ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi,NganhDaTotNghiepTrinhDoThacSi")] TbDuLieuTrungTuyen tbDuLieuTrungTuyen)
         {
-            if (id != tbDuLieuTrungTuyen.IdDuLieuTrungTuyen)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                // Kiểm tra các trường bắt buộc
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.Cccd))
                 {
-                    // Tính tổng điểm xét tuyển
-                    tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
+                    ModelState.AddModelError("Cccd", "Số CCCD/ Hộ chiếu là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.HoVaTen))
+                {
+                    ModelState.AddModelError("HoVaTen", "Họ và tên là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.MaTuyenSinh))
+                {
+                    ModelState.AddModelError("MaTuyenSinh", "Mã tuyển sinh là bắt buộc.");
+                }
+                if (string.IsNullOrWhiteSpace(tbDuLieuTrungTuyen.KhoaDaoTaoTrungTuyen))
+                {
+                    ModelState.AddModelError("KhoaDaoTaoTrungTuyen", "Mã chương trình đào tạo là bắt buộc.");
+                }
 
+                if (id != tbDuLieuTrungTuyen.IdDuLieuTrungTuyen)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    tbDuLieuTrungTuyen.TongDiemXetTuyen = tbDuLieuTrungTuyen.DiemMon1 + tbDuLieuTrungTuyen.DiemMon2 + tbDuLieuTrungTuyen.DiemMon3 + tbDuLieuTrungTuyen.DiemUuTien;
                     _context.Update(tbDuLieuTrungTuyen);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbDuLieuTrungTuyenExists(tbDuLieuTrungTuyen.IdDuLieuTrungTuyen))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                ViewData["IdDoiTuongDauVao"] = new SelectList(_context.DmDoiTuongDauVaos, "IdDoiTuongDauVao", "DoiTuongDauVao", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
+                ViewData["IdDoiTuongUuTien"] = new SelectList(_context.DmDoiTuongUuTiens, "IdDoiTuongUuTien", "DoiTuongUuTien", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
+                ViewData["IdHinhThucTuyenSinh"] = new SelectList(_context.DmHinhThucTuyenSinhs, "IdHinhThucTuyenSinh", "HinhThucTuyenSinh", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
+                ViewData["IdKhuVuc"] = new SelectList(_context.DmKhuVucs, "IdKhuVuc", "KhuVuc", tbDuLieuTrungTuyen.IdKhuVuc);
+                return View(tbDuLieuTrungTuyen);
             }
-            // Nếu ModelState không hợp lệ, hiển thị lại form cùng với các dropdown đã chọn trước đó
-            // Gán thủ công giá trị cho IdDoiTuongDauVao
-            ViewData["IdDoiTuongDauVao"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tốt nghiệp Trung học phổ thông" },
-        new SelectListItem { Value = "2", Text = "2 - Tốt nghiệp Trung cấp" },
-        new SelectListItem { Value = "3", Text = "3 - Tốt nghiệp Cao đẳng" },
-        new SelectListItem { Value = "4", Text = "4 - Tốt nghiệp Đại học" },
-        new SelectListItem { Value = "5", Text = "5 - Thạc sĩ" },
-        new SelectListItem { Value = "6", Text = "6 - Tiến sĩ" },
-        new SelectListItem { Value = "7", Text = "7 - Cử tuyển" },
-        new SelectListItem { Value = "8", Text = "8 - Dự bị" },
-        new SelectListItem { Value = "9", Text = "9 - Tuyển thẳng" }
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongDauVao);
-
-            // Gán thủ công giá trị cho IdDoiTuongUuTien
-            ViewData["IdDoiTuongUuTien"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Nhóm ưu tiên 1" },
-        new SelectListItem { Value = "2", Text = "2 - Nhóm ưu tiên 2" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdDoiTuongUuTien);
-
-            // Gán thủ công giá trị cho IdHinhThucTuyenSinh
-            ViewData["IdHinhThucTuyenSinh"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Tuyển sinh theo hình thức khác" },
-        new SelectListItem { Value = "2", Text = "2 - Tuyển sinh xét theo kết quả thi THPT" },
-        new SelectListItem { Value = "3", Text = "3 - Tuyển sinh xét học bạ" },
-        new SelectListItem { Value = "4", Text = "4 - Tuyển thẳng" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdHinhThucTuyenSinh);
-
-            // Gán thủ công giá trị cho IdKhuVuc
-            ViewData["IdKhuVuc"] = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Value = "1", Text = "1 - Khu vực 1" },
-        new SelectListItem { Value = "2", Text = "2 - Khu vực 2" },
-        new SelectListItem { Value = "3", Text = "3 - Khu vực 2NT" },
-        new SelectListItem { Value = "4", Text = "4 - Khu vực 3" }
-        // Thêm các giá trị khác nếu cần
-    }, "Value", "Text", tbDuLieuTrungTuyen.IdKhuVuc);
-
-            return View(tbDuLieuTrungTuyen);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi khi chỉnh sửa dữ liệu trúng tuyển: " + ex.Message);
+                return View(tbDuLieuTrungTuyen);
+            }
         }
-
-
+    
         // GET: TbDuLieuTrungTuyens/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens
-                .Include(t => t.IdDoiTuongDauVaoNavigation)
-                .Include(t => t.IdDoiTuongUuTienNavigation)
-                .Include(t => t.IdHinhThucTuyenSinhNavigation)
-                .Include(t => t.IdKhuVucNavigation)
-                .FirstOrDefaultAsync(m => m.IdDuLieuTrungTuyen == id);
-            if (tbDuLieuTrungTuyen == null)
+                var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens
+                    .Include(t => t.IdDoiTuongDauVaoNavigation)
+                    .Include(t => t.IdDoiTuongUuTienNavigation)
+                    .Include(t => t.IdHinhThucTuyenSinhNavigation)
+                    .Include(t => t.IdKhuVucNavigation)
+                    .FirstOrDefaultAsync(m => m.IdDuLieuTrungTuyen == id);
+                if (tbDuLieuTrungTuyen == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbDuLieuTrungTuyen);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                ModelState.AddModelError("", "Lỗi khi tải thông tin xóa dữ liệu trúng tuyển: " + ex.Message);
+                return BadRequest();
             }
-
-            return View(tbDuLieuTrungTuyen);
         }
 
         // POST: TbDuLieuTrungTuyens/Delete/5
@@ -325,19 +269,29 @@ namespace C500Hemis.Controllers.TS
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens.FindAsync(id);
-            if (tbDuLieuTrungTuyen != null)
+            try
             {
-                _context.TbDuLieuTrungTuyens.Remove(tbDuLieuTrungTuyen);
-            }
+                var tbDuLieuTrungTuyen = await _context.TbDuLieuTrungTuyens.FindAsync(id);
+                if (tbDuLieuTrungTuyen == null)
+                {
+                    return NotFound();
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                _context.TbDuLieuTrungTuyens.Remove(tbDuLieuTrungTuyen);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi khi xóa dữ liệu trúng tuyển: " + ex.Message);
+                return BadRequest();
+            }
         }
 
         private bool TbDuLieuTrungTuyenExists(int id)
         {
             return _context.TbDuLieuTrungTuyens.Any(e => e.IdDuLieuTrungTuyen == id);
         }
+
     }
 }

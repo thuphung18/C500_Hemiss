@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
-
+//PHẠM XUÂN LONG LÀM VÀ COMMIT..
 public partial class TbDeAnDuAnChuongTrinh
 {
     public int IdDeAnDuAnChuongTrinh { get; set; }
@@ -17,12 +17,16 @@ public partial class TbDeAnDuAnChuongTrinh
 
     public string? MucTieu { get; set; }
     [DataType(DataType.Date)]
+
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+
+
     public DateOnly? ThoiGianHopTacTu { get; set; }
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
     public DateOnly? ThoiGianHopTacDen { get; set; }
 
+    [Range(0, double.MaxValue, ErrorMessage = "Nhập không đúng định dạng số")]
     public double? TongKinhPhi { get; set; }
 
     public int? IdNguonKinhPhiDeAnDuAnChuongTrinh { get; set; }

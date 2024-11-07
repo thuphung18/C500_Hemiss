@@ -3,51 +3,130 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+}
+<h1 style="text-align:center; color:darkred"><B>VĂN BẢN TỪ CHỮ</B></h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Tạo Văn Bản Mới
+    </a>
 </p>
-<table class="table">
+<style>
+ /* Đặt viền đen cho bảng */
+    .table {
+        border: 3px solid black; /* Viền đen cho bảng */
+        border-radius: 10px; /* Bo góc cho bảng */
+        border-collapse: separate; /* Để bo góc không bị ảnh hưởng */
+    }
+
+    .table th, .table td {
+            border: 2px solid black; /* Thêm viền đen cho các ô tiêu đề và dữ liệu */
+            padding: 10px;
+            text-align: center;
+    }
+    .table th {
+        background-color:darkolivegreen; /* Màu nền cho ô tiêu đề */
+        color: white; /* Màu chữ trắng cho ô tiêu đề */
+        text-align: center; /* Căn giữa nội dung */
+        font-weight: bold; /* Chữ đậm */
+    }
+    .table td {
+        background-color: #f9f9f9; /* Màu nền cho ô dữ liệu */
+        color: black; /* Màu chữ đen cho ô dữ liệu */
+        text-align: center; /* Căn giữa nội dung */
+    }
+    .table tbody tr:nth-child(odd) td {
+        background-color: #e6f7ff; /* Màu nền cho các ô dữ liệu ở hàng lẻ */
+    }
+    .table tbody tr:nth-child(even) td {
+        background-color: #fff2e6; /* Màu nền cho các ô dữ liệu ở hàng chẵn */
+    }
+    body{
+    background: pink;
+    }
+</style>
+@{
+    int stt = 0;
+}
+<table id="ntable" class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LoaiVanBan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoiDungVanBan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuyetDinhBanHanh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoQuanQuyetDinhBanHanh)
-            </th>
-            <th></th>
-        </tr>
+        <track style="text-align:center">
+    <th>STT</th>
+    <th>
+        LOẠI VĂN BẢN
+    </th>
+    <th>
+        NỘI DUNG VĂN BẢN
+    </th>
+    <th>
+        QUYẾT ĐỊNH BAN HÀNH
+    </th>
+    <th>
+        CƠ QUAN QUYẾT ĐỊNH
+    </th>
+    <th>
+        THAO TÁC
+    </th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiVanBan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDungVanBan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuyetDinhBanHanh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoQuanQuyetDinhBanHanh)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdVanBanTuChu">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdVanBanTuChu">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdVanBanTuChu">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++stt)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiVanBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoiDungVanBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuyetDinhBanHanh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoQuanQuyetDinhBanHanh)
+                </td>
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@item.IdVanBanTuChu" class="btn btn-sm btn-primary">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.IdVanBanTuChu" class="btn btn-sm btn-info">
+                            <i class="bi bi-info-circle"></i> Chi Tiết
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdVanBanTuChu" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script>
+
+    new DataTable('#ntable', {
+        searching: true, // Mặc định là true, set false để tắt chức năng search
+        info: true, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+        language: {
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Tổng cộng _TOTAL_ bản ghi",
+            zeroRecords: "không tìm thấy kết quả phù hợp",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+        },
+    });
+</script>

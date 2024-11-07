@@ -47,7 +47,8 @@ namespace C500Hemis.Controllers.TCTS
         // GET: HoatDongTaiChinh/Create
         public IActionResult Create()
         {
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh");
+            //Value = DmHoatDongTaiChinh.IdLoaiHoatDongTaiChinh text = DmHoatDongTaiChinh.HoatDongTaiChinh
+            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh");
             return View();
         }
 
@@ -58,13 +59,14 @@ namespace C500Hemis.Controllers.TCTS
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdHoatDongTaiChinh,IdLoaiHoatDongTaiChinh,NamTaiChinh,KinhPhi,NoiDung")] TbHoatDongTaiChinh tbHoatDongTaiChinh)
         {
+            if (TbHoatDongTaiChinhExists(tbHoatDongTaiChinh.IdHoatDongTaiChinh)) ModelState.AddModelError("IdHoatDongTaiChinh", "Đã tồn tại");
             if (ModelState.IsValid)
             {
                 _context.Add(tbHoatDongTaiChinh);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
+            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
             return View(tbHoatDongTaiChinh);
         }
 

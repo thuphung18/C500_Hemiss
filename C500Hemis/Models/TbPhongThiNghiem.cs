@@ -1,11 +1,13 @@
 ﻿using C500Hemis.Models.DM;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace C500Hemis.Models;
 
 public partial class TbPhongThiNghiem
 {
     [DisplayName("STT ")]
+    [Range(1, int.MaxValue, ErrorMessage = "STT phải là số dương.")]
     public int IdPhongThiNghiem { get; set; }
     [DisplayName("STT Công trình")]
 

@@ -9,11 +9,13 @@ public partial class TbHocVien
 {
     [Display(Name = "ID học viên")]
     public int IdHocVien { get; set; }
-    [Display(Name = "Mã học viên")]
 
+    [Display(Name = "Mã học viên")]
     public string? MaHocVien { get; set; }
+
     [Display(Name = "ID người")]
     public int? IdNguoi { get; set; }
+
     [Display(Name = "Email")]
     public string? Email { get; set; }
     [Display(Name = "Số điện thoại")]
