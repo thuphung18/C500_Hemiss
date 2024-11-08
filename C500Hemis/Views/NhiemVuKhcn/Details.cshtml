@@ -1,114 +1,342 @@
 ﻿@model C500Hemis.Models.TbNhiemVuKhcn
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Thông tin chi tiết ";
 }
 
-<h1>Details</h1>
+@section Heads {
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width:device-width, initial-scale=1" />
 
-<div>
-    <h4>TbNhiemVuKhcn</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoQuanChuTri)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoQuanChuTri)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NguoiChuTri)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NguoiChuTri)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThuocNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThuocNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TongKinhPhiCuaNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TongKinhPhiCuaNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianBatDau)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianBatDau)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianKetThuc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DanhGiaKetQuaNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DanhGiaKetQuaNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SanPhamChinhCuaNhiemVu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SanPhamChinhCuaNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapQuanLyNhiemVuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapQuanLyNhiemVuNavigation.IdPhanCapNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCoQuanChuQuanNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCoQuanChuQuanNavigation.IdCoQuanChuQuan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLinhVucNghienCuuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLinhVucNghienCuuNavigation.IdLinhVucNghienCuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNguonKinhPhiNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.IdNguonKinhPhi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhanLoaiNhiemVuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPhanLoaiNhiemVuNavigation.IdLoaiNhiemVu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdTinhTrangNhiemVuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdTinhTrangNhiemVuNavigation.IdTinhTrangNhiemVu)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdNhiemVuKhcn">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*Định dạng chung cho body*/
+        body {
+            font-family: "Pridi", serif; /*Phông chữ */
+            font-weight: 500; /*Độ dày của chữ */
+            font-style: normal; /*Kiểu chữ*/
+            background-color: rgb(212, 190, 228); /*Màu nền*/
+        }
+
+        /*ĐỊnh dạng cho khối container*/
+        .container {
+            justify-content: center; /*Nội dung ở giưã */
+            align-items: center; /*Căn chỉnh nằm giữa*/
+            padding: 20px;
+            font-weight: bold; /*In đậm chữ */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6); /*Chỉnh đổ bóng hiệu ứng cho lớp row */
+            border-radius: 25px; /*Bo viền cho lớp row */
+            background-color: white; /*Màu nền khối*/
+        }
+
+        /*Định dạng cho tiêu đề h1 */
+        h1 {
+            text-align: center; /*Căn giữa nội dung tiêu đề*/
+            color: purple; /*Màu chữ tiêu đề*/
+            font-family: "Pridi", serif; /*Phông chữ */
+            font-weight: 700; /*Độ dày của chữ */
+            font-style: normal; /*Kiểu chữ*/
+            margin-bottom: 30px; /*Chỉnh giữa cho tiêu đề*/
+        }
+
+
+        /*Định dạng cho tiêu đề h3*/
+        h3 {
+            text-align: center; /*Căn giữa nội dung */
+            font-family: "Pridi", serif; /*Phông chữ */
+            font-weight: 700; /*Độ dày của chữ */
+            font-style: normal; /*Kiểu chữ*/
+        }
+
+        /*Định dạng cho ảnh logo*/
+        img {
+            max-width: 150px; /*ĐỊnh dạng cho img */
+            display: block; /*Kiểu hiển thị */
+            margin: auto; /*Căn chỉnh khoảng cách tự động */
+        }
+
+        /*ĐỊnh dạng khối info-block
+                .info-block {
+                    margin-bottom: 25px;
+                } */
+
+        /*Định dạng cho khối row*/
+        .row {
+            display: flex; /*Kiểu hiển thị nổi lên */
+            justify-content: space-between; /**/
+            margin-bottom: 15px;
+            background-color: white; /*Màu nền*/
+        }
+
+        dt, dd {
+            flex: 1;
+            text-align: left;
+            margin: 0;
+        }
+
+        dt {
+            font-weight: bold;
+        }
+
+        dd {
+            text-align: right;
+        }
+
+
+        @@media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            dd {
+                text-align: center;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            dt, dd {
+                flex: none;
+            }
+        }
+
+        /*Định dạng chuyển màu khi nhấn nút Trở về */
+        .button_a_back:hover {
+            background-color: grey;
+            color: white;
+        }
+
+        /*Định dạng chuyển màu khi nhấn nút Cập nhật */
+        .button_a_edit:hover {
+            background-color: orange;
+            color: white;
+        }
+
+        /*Định dạng chuyển màu khi nhấn nút Xóa */
+        .button_a_del:hover {
+            background-color: red;
+            color: white;
+        }
+
+        /* Định dạng cho nút bấm*/
+        .button_a_back, .button_a_edit, .button_a_del {
+            border-style: solid;
+            border-width: 1px;
+            text-align: center;
+            padding: 10px 30px;
+            font-size: 15px;
+            text-decoration: none;
+            border-radius: 35px;
+            color: black;
+            font-weight: bold;
+            width: 50%;
+        }
+
+        /*Định dạng cho khối back*/
+        .back {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Canh giữa các nút trong div */
+            align-items: center;
+        }
+    </style>
+}
+
+
+
+<body>
+
+    <h1> <i class="fa fa-info-circle"></i> CHI TIẾT HỒ SƠ   </h1>
+
+    <div class="container">
+
+        <p style="text-align: center;">
+            <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Học viện An ninh nhân dân">
+        </p>
+
+        <h3>
+            Thông tin hồ sơ <p style="color:purple"> @Html.DisplayFor(model => model.MaNhiemVu)  </p>
+        </h3>
+
+
+        <hr />
+
+        <dl class="row" style="color:purple; font-weight:bold">
+            <dt>
+                Mã nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MaNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row" style="color:purple; font-weight:bold">
+            <dt>
+                Tên nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TenNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Cơ quan chủ trì:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CoQuanChuTri)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Người chủ trì:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NguoiChuTri)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Thuộc nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ThuocNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Tổng kinh phí của nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TongKinhPhiCuaNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row" style="color:purple; font-weight:bold">
+            <dt>
+                Thời gian bắt đầu:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ThoiGianBatDau)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Thời gian kết thúc:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ThoiGianKetThuc)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Đánh giá kết quả nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DanhGiaKetQuaNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Sản phẩm chính của nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SanPhamChinhCuaNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row" style="color:purple; font-weight:bold">
+            <dt>
+                Cấp quản lý của nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdCapQuanLyNhiemVuNavigation.PhanCapNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Cơ quan chủ quản:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdCoQuanChuQuanNavigation.CoQuanChuQuan)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Lĩnh vực nghiên cứu:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdLinhVucNghienCuuNavigation.LinhVucNghienCuu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Nguồn kinh phí:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.NguonKinhPhi)
+            </dd>
+        </dl>
+
+        <dl class="row" style="color:purple; font-weight:bold">
+            <dt>
+                Phân loại nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdPhanLoaiNhiemVuNavigation.LoaiNhiemVu)
+            </dd>
+        </dl>
+
+        <dl class="row">
+            <dt>
+                Tình trạng của nhiệm vụ:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdTinhTrangNhiemVuNavigation.TinhTrangNhiemVu)
+            </dd>
+        </dl>
+
+        <div class="back">
+            <a class="button_a_edit" asp-action="Edit" asp-route-id="@Model?.IdNhiemVuKhcn"> <i class="fa fa-pencil"> </i>Cập nhật</a>
+        </div><br />
+
+        <div class="back">
+            <a class="button_a_del" asp-action="Delete" asp-route-id="@Model?.IdNhiemVuKhcn"><i class="fa fa-trash"></i>XÓA</a>
+        </div><br />
+
+        <div class="back">
+            <a class="button_a_back" asp-action="Index"><i class="fa fa-home"></i>Trở về</a>
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+    </div>
+    <br />
+
+</body>
+
+
+
+

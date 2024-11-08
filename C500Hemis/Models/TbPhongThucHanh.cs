@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
@@ -8,6 +9,7 @@ namespace C500Hemis.Models;
 public partial class TbPhongThucHanh
 {
     [DisplayName("STT ")]
+    [Range(1, int.MaxValue, ErrorMessage = "STT phải là số dương.")]
     public int IdPhongThucHanh { get; set; }
     [DisplayName("STT Công trình csvc")]
     public int? IdCongTrinhCsvc { get; set; }

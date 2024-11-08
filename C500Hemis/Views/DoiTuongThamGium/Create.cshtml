@@ -4,51 +4,129 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>TbDoiTuongThamGium</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdDoiTuongThamGia" class="control-label"></label>
-                <input asp-for="IdDoiTuongThamGia" class="form-control" />
-                <span asp-validation-for="IdDoiTuongThamGia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdLoaiThamGia" class="control-label"></label>
-                <select asp-for="IdLoaiThamGia" class ="form-control" asp-items="ViewBag.IdLoaiThamGia"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaLoaiThamGia" class="control-label"></label>
-                <input asp-for="MaLoaiThamGia" class="form-control" />
-                <span asp-validation-for="MaLoaiThamGia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNguoi" class="control-label"></label>
-                <select asp-for="IdNguoi" class ="form-control" asp-items="ViewBag.IdNguoi"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdVaiTro" class="control-label"></label>
-                <select asp-for="IdVaiTro" class ="form-control" asp-items="ViewBag.IdVaiTro"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPhanLoai" class="control-label"></label>
-                <select asp-for="IdPhanLoai" class ="form-control" asp-items="ViewBag.IdPhanLoai"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+@section Heads {
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+}
+
+<style>
+    /*B8D55 AT13 Ca Kỳ Hòa*/
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: rgb(195,34,34);
+    }
+
+    .khungchua {
+        min-height: 80vh;
+        width: 600px;
+        background-color: #FFF9;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
+    }
+
+    h1 {
+        font-family: Apice;
+        text-align: center;
+    }
+
+    h4 {
+        text-align: center;
+        font-family: Apice;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center; /* Căn giữa */
+        margin-top: 20px; /* Khoảng cách phía trên */
+    }
+
+    .btn-primary {
+        background-color: #41B06E;
+        color: #E9EFEC;
+        margin: 0 10px; /* Khoảng cách giữa các nút */
+    }
+
+        .btn-primary:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    .control-label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        width: 100%; /* Chiếm hết chiều rộng có sẵn */
+        font-size: 16px;
+    }
+
+    .form-control {
+        width: 100%; /* Đặt chiều rộng cho input là 100% */
+    }
+
+    .header {
+        background-color: #d5d1defe; /* Màu nền cho header */
+        border-radius: 10px 10px 0 0; /* Bo góc cho phần trên */
+        height: 120px;
+        text-align: center; /* Căn giữa nội dung trong header */
+        padding: 20px; /* Padding cho header */
+        margin-bottom: 20px; /* Khoảng cách giữa header và nội dung */
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
+</style>
+
+<div class="khungchua">
+    <div class="header">
+        <h1>Tạo mới</h1>
+        <h4>Đối tượng tham gia</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-9" style="padding-left:200px">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdDoiTuongThamGia" class="control-label">ID Đối tượng tham gia</label>
+                    <input asp-for="IdDoiTuongThamGia" class="form-control" />
+                    <span asp-validation-for="IdDoiTuongThamGia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdLoaiThamGia" class="control-label"></label>
+                    <select asp-for="IdLoaiThamGia" class="form-control" asp-items="ViewBag.IdLoaiThamGia"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaLoaiThamGia" class="control-label"></label>
+                    <input asp-for="MaLoaiThamGia" class="form-control" />
+                    <span asp-validation-for="MaLoaiThamGia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdNguoi" class="control-label"></label>
+                    <select asp-for="IdNguoi" class="form-control" asp-items="ViewBag.IdNguoi"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdVaiTro" class="control-label"></label>
+                    <select asp-for="IdVaiTro" class="form-control" asp-items="ViewBag.IdVaiTro"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdPhanLoai" class="control-label"></label>
+                    <select asp-for="IdPhanLoai" class="form-control" asp-items="ViewBag.IdPhanLoai"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

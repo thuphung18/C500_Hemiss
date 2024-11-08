@@ -4,231 +4,224 @@
     ViewData["Title"] = "Tạo mới dữ liệu trúng tuyển";
 }
 
-<h1>Tạo mới dữ liệu trúng tuyển</h1>
+<h1 class="text-center text-primary mt-5">Tạo mới dữ liệu trúng tuyển</h1>
 
-<h4>Dữ liệu trúng tuyển</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container mt-5 py-5" style="background-color: #f0f8ff; border-radius: 15px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);">
+    <h4 class="text-center text-secondary">Dữ liệu trúng tuyển</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Form để tạo mới dữ liệu trúng tuyển -->
+            <form asp-action="Create">
+                <!-- Hiển thị thông báo lỗi cho toàn bộ form nếu có -->
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <div class="form-group">
-                <label asp-for="IdDuLieuTrungTuyen" class="control-label"></label>
-                <input asp-for="IdDuLieuTrungTuyen" class="form-control" />
-                <span asp-validation-for="IdDuLieuTrungTuyen" class="text-danger"></span>
-            </div>
+                <!-- Nhập ID dữ liệu trúng tuyển -->
+                <div class="form-group mb-3">
+                    <label asp-for="IdDuLieuTrungTuyen" class="form-label fw-bold"></label>
+                    <input asp-for="IdDuLieuTrungTuyen" class="form-control border-info" placeholder="Nhập ID dữ liệu trúng tuyển" data-val-required="Nhập id dữ liệu trúng tuyển" />
+                    <span asp-validation-for="IdDuLieuTrungTuyen" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Cccd" class="control-label"></label>
-                <input asp-for="Cccd" class="form-control" />
-                <span asp-validation-for="Cccd" class="text-danger"></span>
-            </div>
+                <!-- Nhập CCCD hoặc Hộ chiếu -->
+                <div class="form-group mb-3">
+                    <label asp-for="Cccd" class="form-label fw-bold"></label>
+                    <input asp-for="Cccd" class="form-control border-info" placeholder="Nhập Căn cước công dân hoặc hộ chiếu" />
+                    <span asp-validation-for="Cccd" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="HoVaTen" class="control-label"></label>
-                <input asp-for="HoVaTen" class="form-control" />
-                <span asp-validation-for="HoVaTen" class="text-danger"></span>
-            </div>
+                <!-- Nhập Họ và tên -->
+                <div class="form-group mb-3">
+                    <label asp-for="HoVaTen" class="form-label fw-bold"></label>
+                    <input asp-for="HoVaTen" class="form-control border-info" placeholder="Nhập Họ và tên" />
+                    <span asp-validation-for="HoVaTen" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="MaTuyenSinh" class="control-label"></label>
-                <input asp-for="MaTuyenSinh" class="form-control" />
-                <span asp-validation-for="MaTuyenSinh" class="text-danger"></span>
-            </div>
+                <!-- Nhập Mã tuyển sinh -->
+                <div class="form-group mb-3">
+                    <label asp-for="MaTuyenSinh" class="form-label fw-bold"></label>
+                    <input asp-for="MaTuyenSinh" class="form-control border-info" placeholder="Nhập Mã tuyển sinh" />
+                    <span asp-validation-for="MaTuyenSinh" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="KhoaDaoTaoTrungTuyen" class="control-label"></label>
-                <input asp-for="KhoaDaoTaoTrungTuyen" class="form-control" />
-                <span asp-validation-for="KhoaDaoTaoTrungTuyen" class="text-danger"></span>
-            </div>
+                <!-- Nhập Khóa đào tạo trúng tuyển -->
+                <div class="form-group mb-3">
+                    <label asp-for="KhoaDaoTaoTrungTuyen" class="form-label fw-bold"></label>
+                    <input asp-for="KhoaDaoTaoTrungTuyen" class="form-control border-info" placeholder="Nhập Khóa đào tạo trúng tuyển" />
+                    <span asp-validation-for="KhoaDaoTaoTrungTuyen" class="text-danger"></span>
+                </div>
+                <!-- Nhập Trường THPT -->
+                <div class="form-group mb-3">
+                    <label asp-for="TruongThpt" class="form-label fw-bold"></label>
+                    <input asp-for="TruongThpt" class="form-control border-info" placeholder="Nhập Trường THPT" />
+                    <span asp-validation-for="TruongThpt" class="text-danger"></span>
+                </div>
+                <!-- Dropdown chọn Đối tượng đầu vào và Đối tượng ưu tiên -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IdDoiTuongDauVao" class="form-label fw-bold"></label>
+                            <select asp-for="IdDoiTuongDauVao" class="form-control border-info" asp-items="ViewBag.IdDoiTuongDauVao">
+                                <option value=""> --Chọn Đối Tượng Tuyển Sinh-- </option>
+                            </select>
+                            <span asp-validation-for="IdDoiTuongDauVao" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IdDoiTuongUuTien" class="form-label fw-bold"></label>
+                            <select asp-for="IdDoiTuongUuTien" class="form-control border-info" asp-items="ViewBag.IdDoiTuongUuTien">
+                                <option value=""> --Chọn Đối Tượng Ưu Tiên-- </option>
+                            </select>
+                            <span asp-validation-for="IdDoiTuongUuTien" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="IdDoiTuongDauVao" class="control-label"></label>
-                <select asp-for="IdDoiTuongDauVao" class="form-control" asp-items="ViewBag.IdDoiTuongDauVao"></select>
-            </div>
+                <!-- Dropdown chọn Hình thức tuyển sinh và Khu vực tuyển sinh -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IdHinhThucTuyenSinh" class="form-label fw-bold"></label>
+                            <select asp-for="IdHinhThucTuyenSinh" class="form-control border-info" asp-items="ViewBag.IdHinhThucTuyenSinh">
+                                <option value=""> --Chọn Hình Thức Tuyển Sinh-- </option>
+                            </select>
+                            <span asp-validation-for="IdHinhThucTuyenSinh" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IdKhuVuc" class="form-label fw-bold"></label>
+                            <select asp-for="IdKhuVuc" class="form-control border-info" asp-items="ViewBag.IdKhuVuc">
+                                <option value=""> --Chọn Khu Vực-- </option>
+                            </select>
+                            <span asp-validation-for="IdKhuVuc" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nhập Tổ Hợp Môn  -->
+                <div class="form-group mb-3">
+                    <label asp-for="ToHopMonTrungTuyen" class="form-label fw-bold"></label>
+                    <input asp-for="ToHopMonTrungTuyen" class="form-control border-info" placeholder="Nhập Tổ hợp môn trúng tuyển" />
+                    <span asp-validation-for="ToHopMonTrungTuyen" class="text-danger"></span>
+                </div>
+                <!-- Các ô nhập điểm môn 1, môn 2 và môn 3 cùng điểm ưu tiên -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DiemMon1" class="form-label fw-bold"></label>
+                            <input asp-for="DiemMon1" class="form-control border-info" id="diemMon1" placeholder="Nhập Điểm môn 1" />
+                            <span asp-validation-for="DiemMon1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DiemMon2" class="form-label fw-bold"></label>
+                            <input asp-for="DiemMon2" class="form-control border-info" id="diemMon2" placeholder="Nhập Điểm môn 2" />
+                            <span asp-validation-for="DiemMon2" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="IdDoiTuongUuTien" class="control-label"></label>
-                <select asp-for="IdDoiTuongUuTien" class="form-control" asp-items="ViewBag.IdDoiTuongUuTien"></select>
-            </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DiemMon3" class="form-label fw-bold"></label>
+                            <input asp-for="DiemMon3" class="form-control border-info" id="diemMon3" placeholder="Nhập Điểm môn 3" />
+                            <span asp-validation-for="DiemMon3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DiemUuTien" class="form-label fw-bold"></label>
+                            <input asp-for="DiemUuTien" class="form-control border-info" id="diemUuTien" placeholder="Nhập Điểm ưu tiên" />
+                            <span asp-validation-for="DiemUuTien" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="IdHinhThucTuyenSinh" class="control-label"></label>
-                <select asp-for="IdHinhThucTuyenSinh" class="form-control" asp-items="ViewBag.IdHinhThucTuyenSinh"></select>
-            </div>
+                <!-- Tổng điểm xét tuyển được tính tự động và không cho người dùng chỉnh sửa -->
+                <div class="form-group mb-3">
+                    <label asp-for="TongDiemXetTuyen" class="form-label fw-bold"></label>
+                    <input asp-for="TongDiemXetTuyen" class="form-control border-info" id="tongDiemXetTuyen" readonly />
+                    <span asp-validation-for="TongDiemXetTuyen" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="IdKhuVuc" class="control-label"></label>
-                <select asp-for="IdKhuVuc" class="form-control" asp-items="ViewBag.IdKhuVuc"></select>
-            </div>
+                <!-- Các thông tin bổ sung khác như Số quyết định trúng tuyển, Ngày ban hành, Chương trình đào tạo, Ngành tốt nghiệp -->
+                <div class="form-group mb-3">
+                    <label asp-for="SoQuyetDinhTrungTuyen" class="form-label"></label>
+                    <input asp-for="SoQuyetDinhTrungTuyen" class="form-control border-info" placeholder="Nhập Số quyết định trúng tuyển" />
+                    <span asp-validation-for="SoQuyetDinhTrungTuyen" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="TruongThpt" class="control-label"></label>
-                <input asp-for="TruongThpt" class="form-control" />
-                <span asp-validation-for="TruongThpt" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="form-label"></label>
+                    <input asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="form-control border-info" type="date" placeholder="Nhập Ngày ban hành quyết định trúng tuyển" />
+                    <span asp-validation-for="NgayBanHanhQuyetDinhTrungTuyen" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="ToHopMonTrungTuyen" class="control-label"></label>
-                <input asp-for="ToHopMonTrungTuyen" class="form-control" />
-                <span asp-validation-for="ToHopMonTrungTuyen" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="form-label"></label>
+                    <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="form-control border-info" placeholder="Nhập Chương trình đào tạo đã tốt nghiệp trình độ đại học" />
+                    <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="DiemMon1" class="control-label"></label>
-                <input asp-for="DiemMon1" class="form-control" id="diemMon1" />
-                <span asp-validation-for="DiemMon1" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="form-label"></label>
+                    <input asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="form-control border-info" placeholder="Nhập ngành đã tốt nghiệp trình độ đại học" />
+                    <span asp-validation-for="NganhDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="DiemMon2" class="control-label"></label>
-                <input asp-for="DiemMon2" class="form-control" id="diemMon2" />
-                <span asp-validation-for="DiemMon2" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="form-label"></label>
+                    <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="form-control border-info" placeholder="Nhập Chương trình đào tạo đã tốt nghiệp trình độ thạc sĩ" />
+                    <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="DiemMon3" class="control-label"></label>
-                <input asp-for="DiemMon3" class="form-control" id="diemMon3" />
-                <span asp-validation-for="DiemMon3" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="NganhDaTotNghiepTrinhDoThacSi" class="form-label"></label>
+                    <input asp-for="NganhDaTotNghiepTrinhDoThacSi" class="form-control border-info" placeholder="Nhập ngành đã tốt nghiệp trình độ thạc sĩ" />
+                    <span asp-validation-for="NganhDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="DiemUuTien" class="control-label"></label>
-                <input asp-for="DiemUuTien" class="form-control" id="diemUuTien" />
-                <span asp-validation-for="DiemUuTien" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="TongDiemXetTuyen" class="control-label"></label>
-                <input asp-for="TongDiemXetTuyen" class="form-control" id="tongDiemXetTuyen" readonly />
-                <span asp-validation-for="TongDiemXetTuyen" class="text-danger"></span>
-            </div
+                <!-- Nút lưu form -->
+                <div class="text-center mt-4">
+                    <input type="submit" value="Lưu để tạo mới" class="btn btn-success px-4 py-2" style="font-size: 18px; box-shadow: 0px 4px 10px rgba(0, 128, 0, 0.4); transition: transform 0.2s;">
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <label asp-for="SoQuyetDinhTrungTuyen" class="control-label"></label>
-                <input asp-for="SoQuyetDinhTrungTuyen" class="form-control" />
-                <span asp-validation-for="SoQuyetDinhTrungTuyen" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="control-label"></label>
-                <input asp-for="NgayBanHanhQuyetDinhTrungTuyen" class="form-control" />
-                <span asp-validation-for="NgayBanHanhQuyetDinhTrungTuyen" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="control-label"></label>
-                <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="form-control" />
-                <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="control-label"></label>
-                <input asp-for="NganhDaTotNghiepTrinhDoDaiHoc" class="form-control"/>
-                <span asp-validation-for="NganhDaTotNghiepTrinhDoDaiHoc" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="control-label"></label>
-                <input asp-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="form-control" />
-                <span asp-validation-for="ChuongTrinhDaoTaoDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="NganhDaTotNghiepTrinhDoThacSi" class="control-label"></label>
-                <input asp-for="NganhDaTotNghiepTrinhDoThacSi" class="form-control" />
-                <span asp-validation-for="NganhDaTotNghiepTrinhDoThacSi" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Lưu để tạo mới" class="btn btn-primary" />
-            </div>
-        </form>
+    <!-- Nút quay lại -->
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary px-3 py-2" style="font-size: 16px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.2s;">Quay lại trang dữ liệu trúng tuyển</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Quay lại trang dữ liệu trúng tuyển</a>
-</div>
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <!-- Mã JS tính tổng điểm xét tuyển -->
     <script>
-        document.getElementById('dateInput').addEventListener('input', function (e) {
-            var input = e.target.value;
-
-            // Xóa hết các ký tự không phải số để định dạng lại
-            input = input.replace(/\D/g, '');
-
-            // Chèn các dấu "/" khi nhập liệu
-            if (input.length >= 2 && input.length <= 4) {
-                input = input.slice(0, 2) + '/' + input.slice(2);
-            } else if (input.length > 4) {
-                input = input.slice(0, 2) + '/' + input.slice(2, 4) + '/' + input.slice(4, 8);
-            }
-
-            e.target.value = input;
-        });
-
-        document.getElementById('dateInput').addEventListener('keydown', function (e) {
-            var key = e.keyCode || e.charCode;
-            if (key === 8 || key === 46) { // Backspace hoặc Delete
-                var input = e.target.value;
-                if (input.length === 3 || input.length === 6) {
-                    e.target.value = input.slice(0, -1); // Xóa dấu "/" tự động khi người dùng xóa
-                }
-            }
-        });</script>
-        <script>
-    function isValidScore(score) {
-        // Kiểm tra xem điểm có trong khoảng từ 0 đến 10 và có tối đa 2 chữ số thập phân
-        return score >= 0 && score <= 10 && /^\d+(\.\d{1,2})?$/.test(score);
-    }
-
-    function calculateTongDiem() {
-        var diemMon1 = parseFloat(document.getElementById('diemMon1').value) || 0;
-        var diemMon2 = parseFloat(document.getElementById('diemMon2').value) || 0;
-        var diemMon3 = parseFloat(document.getElementById('diemMon3').value) || 0;
-        var diemUuTien = parseFloat(document.getElementById('diemUuTien').value) || 0;
-
-        // Kiểm tra điều kiện cho từng điểm
-        if (!isValidScore(diemMon1)) {
-            alert("Điểm môn 1 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
-            document.getElementById('diemMon1').focus();
-            return;
+        //hàm trả về điểm thôi (chưa thêm chức năng kiểm tra)
+        function isValidScore(score) {
+            return score;
         }
-        if (!isValidScore(diemMon2)) {
-            alert("Điểm môn 2 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
-            document.getElementById('diemMon2').focus();
-            return;
-        }
-        if (!isValidScore(diemMon3)) {
-            alert("Điểm môn 3 không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
-            document.getElementById('diemMon3').focus();
-            return;
-        }
-        if (!isValidScore(diemUuTien)) {
-            alert("Điểm ưu tiên không hợp lệ. Vui lòng nhập giá trị từ 0 đến 10 và có tối đa 2 chữ số thập phân.");
-            document.getElementById('diemUuTien').focus();
-            return;
+        function calculateTongDiem() {
+            // Lấy giá trị từ các ô điểm
+            var diemMon1 = parseFloat(document.getElementById('diemMon1').value) || 0;
+            var diemMon2 = parseFloat(document.getElementById('diemMon2').value) || 0;
+            var diemMon3 = parseFloat(document.getElementById('diemMon3').value) || 0;
+            var diemUuTien = parseFloat(document.getElementById('diemUuTien').value) || 0;
+            // Tính tổng điểm xét tuyển
+            var tongDiem = diemMon1 + diemMon2 + diemMon3 + diemUuTien;
+            document.getElementById('tongDiemXetTuyen').value = tongDiem.toFixed(2); // Hiển thị tổng điểm với 2 chữ số sau dấu phẩy
         }
 
-        // Tính tổng điểm
-        var tongDiem = diemMon1 + diemMon2 + diemMon3 + diemUuTien;
-
-        // Hiển thị kết quả vào ô "TongDiemXetTuyen"
-        document.getElementById('tongDiemXetTuyen').value = tongDiem.toFixed(2); // Giới hạn 2 chữ số thập phân
-    }
-
-    // Gán sự kiện "input" cho các trường điểm để tính tổng điểm ngay khi người dùng nhập
-    document.getElementById('diemMon1').addEventListener('input', calculateTongDiem);
-    document.getElementById('diemMon2').addEventListener('input', calculateTongDiem);
-    document.getElementById('diemMon3').addEventListener('input', calculateTongDiem);
-    document.getElementById('diemUuTien').addEventListener('input', calculateTongDiem);
-</script>
-
+        // Gắn sự kiện tính lại tổng điểm khi người dùng nhập lại điểm
+        document.getElementById('diemMon1').addEventListener('input', calculateTongDiem);
+        document.getElementById('diemMon2').addEventListener('input', calculateTongDiem);
+        document.getElementById('diemMon3').addEventListener('input', calculateTongDiem);
+        document.getElementById('diemUuTien').addEventListener('input', calculateTongDiem);
+    </script>
 }

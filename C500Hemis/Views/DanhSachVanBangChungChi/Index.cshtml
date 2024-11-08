@@ -3,13 +3,143 @@
 @{
     ViewData["Title"] = "Index";
 }
+@*Bùi Văn Đạt*@
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
 
-<h1>Index</h1>
+<h1>DANH SÁCH VĂN BẰNG CHỨNG CHỈ</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="create-new" asp-action="Create">
+        <i class="fas fa-plus"></i> Đăng Kí VBCC Mới
+    </a>
 </p>
-<table class="table">
+<style>
+    h1 {
+        color: darkred;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+        background-color: lightskyblue;
+    }
+
+    .create-new {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: lime;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+        .create-new i {
+            margin-right: 8px;
+        }
+
+        .create-new:hover {
+            transform: scale(1.10);
+            color: blue;
+        }
+
+    table {
+        border: 3px solid #333;
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.95); /* Tăng độ mờ nhẹ */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Tăng độ bóng */
+        border-radius: 8px; /* Bo tròn mượt mà hơn */
+        overflow: hidden;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 15px; /* Tăng nhẹ kích thước chữ */
+        box-sizing: border-box;
+    }
+
+    thead th {
+        padding: 10px; /* Tăng khoảng cách cho tiêu đề */
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #222; /* Đổi màu chữ tiêu đề đậm hơn */
+        background-color: #87CEEB; /* Đổi màu nền tiêu đề sang xanh dương nhạt */
+        border-bottom: 2px solid #333; /* Đường phân cách dưới tiêu đề */
+    }
+
+    td {
+        padding: 8px; /* Tăng khoảng cách cho các ô */
+        text-align: left;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Thêm hiệu ứng cho màu chữ */
+        border-bottom: 1px solid #ddd; /* Đường kẻ phân cách hàng */
+    }
+
+    .Nut {
+        display: inline-flex;
+        align-items: center;
+        gap: 1px;
+        padding: 2px 4px;
+        font-size: 0.85rem;
+        border-radius: 2px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .Nut {
+        display: flex;
+        flex-direction: row; /* Thay đổi từ column sang row */
+    }
+
+        .Nut a {
+            padding: 2px 4px; /* Giảm padding của các nút */
+            font-size: 4px; /* Giảm kích thước font của nút */
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 2px;
+            text-decoration: none;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+    .Edit {
+        background-color: chartreuse;
+    }
+
+        .Edit:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+    .Details {
+        background-color: aqua;
+    }
+
+        .Details:hover {
+            background-color: #138496;
+            transform: scale(1.05);
+        }
+
+    .Delete {
+        background-color: gold;
+    }
+
+        .Delete:hover {
+            background-color: darkgoldenrod;
+            transform: scale(1.05);
+        }
+</style>
+<table class="table" id="ntable">
     <thead>
         <tr>
             <th>
@@ -58,56 +188,91 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenVanBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenDonViBangCap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayCap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamTotNghiep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoQuyetDinhCongNhanTotNghiep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayQuyetDinhCongNhanTotNghiep)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoHieuVanBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoVaoSoGocCapVanBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayBaoVe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinkFileScan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdHocVien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiTotNghiepNavigation.IdLoaiTotNghiep)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDanhSachVanBangChungChi">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDanhSachVanBangChungChi">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDanhSachVanBangChungChi">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenVanBang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdChuongTrinhDaoTao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDonViBangCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamTotNghiep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoQuyetDinhCongNhanTotNghiep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayQuyetDinhCongNhanTotNghiep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoHieuVanBang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoVaoSoGocCapVanBang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoQuyetDinhThanhLapHoiDongDanhGiaLuanVan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayBaoVe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LinkFileScan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHocVienNavigation.IdNguoiNavigation.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdLoaiTotNghiepNavigation.LoaiTotNghiep)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdDanhSachVanBangChungChi" class="Nut Edit">
+                        <i class='bx bx-edit'></i>Sửa
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.IdDanhSachVanBangChungChi" class="Nut Details">
+                        <i class='bx bx-show'></i>Chi Tiết
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.IdDanhSachVanBangChungChi" class="Nut Delete">
+                        <i class='bx bx-trash'></i>Xóa
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script>
+    new DataTable('#ntable', {
+        searching: true,
+        processing: true,
+        info: false,
+        language: {
+            processing: "Message khi đang tải dữ liệu",
+            search: "Tìm kiếm",
+            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
+            info: "Bản ghi từ _START_ đến _END_ Tổng cộng _TOTAL_ bản ghi",
+            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
+            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
+            loadingRecords: "",
+            zeroRecords: "Khi tìm kiếm không match với record nào",
+            emptyTable: "Không có dữ liệu",
+            paginate: {
+                first: "Trang đầu",
+                previous: "Trang trước",
+                next: "Trang sau",
+                last: "Trang cuối"
+            },
+            aria: {
+                sortAscending: ": Message khi đang sắp xếp theo column",
+                sortDescending: ": Message khi đang sắp xếp theo column",
+            }
+        },
+    });
+</script>

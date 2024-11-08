@@ -4,11 +4,73 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<style>
+    body {
+        background: pink; /* Đặt màu nền của body thành màu hồng */
+    }
 
-<h4>TbVanBanTuChu</h4>
+    hr {
+        border: 3px dotted red; /* Đặt viền cho thẻ <hr> thành 3px kiểu chấm và màu đỏ */
+    }
+
+    div .row {
+        background-color: #C4DAD2; /* Màu nền xanh nhạt cho lớp .row */
+        justify-content: center; /* Căn giữa nội dung theo chiều ngang trong flex container */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc trong flex container */
+        width: auto; /* Chiều rộng tự động, không giới hạn */
+        height: auto; /* Chiều cao tự động, không giới hạn */
+        padding: 20px; /* Thêm 20px padding bên trong lớp .row */
+        font-weight: bold; /* Làm cho font chữ in đậm */
+        border-radius: 10px; /* Bo góc cho phần .row */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ để tạo chiều sâu */
+        border: 3px solid black; /* Thêm viền đen cho phần .row */
+    }
+
+    h1 {
+        font-family: Apice; /* Đặt font chữ cho h1 là Apice */
+        text-align: center; /* Căn giữa văn bản */
+        color: #16423C; /* Đặt màu chữ cho h1 là màu xanh đậm */
+    }
+
+    h2 {
+        text-align: center; /* Căn giữa văn bản cho h2 */
+        font-weight: bold; /* Làm cho chữ in đậm */
+        color: #16423C; /* Đặt màu chữ cho h2 là màu xanh đậm */
+    }
+
+    .control-label {
+        font-weight: bold; /* Làm cho chữ in đậm */
+        color: #16423C; /* Đặt màu chữ cho nhãn điều khiển là màu xanh đậm */
+    }
+
+    .btn {
+        background-color: #3498db; /* Đặt màu nền của nút thành màu xanh */
+        color: White; /* Đặt màu chữ của nút thành màu trắng */
+        padding: 12px 20px; /* Thêm padding: 12px trên/dưới và 20px trái/phải */
+        border: none; /* Loại bỏ viền mặc định của nút */
+        border-radius: 5px; /* Bo góc cho nút */
+        text-decoration: none; /* Xóa gạch chân nếu có */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển đổi mượt mà cho màu nền khi thay đổi */
+    }
+
+        .btn:hover {
+            background-color: #2980b9; /* Thay đổi màu nền khi di chuột lên nút thành màu xanh đậm hơn */
+        }
+
+    .btn-secondary {
+        background-color: #e74c3c; /* Đặt màu nền cho nút thứ cấp là màu đỏ */
+        font-weight: bold; /* Làm cho chữ in đậm */
+    }
+
+        .btn-secondary:hover {
+            background-color: #c0392b; /* Thay đổi màu nền khi di chuột lên nút thứ cấp thành màu đỏ đậm hơn */
+        }
+
+</style>
+<h1>SỬA VĂN BẢN</h1>
 <hr />
 <div class="row">
+    <h2>VĂN BẢN TỪ CHỮ</h2>
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -33,15 +95,12 @@
                 <input asp-for="CoQuanQuyetDinhBanHanh" class="form-control" />
                 <span asp-validation-for="CoQuanQuyetDinhBanHanh" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="action-links">
+                <input type="submit" style="font-weight: bold;" value="LƯU" class="btn" />
+                <a asp-action="Index" class="btn btn-secondary ">QUAY LẠI DANH SÁCH</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

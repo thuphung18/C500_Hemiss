@@ -9,6 +9,7 @@ using C500Hemis.Models;
 
 namespace C500Hemis.Controllers.CSVC
 {
+    //Dương Minh Vũ
     public class KiTucXaController : Controller
     {
         private readonly HemisContext _context;
@@ -48,8 +49,8 @@ namespace C500Hemis.Controllers.CSVC
         // GET: KiTucXa/Create
         public IActionResult Create()
         {
-            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu");
-            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat");
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "HinhThucSoHuu");
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "TinhTrangCoSoVatChat");
             return View();
         }
 
@@ -84,8 +85,8 @@ namespace C500Hemis.Controllers.CSVC
             {
                 return NotFound();
             }
-            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbKiTucXa.IdHinhThucSoHuu);
-            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbKiTucXa.IdTinhTrangCsvc);
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "HinhThucSoHuu", tbKiTucXa.IdHinhThucSoHuu);
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "TinhTrangCoSoVatChat", tbKiTucXa.IdTinhTrangCsvc);
             return View(tbKiTucXa);
         }
 
