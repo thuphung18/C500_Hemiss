@@ -4,38 +4,41 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 style="text-align:center"> Tạo mới </h1>
+<h1 style="text-align:center"> TẠO MỚI </h1>
 <hr />
-
+@*PHẠM XUÂN LONG LÀM VÀ COMMIT..*@
 <style>
+
     body {
-        background-color: #f7f9fc;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
+        background-color: rgb(250, 243, 240);
     }
 
     .form-container {
         max-width: 800px;
         margin: auto;
-        background-color: #f7f9fc;
+        background-color: rgb(156, 169, 134);
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png); /*ảnh nền */
+        background-position: center;
+        background-repeat: no-repeat; /*không lặp lại*/
         padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /*đổ bóng*/
         border-radius: 10px;
     }
 
     h1, h4 {
         text-align: center;
         color: #333;
-        margin-bottom: 20px;
+        margin-bottom: 20px; /*cách dưới*/
     }
 
     table {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: collapse; /*gộp khung*/
         margin-bottom: 20px;
+        border-radius: 20px;
     }
 
-        table th, table td {
+        table th, table td { /*chính sửa cho cột của bảng*/
             padding: 10px;
             border: 1px solid #ddd;
             text-align: left;
@@ -46,12 +49,12 @@
             color: #fff; /* White text */
         }
 
-        table td {
-            background-color: #f2f2f2; /* Light grey background */
+        table td { /*chỉnh sửa cho bảng k bao gồm padding*/
+            background-color: rgba(225,225,225,0.8); /* Light grey background */
         }
 
         table tr:hover {
-            background-color: #ddd; /* Darker grey on hover */
+            background-color: rgba(221,221,221,0.6); /* Darker grey on hover */
         }
 
     .form-group label {
@@ -61,42 +64,50 @@
         margin-bottom: 5px;
     }
 
-    .form-control {
+    .form-control { /*chỉnh sửa cho ô nhập dữ liệu*/
         width: 100%;
         padding: 10px;
         border: 1px solid #d1d1d1;
         border-radius: 5px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        background-color: rgba(255,255,255,0.5);
     }
 
         .form-control:focus {
-            border-color: #05c46b;
-            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            border-color: #05c46b; /*màu viền*/
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.6); /* Slight glow */
             outline: none;
         }
 
     .btn-primary {
-        width: 100%;
-        padding: 12px;
-        background-color: #05c46b;
+        width: 100%; /*độ rộng tối đa*/
+        padding: 12px; /*khoảng cách so với viền ngoài*/
+        background-color: rgb(95, 111, 101); /*màu nền*/
         border: none;
         color: #fff;
         font-weight: bold;
-        border-radius: 5px;
+        border-radius: 5px; /*bo góc cho bảng*/
         cursor: pointer;
         margin-top: 20px;
         transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
     }
 
         .btn-primary:hover {
-            background-color: #048a55;
+            background-color: rgb(105, 132, 116);
             transform: scale(1.05); /* Slightly bigger */
         }
+
+    .btn-back:hover {
+        background-color: rgb(105, 132, 116); /*màu nền*/
+        transform: scale(1.05); /*phóng to khi di chuột qua*/
+    }
 </style>
 
 
+
+
 <div class="form-container">
-    <h4> Đề án, dự án, chương trình </h4>
+    <h4> ĐỀ ÁN, DỰ ÁN, CHƯƠNG TRÌNH </h4>
     <hr />
 
     <form asp-action="Create">
@@ -105,64 +116,65 @@
         <table>
             <tr>
                 <td>
-            <div class="form-group">
-                <label asp-for="IdDeAnDuAnChuongTrinh" class="control-label">Đề án, dự án, chương trình</label>
-                <input asp-for="IdDeAnDuAnChuongTrinh" class="form-control" />
-                <span asp-validation-for="IdDeAnDuAnChuongTrinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaDeAnDuAnChuongTrinh" class="control-label">Mã đề án, dự án, chương trình</label>
-                <input asp-for="MaDeAnDuAnChuongTrinh" class="form-control" />
-                <span asp-validation-for="MaDeAnDuAnChuongTrinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenDeAnDuAnChuongTrinh" class="control-label">Tên đề án, dự án, chương trình</label>
-                <input asp-for="TenDeAnDuAnChuongTrinh" class="form-control" />
-                <span asp-validation-for="TenDeAnDuAnChuongTrinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDungTomTat" class="control-label">Nội dung tóm tắt</label>
-                <input asp-for="NoiDungTomTat" class="form-control" />
-                <span asp-validation-for="NoiDungTomTat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MucTieu" class="control-label">Mục tiêu</label>
-                <input asp-for="MucTieu" class="form-control" />
-                <span asp-validation-for="MucTieu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ThoiGianHopTacTu" class="control-label">Thời gian hợp tác từ</label>
-                <input asp-for="ThoiGianHopTacTu" class="form-control" />
-                <span asp-validation-for="ThoiGianHopTacTu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ThoiGianHopTacDen" class="control-label">Thời gian hợp tác đến</label>
-                <input asp-for="ThoiGianHopTacDen" class="form-control" />
-                <span asp-validation-for="ThoiGianHopTacDen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TongKinhPhi" class="control-label">Tổng kinh phí</label>
-                <input asp-for="TongKinhPhi" class="form-control" />
-                <span asp-validation-for="TongKinhPhi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNguonKinhPhiDeAnDuAnChuongTrinh" class="control-label">Nguồn kinh phí đề án, dự án, chương trình</label>
-                <select asp-for="IdNguonKinhPhiDeAnDuAnChuongTrinh" class="form-control" asp-items="ViewBag.IdNguonKinhPhiDeAnDuAnChuongTrinh"></select>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="IdDeAnDuAnChuongTrinh" class="control-label">Đề án, dự án, chương trình</label>
+                        <input asp-for="IdDeAnDuAnChuongTrinh" class="form-control" />
+                        <span asp-validation-for="IdDeAnDuAnChuongTrinh" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaDeAnDuAnChuongTrinh" class="control-label">Mã đề án, dự án, chương trình</label>
+                        <input asp-for="MaDeAnDuAnChuongTrinh" class="form-control" />
+                        <span asp-validation-for="MaDeAnDuAnChuongTrinh" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TenDeAnDuAnChuongTrinh" class="control-label">Tên đề án, dự án, chương trình</label>
+                        <input asp-for="TenDeAnDuAnChuongTrinh" class="form-control" />
+                        <span asp-validation-for="TenDeAnDuAnChuongTrinh" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NoiDungTomTat" class="control-label">Nội dung tóm tắt</label>
+                        <input asp-for="NoiDungTomTat" class="form-control" />
+                        <span asp-validation-for="NoiDungTomTat" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MucTieu" class="control-label">Mục tiêu</label>
+                        <input asp-for="MucTieu" class="form-control" />
+                        <span asp-validation-for="MucTieu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThoiGianHopTacTu" class="control-label">Thời gian hợp tác từ</label>
+                        <input asp-for="ThoiGianHopTacTu" class="form-control" />
+                        <span asp-validation-for="ThoiGianHopTacTu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThoiGianHopTacDen" class="control-label">Thời gian hợp tác đến</label>
+                        <input asp-for="ThoiGianHopTacDen" class="form-control" />
+                        <span asp-validation-for="ThoiGianHopTacDen" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TongKinhPhi" class="control-label">Tổng kinh phí</label>
+                        <input asp-for="TongKinhPhi" data-val-number="Chỉ nhập số" class="form-control" /> @*data-val-number để hiển thị lỗi khi không đúng định dạng *@
+                        <span asp-validation-for="TongKinhPhi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdNguonKinhPhiDeAnDuAnChuongTrinh" class="control-label">Nguồn kinh phí đề án, dự án, chương trình</label>
+                        <select asp-for="IdNguonKinhPhiDeAnDuAnChuongTrinh" class="form-control" asp-items="ViewBag.IdNguonKinhPhiDeAnDuAnChuongTrinh"></select>
+                    </div>
                 </td>
             </tr>
         </table>
 
 
-            <div class="form-group">
-                <input type="submit" value="Tạo mới" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-
+        <div class="form-group">
+            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 
 <div>
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Index" class="btn btn-back" style="margin-top:10px; background-color:darkolivegreen; margin-left:250px">
+        <b style="color:ghostwhite">Quay lại</b>
+    </a>
 </div>
 
 @section Scripts {

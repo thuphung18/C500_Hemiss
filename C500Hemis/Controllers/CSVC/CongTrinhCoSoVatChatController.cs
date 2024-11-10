@@ -51,11 +51,11 @@ namespace C500Hemis.Controllers.CSVC
         // GET: CongTrinhCoSoVatChat/Create
         public IActionResult Create()
         {
-            ViewData["CongTrinhCsvctrongNha"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon");
-            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu");
-            ViewData["IdLoaiCongTrinh"] = new SelectList(_context.DmLoaiCongTrinhCoSoVatChats, "IdLoaiCongTrinhCoSoVatChat", "IdLoaiCongTrinhCoSoVatChat");
-            ViewData["IdMucDichSuDung"] = new SelectList(_context.DmMucDichSuDungCsvcs, "IdMucDichSuDungCsvc", "IdMucDichSuDungCsvc");
-            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat");
+            ViewData["CongTrinhCsvctrongNha"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon");
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "HinhThucSoHuu");
+            ViewData["IdLoaiCongTrinh"] = new SelectList(_context.DmLoaiCongTrinhCoSoVatChats, "IdLoaiCongTrinhCoSoVatChat", "LoaiCongTrinhCoSoVatChat");
+            ViewData["IdMucDichSuDung"] = new SelectList(_context.DmMucDichSuDungCsvcs, "IdMucDichSuDungCsvc", "MucDichSuDungCsvc");
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "TinhTrangCoSoVatChat");
             return View();
         }
 
@@ -66,6 +66,8 @@ namespace C500Hemis.Controllers.CSVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCongTrinhCoSoVatChat,MaCongTrinh,TenCongTrinh,IdLoaiCongTrinh,IdMucDichSuDung,DoiTuongSuDung,DienTichSanXayDung,VonBanDau,VonDauTu,IdTinhTrangCsvc,IdHinhThucSoHuu,CongTrinhCsvctrongNha,SoPhongOcongVu,SoChoOchoCanBoGiangDay,NamDuaVaoSuDung")] TbCongTrinhCoSoVatChat tbCongTrinhCoSoVatChat)
         {
+            //Kiểm tra ID trùng lập
+            if (TbCongTrinhCoSoVatChatExists(tbCongTrinhCoSoVatChat.IdCongTrinhCoSoVatChat)) ModelState.AddModelError("IdCongTrinhCoSoVatChat", "Đã tồn tại ID này, vui lòng nhâp lại ID khác");
             if (ModelState.IsValid)
             {
                 _context.Add(tbCongTrinhCoSoVatChat);
@@ -93,11 +95,11 @@ namespace C500Hemis.Controllers.CSVC
             {
                 return NotFound();
             }
-            ViewData["CongTrinhCsvctrongNha"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon", tbCongTrinhCoSoVatChat.CongTrinhCsvctrongNha);
-            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "IdHinhThucSoHuu", tbCongTrinhCoSoVatChat.IdHinhThucSoHuu);
-            ViewData["IdLoaiCongTrinh"] = new SelectList(_context.DmLoaiCongTrinhCoSoVatChats, "IdLoaiCongTrinhCoSoVatChat", "IdLoaiCongTrinhCoSoVatChat", tbCongTrinhCoSoVatChat.IdLoaiCongTrinh);
-            ViewData["IdMucDichSuDung"] = new SelectList(_context.DmMucDichSuDungCsvcs, "IdMucDichSuDungCsvc", "IdMucDichSuDungCsvc", tbCongTrinhCoSoVatChat.IdMucDichSuDung);
-            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "IdTinhTrangCoSoVatChat", tbCongTrinhCoSoVatChat.IdTinhTrangCsvc);
+            ViewData["CongTrinhCsvctrongNha"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon", tbCongTrinhCoSoVatChat.CongTrinhCsvctrongNha);
+            ViewData["IdHinhThucSoHuu"] = new SelectList(_context.DmHinhThucSoHuus, "IdHinhThucSoHuu", "HinhThucSoHuu", tbCongTrinhCoSoVatChat.IdHinhThucSoHuu);
+            ViewData["IdLoaiCongTrinh"] = new SelectList(_context.DmLoaiCongTrinhCoSoVatChats, "IdLoaiCongTrinhCoSoVatChat", "LoaiCongTrinhCoSoVatChat", tbCongTrinhCoSoVatChat.IdLoaiCongTrinh);
+            ViewData["IdMucDichSuDung"] = new SelectList(_context.DmMucDichSuDungCsvcs, "IdMucDichSuDungCsvc", "MucDichSuDungCsvc", tbCongTrinhCoSoVatChat.IdMucDichSuDung);
+            ViewData["IdTinhTrangCsvc"] = new SelectList(_context.DmTinhTrangCoSoVatChats, "IdTinhTrangCoSoVatChat", "TinhTrangCoSoVatChat", tbCongTrinhCoSoVatChat.IdTinhTrangCsvc);
             return View(tbCongTrinhCoSoVatChat);
         }
 

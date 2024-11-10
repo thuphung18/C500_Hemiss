@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace C500Hemis.Models;
 
 public partial class VCoCauToChuc
 {
-    public int id { get; set; }
-
     public string? MaPhongBanDonVi { get; set; }
 
     public string? LoaiPhongBan { get; set; }

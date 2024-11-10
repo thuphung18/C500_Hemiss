@@ -21,11 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\KHCN\" />
     <Folder Include="Controllers\TS\" />
     <Folder Include="Controllers\NH\" />
     <Folder Include="Models\KHCN\" />
     <Folder Include="TaiLieu\" />
-    <Folder Include="Views\CSGD\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\nen1.jpg" />
   </ItemGroup>
 
 </Project>

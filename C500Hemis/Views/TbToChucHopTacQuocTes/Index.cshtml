@@ -1,107 +1,419 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbToChucHopTacQuocTe>
 
 @{
-    ViewData["Title"] = "Tổ chức hợp tác quốc tế";
+    ViewData["Title"] = "Hợp tác quốc tế";
 }
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqujzMOgr0rSvMktTx09/L+gTm0G+0iY/+2Q65KVQwgU/..." crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+</head>
 
-<h1 class="text-center">TỔ CHỨC HỢP TÁC QUỐC TẾ</h1>
+
 <style>
-    th, td {
-        text-align: center;
-        vertical-align: middle;
+    body { /*chèn màu vào backgruond, chỉnh sửa font chữ cách hiện*/
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif color: #673ab7; /* Purple */
+        text-align: left;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        background-image: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
     }
 
-    thead {
-        background-color: #3498db;
+    .btn { /*css cho bảng*/
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 14px;
+        transition: background-color 0.3s, transform 0.2s;
+        border: none;
+    }
+
+    .btn-success {
+        background-color: #4caf50; /* Xanh là cây */
         color: white;
     }
 
-
-    tbody tr:nth-child(odd) {
-        background-color: #e8e8e8;
-    }
-
-    tbody tr:nth-child(even) {
-        background-color: #ffffff;
-    }
-
-    tbody tr:hover {
-        background-color: #D6EEEE;
-    }
-    table.dataTable{
-        text-align:center;
-    }
-
-    .btn {
-        padding: 3px 6px;
-        font-size: 12px;
-        border-radius: 4px;
-        margin: 0 2px;
+    .btn-primary {
+        background-color: #2196f3; /* Xanh nước biển */
+        color: white;
     }
 
     .btn-warning {
-        background-color: #2ecc71;
+        background-color: #ff9800; /* Màu vàng cam*/
         color: white;
     }
 
     .btn-info {
-        background-color: #3498db;
+        background-color: #00bcd4; /* màu xanh nhạt */
         color: white;
-        white-space: nowrap;
-        height: auto;
-        line-height: 1;
-        padding: 5px 10px;
+    }
+
+    .btn-danger {
+        background-color: #f44336; /* Màu đỏ >  */
+        color: white;
+    }
+
+    .btn:hover {
+        filter: brightness(0.9);
+        transform: scale(1.05);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        border-radius: 25px;
+        border: 1px solid #ced4da;
+        box-shadow: none;
+        padding: 10px;
+        transition: border-color 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #2196f3;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+        }
+
+    .table {
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+        .table th {
+            background-color: #673ab7; /* Tím */
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f3e5f5; /* Màu tím nhẹ */
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e0e0e0; /* Màu xám nhạt */
+    }
+
+    (max-width: 768px) {
+        .btn
+
+    {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    }
+
+    /* Thêm một số lựa chọn màu mè*/
+
+    .btn-primary-dark {
+        background-color: #1976d2;
+    }
+
+    .btn-primary-light {
+        background-color: #42a5f5;
+    }
+
+    .btn-success-dark {
+        background-color: #388e3c;
+    }
+
+    .btn-success-light {
+        background-color: #c3e6cb;
+    }
+
+    .btn-warning-dark {
+        background-color: #e65100;
+    }
+
+    .btn-warning-light {
+        background-color: #ffccbc;
+    }
+
+    .btn-info-dark {
+        background-color: #009688;
+    }
+
+    .btn-info-light {
+        background-color: #b2dfdb;
+    }
+
+    .btn-danger-dark {
+        background-color: #b71c1c;
+    }
+
+    .btn-danger-light {
+        background-color: #ffbdbd;
+    }
+
+    .btn-edit {
+        background-color: #2196f3; /* Xanh nước biển */
+        color: white;
+    }
+
+    .btn-details {
+        background-color: #4caf50; /* Xanh lá cây */
+        color: white;
+    }
+
+    .btn-delete {
+        background-color: #f44336; /* Đỏ*/
+        color: white;
+    }
+
+    .btn-maume {
+        background-color: hotpink; /* Đỏ*/
+        color: black;
+    }
+
+    .text-color {
+        color: darkgreen;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        border: 1px solid #ccc; /* Đường viền xung quanh */
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .form-control {
+        border: none; /* Loại bỏ đường viền mặc định */
+        border-radius: 0;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #666;
+    }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+    ::placeholder {
+        color: #ccc;
+        font-style: italic;
+    }
+
+    (max-width: 768px) {
+        .input-group
+
+    {
+        flex-direction: column;
+    }
+
+    }
+
+    .logo-text {
         display: flex;
         align-items: center;
     }
 
-        .btn-info i {
-            margin-right: 5px;
-        }
-
-        .btn-info span {
-            display: block;
-        }
-
-    .btn-danger {
-        background-color: #e74c3c;
-        color: white;
+    .logo {
+        width: 80px; /* Điều chỉnh kích thước logo theo ý muốn */
+        height: auto;
+        margin-right: 20px; /* Khoảng cách giữa logo và chữ */
     }
 
-    .btn-group .btn {
-        flex: 1;
-        min-width: 60px;
-    }
-
-    .btn-group .btn i {
-            margin-right: 5px;
+        .logo:hover {
+            transform: scale(1.1); /* Tăng kích thước logo khi hover */
         }
 
-    .btn-group {
+    .form-group {
         display: flex;
-        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 15px;
     }
-     .table{
-        width: 100%;
+
+    label {
+        flex: 0 0 150px; /* Đặt chiều rộng cố định cho label */
+        text-align: right;
+        margin-right: 10px;
     }
-   
+
+    .form-control {
+        flex: 1;
+    }
+
+    .to-chuc-hop-tac-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-gap: 10px; /* điều chỉnh khoảng cách giữa các giá trị */
+    }
+
+        .to-chuc-hop-tac-details label {
+            font-weight: bold;
+        }
+
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+        .search-form .form-control {
+            border-radius: 30px;
+            padding: 10px;
+            height: 40px;
+        }
+
+        .search-form .input-group-text {
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            padding: 10px;
+        }
+
+        .search-form .input-group-append .btn {
+            border-radius: 0 30px 30px 0;
+        }
+
+
 </style>
+
+
+<h1> 
+    <div class="logo-text">
+        <img src="https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/220px-Logo_hoc_vien_ANND.png" alt="Logo của bạn" class="logo">
+        <span class="text-color">Công tác tổ chức quốc tế</span>
+    </div>
+</h1>
+
 <p>
-    <a class="btn btn-primary" asp-action="Create"> Tạo mới </a>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <a asp-action="Create" class="btn btn-warning btn-lg">
+        <i class="fas fa-plus"></i> Thêm công tác mới
+    </a>
+
 </p>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
 
+<form asp-action="Index" method="get" class="search-form">
 
-</head>
-<body>
+    <div class="form-group">
+        <label for="search" class="btn btn-maume">Tìm kiếm công tác:</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input type="text" name="search" id="search" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-maume" onclick="searchData()">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
 
-
-    <table id="ntable" class="table table-striped table-bordered">
+<style>
     
-        <thead>
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        border-radius: 25px;
+        border: 1px solid #ced4da;
+        box-shadow: none;                   /*css để tạo bảng*/
+        overflow: initial;
+    }
+
+    .form-control {
+        border-radius: 25px;
+        border: medium;
+        padding: 10px;
+        transition: border-color 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #2196f3;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+        }
+
+    .input-group-append .btn {
+        border-radius: 25px 0 0 25px; /* Bo tròn cái góc bên phải*/
+        background-color: #2196f3; /* Màu xanh của bảng */
+        color: aqua;
+    }
+
+        .input-group-append .btn:hover {
+            background-color: #1976d2; /* Chuyển màu xanh đậm khi di chuột */
+        }
+
+    .actions-column {
+        text-align: center; /* Căn giữa các nút */
+    }
+
+    .btn-info {   /* thêm màu vào cho phần đếm tổng số bản ghi*/
+        background-color: #17a2b8;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-count {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        background-color: #4CAF50; /* Màu xanh lá cây */
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 12px;
+    }
+
+        .btn-count:hover {
+            background-color: #3e8e41; /* Màu xanh lá cây đậm hơn khi hover */
+        }
+
+</style>
+
+<p>
+    <button class="btn-count">
+        Có @Model.Count() bản ghi về đơn vị hợp tác tổ chức quốc tế đã tạo
+    </button>
+</p>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'H:i d/m/Y '
+            });
+        });
+    </script>
+
+<table id="ntable" class="table table-striped table-bordered">
+
+    <thead>
         <tr>
             <th>Mã hợp tác</th>
             <th>
@@ -126,82 +438,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaHopTac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenToChuc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
-            </td>
-            <td>
-             @String.Format("{0:dd/MM/yyyy}", item.ThoiGianKyKet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KetQuaHopTac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiToChuc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdQuocGiaNavigation.IdQuocTich)
-            </td>
-
-            <td>
-                        <div class="btn-group">
-
-                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdToChucHopTacQuocTe"><i class="fa fa-pencil-alt"></i>Sửa</a>
-                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdToChucHopTacQuocTe"><i class="fa fa-info-circle"></i>Chi tiết</a>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdToChucHopTacQuocTe"><i class="fa fa-trash"></i>Xoá</a>
-
-                        </div>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHopTac)
+                </td>
+                
+                <td>
+                        @Html.DisplayFor(modelItem => item.TenToChuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoiDung)
+                </td>
+                <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.ThoiGianKyKet)
+                </td>
+                
+                <td>
+                        @Html.DisplayFor(modelItem => item.KetQuaHopTac)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.LoaiToChuc)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.IdQuocGiaNavigation.TenNuoc)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.IdToChucHopTacQuocTe" class="btn btn-edit">
+                            <i class="fas fa-pen"></i> Chỉnh sửa
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.IdToChucHopTacQuocTe" class="btn btn-details">
+                            <i class="fas fa-eye"></i> Thông tin
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdToChucHopTacQuocTe" class="btn btn-delete">
+                            <i class="fas fa-trash"></i> Xóa
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>   
 </body>
-<script>
-    new DataTable('#ntable', {
-        searching: true,
-        processing: true,
-        info: false,
-        paging: true,
-        lengthMenu: [5, 10],
-        language: {
-            processing: "Đang tải dữ liệu...",
-            search: "Tìm kiếm",
-            lengthMenu: "Hiển thị _MENU_ bản ghi",
-            info: "Bản ghi từ _START_ đến _END_ trong tổng cộng _TOTAL_ bản ghi",
-            infoEmpty: "Không có dữ liệu",
-            infoFiltered: "(lọc từ _MAX_ bản ghi)",
-            loadingRecords: "Đang tải...",
-            zeroRecords: "Không tìm thấy bản ghi nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
-            },
-            aria: {
-                sortAscending: ": sắp xếp tăng dần",
-                sortDescending: ": sắp xếp giảm dần"
-            }
-        },
-    });
-</script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-
-<script>
-    $(function () {
-        $('.datetimepicker').datetimepicker({
-            format: 'H:i d/m/Y '
-        });
-    });
-</script>

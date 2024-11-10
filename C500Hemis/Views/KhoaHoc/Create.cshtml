@@ -4,9 +4,66 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>TẠO KHOÁ HỌC MỚI</h1>
 
-<h4>TbKhoaHoc</h4>
+<style>
+    body {
+        background: pink; /* Chỉnh màu nền của trang thành màu hồng */
+    }
+
+    h1 {
+        font-family: Apice; /* Chọn kiểu chữ cho tiêu đề (h1) là Apice */
+        text-align: center; /* Căn chữ ở giữa theo chiều ngang */
+        color: #16423C; /* Đổi màu chữ của tiêu đề sang màu xanh đậm (#16423C) */
+    }
+
+    h4 {
+        font-family: Apice; /* Chọn kiểu chữ cho tiêu đề h4 là Apice */
+        text-align: center; /* Căn chữ h4 ở giữa theo chiều ngang */
+    }
+
+    .row {
+        background-color: #C4DAD2; /* Màu nền của phần tử có class "row" là màu xanh nhạt */
+        justify-content: center; /* Căn giữa nội dung theo chiều ngang (áp dụng khi dùng Flexbox) */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc (áp dụng khi dùng Flexbox) */
+        padding: 20px; /* Thêm khoảng trống (padding) bên trong phần tử là 20px */
+        font-weight: bold; /* Làm cho chữ trong phần tử có class "row" đậm hơn */
+        border-radius: 10px; /* Bo tròn các góc của phần tử với bán kính là 10px */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng, với bóng đổ 4px theo trục y, 8px là độ mờ, và màu bóng là đen mờ (0.1) */
+        border: 3px solid black; /* Tạo viền đen có độ dày 3px cho phần tử "row" */
+    }
+
+    .action-links {
+        text-align: center; /* Căn giữa toàn bộ nội dung trong phần tử có class "action-links" */
+        margin-top: 20px; /* Tạo khoảng trống phía trên phần tử là 20px */
+    }
+
+    .btn {
+        background-color: #3498db; /* Màu nền của nút (button) là màu xanh (#3498db) */
+        color: White; /* Màu chữ của nút là màu trắng */
+        padding: 12px 20px; /* Tạo khoảng cách bên trong nút (12px trên/dưới và 20px trái/phải) */
+        border: none; /* Không có viền cho nút */
+        border-radius: 5px; /* Bo tròn các góc của nút với bán kính là 5px */
+        text-decoration: none; /* Xóa gạch chân mặc định (nếu nút là một liên kết) */
+        transition: background-color 0.3s; /* Thêm hiệu ứng chuyển màu nền trong 0.3 giây khi di chuột vào nút */
+    }
+
+        .btn:hover {
+            background-color: #2980b9; /* Khi người dùng di chuột vào nút, màu nền của nút sẽ thay đổi thành xanh đậm hơn (#2980b9) */
+        }
+
+    .btn-secondary {
+        background-color: #e74c3c; /* Màu nền của nút có class "btn-secondary" là màu đỏ (#e74c3c) */
+        font-weight: bold; /* Chữ trên nút sẽ đậm hơn */
+    }
+
+        .btn-secondary:hover {
+            background-color: #c0392b; /* Khi di chuột vào nút có class "btn-secondary", màu nền của nút sẽ đổi thành màu đỏ đậm hơn (#c0392b) */
+        }
+
+</style>
+
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,16 +84,15 @@
                 <input asp-for="DenNam" class="form-control" />
                 <span asp-validation-for="DenNam" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="action-links">
+                <input type="submit" style=" font-weight: bold;" value="TẠO MỚI" class="btn " />
+                <a asp-action="Index" class="btn btn-secondary">QUAY LẠI DANH SÁCH</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
