@@ -5512,5 +5512,11 @@ public partial class HemisContext : DbContext
 
 public DbSet<C500Hemis.Models.VCoCauToChuc2> VCoCauToChuc2 { get; set; } = default!;
 
+public DbSet<C500Hemis.Models._VDeAnDuAnChuongTrinh> _VDeAnDuAnChuongTrinh { get; set; } = default!;
+
+public DbSet<C500Hemis.Models._VDoanCongTac> _VDoanCongTac { get; set; } = default!;
+
+public DbSet<C500Hemis.Models._VGvduocCuDiDaoTao> _VGvduocCuDiDaoTao { get; set; } = default!;
+
 //public DbSet<C500Hemis.Models.VKhoaHoc2> VKhoaHoc2 { get; set; } = default!;
 }
