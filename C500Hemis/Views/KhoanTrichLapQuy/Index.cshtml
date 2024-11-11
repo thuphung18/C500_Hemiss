@@ -5,131 +5,168 @@
 }
 
 @section Heads {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 }
-    <style>
-        body {
-            background-color: #e0f7fa;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
+<style>
+    body {
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
 
-        .table-container {
-            background-color: #ffffff; /* Màu nền cho bảng */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
-            padding: 20px;
-            margin-top: 20px;
-        }
+    /*Thiết lập kiểu cho container của bảng dữ liệu*/
+    .table-container {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+    }
 
-        #ntable thead {
-            background-color: #34495e;
-            color: white;
-        }
+    /*Thiết lập màu nền và màu chữ cho header của bảng*/
+    thead {
+        background-color: #34495e;
+        color: white;
+    }
 
-        #ntable tbody tr:hover {
-            background-color: #f2f2f2;
-        }
+    /*Hiệu ứng hover cho hàng của bảng*/
+    #ntable tbody tr:hover {
+        background-color: #f2f2f2;
+    }
 
-        .btn-custom {
-            border: none;
-            padding: 8px 12px;
-            color: white;
-            cursor: pointer;
-        }
+    /*Định dạng các nút tùy chỉnh*/
+    .btn-custom {
+        border: none;
+        padding: 8px 12px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        .btn-primary-custom {
-            background-color: #3498db;
-            color: white;
-        }
+    /*Màu sắc tùy chỉnh cho từng loại nút*/
+    .btn-primary-custom {
+        background-color: #3498db;
+        color: white;
+    }
 
-        .btn-success-custom {
-            background-color: #456512;
-            color: white;
-        }
+    .btn-success-custom {
+        background-color: #456512;
+        color: white;
+    }
 
-        .btn-danger-custom {
-            background-color: #e74c3c;
-            color: white;
-        }
+    .btn-danger-custom {
+        background-color: #e74c3c;
+        color: white;
+    }
 
-        .btn-custom:hover {
-            opacity: 0.8;
-        }
+    /*Hiệu ứng hover cho các nút*/
+    .btn-custom:hover {
+        transform: translateY(-5px);
+        opacity: 0.8;
+    }
 
-        a.btn-custom i {
-            margin-right: 5px;
-        }
+    /*Căn chỉnh biểu tượng trong các nút*/
+    a.btn-custom i {
+        margin-right: 5px;
+    }
 
-        a {
-            text-decoration: none;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        /* Hiệu chỉnh phần tiêu đề chính */
-        h1 {
-            font-size: 50px;
-            color: #c0392b;
-            margin-bottom: 20px;
-        }
-        th {
-            padding: 12px;
-            border: 1px solid #ddd;
-            font-size: 18px;
-        }
-        td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            color: #34495e;
-        }
-    </style>
+    /*Căn chỉnh margin cho các đoạn văn*/
+    p {
+        margin-top: 30px;
+    }
+
+    /*Thiết lập kiểu chữ và kích thước cho tiêu đề h1*/
+    h1 {
+        font-size: 63px;
+        color: #FFFFE0;
+        margin-bottom: 20px;
+    }
+
+    /*Thiết lập kiểu chữ và kích thước cho tiêu đề h4*/
+    h4 {
+        color: #FFFFE0;
+    }
+
+    /*Định dạng tiêu đề và ô trong bảng*/
+    th {
+        padding: 12px;
+        border: 1px solid #ddd;
+        font-size: 18px;
+    }
+
+    td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        color: #34495e;
+    }
+
+    /*Vị trí logo*/
+    .logo-container {
+        position: absolute;
+        top: 100px;
+        right: 200px;
+    }
+
+</style>
 
 <h1>Khoản Trích Lập Quỹ</h1>
-        <p style="text-align: center; font-size: 25px; margin-bottom: 30px;">
-            <a asp-action="Create" style="color: #3498db; text-decoration: none; font-weight: bold; border: 2px solid #3498db; padding: 10px 20px; border-radius: 5px;">Tạo Mới</a>
-        </p>
+<h4>@Model.Count() Khoản Trích Lập Quỹ đã được tạo.</h4>
+<p>
+    <a asp-action="Create" style="color: #98FB98; font-size: 25px; text-decoration: none; font-weight: bold; border: 3px solid #98FB98; padding: 10px 20px; border-radius: 5px;">Tạo Mới</a>
+</p>
+<div class="logo-container">
+    <img src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png" alt="Logo Học viện An ninh nhân dân" width="175" />
+</div>
 
-
-<!-- Bao bọc bảng trong một container có nền khác với nền trang -->
 <div>
     <table class="table-container" id="ntable">
         <thead>
             <tr>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.MaKhoanTrichLapQuy)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.TenKhoanTrichLapQuy)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.NamTaiChinh)
                 </th>
-                <th>
+                <th style="text-align:center;">
                     @Html.DisplayNameFor(model => model.SoTien)
                 </th>
-                <th></th>
+                <th style="text-align:center;"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="text-align:center;">
                         @Html.DisplayFor(modelItem => item.MaKhoanTrichLapQuy)
                     </td>
-                    <td>
+                    <td style="text-align:center;">
                         @Html.DisplayFor(modelItem => item.TenKhoanTrichLapQuy)
                     </td>
-                    <td>
+                    <td style="text-align:center;">
                         @Html.DisplayFor(modelItem => item.NamTaiChinh)
                     </td>
-                    <td>
+                    <td style="text-align:center;">
                         @Html.DisplayFor(modelItem => item.SoTien)
                     </td>
-                    <td>
+                    <td style="text-align:center;">
                         <a asp-action="Edit" asp-route-id="@item.IdKhoanTrichLapQuy" class="btn btn-primary-custom btn-custom">
                             <i class="fas fa-edit"></i> Sửa
                         </a>
@@ -161,7 +198,7 @@
             infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
             infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
             loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
+            zeroRecords: "Không tìm thấy giá trị phù hợp",
             emptyTable: "Không có dữ liệu",
             paginate: {
                 first: "Trang đầu",

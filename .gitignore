@@ -361,3 +361,30 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/C500Hemis/wwwroot/images
+/C500Hemis/Controllers/HTQT/TbThongTinHopTacsController.cs
+/C500Hemis/Models/TbThongTinHopTac.cs
+/C500Hemis/Views/Shared/_Layout.cshtml
+/C500Hemis/Views/TbDeAnDuAnChuongTrinhs/Index.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Create.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Delete.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Details.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Edit.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Index.cshtml
+/C500Hemis/Views/TbToChucHopTacDoanhNghieps/Index.cshtml
+/C500Hemis/Views/TbToChucHopTacQuocTes/Index.cshtml
+/C500Hemis/C500Hemis.csproj
+/C500Hemis/wwwroot/images/hinh-nen-dong-dep-55.gif
+/C500Hemis/Models/TbThongTinHopTac.cs
+/C500Hemis/Views/Shared/_Layout.cshtml
+/C500Hemis/Views/TbDeAnDuAnChuongTrinhs/Index.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Create.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Delete.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Details.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Edit.cshtml
+/C500Hemis/Views/TbThongTinHopTacs/Index.cshtml
+/C500Hemis/Views/TbToChucHopTacDoanhNghieps/Index.cshtml
+/C500Hemis/Views/TbToChucHopTacQuocTes/Index.cshtml
+/C500Hemis/C500Hemis.csproj
+/C500Hemis/Controllers/HTQT/TbThongTinHopTacsController.cs
+/C500Hemis/Views/TbDeAnDuAnChuongTrinhs/Index.cshtml

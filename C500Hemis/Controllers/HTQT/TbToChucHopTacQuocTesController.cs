@@ -22,8 +22,12 @@ namespace C500Hemis.Controllers.HTQT
         public async Task<IActionResult> Index()
         {
             var hemisContext = _context.TbToChucHopTacQuocTes.Include(t => t.IdQuocGiaNavigation);
+            var totalRecords = await hemisContext.CountAsync(); // Đếm tổng số bản ghi
+            ViewBag.TotalRecords = totalRecords;
+
             return View(await hemisContext.ToListAsync());
         }
+
 
         // GET: TbToChucHopTacQuocTes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -47,11 +51,9 @@ namespace C500Hemis.Controllers.HTQT
         // GET: TbToChucHopTacQuocTes/Create
         public IActionResult Create()
         {
-            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich");
-            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "TenHinhThuc"); // Adjust the fields as necessary
+            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc");  //: kHÓA nGOẠI
 
-
-
+            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "HinhThucHopTac"); // Adjust the fields as necessary
             return View();
         }
 
@@ -64,12 +66,31 @@ namespace C500Hemis.Controllers.HTQT
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbToChucHopTacQuocTe);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(tbToChucHopTacQuocTe);                                       // Try catch: Bắt lỗi trùng ID
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "ID này đã tồn tại rồi. Bạn vui lòng nhập ID khác  ");
+                }
+
             }
-            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbToChucHopTacQuocTe.IdQuocGia);
-            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "TenHinhThuc");
+            else
+            {
+                var error1 = ModelState.Values.SelectMany(h => h.Errors);
+                foreach (var error in error1)
+                {
+                    ModelState.AddModelError("", error.ErrorMessage);
+                }
+            }
+            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbToChucHopTacQuocTe.IdQuocGia);
+
+
+
+            ViewData["IdHinhThucHopTac"] = new SelectList(_context.DmHinhThucHopTacs, "IdHinhThucHopTac", "HinhThucHopTac");
             return View(tbToChucHopTacQuocTe);
         }
 
@@ -86,7 +107,7 @@ namespace C500Hemis.Controllers.HTQT
             {
                 return NotFound();
             }
-            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbToChucHopTacQuocTe.IdQuocGia);
+            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbToChucHopTacQuocTe.IdQuocGia);
             return View(tbToChucHopTacQuocTe);
         }
 
@@ -122,7 +143,7 @@ namespace C500Hemis.Controllers.HTQT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "IdQuocTich", tbToChucHopTacQuocTe.IdQuocGia);
+            ViewData["IdQuocGia"] = new SelectList(_context.DmQuocTiches, "IdQuocTich", "TenNuoc", tbToChucHopTacQuocTe.IdQuocGia);
             return View(tbToChucHopTacQuocTe);
         }
 
@@ -155,8 +176,8 @@ namespace C500Hemis.Controllers.HTQT
             {
                 _context.TbToChucHopTacQuocTes.Remove(tbToChucHopTacQuocTe);
             }
-                await _context.SaveChangesAsync();
-           
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

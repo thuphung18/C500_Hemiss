@@ -34,14 +34,14 @@
                 <span asp-validation-for="SoTien" class="text-danger"></span>
             </div>
             <div class="form-group" style="text-align: center;">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div style="text-align: center; margin-top: 30px;">
-    <a asp-action="Index" class="btn-back">Back to List</a>
+    <a asp-action="Index" class="btn-back">Trở lại</a>
 </div>
 
 @section Scripts {
@@ -51,27 +51,34 @@
 }
 
 <style>
+    /*Thiết lập nền gradient và các thuộc tính cơ bản cho trang*/
     body {
-        background-color: #e0f7fa;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
     }
 
+    /*Định dạng tiêu đề chính (h1) của trang*/
     h1 {
-        font-size: 50px;
-        color: #c0392b;
+        font-size: 63px;
+        color: #FFFFE0;
         text-align: center;
         margin-bottom: 20px;
     }
 
+    /*Định dạng tiêu đề phụ (h4) của trang*/
     h4 {
         font-size: 24px;
-        color: #2c3e50;
+        color: #98FB98;
         text-align: center;
         margin-bottom: 10px;
     }
 
+    /*Định dạng cho đường kẻ ngang (hr)*/
     hr {
         border: 0;
         height: 1px;
@@ -79,11 +86,13 @@
         margin-bottom: 20px;
     }
 
+    /*Thiết lập lưới cho các hàng để căn giữa nội dung*/
     .row {
         display: flex;
         justify-content: center;
     }
 
+    /*Định dạng cột với chiều rộng 4/12 trang, có hộp bóng đổ và bo tròn*/
     .col-md-4 {
         background-color: #ffffff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -91,10 +100,12 @@
         border-radius: 8px;
     }
 
+    /*Thiết lập khoảng cách giữa các trường trong form*/
     .form-group {
         margin-bottom: 20px;
     }
 
+    /*Định dạng cho nhãn (label) của các trường form*/
     label {
         font-size: 18px;
         color: #00796b;
@@ -103,6 +114,7 @@
         margin-bottom: 5px;
     }
 
+    /*Thiết lập các thuộc tính cơ bản cho input của form*/
     .form-control {
         width: 100%;
         padding: 10px;
@@ -113,18 +125,21 @@
         background-color: #f9f9f9;
     }
 
+        /*Hiệu ứng khi input được focus (click vào)*/
         .form-control:focus {
             border-color: #3498db;
             box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
         }
 
+    /*Định dạng màu chữ đỏ cho các thông báo lỗi*/
     .text-danger {
         color: #e74c3c;
     }
 
+    /*Định dạng nút "Save"*/
     .btn-primary {
         padding: 12px 30px;
-        background-color: #3498db;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
         border: none;
         color: white;
         border-radius: 5px;
@@ -132,13 +147,25 @@
         font-size: 16px;
     }
 
+        /*Hiệu ứng khi nút "Save" được hover (di chuột vào)*/
+        .btn-primary:hover {
+            background-image: linear-gradient(to left, #8360c3, #2ebf91);
+        }
+
+    /*Định dạng nút "Back to List"*/
     .btn-back {
-        color: #3498db;
+        background-image: linear-gradient(to right, #8360c3, #2ebf91);
         text-decoration: none;
         font-size: 18px;
         padding: 10px 20px;
-        background-color: #ecf0f1;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: white;
     }
+
+        /*Hiệu ứng khi nút "Back to List" được hover (di chuột vào)*/
+        .btn-back:hover {
+            background-image: linear-gradient(to left, #8360c3, #2ebf91);
+            color: white;
+        }
 </style>

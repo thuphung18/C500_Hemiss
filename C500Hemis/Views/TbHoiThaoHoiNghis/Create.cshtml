@@ -1,174 +1,143 @@
 ﻿@model C500Hemis.Models.TbHoiThaoHoiNghi
 
 @{
-    ViewData["Title"] = "Tạo mới";
+    ViewData["Title"] = "Create";
 }
-
-<h1 style="text-align:center"> Tạo mới </h1>
-<hr />
-
 <style>
+    /*body*/
     body {
-        background-color: #f7f9fc;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
+        background-color: #dacae3;
     }
-
-    .form-container {
-        max-width: 800px;
-        margin: auto;
-        background-color: #f7f9fc;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-    }
-
-    h1, h4 {
+    /*thanh tiêu đề*/
+    h1 {
+        color: #29337C;
         text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-        table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #4CAF50; /* Green background */
-            color: #fff; /* White text */
-        }
-
-        table td {
-            background-color: #f2f2f2; /* Light grey background */
-        }
-
-        table tr:hover {
-            background-color: #ddd; /* Darker grey on hover */
-        }
-
-    .form-group label {
         font-weight: bold;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
+        font-family: 'UVN Chim Bien Nang';
     }
-
+    /*table*/
+    div .row {
+        background-color: #7E60BF;
+        justify-content: center;
+        align-items: center;
+    }
+    /*title*/
+    .control-label {
+        font-size: 20px;
+        font-weight: bold;
+        color: #FFE1FF;
+        -webkit-text-stroke: 0.3px #433878;
+        margin-top: 10px;
+    }
+    /*content*/
     .form-control {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #d1d1d1;
-        border-radius: 5px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        margin-top: 10px;
+        background-color: #F5EFFF;
+        color: #29337C;
+        font-weight: 400;
     }
-
-        .form-control:focus {
-            border-color: #05c46b;
-            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
-            outline: none;
-        }
-
+    /*button*/
     .btn-primary {
-        width: 100%;
-        padding: 12px;
-        background-color: #05c46b;
-        border: none;
-        color: #fff;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
+        width:100%;
+        border: solid #433878 0.5px;
+        margin: 10px 0;
+        background-color: #FAF7F0;
+        color: #433878;
     }
 
         .btn-primary:hover {
-            background-color: #048a55;
-            transform: scale(1.05); /* Slightly bigger */
+            color: #FAF7F0;
+            background-color: #433878;
+            border: solid #433878 0.5px;
         }
+    .comeback {
+        border-radius: 5px;
+        margin: 10px 0;
+        background-color: #433878;
+        color: #FAF7F0;
+        border: solid #433878 0.5px;
+    }
+        .comeback:hover {
+            transform: scale(1.05);
+            background-color: #FAF7F0;
+            color: #433878;
+        }
+   
 </style>
-
-<div class="form-container">
-    <h4>Hội thảo hội nghị  </h4>
-    <hr />
-
-    <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
-
-        <table>
-            <tr>
-                <td>
-
-            <div class="form-group">
-                <label asp-for="IdHoiThaoHoiNghi" class="control-label">Hội thảo Hội nghị</label>
-                <input asp-for="IdHoiThaoHoiNghi" class="form-control" />
-                <span asp-validation-for="IdHoiThaoHoiNghi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaHoiThaoHoiNghi" class="control-label">Mã hội thảo hội nghị</label>
-                <input asp-for="MaHoiThaoHoiNghi" class="form-control" />
-                <span asp-validation-for="MaHoiThaoHoiNghi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenHoiThaoHoiNghi" class="control-label">Tên hội thảo hội nghị</label>
-                <input asp-for="TenHoiThaoHoiNghi" class="form-control" />
-                <span asp-validation-for="TenHoiThaoHoiNghi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoQuanCoThamQuyenCapPhep" class="control-label">Cơ quan có thẩm quyền cấp phép</label>
-                <input asp-for="CoQuanCoThamQuyenCapPhep" class="form-control" />
-                <span asp-validation-for="CoQuanCoThamQuyenCapPhep" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MucTieu" class="control-label">Mục tiêu</label>
-                <input asp-for="MucTieu" class="form-control" />
-                <span asp-validation-for="MucTieu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDung" class="control-label">Nội dung</label>
-                <input asp-for="NoiDung" class="form-control" />
-                <span asp-validation-for="NoiDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoLuongDaiBieuThamDu" class="control-label">Số lượng đại biểu tham dự</label>
-                <input asp-for="SoLuongDaiBieuThamDu" class="form-control" />
-                <span asp-validation-for="SoLuongDaiBieuThamDu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoLuongDaiBieuQuocTeThamDu" class="control-label">Số lượng đại biểu quốc tế tham dự</label>
-                <input asp-for="SoLuongDaiBieuQuocTeThamDu" class="form-control" />
-                <span asp-validation-for="SoLuongDaiBieuQuocTeThamDu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ThoiGianToChuc" class="control-label">Thời gian tổ chức</label>
-                <input asp-for="ThoiGianToChuc" class="form-control" />
-                <span asp-validation-for="ThoiGianToChuc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiaDiemToChuc" class="control-label">Địa điểm tổ chức</label>
-                <input asp-for="DiaDiemToChuc" class="form-control" />
-                <span asp-validation-for="DiaDiemToChuc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNguonKinhPhiHoiThao" class="control-label">Nguồn kinh phí hội thao</label>
-                <select asp-for="IdNguonKinhPhiHoiThao" class="form-control" asp-items="ViewBag.IdNguonKinhPhiHoiThao"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DonViChuTri" class="control-label">Đơn vị chủ trì</label>
-                <input asp-for="DonViChuTri" class="form-control" />
-                <span asp-validation-for="DonViChuTri" class="text-danger"></span>
-            </div>
-            </td>
-            </tr>
-            </table>
-            <div class="form-group">
-                <input type="submit" value="Tạo mới " class="btn btn-primary" />
+<h1>THÊM MỚI DỮ LIỆU</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdHoiThaoHoiNghi" class="control-label"></label>
+                        <input asp-for="IdHoiThaoHoiNghi" class="form-control" placeholder="12345"/>
+                        <span asp-validation-for="IdHoiThaoHoiNghi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaHoiThaoHoiNghi" class="control-label"></label>
+                        <input asp-for="MaHoiThaoHoiNghi" class="form-control" placeholder="HT" />
+                        <span asp-validation-for="MaHoiThaoHoiNghi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TenHoiThaoHoiNghi" class="control-label"></label>
+                        <input asp-for="TenHoiThaoHoiNghi" class="form-control" placeholder="Hội nghị nâng cao kĩ năng ATTT C500" />
+                        <span asp-validation-for="TenHoiThaoHoiNghi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CoQuanCoThamQuyenCapPhep" class="control-label"></label>
+                        <input asp-for="CoQuanCoThamQuyenCapPhep" class="form-control" placeholder="Khoa NV7"/>
+                        <span asp-validation-for="CoQuanCoThamQuyenCapPhep" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MucTieu" class="control-label"></label>
+                        <input asp-for="MucTieu" class="form-control" placeholder="Nâng cao kĩ năng ATTT của học viên lớp ATTT"/>
+                        <span asp-validation-for="MucTieu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NoiDung" class="control-label"></label>
+                        <input asp-for="NoiDung" class="form-control" placeholder="thảo luận về phương hướng, giải pháp nâng cao kĩ năng ATTT"/>
+                        <span asp-validation-for="NoiDung" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SoLuongDaiBieuThamDu" class="control-label"></label>
+                        <input asp-for="SoLuongDaiBieuThamDu" class="form-control"placeholder="300"/>
+                        <span asp-validation-for="SoLuongDaiBieuThamDu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SoLuongDaiBieuQuocTeThamDu" class="control-label"></label>
+                        <input asp-for="SoLuongDaiBieuQuocTeThamDu" class="form-control" placeholder="100"/>
+                        <span asp-validation-for="SoLuongDaiBieuQuocTeThamDu" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThoiGianToChuc" class="control-label"></label>
+                        <input asp-for="ThoiGianToChuc" class="form-control" placeholder="05/10/2024"/>
+                        <span asp-validation-for="ThoiGianToChuc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaDiemToChuc" class="control-label"></label>
+                        <input asp-for="DiaDiemToChuc" class="form-control" placeholder="Học viện An ninh nhân dân"/>
+                        <span asp-validation-for="DiaDiemToChuc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdNguonKinhPhiHoiThao" class="control-label"></label>
+                        <select asp-for="IdNguonKinhPhiHoiThao" class="form-control" asp-items="ViewBag.IdNguonKinhPhiHoiThao"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DonViChuTri" class="control-label">Đơn vị chủ trì</label>
+                        <input asp-for="DonViChuTri" class="form-control" placeholder="Khoa NV7"/>
+                        <span asp-validation-for="DonViChuTri" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
@@ -176,7 +145,7 @@
 
 
 <div>
-    <a asp-action="Index">Quay lại </a>
+    <a class="btn comeback" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -11,14 +11,15 @@ namespace C500Hemis.Controllers.CTDT
 {
     public class GiaHanChuongTrinhDaoTaoController : Controller
     {
+        // Khởi tạo biến ngữ cảnh cơ sở dữ liệu
         private readonly HemisContext _context;
-
+        // Hàm dựng (constructor) để khởi tạo controller với ngữ cảnh cơ sở dữ liệu
         public GiaHanChuongTrinhDaoTaoController(HemisContext context)
         {
             _context = context;
         }
 
-        // GET: GiaHanChuongTrinhDaoTao
+        // Hiển thị danh sách các chương trình đào tạo
         public async Task<IActionResult> Index()
         {
             var hemisContext = _context.TbGiaHanChuongTrinhDaoTaos.Include(t => t.IdChuongTrinhDaoTaoNavigation);
@@ -28,14 +29,16 @@ namespace C500Hemis.Controllers.CTDT
         // GET: GiaHanChuongTrinhDaoTao/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //kiểm tra xem id có null hay không
             if (id == null)
             {
                 return NotFound();
             }
-
+            // Lấy thông tin chương trình đào tạo dựa trên ID từ cơ sở dữ liệu
             var tbGiaHanChuongTrinhDaoTao = await _context.TbGiaHanChuongTrinhDaoTaos
                 .Include(t => t.IdChuongTrinhDaoTaoNavigation)
                 .FirstOrDefaultAsync(m => m.IdGiaHanChuongTrinhDaoTao == id);
+            // Nếu không tìm thấy chương trình, trả về trang lỗi 404
             if (tbGiaHanChuongTrinhDaoTao == null)
             {
                 return NotFound();
@@ -44,10 +47,10 @@ namespace C500Hemis.Controllers.CTDT
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 
-        // GET: GiaHanChuongTrinhDaoTao/Create
+        //hiển thị form create
         public IActionResult Create()
         {
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao");
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh");
             return View();
         }
 
@@ -58,13 +61,33 @@ namespace C500Hemis.Controllers.CTDT
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdGiaHanChuongTrinhDaoTao,IdChuongTrinhDaoTao,SoQuyetDinhGiaHan,NgayBanHanhVanBanGiaHan,GiaHanLanThu")] TbGiaHanChuongTrinhDaoTao tbGiaHanChuongTrinhDaoTao)
         {
+            // Kiểm tra nếu dữ liệu hợp lệ
             if (ModelState.IsValid)
             {
-                _context.Add(tbGiaHanChuongTrinhDaoTao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+
+                    if (tbGiaHanChuongTrinhDaoTao.GiaHanLanThu <= 0)
+                    {
+                        ModelState.AddModelError("GiaHanLanThu", "Vui lòng nhập số dương");
+                    }
+                    //thêm đối tượng vào context
+                    _context.Add(tbGiaHanChuongTrinhDaoTao);
+                    //lưu thay đổi
+                    await _context.SaveChangesAsync();
+                    //chuyển hướng về index sau khi lưu thành công
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    //bắt lỗi khi lưu dữ liệu. Mỗi lỗi sẽ được thêm vào modelstate
+                    ModelState.AddModelError("", "Đã có lỗi xảy ra. Vui lòng thử lại");
+                }
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            
+            //tạo lại Selectlist cho view trong trường hợp dữ liệu không hợp lệ
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            //quay lại create
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 
@@ -81,7 +104,7 @@ namespace C500Hemis.Controllers.CTDT
             {
                 return NotFound();
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 
@@ -117,7 +140,7 @@ namespace C500Hemis.Controllers.CTDT
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "IdChuongTrinhDaoTao", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
+            ViewData["IdChuongTrinhDaoTao"] = new SelectList(_context.TbChuongTrinhDaoTaos, "IdChuongTrinhDaoTao", "TenChuongTrinh", tbGiaHanChuongTrinhDaoTao.IdChuongTrinhDaoTao);
             return View(tbGiaHanChuongTrinhDaoTao);
         }
 

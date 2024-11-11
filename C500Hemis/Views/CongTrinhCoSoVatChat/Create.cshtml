@@ -11,19 +11,32 @@
     <title>Document</title>
     <style>
         body {
-            font-family: sans-serif;
-            background-image: linear-gradient(to right, rgb(124, 182, 191), rgb(200, 223, 227), #ffff);
+            font-family: 'lato', sans-serif;
+            background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
         }
 
         .wrapper {
-            background: transparent;
-            border: 2px solid rgba(255,255,255,.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            color: black;
-            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            width: 936px;
+            background-color: #fff;
+            border-radius: 24px;
+            padding: 10px 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin: auto;
         }
+
+            .wrapper::before {
+                top: 0;
+                left: 0;
+                border-radius: 24px 24px 0 0;
+                content: "";
+                position: absolute;
+                height: 4%;
+                width: 100%;
+                background-color: #16a085;
+            }
 
         .form-group {
             /* display:table; */
@@ -31,16 +44,22 @@
         }
 
         .form-control {
-            padding: 40px;
             background: rgba(255,255,255,.2);
             height: 50px;
             border: 10px;
-            border-radius: 20px;
+            border-radius: 10px;
             outline: none;
             transition: .2s ease;
+            background-color: #E9EFEC;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
         }
 
+            .form-control:hover {
+                background-color: #C4DAD2;
+            }
+
         .row {
+            margin: 15px 5px;
             background: transparent;
             border: 2px solid rgba(255,255,255,.2);
             backdrop-filter: blur(20px);
@@ -52,8 +71,8 @@
 
         label {
             display: flex;
-            font-size: 30px;
-            font-weight: 500;
+            font-size: 20px;
+            font-weight: bold;
             padding-bottom: 20px;
         }
 
@@ -69,10 +88,10 @@
             border: none;
             color: #fff;
             font-weight: 24px;
-            font-size: 30px;
+            font-size: 20px;
             margin: 0 10px;
             padding: 8px 24px;
-            background-color: #4070f4;
+            background-color: rgb(60, 60, 176);
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -98,73 +117,79 @@
             margin-bottom: 10px;
         }
 
-        .back {
-            text-align: left;
-            font-size: 30px;
-            font-weight: 300;
+
+        h1 {
+            position: relative;
+            padding: 10px 15px;
+            width: 100%;
         }
 
-        #main-text-2 {
-            text-align: center;
-            font-size: 70px;
+        .main-text {
             font-weight: 600;
+            text-align: center;
+            background-color: #16a085;
+            color: #fff;
+        }
+
+        .back a {
+            text-decoration: none;
+        }
+
+        .back {
+            margin: 10px;
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
-        <div class="main-function">
-            <h1 id="main-text">THÊM THÔNG TIN</h1>
-</div>
+        <h1 class="main-text">THÊM THÔNG TIN</h1>
         <div class="row">
-            <h1 id="main-text-2">CÔNG TRÌNH CƠ SỞ VẬT CHẤT</h1>
-            <hr>
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdCongTrinhCoSoVatChat" class="control-label"></label>
-                <input asp-for="IdCongTrinhCoSoVatChat" class="form-control" />
-                <span asp-validation-for="IdCongTrinhCoSoVatChat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaCongTrinh" class="control-label"></label>
-                <input asp-for="MaCongTrinh" class="form-control" />
-                <span asp-validation-for="MaCongTrinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenCongTrinh" class="control-label"></label>
-                <input asp-for="TenCongTrinh" class="form-control" />
-                <span asp-validation-for="TenCongTrinh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdLoaiCongTrinh" class="control-label"></label>
-                <select asp-for="IdLoaiCongTrinh" class ="form-control" asp-items="ViewBag.IdLoaiCongTrinh"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdMucDichSuDung" class="control-label"></label>
-                <select asp-for="IdMucDichSuDung" class ="form-control" asp-items="ViewBag.IdMucDichSuDung"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoiTuongSuDung" class="control-label"></label>
-                <input asp-for="DoiTuongSuDung" class="form-control" />
-                <span asp-validation-for="DoiTuongSuDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DienTichSanXayDung" class="control-label"></label>
-                <input asp-for="DienTichSanXayDung" class="form-control" />
-                <span asp-validation-for="DienTichSanXayDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VonBanDau" class="control-label"></label>
-                <input asp-for="VonBanDau" class="form-control" />
-                <span asp-validation-for="VonBanDau" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VonDauTu" class="control-label"></label>
-                <input asp-for="VonDauTu" class="form-control" />
-                <span asp-validation-for="VonDauTu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdCongTrinhCoSoVatChat" class="control-label"></label>
+                    <input asp-for="IdCongTrinhCoSoVatChat" class="form-control" />
+                    <span asp-validation-for="IdCongTrinhCoSoVatChat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MaCongTrinh" class="control-label"></label>
+                    <input asp-for="MaCongTrinh" class="form-control" />
+                    <span asp-validation-for="MaCongTrinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TenCongTrinh" class="control-label"></label>
+                    <input asp-for="TenCongTrinh" class="form-control" />
+                    <span asp-validation-for="TenCongTrinh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdLoaiCongTrinh" class="control-label"></label>
+                    <select asp-for="IdLoaiCongTrinh" class="form-control" asp-items="ViewBag.IdLoaiCongTrinh"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdMucDichSuDung" class="control-label"></label>
+                    <select asp-for="IdMucDichSuDung" class="form-control" asp-items="ViewBag.IdMucDichSuDung"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DoiTuongSuDung" class="control-label"></label>
+                    <input asp-for="DoiTuongSuDung" class="form-control" />
+                    <span asp-validation-for="DoiTuongSuDung" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DienTichSanXayDung" class="control-label"></label>
+                    <input asp-for="DienTichSanXayDung" class="form-control" />
+                    <span asp-validation-for="DienTichSanXayDung" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VonBanDau" class="control-label"></label>
+                    <input asp-for="VonBanDau" class="form-control" />
+                    <span asp-validation-for="VonBanDau" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VonDauTu" class="control-label"></label>
+                    <input asp-for="VonDauTu" class="form-control" />
+                    <span asp-validation-for="VonDauTu" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="IdTinhTrangCsvc" class="control-label"></label><select asp-for="IdTinhTrangCsvc" class="form-control" asp-items="ViewBag.IdTinhTrangCsvc"></select>
                 </div>
                 <div class="form-group">
@@ -196,7 +221,7 @@
             </form>
         </div>
         <div class="back">
-            <a asp-action="Index">Trở lại</a>
+            <a asp-action="Index" class="button">Trở lại</a>
         </div>
     </div>
 </body>
