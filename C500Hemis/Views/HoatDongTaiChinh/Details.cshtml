@@ -3,11 +3,116 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    /* Thiết lập cơ bản cho các khối con nằm bên trong */
 
-<h1>Details</h1>
+    /* Mục đích làm cho form thông tin chi tiết căn giữa trang web */
+    .total {
+        display: flex; /* khung chứa linh hoạt */
+        justify-content: center; /* căn giữa các phần tử con */
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
 
-<div>
-    <h4>TbHoatDongTaiChinh</h4>
+    /* Các thuộc tính cơ bản cho bảng: màu, căn lề, bo góc, hiệu ứng, ... */
+    .form_del {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        width: 50%;
+        background-color: rgba(0, 139, 69, 0.8);
+    }
+
+    /* Tiêu đề "THÔNG TIN CHI TIẾT" */
+
+    h3 {
+        text-align: center;
+        font-size: 28px;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    /* Định dạng cho bảng thông tin, ô nhỏ phía trong */
+    .row {
+        display: grid;
+        grid-template-columns: 50% 50%; /* Mỗi cột thông tin chiếm 50% */
+        gap: 10px; /* Khoảng cách giữa các phần tử */
+        padding: 15px;
+        background-color: rgba(240, 255, 255, 0.8);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px;
+    }
+
+    /* Cột thông tin bên trái */
+    dt {
+        font-weight: bold;
+        color: #444;
+        white-space: nowrap; /* Tránh xuống dòng */
+        align-self: center; /* Canh giữa theo trục dọc */
+        text-align: right; /* Căn phải để khoảng cách giữa dt và dd đều đặn hơn */
+        padding-right: 10px; /* Thêm khoảng cách giữa dt và dd */
+    }
+
+    /* Cột thông tin bên phải */
+    dd {
+        color: #555;
+        margin-bottom: 0;
+        align-self: center; /* Canh giữa theo trục dọc */
+    }
+
+    /* Nút quay lại */
+   
+
+    .btn-primary {
+        width: 49%;
+        padding: 12px;
+        background-color: rgba(4, 138, 85, 0.95);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer; /* thay đổi khi di chuyển chuột qua */
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi mượt và hiệu ứng nhấn nút */
+        text-align: center;
+    }
+
+        .btn-primary:hover {
+            background-color: rgba(46, 240, 163, 0.95);
+            transform: scale(1.05); /* phóng to một chút */
+        }
+
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(204, 255, 204, 0.8);
+        font-weight: bolder;
+    }
+    /* Căn giữa cho nút xác nhận */
+    .submit {
+        display: flex;
+        justify-content: center; /* căn giữa các phần tử con */
+        margin-top: 20px;
+    }
+
+    .btn-head {
+        background-color: #66CC66;
+        width: 100%;
+        height: 60px;
+    }
+
+        .btn-head:hover {
+            background-color: rgba(245, 255, 250, 0.4);
+        }
+</style>
+<a class="btn btn-head">
+<h1 style="color:red; text-align:center; font-weight: bolder;">CHI TIẾT</h1>
+</a>
+<div class="total">
+    <div class="form_del">
+    <h3 style="text-align:center; color: white; font-weight: bolder;">HOẠT ĐỘNG TÀI CHÍNH</h3>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -32,11 +137,13 @@
             @Html.DisplayNameFor(model => model.IdLoaiHoatDongTaiChinhNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation.IdHoatDongTaiChinh)
+            @Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation.HoatDongTaiChinh)
         </dd>
     </dl>
+        <form asp-action="Delete">
+            <a asp-action="Delete" asp-route-id="@Model?.IdLoaiHoatDongTaiChinh"><input type="submit" value="Xóa" class="btn btn-primary" /></a>
+            <a asp-action="Index" class="back"><input type="submit" value="Quay lại danh sách" class="btn btn-primary" /></a>
+        </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdHoatDongTaiChinh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
+

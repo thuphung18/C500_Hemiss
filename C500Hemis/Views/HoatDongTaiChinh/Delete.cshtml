@@ -3,12 +3,117 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<style>
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(204, 255, 204, 0.8);
+        font-weight: bolder;
+    }
 
-<h1>Delete</h1>
+    .total {
+        display: flex;
+		justify-content: center; /* căn giữa các phần tử con */
+        margin-bottom: 50px;
+    }
 
-<h3>Are you sure you want to delete this?</h3>
+    /* Bảng thông tin */
+    .form_del {
+        background-color: rgba(0, 139, 69, 0.8); /* Màu nền bảng nhẹ nhàng */
+        padding: 35px;
+        border-radius: 10px; /* bo góc */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* đổ bóng */
+        width: 50%;
+        opacity: 0.9; /* Tăng độ trong suốt một chút */
+    }
+
+    /* Đặt tiêu đề nổi "XÓA" */
+    h1 {
+        font-size: 45px;
+        text-align: center;
+        color: white; /* Màu trắng */
+        margin-bottom: 20px;
+    }
+
+    /* Câu hỏi xác nhận */
+    h3 {
+        text-align: center;
+        font-size: 30px;
+        color: white; /* Màu chữ tối hơn để dễ đọc */
+        margin-bottom: 20px; /* khoảng trắng ở dưới */
+        font-weight: 500;
+    }
+
+    h4 {
+        text-align: center;
+        color: white;
+    }
+    /* Định dạng cho bảng thông tin */
+    .row {
+        display: grid; /* hiển thị phần tử */
+        grid-template-columns: 1fr 1fr; /* Cột đều nhau */
+        gap: 15px; /* Khoảng cách giữa các phần tử */
+        padding: 15px;
+        background-color: #ffffff; /* Màu nền cho các ô */
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px 0; /* Giảm khoảng cách trên và dưới */
+    }
+
+    /* Cột thông tin bên trái */
+    dt {
+        font-weight: bold;
+        color: #444;
+        white-space: nowrap; /* Tránh xuống dòng */
+        text-align: right; /* Căn phải */
+        padding-right: 10px; /* khoảng cách bên phải nội dung và đường viền */
+    }
+
+    /* Cột thông tin bên phải */
+    dd {
+        color: #555;
+        margin-bottom: 0;
+    }
+
+    .btn-primary {
+        text allign: center;
+    }
+    /* Canh giữa cho nút xác nhận */
+    .submit {
+        display: flex;
+        justify-content: center; /* căn giữa các phần tử con */
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        width: 49%;
+        padding: 12px;
+        background-color: rgba(4, 138, 85, 0.95);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer; /* thay đổi khi chuột di chuyển qua */
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi mượt và hiệu ứng nhấn nút */
+        text-align: center;
+    }
+
+        .btn-primary:hover {
+            background-color: rgba(46, 240, 163, 0.95);
+            transform: scale(1.05); /* phóng to một chút */
+        }
+
+</style>
+
+<div class="total">
+    <div class="form_del">
+<h1 style="text-align: center;">XÓA BỎ</h1>
+
+<h3 style="color:red;">Bạn có chắc chắn muốn xóa không?</h3>
 <div>
-    <h4>TbHoatDongTaiChinh</h4>
+    <h4 style="text-align: center;">HOẠT ĐỘNG TÀI CHÍNH</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -33,13 +138,14 @@
             @Html.DisplayNameFor(model => model.IdLoaiHoatDongTaiChinhNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation.IdHoatDongTaiChinh)
+            @Html.DisplayFor(model => model.IdLoaiHoatDongTaiChinhNavigation.HoatDongTaiChinh)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdHoatDongTaiChinh" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+            <form asp-action="Delete">
+                <a asp-action="Delete" asp-route-id="@Model?.IdLoaiHoatDongTaiChinh"><input type="submit" value="Xóa" class="btn btn-primary" /></a>
+                <a asp-action="Index" class="back"><input type="submit" value="Quay lại danh sách" class="btn btn-primary" /></a>
+            </form>
 </div>
+</div>
+</div> 

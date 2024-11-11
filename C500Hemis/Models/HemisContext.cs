@@ -3111,7 +3111,7 @@ public partial class HemisContext : DbContext
 
             entity.Property(e => e.IdHoatDongTaiChinh).ValueGeneratedNever();
             entity.Property(e => e.NamTaiChinh).HasColumnType("text");
-            entity.Property(e => e.NoiDung).HasColumnType("text");
+            entity.Property(e => e.NoiDung).HasColumnType("ntext");
 
             entity.HasOne(d => d.IdLoaiHoatDongTaiChinhNavigation).WithMany(p => p.TbHoatDongTaiChinhs)
                 .HasForeignKey(d => d.IdLoaiHoatDongTaiChinh)

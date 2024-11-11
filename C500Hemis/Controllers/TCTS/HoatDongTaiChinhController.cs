@@ -13,151 +13,235 @@ namespace C500Hemis.Controllers.TCTS
     {
         private readonly HemisContext _context;
 
+        // Constructor để khởi tạo context
         public HoatDongTaiChinhController(HemisContext context)
         {
             _context = context;
         }
 
         // GET: HoatDongTaiChinh
+        // Hiển thị danh sách tất cả các hoạt động tài chính
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbHoatDongTaiChinhs.Include(t => t.IdLoaiHoatDongTaiChinhNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                // Lấy danh sách hoạt động tài chính và bao gồm loại hoạt động
+                var hemisContext = _context.TbHoatDongTaiChinhs.Include(t => t.IdLoaiHoatDongTaiChinhNavigation);
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
         // GET: HoatDongTaiChinh/Details/5
+        // Hiển thị chi tiết cho một hoạt động tài chính cụ thể
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound(); // Nếu id null, trả về 404
+                }
 
-            var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs
-                .Include(t => t.IdLoaiHoatDongTaiChinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdHoatDongTaiChinh == id);
-            if (tbHoatDongTaiChinh == null)
+                // Tìm hoạt động tài chính theo id
+                var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs
+                    .Include(t => t.IdLoaiHoatDongTaiChinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdHoatDongTaiChinh == id);
+
+                if (tbHoatDongTaiChinh == null)
+                {
+                    return NotFound(); // Nếu không tìm thấy, trả về 404
+                }
+
+                return View(tbHoatDongTaiChinh);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
             }
-
-            return View(tbHoatDongTaiChinh);
         }
 
         // GET: HoatDongTaiChinh/Create
+        // Hiển thị trang tạo mới hoạt động tài chính
         public IActionResult Create()
         {
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh");
-            return View();
+            try
+            {
+                // Tạo danh sách các loại hoạt động tài chính cho dropdown
+                ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
         // POST: HoatDongTaiChinh/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Xử lý dữ liệu khi tạo mới hoạt động tài chính
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdHoatDongTaiChinh,IdLoaiHoatDongTaiChinh,NamTaiChinh,KinhPhi,NoiDung")] TbHoatDongTaiChinh tbHoatDongTaiChinh)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbHoatDongTaiChinh);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Kiểm tra tính hợp lệ của model
+                if (ModelState.IsValid)
+                {
+                    _context.Add(tbHoatDongTaiChinh); // Thêm vào context
+                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+                }
+                // Nếu không hợp lệ, tạo lại danh sách dropdown
+                ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
+                return View(tbHoatDongTaiChinh); // Trả về view với model không hợp lệ
             }
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
-            return View(tbHoatDongTaiChinh);
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
         // GET: HoatDongTaiChinh/Edit/5
+        // Hiển thị trang chỉnh sửa hoạt động tài chính
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound(); // Nếu id null, trả về 404
+                }
 
-            var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs.FindAsync(id);
-            if (tbHoatDongTaiChinh == null)
-            {
-                return NotFound();
+                // Tìm hoạt động tài chính để chỉnh sửa
+                var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs.FindAsync(id);
+                if (tbHoatDongTaiChinh == null)
+                {
+                    return NotFound(); // Nếu không tìm thấy, trả về 404
+                }
+                // Tạo danh sách loại hoạt động tài chính cho dropdown
+                ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
+                return View(tbHoatDongTaiChinh);
             }
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
-            return View(tbHoatDongTaiChinh);
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
         // POST: HoatDongTaiChinh/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Xử lý dữ liệu khi chỉnh sửa hoạt động tài chính
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdHoatDongTaiChinh,IdLoaiHoatDongTaiChinh,NamTaiChinh,KinhPhi,NoiDung")] TbHoatDongTaiChinh tbHoatDongTaiChinh)
         {
-            if (id != tbHoatDongTaiChinh.IdHoatDongTaiChinh)
+            try
             {
-                return NotFound();
-            }
+                if (id != tbHoatDongTaiChinh.IdHoatDongTaiChinh)
+                {
+                    return NotFound(); // Nếu id không khớp, trả về 404
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(tbHoatDongTaiChinh);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbHoatDongTaiChinhExists(tbHoatDongTaiChinh.IdHoatDongTaiChinh))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(tbHoatDongTaiChinh); // Cập nhật thông tin
+                        await _context.SaveChangesAsync(); // Lưu thay đổi
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        // Xử lý trường hợp đồng thời cập nhật
+                        if (!TbHoatDongTaiChinhExists(tbHoatDongTaiChinh.IdHoatDongTaiChinh))
+                        {
+                            return NotFound(); // Nếu không tìm thấy, trả về 404
+                        }
+                        else
+                        {
+                            throw; // Ném lại lỗi khác
+                        }
                     }
+                    return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
                 }
-                return RedirectToAction(nameof(Index));
+                // Nếu không hợp lệ, tạo lại danh sách dropdown
+                ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "HoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
+                return View(tbHoatDongTaiChinh); // Trả về view với model không hợp lệ
             }
-            ViewData["IdLoaiHoatDongTaiChinh"] = new SelectList(_context.DmHoatDongTaiChinhs, "IdHoatDongTaiChinh", "IdHoatDongTaiChinh", tbHoatDongTaiChinh.IdLoaiHoatDongTaiChinh);
-            return View(tbHoatDongTaiChinh);
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
         // GET: HoatDongTaiChinh/Delete/5
+        // Hiển thị trang xác nhận xóa hoạt động tài chính
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound(); // Nếu id null, trả về 404
+                }
 
-            var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs
-                .Include(t => t.IdLoaiHoatDongTaiChinhNavigation)
-                .FirstOrDefaultAsync(m => m.IdHoatDongTaiChinh == id);
-            if (tbHoatDongTaiChinh == null)
+                // Tìm hoạt động tài chính để xác nhận xóa
+                var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs
+                    .Include(t => t.IdLoaiHoatDongTaiChinhNavigation)
+                    .FirstOrDefaultAsync(m => m.IdHoatDongTaiChinh == id);
+
+                if (tbHoatDongTaiChinh == null)
+                {
+                    return NotFound(); // Nếu không tìm thấy, trả về 404
+                }
+
+                return View(tbHoatDongTaiChinh);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
             }
-
-            return View(tbHoatDongTaiChinh);
         }
 
         // POST: HoatDongTaiChinh/Delete/5
+        // Xử lý dữ liệu khi xác nhận xóa hoạt động tài chính
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs.FindAsync(id);
-            if (tbHoatDongTaiChinh != null)
+            try
             {
-                _context.TbHoatDongTaiChinhs.Remove(tbHoatDongTaiChinh);
-            }
+                // Tìm hoạt động tài chính để xóa
+                var tbHoatDongTaiChinh = await _context.TbHoatDongTaiChinhs.FindAsync(id);
+                if (tbHoatDongTaiChinh != null)
+                {
+                    _context.TbHoatDongTaiChinhs.Remove(tbHoatDongTaiChinh); // Xóa hoạt động tài chính
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync(); // Lưu thay đổi
+                return RedirectToAction(nameof(Index)); // Chuyển hướng về danh sách
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi: Trả về BadRequest nếu có lỗi
+                return BadRequest();
+            }
         }
 
+        // Kiểm tra xem hoạt động tài chính có tồn tại hay không
         private bool TbHoatDongTaiChinhExists(int id)
         {
             return _context.TbHoatDongTaiChinhs.Any(e => e.IdHoatDongTaiChinh == id);
         }
     }
 }
+
