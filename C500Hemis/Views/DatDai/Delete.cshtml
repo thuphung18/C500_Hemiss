@@ -4,72 +4,106 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
 
-<h3>Are you sure you want to delete this?</h3>
+    /* Định dạng cho tiêu đề*/
+    h1 {
+        font-family: Apice; /* Font chữ sử dụng cho tiêu đề */
+        text-align: center; /* Căn giữa tiêu đề */
+        color: #16423C; /* Màu chữ của tiêu đề */
+    }
+
+    /* Định dạng cho bảng */
+    table {
+        border-collapse: collapse; /* Gộp các đường biên lại với nhau */
+        width: 100%; /* Chiều rộng bảng chiếm toàn bộ không gian có sẵn */
+        background-color: #C4DAD2; /* Màu nền cho bảng */
+    }
+
+    /* Định dạng cho ô tiêu đề và ô dữ liệu trong bảng */
+    th, td {
+        padding: 10px; /* Khoảng cách bên trong ô */
+        text-align: left; /* Căn trái nội dung trong ô */
+        border: 2px solid black; /* Đường viền ô */
+        width: 100px; /* Chiều rộng tối đa của ô */
+    }
+
+    /* Định dạng cho hàng trong bảng */
+    tr {
+        width: 400px; /* Chiều rộng của hàng */
+    }
+
+    /* Định dạng cho container chứa các phần tử khác */
+    .container {
+        margin-top: 0.5rem; /* Khoảng cách trên của container */
+        border-radius: 6px; /* Bo góc container */
+        box-shadow: 0 0 10px rgba(50, 50, 110, 0.85); /* Đổ bóng cho container */
+        width: 850px; /* Chiều rộng của container */
+    }
+
+    /* Định dạng cho logo */
+    .logo {
+        width: 100px; /* Kích thước logo */
+        margin-right: 10px; /* Khoảng cách bên phải của logo */
+    }
+</style>
+
 <div>
-    <h4>TbDatDai</h4>
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png?20220506143703" alt="logo">
+    <h1>Bạn có chắc muốn xóa cái này không?</h1>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaGiayChungNhanQuyenSoHuu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaGiayChungNhanQuyenSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DienTichDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DienTichDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenDonViSoHuu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenDonViSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MinhChungQuyenSoHuuDatDai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MinhChungQuyenSoHuuDatDai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDichSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucDichSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamBatDauSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamBatDauSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DienTichDatDaSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DienTichDatDaSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHinhThucSoHuuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)
-        </dd>
-    </dl>
-    
+    <table class="table table-bordered" style="border: 2px solid black;">
+
+        <tr>
+            <th style="border: 2px solid black;">Mã Giấy Chứng Nhận Quyền Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MaGiayChungNhanQuyenSoHuu)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Diện Tích Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.DienTichDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Tên Đơn Vị Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.TenDonViSoHuu)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Minh Chứng Quyền sở Hữu Đất Đai </th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MinhChungQuyenSoHuuDatDai)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Mục Đích Sử Dụng Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MucDichSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Năm Bắt Đầu Sử Dụng</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.NamBatDauSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Thời Gian Sử Dụng Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.ThoiGianSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Diện Tích Đất Đã Sử Dụng</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.DienTichDatDaSuDung)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Hình Thức Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.HinhThucSoHuu)</td>
+        </tr>
+
+    </table>
+    <!--Bình luaanh code-->
     <form asp-action="Delete">
+        <!-- Ẩn trường ID để gửi dữ liệu khi xóa -->
         <input type="hidden" asp-for="IdDatDai" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+
+        <!-- Div để căn giữa các nút ->
+        <div style="text-align: center; margin-top: 20px;">
+            <!-- Nút Xóa với kiểu Bootstrap -->
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+
+        <!-- Nút Quay lại với khoảng cách bên trái -->
+        <a asp-action="Index" class="btn btn-secondary" style="margin-left: 10px;">Quay lại</a>
+</div>
     </form>
 </div>
