@@ -13,52 +13,115 @@ namespace C500Hemis.Controllers.KHCN
     {
         private readonly HemisContext _context;
 
+
         public HoatDongBaoVeMoiTruongController(HemisContext context)
         {
             _context = context;
         }
 
+        // Toàn bộ action mặc định không xuất lổi chỉ trả về BadRequest
         // GET: HoatDongBaoVeMoiTruong
+
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbHoatDongBaoVeMoiTruongs.Include(t => t.IdCapQuanLyNhiemVuNavigation).Include(t => t.IdCoQuanChuQuanNavigation).Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation).Include(t => t.IdNguonKinhPhiNavigation).Include(t => t.IdNhiemVuKhcnNavigation).Include(t => t.IdTinhTrangNhiemVuNavigation);
-            return View(await hemisContext.ToListAsync());
+            try
+            {
+                var hemisContext = _context.TbHoatDongBaoVeMoiTruongs
+                    .Include(t => t.IdCapQuanLyNhiemVuNavigation)
+                    .Include(t => t.IdCoQuanChuQuanNavigation)
+                    .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
+                    .Include(t => t.IdNguonKinhPhiNavigation)
+                    .Include(t => t.IdNhiemVuKhcnNavigation)
+                    .Include(t => t.IdTinhTrangNhiemVuNavigation);
+                var records = hemisContext.ToList(); // Lấy danh sách bản ghi
+                ViewBag.RecordCount = records.Count; // Đếm số bản ghi trong phần try của index
+                return View(await hemisContext.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
+        //chức năng tìm kiếm
+        [HttpGet("index-search")]
+        public async Task<IActionResult> Index(string searchString)
+        {
+            try
+            {
+                // Lấy toàn bộ dữ liệu từ bảng
+                var query = _context.TbHoatDongBaoVeMoiTruongs
+                    .Include(t => t.IdCapQuanLyNhiemVuNavigation)
+                    .Include(t => t.IdCoQuanChuQuanNavigation)
+                    .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
+                    .Include(t => t.IdNguonKinhPhiNavigation)
+                    .Include(t => t.IdNhiemVuKhcnNavigation)
+                    .Include(t => t.IdTinhTrangNhiemVuNavigation)
+                    .AsQueryable(); // Chuyển đổi thành IQueryable để có thể lọc dữ liệu
 
+                // Nếu có tham số tìm kiếm, lọc dữ liệu theo từ khóa
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    query = query.Where(t => t.TenNhiemVuBvmt.Contains(searchString) ||
+                                             t.CoQuanChuTri.Contains(searchString) ||
+                                             t.TongKinhPhiCuaNhiemVu.ToString().Contains(searchString));
+                }
+
+                ViewData["CurrentFilter"] = searchString; // Truyền lại từ khóa tìm kiếm cho View
+                return View(await query.ToListAsync()); // Trả về kết quả sau khi lọc
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
         // GET: HoatDongBaoVeMoiTruong/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs
-                .Include(t => t.IdCapQuanLyNhiemVuNavigation)
-                .Include(t => t.IdCoQuanChuQuanNavigation)
-                .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
-                .Include(t => t.IdNguonKinhPhiNavigation)
-                .Include(t => t.IdNhiemVuKhcnNavigation)
-                .Include(t => t.IdTinhTrangNhiemVuNavigation)
-                .FirstOrDefaultAsync(m => m.IdHoatDongBaoVeMoiTruong == id);
-            if (tbHoatDongBaoVeMoiTruong == null)
+                var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs
+                    .Include(t => t.IdCapQuanLyNhiemVuNavigation)
+                    .Include(t => t.IdCoQuanChuQuanNavigation)
+                    .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
+                    .Include(t => t.IdNguonKinhPhiNavigation)
+                    .Include(t => t.IdNhiemVuKhcnNavigation)
+                    .Include(t => t.IdTinhTrangNhiemVuNavigation)
+                    .FirstOrDefaultAsync(m => m.IdHoatDongBaoVeMoiTruong == id);
+                if (tbHoatDongBaoVeMoiTruong == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbHoatDongBaoVeMoiTruong);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            return View(tbHoatDongBaoVeMoiTruong);
         }
 
         // GET: HoatDongBaoVeMoiTruong/Create
         public IActionResult Create()
         {
-            ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu");
-            ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan");
-            ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong");
-            ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi");
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn");
-            ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu");
-            return View();
+            try
+            {
+                ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "PhanCapNhiemVu");
+                ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "CoQuanChuQuan");
+                ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "LoaiNhiemVuBaoVeMoiTruong");
+                ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi");
+                ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "MaNhiemVu");
+                ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "TinhTrangNhiemVu");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: HoatDongBaoVeMoiTruong/Create
@@ -68,41 +131,65 @@ namespace C500Hemis.Controllers.KHCN
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdHoatDongBaoVeMoiTruong,IdNhiemVuKhcn,TenNhiemVuBvmt,IdCapQuanLyNhiemVu,IdCoQuanChuQuan,CoQuanChuTri,IdLoaiNhiemVuBaoVeMoiTruong,TongKinhPhiCuaNhiemVu,IdNguonKinhPhi,ThoiGianBatDau,ThoiGianKetThuc,DanhGiaKetQuaNhiemVu,SanPhamChinhCuaNhiemVu,DonViThucHienLuuTruSanPham,IdTinhTrangNhiemVu")] TbHoatDongBaoVeMoiTruong tbHoatDongBaoVeMoiTruong)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tbHoatDongBaoVeMoiTruong);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Kiểm tra nếu ThoiGianBatDau >= ThoiGianKetThuc thì thêm lỗi vào ModelState
+                if (tbHoatDongBaoVeMoiTruong.ThoiGianBatDau >= tbHoatDongBaoVeMoiTruong.ThoiGianKetThuc)
+                {
+                    ModelState.AddModelError("ThoiGianKetThuc", "Thời gian bắt đầu phải trước thời gian kết thúc.");
+                }
+                //Nếu đã tồn tại thì thêm Error cho IdHoatDongBaoVeMoiTruong
+                if (await existId(tbHoatDongBaoVeMoiTruong.IdHoatDongBaoVeMoiTruong)) ModelState.AddModelError("IdHoatDongBaoVeMoiTruong", "Đã tồn tại Id này!");
+                if (ModelState.IsValid)
+                {
+                    //Thêm đối tượng vào context
+                    _context.Add(tbHoatDongBaoVeMoiTruong);
+                    // Lưu vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    // Nếu thành công sẽ trở về trang index
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
+                ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
+                ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
+                ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
+                ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
+                ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
+                return View(tbHoatDongBaoVeMoiTruong);
             }
-            ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
-            ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
-            ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
-            ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
-            ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
-            return View(tbHoatDongBaoVeMoiTruong);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: HoatDongBaoVeMoiTruong/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs.FindAsync(id);
-            if (tbHoatDongBaoVeMoiTruong == null)
-            {
-                return NotFound();
+                var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs.FindAsync(id);
+                if (tbHoatDongBaoVeMoiTruong == null)
+                {
+                    return NotFound();
+                }
+                ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
+                ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
+                ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
+                ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
+                ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
+                ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
+                return View(tbHoatDongBaoVeMoiTruong);
             }
-            ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
-            ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
-            ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
-            ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
-            ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
-            return View(tbHoatDongBaoVeMoiTruong);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // POST: HoatDongBaoVeMoiTruong/Edit/5
@@ -112,62 +199,81 @@ namespace C500Hemis.Controllers.KHCN
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdHoatDongBaoVeMoiTruong,IdNhiemVuKhcn,TenNhiemVuBvmt,IdCapQuanLyNhiemVu,IdCoQuanChuQuan,CoQuanChuTri,IdLoaiNhiemVuBaoVeMoiTruong,TongKinhPhiCuaNhiemVu,IdNguonKinhPhi,ThoiGianBatDau,ThoiGianKetThuc,DanhGiaKetQuaNhiemVu,SanPhamChinhCuaNhiemVu,DonViThucHienLuuTruSanPham,IdTinhTrangNhiemVu")] TbHoatDongBaoVeMoiTruong tbHoatDongBaoVeMoiTruong)
         {
-            if (id != tbHoatDongBaoVeMoiTruong.IdHoatDongBaoVeMoiTruong)
+            try
             {
-                return NotFound();
-            }
+                if (id != tbHoatDongBaoVeMoiTruong.IdHoatDongBaoVeMoiTruong)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                // Kiểm tra nếu ThoiGianBatDau >= ThoiGianKetThuc thì thêm lỗi vào ModelState
+                if (tbHoatDongBaoVeMoiTruong.ThoiGianBatDau >= tbHoatDongBaoVeMoiTruong.ThoiGianKetThuc)
                 {
-                    _context.Update(tbHoatDongBaoVeMoiTruong);
-                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError("ThoiGianKetThuc", "Thời gian bắt đầu phải trước thời gian kết thúc.");
                 }
-                catch (DbUpdateConcurrencyException)
+                if (ModelState.IsValid)
                 {
-                    if (!TbHoatDongBaoVeMoiTruongExists(tbHoatDongBaoVeMoiTruong.IdHoatDongBaoVeMoiTruong))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(tbHoatDongBaoVeMoiTruong);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!(await existId(tbHoatDongBaoVeMoiTruong.IdHoatDongBaoVeMoiTruong)))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
+                ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
+                ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
+                ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
+                ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
+                ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
+                return View(tbHoatDongBaoVeMoiTruong);
             }
-            ViewData["IdCapQuanLyNhiemVu"] = new SelectList(_context.DmPhanCapNhiemVus, "IdPhanCapNhiemVu", "IdPhanCapNhiemVu", tbHoatDongBaoVeMoiTruong.IdCapQuanLyNhiemVu);
-            ViewData["IdCoQuanChuQuan"] = new SelectList(_context.DmCoQuanChuQuans, "IdCoQuanChuQuan", "IdCoQuanChuQuan", tbHoatDongBaoVeMoiTruong.IdCoQuanChuQuan);
-            ViewData["IdLoaiNhiemVuBaoVeMoiTruong"] = new SelectList(_context.DmLoaiNhiemVuBaoVeMoiTruongs, "IdLoaiNhiemVuBaoVeMoiTruong", "IdLoaiNhiemVuBaoVeMoiTruong", tbHoatDongBaoVeMoiTruong.IdLoaiNhiemVuBaoVeMoiTruong);
-            ViewData["IdNguonKinhPhi"] = new SelectList(_context.DmNguonKinhPhis, "IdNguonKinhPhi", "IdNguonKinhPhi", tbHoatDongBaoVeMoiTruong.IdNguonKinhPhi);
-            ViewData["IdNhiemVuKhcn"] = new SelectList(_context.TbNhiemVuKhcns, "IdNhiemVuKhcn", "IdNhiemVuKhcn", tbHoatDongBaoVeMoiTruong.IdNhiemVuKhcn);
-            ViewData["IdTinhTrangNhiemVu"] = new SelectList(_context.DmTinhTrangNhiemVus, "IdTinhTrangNhiemVu", "IdTinhTrangNhiemVu", tbHoatDongBaoVeMoiTruong.IdTinhTrangNhiemVu);
-            return View(tbHoatDongBaoVeMoiTruong);
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         // GET: HoatDongBaoVeMoiTruong/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs
-                .Include(t => t.IdCapQuanLyNhiemVuNavigation)
-                .Include(t => t.IdCoQuanChuQuanNavigation)
-                .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
-                .Include(t => t.IdNguonKinhPhiNavigation)
-                .Include(t => t.IdNhiemVuKhcnNavigation)
-                .Include(t => t.IdTinhTrangNhiemVuNavigation)
-                .FirstOrDefaultAsync(m => m.IdHoatDongBaoVeMoiTruong == id);
-            if (tbHoatDongBaoVeMoiTruong == null)
+                var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs
+                    .Include(t => t.IdCapQuanLyNhiemVuNavigation)
+                    .Include(t => t.IdCoQuanChuQuanNavigation)
+                    .Include(t => t.IdLoaiNhiemVuBaoVeMoiTruongNavigation)
+                    .Include(t => t.IdNguonKinhPhiNavigation)
+                    .Include(t => t.IdNhiemVuKhcnNavigation)
+                    .Include(t => t.IdTinhTrangNhiemVuNavigation)
+                    .FirstOrDefaultAsync(m => m.IdHoatDongBaoVeMoiTruong == id);
+                if (tbHoatDongBaoVeMoiTruong == null)
+                {
+                    return NotFound();
+                }
+
+                return View(tbHoatDongBaoVeMoiTruong);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            return View(tbHoatDongBaoVeMoiTruong);
         }
 
         // POST: HoatDongBaoVeMoiTruong/Delete/5
@@ -175,19 +281,30 @@ namespace C500Hemis.Controllers.KHCN
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs.FindAsync(id);
-            if (tbHoatDongBaoVeMoiTruong != null)
+            try
             {
-                _context.TbHoatDongBaoVeMoiTruongs.Remove(tbHoatDongBaoVeMoiTruong);
+                var tbHoatDongBaoVeMoiTruong = await _context.TbHoatDongBaoVeMoiTruongs.FindAsync(id);
+                if (tbHoatDongBaoVeMoiTruong != null)
+                {
+                    _context.TbHoatDongBaoVeMoiTruongs.Remove(tbHoatDongBaoVeMoiTruong);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
-        private bool TbHoatDongBaoVeMoiTruongExists(int id)
+        private async Task<bool> existId(int id)
         {
-            return _context.TbHoatDongBaoVeMoiTruongs.Any(e => e.IdHoatDongBaoVeMoiTruong == id);
+            //Kiểm tra đã tồn tại trong TbHoatDongBaoVeMoiTruong chua
+            TbHoatDongBaoVeMoiTruong? cr = (await _context.TbHoatDongBaoVeMoiTruongs.SingleOrDefaultAsync(e => e.IdHoatDongBaoVeMoiTruong == id));
+            if (cr == null) return false;
+            return true;
         }
+
     }
 }
