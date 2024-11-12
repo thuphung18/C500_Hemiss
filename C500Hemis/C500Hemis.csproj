@@ -22,9 +22,9 @@
 
   <ItemGroup>
     <Folder Include="Controllers\KHCN\" />
-    <Folder Include="Controllers\CSGD\" />
     <Folder Include="Controllers\TS\" />
     <Folder Include="Controllers\NH\" />
+    <Folder Include="Models\KHCN\" />
     <Folder Include="TaiLieu\" />
   </ItemGroup>
 

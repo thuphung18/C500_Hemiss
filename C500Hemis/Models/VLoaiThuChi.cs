@@ -7,6 +7,7 @@ public partial class VLoaiThuChi
 {
     public string? MaLoaiThuChi { get; set; }
 
+
     public string? PhanLoaiThuChi { get; set; }
 
     public string? TenLoaiThuChi { get; set; }

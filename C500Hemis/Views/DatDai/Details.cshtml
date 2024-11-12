@@ -3,105 +3,115 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>TbDatDai</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaGiayChungNhanQuyenSoHuu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaGiayChungNhanQuyenSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DienTichDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DienTichDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenDonViSoHuu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenDonViSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MinhChungQuyenSoHuuDatDai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MinhChungQuyenSoHuuDatDai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MucDichSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MucDichSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamBatDauSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamBatDauSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianSuDungDat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianSuDungDat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DienTichDatDaSuDung)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DienTichDatDaSuDung)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHinhThucSoHuuNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdDatDai">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
 <style>
-    .table {
-        width: 100%;
-        border-collapse: collapse;
+
+    h1, h3 {
+        font-family: Apice; /* Đặt phông chữ cho tiêu đề h1 và h3 */
+        text-align: center; /* Căn giữa nội dung cho cả h1 và h3 */
+        color: #16423C; /* Màu chữ cho h1 và h3 */
     }
 
-    .table-header {
-        background-color: #007bff; /* Màu xanh dương */
-        color: white;
-        padding: 10px;
+    table {
+        border-collapse: collapse; /* Xóa khoảng cách giữa các ô trong bảng */
+        width: 100%; /* Đặt chiều rộng của bảng là 100% */
     }
 
-    .table td {
-        padding: 10px;
-        border: 1px solid #dee2e6; /* Màu xám nhạt */
-        background-color: #f9f9f9; /* Màu nền nhạt */
+    th, td {
+        padding: 10px; /* Khoảng cách bên trong cho ô tiêu đề (th) và ô dữ liệu (td) */
+        text-align: left; /* Căn trái nội dung trong ô */
+        border: 2px solid black; /* Viền cho ô tiêu đề và ô dữ liệu */
+        width: 100px; /* Đặt chiều rộng cố định cho ô */
     }
 
-    .table tr:nth-child(even) td {
-        background-color: #e9ecef; /* Màu nền nhạt cho hàng chẵn */
+    tr {
+        width: 400px; /* Chiều rộng cố định cho hàng (tr) */
     }
 
-    .table tr:hover td {
-        background-color: #d6e9f9; /* Màu nền khi di chuột */
+    .container {
+        margin-top: 0.5rem; /* Khoảng cách phía trên cho container */
+        border-radius: 6px; /* Bo tròn góc cho container */
+        box-shadow: 0 0 10px rgba(50, 50, 110, 0.85); /* Thêm bóng đổ cho container */
+        width: 850px; /* Đặt chiều rộng cố định cho container */
+        backdrop-filter: blur(0.5px); /* Làm mờ nền phía sau container */
+        background-color: rgba(226, 241, 231, 0.9); /* Màu nền với độ trong suốt */
     }
 
-    .action-buttons {
-        margin-top: 20px;
+    .logo {
+        width: 100px; /* Điều chỉnh kích thước logo */
+        margin-right: 10px; /* Khoảng cách giữa logo và tiêu đề */
     }
 
-    .btn {
-        margin-right: 10px; /* Khoảng cách giữa các nút */
+    .button {
+        background-color: #16423C; /* Màu nền cho nút */
+        color: #C4DAD2; /* Màu chữ cho nút */
+        padding: 10px 20px; /* Padding cho nút */
+        border: none; /* Không viền cho nút */
+        border-radius: 4px; /* Bo góc cho nút */
+        text-decoration: none; /* Xóa gạch chân cho liên kết */
     }
 
+        .button:hover {
+            background-color: #6A9C89; /* Màu nền khi hover trên nút */
+            transform: scale(1.05); /* Phóng to nút khi hover */
+        }
+
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Hình nền cho body */
+        background-repeat: no-repeat; /* Không lặp lại hình nền */
+        background-position: center; /* Đặt hình nền ở giữa */
+        background-color: rgb(164, 190, 123); /* Màu nền fallback cho body */
+    }
 </style>
+<div>
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png?20220506143703" alt="logo">
+    <h1>THÔNG TIN CHI TIẾT</h1>
+    <h3>ĐẤT ĐAI</h3>
+
+    <hr />
+    <table class="table table-bordered" style="border: 2px solid black;">
+
+        <tr>
+            <th style="border: 2px solid black;">Mã Giấy Chứng Nhận Quyền Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MaGiayChungNhanQuyenSoHuu)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Diện Tích Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.DienTichDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Tên Đơn Vị Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.TenDonViSoHuu)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Minh Chứng Quyền sở Hữu Đất Đai </th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MinhChungQuyenSoHuuDatDai)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Mục Đích Sử Dụng Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.MucDichSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Năm Bắt Đầu Sử Dụng</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.NamBatDauSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Thời Gian Sử Dụng Đất</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.ThoiGianSuDungDat)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Diện Tích Đất Đã Sử Dụng</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.DienTichDatDaSuDung)</td>
+        </tr>
+        <tr>
+            <th style="border: 2px solid black;">Hình Thức Sở Hữu</th>
+            <td style="border: 2px solid black;">@Html.DisplayFor(model => model.IdHinhThucSoHuuNavigation.HinhThucSoHuu)</td>
+        </tr>
+
+    </table>
+</div>
+<!--Làm cho hai nút chỉnh sửa và quay lại căn giữa bảng------->
+<!--Sử dụng thuộc tính text-align: center; trong thẻ <div> để căn giữa nội dung bên trong nó.-->
+<div style="text-align: center; margin-top: 20px;">
+    <a asp-action="Edit" asp-route-id="@Model?.IdDatDai" class="button">Chỉnh sửa</a> |
+    <a asp-action="Index" class="button">Quay lại</a>
+</div>

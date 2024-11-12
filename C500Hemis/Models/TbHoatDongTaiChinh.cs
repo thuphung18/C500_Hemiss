@@ -2,30 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using C500Hemis.Models.DM;
 
 namespace C500Hemis.Models;
 
 public partial class TbHoatDongTaiChinh
 {
+    [DisplayName(displayName: "ID HOẠT ĐỘNG TÀI CHÍNH")]
     [Required(ErrorMessage = "Bắt buộc nhập")]
     public int IdHoatDongTaiChinh { get; set; }
-
-    [DisplayName(displayName: "ID Loại hoạt động tài chính")]
+    [DisplayName(displayName: "ID LOẠI HOẠT ĐỘNG TÀI CHÍNH")]
+    [Required(ErrorMessage = "Bắt buộc nhập")]
     public int? IdLoaiHoatDongTaiChinh { get; set; }
-
-    [DisplayName(displayName: "Năm tài chính")]
-    [DisplayFormat(DataFormatString = "{0:yyyy}")]
-    [DataType(DataType.Date)]
-    [Required(ErrorMessage ="Nhập lại năm!")]
+    [DisplayName(displayName: "NĂM TÀI CHÍNH")]
+    [Required(ErrorMessage = "Bắt buộc nhập")]
     public string? NamTaiChinh { get; set; }
-
-    [DisplayName(displayName: "Kinh phí")]
+    [DisplayName(displayName: "KINH PHÍ (VNĐ)")]
     public int? KinhPhi { get; set; }
-
-    [DisplayName(displayName: "Nội dung")]
+    [DisplayName(displayName: "NỘI DUNG ")]
     public string? NoiDung { get; set; }
-
-    [DisplayName(displayName: "ID Loại hoạt động điều hướng tài chính")]
+    [DisplayName(displayName: "ID LOẠI HOẠT ĐỘNG TÀI CHÍNH")]
     public virtual DmHoatDongTaiChinh? IdLoaiHoatDongTaiChinhNavigation { get; set; }
 }
