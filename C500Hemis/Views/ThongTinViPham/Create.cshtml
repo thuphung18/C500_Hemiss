@@ -1,25 +1,144 @@
 ﻿@model C500Hemis.Models.TbThongTinViPham
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "THÊM HỒ SƠ";
 }
-<style>
-    h1, h4  {
-        text-align: center;
-    }
-    div {
-        margin:auto;
-    }
-</style>
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body::before {
+            content: ''; /* Không có nội dung */
+            position: fixed; /* Giữ vị trí cố định */
+            top: 0; /* Đỉnh của trang */
+            left: 0; /* Bên trái */
+            width: 100%; /* Chiều rộng 100% */
+            height: 100%; /* Chiều cao 100% */
+            background-image: url('/images/son.jpg'); /* Hình nền */
+            background-size: cover; /* Lấp đầy không gian */
+            background-position: center; /* Căn giữa hình nền */
+            background-attachment: fixed; /* Hình nền không di chuyển khi cuộn */
+            z-index: -1; /* Đặt dưới cùng */
+        }
 
-<h1>Tạo mới</h1>
+        /* Định dạng cơ bản cho form */
+        form {
+            background-color: #f0f0f0; /* Màu nền của form */
+            padding: 20px; /* Khoảng cách bên trong */
+            border-radius: 10px; /* Bo góc */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
 
-<h4>Thông tin vi phạm</h4>
-<hr />
+        /* Tiêu đề "THÊM" */
+        h1 {
+            font-size: 36px; /* Kích thước chữ */
+            text-align: center; /* Căn giữa */
+            color: #333; /* Màu chữ */
+            margin-bottom: 20px; /* Khoảng cách dưới */
+        }
+
+        /* Khối thông tin trong form */
+        .form-group {
+            margin-bottom: 15px; /* Khoảng cách dưới mỗi nhóm thông tin */
+        }
+
+        /* Định dạng cho nhãn thông tin nhập */
+        label {
+            font-weight: bold; /* Chữ đậm */
+            color: #444; /* Màu chữ */
+        }
+
+        /* Hộp nhập dữ liệu */
+        .form-control {
+            width: 100%; /* Chiều rộng 100% */
+            padding: 10px; /* Khoảng cách bên trong */
+            font-size: 16px; /* Kích thước chữ */
+            border: 1px solid #ccc; /* Viền màu xám */
+            border-radius: 5px; /* Bo góc */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+            /* Hiệu ứng khi nhấn vào hộp nhập dữ liệu */
+            .form-control:focus {
+                border-color: #007bff; /* Màu viền khi focus */
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Đổ bóng */
+                outline: none; /* Không có viền ngoài */
+            }
+
+        /* Định dạng cho thông báo lỗi */
+        .text-danger {
+            color: #e3342f; /* Màu chữ đỏ */
+        }
+
+        /* Nút xác nhận */
+        .btn-primary {
+            background-color: #007bff; /* Màu nền của nút */
+            border: none; /* Không có viền */
+            padding: 12px 20px; /* Khoảng cách bên trong */
+            color: white; /* Màu chữ */
+            font-size: 16px; /* Kích thước chữ */
+            border-radius: 5px; /* Bo góc */
+            cursor: pointer; /* Con trỏ khi hover */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+            /* Hiệu ứng khi di chuột vào nút xác nhận */
+            .btn-primary:hover {
+                background-color: #0056b3; /* Màu nền khi hover */
+                transform: scale(1.05); /* Phóng to một chút */
+            }
+
+        /* Nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị dạng khối nội tuyến */
+            padding: 10px 15px; /* Khoảng cách bên trong */
+            background-color: #6c757d; /* Màu nền */
+            color: white; /* Màu chữ */
+            border-radius: 5px; /* Bo góc */
+            text-decoration: none; /* Không gạch chân */
+            margin-top: 15px; /* Khoảng cách trên */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
+
+            /* Hiệu ứng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Màu nền khi hover */
+                transform: scale(1.05); /* Phóng to một chút */
+                color: white; /* Màu chữ */
+            }
+
+        /* Căn giữa cho nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+        }
+
+        /* Căn giữa cho form */
+        .row {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+            margin-top: 20px; /* Khoảng cách trên */
+        }
+
+        /* Hiển thị lỗi */
+        .validation-summary-errors {
+            background-color: #f8d7da; /* Màu nền cho thông báo lỗi */
+            color: yellow; /* Màu chữ */
+            padding: 10px; /* Khoảng cách bên trong */
+            border-radius: 5px; /* Bo góc */
+            border: 1px solid #f5c6cb; /* Viền */
+            margin-bottom: 20px; /* Khoảng cách dưới */
+        }
+    </style>
+}
+
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="background-image"></div>
+    <div class="col-md-6">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h1 style="text-align: center; text-shadow: 3px 3px 3px #ababab;">THÊM THÔNG TIN VI PHẠM</h1>
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
             <div class="form-group">
                 <label asp-for="IdThongTinViPham" class="control-label"></label>
                 <input asp-for="IdThongTinViPham" class="form-control" />
@@ -27,7 +146,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdHocVien" class="control-label"></label>
-                <select asp-for="IdHocVien" class ="form-control" asp-items="ViewBag.IdHocVien"></select>
+                <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien" size="5"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ThoiGianViPham" class="control-label"></label>
@@ -42,31 +161,30 @@
             <div class="form-group">
                 <label asp-for="HinhThucXuLy" class="control-label"></label>
                 <input asp-for="HinhThucXuLy" class="form-control" />
-                <span asp-validation-for="HinhThucXuLy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdLoaiViPham" class="control-label"></label>
-                <select asp-for="IdLoaiViPham" class ="form-control" asp-items="ViewBag.IdLoaiViPham"></select>
+                <select asp-for="IdLoaiViPham" class="form-control" asp-items="ViewBag.IdLoaiViPham"></select>
+                <span asp-validation-for="IdLoaiViPham" class="text-danger"></span>
             </div>
-            <table>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary"</a>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+           <div class="sub_back">
+                <div class="submit">
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+
+                <a class="back" asp-action="Index"><i class="fa-solid fa-backward"></i> Trở về</a>
+
+            </div>
+
         </form>
+
+
     </div>
 </div>
 
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
