@@ -132,7 +132,8 @@ namespace C500Hemis.Controllers.KHCN
 
             try
             {
-                throw new Exception("Lỗi rồi bạn ơi! Mã quản lí nhiệm vụ bạn vừa nhập đã tồn tại!!!Nhập lại nhé!");
+                //Áp dụng throw và hiển thị ra theo BadRequest(bat_loi.Message);
+                //throw new Exception("Lỗi rồi bạn ơi! Mã quản lí nhiệm vụ bạn vừa nhập đã tồn tại!!!Nhập lại nhé!");
                 if (ModelState.IsValid)
                 {
                     //Thêm đối tượng vào context 
@@ -159,8 +160,9 @@ namespace C500Hemis.Controllers.KHCN
             catch (Exception bat_loi)
             {
                 // trả về HTTP Bad request 400
-
-                return BadRequest(bat_loi.Message);
+                return BadRequest(bat_loi);     
+              //Trả về thông báo hiển thị 
+              //  return BadRequest(bat_loi.Message);
             }
 
         }

@@ -4,57 +4,134 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center" style="color: #ff69b4;">🌸 Chi tiết 🌸</h1>
 
-<div>
-    <h4>TbDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.IdCapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation.IdThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong)
-        </dd>
-    </dl>
+    <div class="card shadow-sm">
+        <div class="card-header bg-pink text-white" style="background-color: #ff69b4;">
+            <h4 class="mb-0">💖 Thông tin khen thưởng 💖</h4>
+        </div>
+        <div class="card-body" style="background-color: #fff0f6;">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NamKhenThuong)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.NamKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.CapKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation.ThiDuaGiaiThuongKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.LoaiDanhHieuThiDuaGiaiThuongKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.PhuongThucKhenThuong)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-3 text-center">
+        <a asp-action="Edit" asp-route-id="@Model?.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd" class="btn btn-warning">
+            <i class="fas fa-edit"></i> ✏️ Sửa
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> ⬅️ Trở về danh sách
+        </a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqS2hKNacvn5IY6b3x6z7EACF7CemW8iD0EMB4E5FTMz7H+G7R2sb" crossorigin="anonymous">
+
+<style>
+    body {
+        background-color: #fff0f6;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .card {
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid #ffb6c1;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #ff69b4;
+    }
+
+    dd {
+        margin-bottom: 15px;
+        color: #495057;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .btn-warning {
+        background-color: #ff69b4;
+        color: white;
+        border-color: #ff69b4;
+    }
+
+        .btn-warning:hover {
+            background-color: #ff85c2;
+            border-color: #ff85c2;
+        }
+
+    .btn-secondary {
+        background-color: #ffc0cb;
+        border-color: #ff85c2;
+    }
+
+        .btn-secondary:hover {
+            background-color: #ff85c2;
+            border-color: #ff69b4;
+        }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h4 {
+        font-size: 1.5em;
+    }
+
+    .fas {
+        margin-right: 5px;
+    }
+</style>

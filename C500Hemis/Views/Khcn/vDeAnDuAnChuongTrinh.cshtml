@@ -1,0 +1,74 @@
+﻿@model IEnumerable<C500Hemis.Models.VDeAnDuAnChuongTrinh>
+
+@{
+    ViewData["Title"] = "vDeAnDuAnChuongTrinh";
+}
+
+<h1>vDeAnDuAnChuongTrinh</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDeAnDuAnChuongTrinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDeAnDuAnChuongTrinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDungTomTat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MucTieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianHopTacTu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianHopTacDen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongKinhPhi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguonKinhPhiChoDeAn)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDeAnDuAnChuongTrinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDeAnDuAnChuongTrinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDungTomTat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MucTieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianHopTacTu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianHopTacDen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongKinhPhi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NguonKinhPhiChoDeAn)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

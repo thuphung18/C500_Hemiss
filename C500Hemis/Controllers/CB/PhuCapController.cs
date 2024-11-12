@@ -19,10 +19,24 @@ namespace C500Hemis.Controllers.CB
         }
 
         // GET: PhuCap
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Search)
         {
-            var hemisContext = _context.TbPhuCaps.Include(t => t.IdBacLuongNavigation).Include(t => t.IdCanBoNavigation).Include(t => t.IdHeSoLuongNavigation);
-            return View(await hemisContext.ToListAsync());
+
+            IQueryable<TbPhuCap> query = _context.TbPhuCaps
+
+                .Include(t => t.IdBacLuongNavigation)
+                .Include(t => t.IdCanBoNavigation)
+                .Include(t => t.IdHeSoLuongNavigation);
+
+            if (Search.HasValue)
+            {
+                query = query.Where(s => s.IdCanBo == Search.Value);
+            }
+
+            // Trả về view với danh sách đã lọc
+            var result = await query.ToListAsync();
+            //Sau khi áp dụng điều kiện lọc (nếu có), đoạn mã này sẽ thực hiện truy vấn và lấy danh sách các bản ghi thỏa mãn điều kiện.
+            return View(result);
         }
 
         // GET: PhuCap/Details/5
@@ -49,9 +63,11 @@ namespace C500Hemis.Controllers.CB
         // GET: PhuCap/Create
         public IActionResult Create()
         {
-            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "IdBacLuong");
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo");
-            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "IdHeSoLuong");
+
+            //tạo dropdow
+            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "BacLuong");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "MaCanBo");
+            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "HeSoLuong");
             return View();
         }
 
@@ -62,18 +78,29 @@ namespace C500Hemis.Controllers.CB
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdPhuCap,IdCanBo,PhuCapThuHutNghe,PhuCapThamNien,PhuCapUuDaiNghe,PhuCapChucVu,PhuCapDocHai,PhuCapKhac,IdBacLuong,PhanTramVuotKhung,IdHeSoLuong,NgayThangNamHuongLuong")] TbPhuCap tbPhuCap)
         {
+
+            // Kiểm tra xem ID đã tồn tại hay chưa
+            if (_context.TbPhuCaps.Any(p => p.IdPhuCap == tbPhuCap.IdPhuCap))
+            {
+                ModelState.AddModelError("IdPhuCap", "ID đã tồn tại. Vui lòng chọn ID khác.");
+                ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "BacLuong");
+                ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "MaCanBo");
+                ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "HeSoLuong");
+                return View(tbPhuCap);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(tbPhuCap);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "IdBacLuong", tbPhuCap.IdBacLuong);
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbPhuCap.IdCanBo);
-            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "IdHeSoLuong", tbPhuCap.IdHeSoLuong);
+
+            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "BacLuong");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "MaCanBo");
+            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "HeSoLuong");
             return View(tbPhuCap);
         }
-
         // GET: PhuCap/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,9 +114,9 @@ namespace C500Hemis.Controllers.CB
             {
                 return NotFound();
             }
-            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "IdBacLuong", tbPhuCap.IdBacLuong);
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbPhuCap.IdCanBo);
-            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "IdHeSoLuong", tbPhuCap.IdHeSoLuong);
+            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "BacLuong");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "MaCanBo");
+            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "HeSoLuong");
             return View(tbPhuCap);
         }
 
@@ -103,6 +130,12 @@ namespace C500Hemis.Controllers.CB
             if (id != tbPhuCap.IdPhuCap)
             {
                 return NotFound();
+            }
+
+            // Kiểm tra xem ID đã tồn tại hay chưa (trừ ID hiện tại)
+            if (_context.TbPhuCaps.Any(p => p.IdPhuCap == tbPhuCap.IdPhuCap && p.IdPhuCap != id))
+            {
+                ModelState.AddModelError("IdPhuCap", "ID đã tồn tại. Vui lòng chọn ID khác.");
             }
 
             if (ModelState.IsValid)
@@ -125,9 +158,10 @@ namespace C500Hemis.Controllers.CB
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "IdBacLuong", tbPhuCap.IdBacLuong);
-            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "IdCanBo", tbPhuCap.IdCanBo);
-            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "IdHeSoLuong", tbPhuCap.IdHeSoLuong);
+
+            ViewData["IdBacLuong"] = new SelectList(_context.DmBacLuongs1, "IdBacLuong", "BacLuong");
+            ViewData["IdCanBo"] = new SelectList(_context.TbCanBos, "IdCanBo", "MaCanBo");
+            ViewData["IdHeSoLuong"] = new SelectList(_context.DmHeSoLuongs, "IdHeSoLuong", "HeSoLuong");
             return View(tbPhuCap);
         }
 

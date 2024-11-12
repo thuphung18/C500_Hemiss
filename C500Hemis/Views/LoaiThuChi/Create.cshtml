@@ -3,13 +3,130 @@
 @{
     ViewData["Title"] = "Create";
 }
+<a class="btn btn-head">
+<h1>THÊM MỚI</h1>
+</a>
+<style>
+    body {
+       background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+       background-position: center;
+       background-repeat: no-repeat;
+       background-color: rgb(204, 255, 204, 0.8);
+       font-weight: bolder;
+    }
+    
 
-<h1>Create</h1>
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+        background-color: rgba(152, 251, 152, 0.95);
+        padding: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        opacity: 0.95;
+        
+    }
 
-<h4>TbLoaiThuChi</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    h1, h3 {
+        text-align: center;
+        color: #FF0000;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50; 
+            color: #FF00FF;
+        }
+
+        table td {
+            background-color: #00FFFF;
+        }
+
+        table tr:hover {
+            background-color: #FFFF00;
+        }
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* Slight glow */
+            outline: none;
+        }
+
+    .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background-color: #05c46b;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition and button push effect */
+    }
+
+        .btn-primary:hover {
+            background-color: #048a55;
+            transform: scale(1.05); /* Slightly bigger */
+        }
+
+    .btn-back {
+        background-color:#00CC00;
+    }
+
+        .btn-back:hover {
+            font-weight: bold; /* Chữ sẽ đậm hơn khi hover */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng đổ khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            
+        }
+
+        /* Khi nhấn nút */
+        .btn-back:active {
+            font-weight: bolder; /* Chữ sẽ đậm hơn khi nhấn */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Thay đổi bóng đổ khi nhấn */
+        }
+    .btn-head {
+        background-color: rgba(245, 255, 250, 0.8);
+        width: 100%;
+        height: 80px;
+    }
+
+        .btn-head:hover {
+            background-color: rgba(245, 255, 250, 0.4);
+        }
+</style>
+
+<div class="form-container">
+    <h3>LOẠI THU CHI</h3>
+    <hr/>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -37,15 +154,16 @@
                 <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="TẠO" class="btn btn-primary" />
             </div>
         </form>
     </div>
+<div>
+    <a asp-action="Index" class="btn btn-back" style="margin-top:100px; color: white">
+        <i class="fa-solid fa-circle-arrow-left"></i>Quay lại danh sách
+    </a>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

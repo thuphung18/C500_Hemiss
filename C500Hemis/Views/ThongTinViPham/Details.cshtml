@@ -1,111 +1,143 @@
 ﻿@model C500Hemis.Models.TbThongTinViPham
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "CHI TIẾT";
 }
-<style>
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body::before {
+            content: '';
+            position: fixed; /* Giữ vị trí cố định */
+            top: 0;
+            left: 0;
+            width: 100%; /* Chiều rộng 100% */
+            height: 100%; /* Chiều cao 100% */
+            background-image: url('/images/son.jpg'); /* Hình nền */
+            background-size: cover; /* Lấp đầy không gian */
+            background-position: center; /* Căn giữa hình nền */
+            background-attachment: fixed; /* Hình nền không di chuyển khi cuộn */
+            z-index: -1; /* Đặt dưới cùng */
+        }
 
-    h3 {
-        text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
+        /* Căn giữa tổng thể cho phần tử chứa */
+        .total {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+            margin-top: 50px; /* Khoảng cách trên */
+            margin-bottom: 50px; /* Khoảng cách dưới */
+        }
 
-    h4 {
-        text-align: center;
-        font-size: 28px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
+        /* Định dạng cho bảng thông tin */
+        .form_del {
+            background-color: #f0f0f0; /* Màu nền bảng */
+            padding: 20px; /* Khoảng cách bên trong */
+            border-radius: 10px; /* Bo góc */
+            width: 50%; /* Chiều rộng 50% */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        }
 
-    .form-container {
-        padding: 30px;
-        margin: 0 auto;
-        width: 70%;
-    }
+        /* Tiêu đề "THÔNG TIN CHI TIẾT" */
+        h1 {
+            font-size: 36px; /* Kích thước chữ */
+            text-align: center; /* Căn giữa */
+        }
 
-    dl.row dt, dl.row dd {
-        margin-bottom: 10px;
-    }
+        /* Định dạng cho bảng thông tin, tạo lưới với hai cột */
+        .row {
+            display: grid; /* Sử dụng grid layout */
+            grid-template-columns: 50% 50%; /* Mỗi cột chiếm 50% chiều rộng */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+            padding: 15px; /* Khoảng cách bên trong */
+            background-color: #fff; /* Màu nền trắng */
+            border-radius: 8px; /* Bo góc */
+            margin: 20px; /* Khoảng cách bên ngoài */
+        }
 
-    dt {
-        font-weight: bold;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+        /* Định dạng cho cột thông tin bên trái */
+        dt {
+            font-weight: bold; /* Chữ đậm */
+            color: #444; /* Màu chữ */
+            white-space: nowrap; /* Tránh xuống dòng */
+            align-self: center; /* Căn giữa theo trục dọc */
+            text-align: right; /* Căn phải để khoảng cách giữa dt và dd đều đặn */
+            padding-right: 10px; /* Khoảng cách giữa dt và dd */
+        }
 
-    dd {
-        margin-bottom: 10px;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 10px;
-    }
+        /* Định dạng cho cột thông tin bên phải */
+        dd {
+            color: #555; /* Màu chữ */
+            margin-bottom: 0; /* Không có khoảng cách dưới */
+            align-self: center; /* Căn giữa theo trục dọc */
+        }
 
-    .btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 10px;
-        margin-right: 10px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
+        /* Định dạng nút quay lại */
+        .back {
+            display: inline-block; /* Hiển thị dạng khối nội tuyến */
+            padding: 10px 15px; /* Khoảng cách bên trong */
+            background-color: #6c757d; /* Màu nền */
+            color: white; /* Màu chữ */
+            border-radius: 5px; /* Bo góc */
+            text-decoration: none; /* Không gạch chân */
+            margin-top: 15px; /* Khoảng cách trên */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi */
+        }
 
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #dee2e6;
-    }
+            /* Hiệu ứng khi di chuột vào nút quay lại */
+            .back:hover {
+                background-color: #5a6268; /* Màu nền khi hover */
+                transform: scale(1.05); /* Phóng to một chút */
+                color: white; /* Màu chữ */
+            }
 
-    form {
-        padding-bottom: 50px;
-    }
-</style>
-<h1>Thông tin chi tiết</h1>
+        /* Căn giữa cho nút xác nhận */
+        .submit {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa */
+            margin-top: 20px; /* Khoảng cách trên */
+        }
+    </style>
+}
 
-<div>
-    <h4>Thông tin vi phạm</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianViPham)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianViPham)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoiDungViPham)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NoiDungViPham)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HinhThucXuLy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HinhThucXuLy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdHocVienNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiViPhamNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiViPhamNavigation.IdLoaiViPham)
-        </dd>
-    </dl>
+<div class="total">
+    <div class="form_del">
+        <h1 style="text-align:centerstyle; text-shadow: 3px 3px 3px #ababab;">THÔNG TIN CHI TIẾT VI PHẠM</h1>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ThoiGianViPham)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ThoiGianViPham)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NoiDungViPham)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NoiDungViPham)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HinhThucXuLy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HinhThucXuLy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdHocVienNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdHocVienNavigation.IdHocVien)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdLoaiViPhamNavigation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdLoaiViPhamNavigation.IdLoaiViPham)
+            </dd>
+        </dl>
+        <div class="submit"> <a asp-action="Index" class="back"><i class="fa-solid fa-backward"></i> Trở về</a></div>
+
+    </div>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdThongTinViPham"><input type="submit" value="Chỉnh sửa" class="btn btn-primary" /></a> |
-    <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary" /></a>
-</div>
+
