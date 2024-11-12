@@ -4,60 +4,147 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        background-color: #fff0f6;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>TbDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamKhenThuong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.IdCapKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation.IdThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.IdPhuongThucKhenThuong)
-        </dd>
-    </dl>
-    
+    h1 {
+        color: #ff69b4;
+        font-size: 3em;
+        text-align: center;
+    }
+
+    h3 {
+        color: #ff85c2;
+        font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    dt {
+        font-weight: bold;
+        color: #ff69b4;
+    }
+
+    dd {
+        color: #495057;
+        margin-bottom: 15px;
+    }
+
+    .btn-danger {
+        background-color: #ff4d4d;
+        border-color: #ff4d4d;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #ff1a1a;
+        border-color: #ff1a1a;
+    }
+
+    .btn-secondary {
+        background-color: #ffc0cb;
+        border-color: #ffc0cb;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #ff85c2;
+        border-color: #ff85c2;
+    }
+
+    .fas {
+        margin-right: 5px;
+    }
+
+    form {
+        text-align: center;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1>🗑️ Xóa mục</h1>
+
+    <h3>Bạn có chắc chắn muốn xóa mục này không?</h3>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-pink text-white" style="background-color: #ff69b4;">
+            <h4 class="mb-0">💖 Thông tin khen thưởng 💖</h4>
+        </div>
+        <div class="card-body" style="background-color: #fff0f6;">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.SoQuyetDinhKhenThuong)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.SoQuyetDinhKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NamKhenThuong)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.NamKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdCapKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdCapKhenThuongNavigation.CapKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGdNavigation.ThiDuaGiaiThuongKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdLoaiDanhHieuThiDuaGiaiThuongKhenThuongNavigation.LoaiDanhHieuThiDuaGiaiThuongKhenThuong)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdPhuongThucKhenThuongNavigation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdPhuongThucKhenThuongNavigation.PhuongThucKhenThuong)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="🗑️ Xóa" class="btn btn-danger mt-3" />
+        <a asp-action="Index" class="btn btn-secondary mt-3">⬅️ Trở về danh sách</a>
     </form>
 </div>

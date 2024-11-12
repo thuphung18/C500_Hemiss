@@ -2,131 +2,194 @@
 
 @{
     ViewData["Title"] = "Details";
+
 }
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+          body
+        {
+            height: 100%;
+            margin: 0;
+            overflow-y: auto;
+            background-image: url("/images/taisantritue.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+            .btn {
+                transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+            }
 
-<h1>Details</h1>
+                .btn :hover {
+                    transform: scale(1.5); /* Làm to nút lên khi hover vào */
+                }
 
-<div>
-    <h4>TbTaiSanTriTue</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaGiaiPhapSangChe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaGiaiPhapSangChe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenTaiSanTriTue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenTaiSanTriTue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToChucCapBangGiayChungNhan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToChucCapBangGiayChungNhan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayCapBangGiayChungNhan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayCapBangGiayChungNhan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToChucCapBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToChucCapBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayCap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayCap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoDon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoDon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayNopDon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayNopDon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.QuyetDinhCapBangGiayChungNhan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QuyetDinhCapBangGiayChungNhan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CongBoBang)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CongBoBang)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ipc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ipc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ChuSoHuu)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ChuSoHuu)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TacGiaSangCheGiaiPhap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TacGiaSangCheGiaiPhap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TomTatNoiDungTaiSanTriTue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TomTatNoiDungTaiSanTriTue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NguoiChuTri)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NguoiChuTri)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NamDuocChapNhanDonHopLe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NamDuocChapNhanDonHopLe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdLoaiTaiSanTriTueNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdLoaiTaiSanTriTueNavigation.IdLoaiTaiSanTriTue)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdTaiSanTriTue">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+            .btn-hover {
+                transition: transform 0.3s ease;
+            }
+
+                .btn-hover:hover {
+                    transform: scale(1.2);
+                }
+            .col-md-6{
+                background-color: rgb(252, 242, 220, 0.8);
+            }
+            .table tr{
+                border-radius: 10px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5" style="position: sticky;">
+        <div style="background-color: lightblue; padding: 20px; margin-bottom: 20px;">
+            <!-- Phần đầu của card với nền màu xanh nhạt và l padding -->
+            <h1 class="card-title text-center mt-3">Thông Tin Chi Tiết</h1>
+            <!-- Tiêu đề chính của card -->
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-striped table-hover  mt-3" style="border-radius: 20px;">
+                    <!-- Bảng chứa thông tin chi tiết, với các kiểu dáng bảng hấp dẫn -->
+                    <tbody>
+                        <!-- Phần thân của bảng -->
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.MaGiaiPhapSangChe)</th>
+                            <td>@Html.DisplayFor(model => model.MaGiaiPhapSangChe)</td>
+                        </tr>
+                        <!-- Các hàng với tên thuộc tính và giá trị tương ứng từ model -->
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.TenTaiSanTriTue)</th>
+                            <td>@Html.DisplayFor(model => model.TenTaiSanTriTue)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ToChucCapBangGiayChungNhan)</th>
+                            <td>@Html.DisplayFor(model => model.ToChucCapBangGiayChungNhan)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NgayCapBangGiayChungNhan)</th>
+                            <td>@Html.DisplayFor(model => model.NgayCapBangGiayChungNhan)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ToChucCapBang)</th>
+                            <td>@Html.DisplayFor(model => model.ToChucCapBang)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.SoBang)</th>
+                            <td>@Html.DisplayFor(model => model.SoBang)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NgayCap)</th>
+                            <td>@Html.DisplayFor(model => model.NgayCap)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.SoDon)</th>
+                            <td>@Html.DisplayFor(model => model.SoDon)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NgayNopDon)</th>
+                            <td>@Html.DisplayFor(model => model.NgayNopDon)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.QuyetDinhCapBangGiayChungNhan)</th>
+                            <td>@Html.DisplayFor(model => model.QuyetDinhCapBangGiayChungNhan)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-striped table-hover mt-3" style="border-radius: 20px;">
+                    <!-- Bảng chứa thông tin chi tiết, với các kiểu dáng bảng hấp dẫn -->
+                    <tbody>
+
+
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.CongBoBang)</th>
+                            <td>@Html.DisplayFor(model => model.CongBoBang)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Ipc)</th>
+                            <td>@Html.DisplayFor(model => model.Ipc)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ChuSoHuu)</th>
+                            <td>@Html.DisplayFor(model => model.ChuSoHuu)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.TacGiaSangCheGiaiPhap)</th>
+                            <td>@Html.DisplayFor(model => model.TacGiaSangCheGiaiPhap)</td>
+                        </tr>
+                        @if (Model.TomTatNoiDungTaiSanTriTue != null)
+                        {
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.TomTatNoiDungTaiSanTriTue)</th>
+                                <td>
+                                    <span class="short-description">@String.Join(" ", Model.TomTatNoiDungTaiSanTriTue.Split(' ').Take(10))...</span>
+                                    <span class="full-description" style="display: none;">@Model.TomTatNoiDungTaiSanTriTue</span>
+                                    <a href="javascript:void(0)" onclick="toggleDescription(this)" style="color: blue; cursor: pointer;">Xem thêm</a>
+                                </td>
+                            </tr>
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.TomTatNoiDungTaiSanTriTue)</th>
+                                <td>Không có miêu tả</td>
+                            </tr>
+
+                        }
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NguoiChuTri)</th>
+                            <td>@Html.DisplayFor(model => model.NguoiChuTri)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NamDuocChapNhanDonHopLe)</th>
+                            <td>@Html.DisplayFor(model => model.NamDuocChapNhanDonHopLe)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.IdLoaiTaiSanTriTueNavigation)</th>
+                            <td>@Html.DisplayFor(model => model.IdLoaiTaiSanTriTueNavigation.IdLoaiTaiSanTriTue)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)</th>
+                            <td>@Html.DisplayFor(model => model.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Phần nội dung chính của card -->
+
+        </div>
+    </div>
+    <div class="card-footer text-center" style="background-color: transparent;">
+        <a class="btn btn-primary btn-hover " style="margin: 5px;" asp-action="Edit" asp-route-id="@Model?.IdTaiSanTriTue"><i class="fas fa-edit"></i></a>
+        <a class="btn btn-secondary btn-hover" style="margin: 5px;" asp-action="Index"><i class="fas fa-undo-alt"></i></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script>
+        function toggleDescription(link) {
+            var td = link.parentElement;
+            var shortDesc = td.querySelector('.short-description');
+            var fullDesc = td.querySelector('.full-description');
+
+            if (fullDesc.style.display === "none") {
+                fullDesc.style.display = "inline";
+                shortDesc.style.display = "none";
+                link.textContent = " Thu gọn";
+            } else {
+                fullDesc.style.display = "none";
+                shortDesc.style.display = "inline";
+                link.textContent = "Xem thêm";
+            }
+        }
+
+
+    </script>
+
+</body>
