@@ -3,68 +3,131 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
 <style>
     body {
         background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
-        background-position: center;
+        background-position: center; 
         background-repeat: no-repeat;
-        background-color: #ccffcc;
+        background-color: rgb(204, 255, 204, 0.8);
+        font-weight: bolder;
     }
 
-    div .row {
-        background-color: #FFFFE0;
-        justify-content: center;
-        align-items: center;
-        width: auto;
-        height: auto;
-        padding: 20px;
-        font-weight: bold;
+    .form-container {
+        max-width: 500px; /* chiều rộng tối đa của form */
+        margin: auto; /* khoảng trắng */
+        background-color: rgba(152, 251, 152, 0.95);
+        padding: 30px; /* khoảng cách giữa đường viền và nội dung*/
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* đổ bóng */
+        border-radius: 10px;
+        opacity: 0.95; /* làm mờ */
     }
 
-    h1 {
-        font-family: Apice;
+    h1, h3, h4 {
         text-align: center;
-        color: #16423C;
+        color: #FF0000;
+        margin-bottom: 20px;
     }
 
-    .control-label {
-        font-weight: bold;
-        color: #228B22;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
     }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: #FF00FF;
+        }
+
+        table td {
+            background-color: #00FFFF;
+        }
+
+        table tr:hover {
+            background-color: #FFFF00;
+        }
+
+    .form-group {
+        font-weight: bold;
+        color: #333;
+        display: block; /* hiển thị phần tử thành một khối */
+        margin-bottom: 5px;
+        width: 100%
+    }
+    .col-md-4 {
+        width: 100%;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d1d1;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* hiệu ứng chuyển đổi mượt */
+    }
+
+        .form-control:focus {
+            border-color: #05c46b;
+            box-shadow: 0 0 5px rgba(5, 196, 107, 0.5); /* đổ bóng  */
+            outline: none;
+        }
 
     .btn-primary {
-        background-color: #2E8B57;
-        color: #E9EFEC;
+        width: 100%;
+        padding: 12px;
+        background-color: #05c46b;
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px; /* bo góc */
+        cursor: pointer; /* thay đổi khi chuột di chuyển qua */
+        margin-top: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng chuyển đổi mượt và hiệu ứng nhấn nút */
     }
 
         .btn-primary:hover {
-            background-color: #6A9C89;
-            transform: scale(1.05);
+            background-color: #048a55;
+            transform: scale(1.05); /* phóng to một chút */
         }
 
-    /* Flexbox container to align form fields on one row */
-    .form-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px; /* Add some spacing between fields */
+    .btn-back {
+        background-color: #00CC00;
     }
 
-    .form-group {
-        flex: 1; /* Each field takes equal width */
-        margin-bottom: 15px; /* Add space below each field */
+        .btn-back:hover {
+            font-weight: bold; /* Chữ sẽ đậm hơn khi hover */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng đổ khi hover */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+        }
+
+        /* Khi nhấn nút */
+        .btn-back:active {
+            font-weight: bolder; /* Chữ sẽ đậm hơn khi nhấn */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Thay đổi bóng đổ khi nhấn */
+        }
+
+    .btn-head {
+        background-color: rgba(245, 255, 250, 0.9);
+        width: 100%;
+        height: 80px;
     }
 
-    /* Adjust form size */
-    .form-container {
-        max-width: 1200px; /* Limit the maximum width of the form */
-        margin: 0 auto; /* Center the form */
-    }
+        .btn-head:hover {
+            background-color: rgba(245, 255, 250, 0.4);
+        }
+
 </style>
-
-<h1 align="center">Chỉnh Sửa Thông Tin</h1>
-<h4 style="text-align:center">Hoạt Động Tài Chính</h4>
+<a class="btn btn-head">
+<h1>CHỈNH SỬA</h1>
+</a>
+<div class="form-container">
+<h4>HOẠT ĐỘNG TÀI CHÍNH</h4>
 <hr />
 
 <div class="row">
@@ -72,41 +135,38 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdHoatDongTaiChinh" />
-
-            <!-- Form fields on one row -->
-            <div class="form-container">
-                <div class="form-group">
-                    <label asp-for="IdLoaiHoatDongTaiChinh" class="control-label"></label>
-                    <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
-                    <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="NamTaiChinh" class="control-label"></label>
-                    <input asp-for="NamTaiChinh" class="form-control" />
-                    <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="KinhPhi" class="control-label"></label>
-                    <input asp-for="KinhPhi" class="form-control" />
-                    <span asp-validation-for="KinhPhi" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="NoiDung" class="control-label"></label>
-                    <input asp-for="NoiDung" class="form-control" />
-                    <span asp-validation-for="NoiDung" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="IdLoaiHoatDongTaiChinh" class="control-label"></label>
+                <select asp-for="IdLoaiHoatDongTaiChinh" class="form-control" asp-items="ViewBag.IdLoaiHoatDongTaiChinh"></select>
+                <span asp-validation-for="IdLoaiHoatDongTaiChinh" class="text-danger"></span>
             </div>
-
-            <!-- Submit button -->
-            <div class="text-center">
+            <div class="form-group">
+                <label asp-for="NamTaiChinh" class="control-label"></label>
+                <input asp-for="NamTaiChinh" class="form-control" />
+                <span asp-validation-for="NamTaiChinh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KinhPhi" class="control-label"></label>
+                <input asp-for="KinhPhi" class="form-control" />
+                <span asp-validation-for="KinhPhi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoiDung" class="control-label"></label>
+                <input asp-for="NoiDung" class="form-control" />
+                <span asp-validation-for="NoiDung" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Lưu" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
             </div>
         </form>
     </div>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-back" style="margin-top:100px; color: white">
+        <i class="fa-solid fa-circle-arrow-left"></i>Quay lại danh sách
+    </a>
 </div>
 
 @section Scripts {

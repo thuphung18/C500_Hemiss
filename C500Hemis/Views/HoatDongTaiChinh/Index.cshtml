@@ -1,139 +1,146 @@
 ﻿@model IEnumerable<C500Hemis.Models.TbHoatDongTaiChinh>
-
 @{
     ViewData["Title"] = "Index";
 }
-
-<head>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-
-<style>
-    body {
-        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #ccffcc;
-    }
-    h1 {
-        font-family: Apice;
-        text-align: center;
-    }
-
-    thead {
-        background-color: #228B22;
-    }
-
-    tbody {
-        background-color: #FFFFE0;
-    }
-
-    th {
-        border: solid black 0.5px;
-        padding: 20px;
-        text-align: left;
-        color: #C4DAD2;
-    }
-
-    a {
-        color: #E9EFEC;
-        text-decoration: none;
-    }
-
-        a:hover {
-            text-decoration: none;
-            color: white;
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet"> 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Font+Name&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
+    <style>
+        body {
+            background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgb(204, 255, 204, 0.8);
+            font-weight: bolder; /* tô đậm */
         }
 
-    table {
-        border-radius: 10px;
-        width: 100%;
-        border-collapse: collapse;
-        background-color: #f1f3f3;
-        margin-top: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    }
-
-    th:hover {
-        background-color: #6A9C89;
-    }
-
-    footer {
-        text-align: center;
-        margin-top: 20px;
-        color: #666;
-    }
-    .butcreate {
-        border: solid black 2px;
-        color: white;
-        background-color: #424242;
-        border-radius: 10px;
-        padding: 10px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-
-    .btn a:hover {
-        color: #E9EFEC;
-        text-decoration: none;
-    }
-
-    .btn-edit {
-        background-color: #2E8B57;
-        color: #E9EFEC;
-    }
-
-        .btn-edit:hover {
-            background-color: #FFD700;
-            transform: scale(1.05);
+        background-image {
+            opacity: 0.5; /* Độ trong suốt của ảnh nền */
+        } 
+       
+        .btn-edit {
+            background-color: #88a764; /* Màu xanh lá cho Chỉnh sửa */
         }
 
-    .btn-details {
-        background-color: #2E8B57;
-        color: #E9EFEC;
-    }
+            .btn-edit:hover {
+                background-color: #f5f6b4;
+                transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            }
 
-        .btn-details:hover {
-            background-color: #FFA500;
-            transform: scale(1.05);
+        .btn-details {
+            background-color: #8fc8d9; /* Màu xanh dương nhạt cho Chi tiết */
         }
 
-    .btn-delete {
-        background-color: #2E8B57;
-        color: #E9EFEC;
-    }
+            .btn-details:hover {
+                background-color: #c4faf0;
+                transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            }
 
-        .btn-delete:hover {
-            transform: scale(1.05);
-            background-color: #FF4500;
+        .btn-delete {
+            background-color: #dc3f1c; /* Màu đỏ cho Xóa bỏ */
         }
 
-    .btn-create {
-        background-color: #16423C;
-        color: #E9EFEC;
+            .btn-delete:hover {
+                background-color: #df8584;
+                transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+            }
+        .btn-create {
+            background-color: #FF4040;
+        }
+            .btn-create:hover {
+                background-color: #FF6A6A;
+                transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi hover */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng đổ khi hover */
+            }
+            /* Khi nhấn nút */
+            .btn-create:active {
+                font-weight: bolder; /* Chữ sẽ đậm hơn khi nhấn */
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Thay đổi bóng đổ khi nhấn */
+            }
+
+        table {
+            text-align: center;
+            width: 80%;
+            margin: auto; /* tạo khoảng trắng ngẫu nhiên */
+            table-layout: fixed ; /* Cho phép cột tự điều chỉnh theo nội dung */
+            border-collapse: collapse; /* Giúp giảm khoảng cách giữa các ô */
+        }
+
+
+
+        tr {
+            transition: background-color 0.3s ease; /* Thêm hiệu ứng cho hàng */
+            text-align: center;
+        }
+
+            tr:hover {
+                background-color: rgba(154, 255, 154, 0.5); /* Màu nền khi di chuột vào hàng */
+            }
+
+        th {
+            background-color: #006600;
+            font-size: 20px;
+            vertical-align: middle;
+            height: 60px; /* Đảm bảo có đủ chiều cao để căn giữa */
+            padding: 10px; /* Khoảng cách giữa nội dung và viền */
+        }
+            th:hover {
+                background-color: rgba(84, 255, 159, 0.5); /* Màu nền khi di chuột vào tiêu đề */
+                font-size: 20px;
+            }
+        td { 
+            text-align:right; /* căn phải */
+            padding: 10px;
+
+        }
+            td:hover {
+            background-color: rgba(152, 251, 152, 0.5);
+        }
+        thead {
+            background-color: rgba(84, 139, 84, 0.8);
+            text-align: center;
+            
+        }
+            thead:hover {
+                background-color: rgba(60, 179, 113, 0.8);
+            }  
+        h1 {
+            color: #553f3a;
+            text-align: center;
+            font-size: 45px;
+            font-family: 'Playfair Display';
+        }
+        .btn-head{
+            background-color: rgba(245, 255, 250, 0.8);
+            width: 100%;
+            height:120px; /* độ cao */
+        }
+               .btn-head:hover {
+                background-color: rgba(245, 255, 250, 0.4);
+            }
+
+    table.dataTable > tbody > tr {
+            background-color:rgba(189, 183, 107, 0.8); /* màu hàng */
+    }
+    .dt-column-title {
+        font-size: 18px;
+        text align: center;
     }
 
-        .btn-create:hover {
-            background-color: #6A9C89;
-            transform: scale(1.05);
-        }
-</style>
-
-<h1 align ="center"> HOẠT ĐỘNG TÀI CHÍNH</h1>
-
+    </style>
+}
+<a class="btn btn-head">
+<h1>HOẠT ĐỘNG TÀI CHÍNH</h1>
+<h3 style="text-align:center;">Tổng số bản ghi: @Model.Count()</h3>
+</a>
 <p>
-    <a asp-action="Create">Tạo Mới</a>
+    <a asp-action="Create" class="btn btn-create" style:"font-weight: bolder; text-decoration: underline; color: red;"> + TẠO MỚI</a>
 </p>
-<table class="table"
-    id="ntable">
+<table class="table" id="ntable">
     <thead>
         <tr>
             <th>
@@ -148,7 +155,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdLoaiHoatDongTaiChinhNavigation)
             </th>
-            <th></th>
+            <th style="text-align:center;">
+                TÙY CHỌN
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -164,45 +173,36 @@
                 @Html.DisplayFor(modelItem => item.NoiDung)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiHoatDongTaiChinhNavigation.IdHoatDongTaiChinh)
+                @Html.DisplayFor(modelItem => item.IdLoaiHoatDongTaiChinhNavigation.HoatDongTaiChinh)
             </td>
-                <td nowrap>
-                    <a asp-action="Edit" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-edit"><i class='bx bx-edit-alt'></i> Sửa</a>
-                    <a asp-action="Details" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-details"><i class='bx bx-info-circle'></i> Chi tiết</a>
-                    <a asp-action="Delete" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-delete"><i class='bx bx-trash-alt'></i> Xóa</a>
-                </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-edit">
+                        <i class="fa-solid fa-pen-to-square"></i><i class='bx bx-edit'></i>Sửa 
+                    </a> 
+                    <a asp-action="Details" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-details">
+                        <i class="fa-solid fa-circle-info"></i><i class='bx bx-info-circle'></i>Chi tiết
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.IdHoatDongTaiChinh" class="btn btn-delete">
+                        <i class="fa-solid fa-circle-info"></i><i class='bx bx-trash'></i>Xóa
+                    </a>
+            </td> 
         </tr>
 }
     </tbody>
 </table>
-<a asp-action="Create" class="btn btn-create">Tạo mới</a>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+    <script>
 
-<script>
-    new DataTable('#ntable', {
-        searching: true, // Mặc định là true, set false để tắt chức năng search
-        processing: true,
-        info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
-        language: {
-            processing: "Message khi đang tải dữ liệu",
-            search: "Tìm kiếm",
-            lengthMenu: "Điều chỉnh số lượng bản ghi trên 1 trang _MENU_ ",
-            info: "Bản ghi từ _START_ đến _END_ Tổng công _TOTAL_ bản ghi",
-            infoEmpty: "Khi không có dữ liệu, Hiển thị 0 bản ghi trong 0 tổng cộng 0 ",
-            infoFiltered: "(Message bổ sung cho info khi không search đc record nào _MAX_)",
-            infoPostFix: "Alo Alo", // Cái này khi thêm vào nó sẽ đứng sau info
-            loadingRecords: "",
-            zeroRecords: "Khi tìm kiếm không match với record nào",
-            emptyTable: "Không có dữ liệu",
-            paginate: {
-                first: "Trang đầu",
-                previous: "Trang trước",
-                next: "Trang sau",
-                last: "Trang cuối"
-            },
-            aria: {
-                sortAscending: ": Message khi đang sắp xếp theo column",
-                sortDescending: ": Message khi đang sắp xếp theo column",
-            }
-        },
-    });
-</script>
+        new DataTable('#ntable', {
+            searching: true, // Mặc định là true, set false để tắt chức năng search
+            processing: true,
+            info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Vietnamese.json"
+                    },
+                });
+    </script>
+}

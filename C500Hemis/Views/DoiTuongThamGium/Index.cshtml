@@ -13,74 +13,97 @@
     </style>
 }
 
+@*
+     /*B8D55 AT13 Ca Kỳ Hòa*/
+    Nội dung:-Hiện thông tin được tạo từ phần create
+             -Hiển thị số bản ghi
+             -sử dụng datatable
+             -có những chức năng sắp xếp tìm kiếm hiển thị số bản ghi của 1 trang
+             -điều chỉnh màn hình phù hợp với màn hình từng thiết bị
+    Hình thức:- Sử dụng css làm đẹp giao diện
+              - các hàng chẵn lẻ có màu khác nhau
+              - đồng bộ phong cách với các phần khác
+              - có hiệu ứng khi tương tác với các phần trong bảng
+              - có background
+              - căn giữa tất cả các nội dung trong bảng.
+*@
+
 <style>
-        /*B8D55 AT13 Ca Kỳ Hòa*/
-    /*Ảnh nền cho Index (bao gồm logo HVAN và màu nền đỏ)*/
-    body{
-        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: rgb(195,34,34);
+    /* Ảnh nền cho trang Index với logo HVAN và màu nền đỏ */
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Đặt ảnh nền là logo HVAN */
+        background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-color: rgb(195, 34, 34); /* Màu nền đỏ */
     }
-    /*Chỉnh font chữ cho H1*/
-    h1{
-        font-family: Apice;
+
+    /* Chỉnh font chữ cho tiêu đề H1 */
+    h1 {
+        font-family: Apice; /* Đặt font chữ là Apice cho tiêu đề */
     }
-    /*Tạo một khung chứa*/
+
+    /* Tạo một khung chứa */
     .khungchua {
-        min-height: 100vh;
-        height: auto;
-        background-color: #FFF5;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 20px;
+        min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao màn hình */
+        height: auto; /* Chiều cao tự động theo nội dung */
+        background-color: #FFF5; /* Màu nền trắng mờ */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc */
+        justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+        border-radius: 10px; /* Bo tròn góc khung */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        padding: 20px; /* Đệm xung quanh khung */
+        margin: 20px; /* Khoảng cách giữa khung và các phần tử khác */
     }
-    /*Chỉnh giao diện table*/
-    table{
-        width: 82vw;
-        backdrop-filter: blur(3px);
-        border-radius: .8rem;
-        background-color: #FFF5;
-        box-shadow: 0 .4rem .8rem #0005;
-        overflow: hidden;
-        border: 0.2px
+
+    /* Chỉnh giao diện cho bảng */
+    table {
+        width: 82vw; /* Chiều rộng bảng chiếm 82% chiều rộng viewport */
+        backdrop-filter: blur(3px); /* Hiệu ứng làm mờ nền phía sau */
+        border-radius: 0.8rem; /* Bo tròn góc bảng */
+        background-color: #FFF5; /* Màu nền trắng mờ */
+        box-shadow: 0 0.4rem 0.8rem #0005; /* Đổ bóng nhẹ */
+        overflow: hidden; /* Ẩn phần nội dung tràn */
+        border: 0.2px; /* Đường viền bảng */
     }
-    /*Chỉnh giao diện thead trong table*/
-    table thead{
-        width: 100%;
-        height: 10%;
-        background-color:#d5d1defe;
-        padding: .8rem 1rem;
-    }
-    /*Chỉnh giao diện tbody trong table*/
-    table tbody{
-        width: 95%;
-        max-height: 89%;
-        background-color: #fffb;
-        overflow: auto;
-    }
-    /*Phân loại màu cho bản ghi cho hàng chẵn*/
-    table tbody tr:nth-child(even){
-        background-color:#0000000b;
-    }
-    /*Tạo hover khi trỏ vào bản ghi của tbody*/
-    table tbody tr:hover{
-        background-color: #fff6;
-    }
-    /*Chỉnh button Edit*/
+
+        /* Chỉnh giao diện phần thead trong bảng */
+        table thead {
+            width: 100%; /* Chiều rộng đầy đủ */
+            height: 10%; /* Chiều cao là 10% */
+            background-color: #d5d1defe; /* Màu nền cho phần thead */
+            padding: 0.8rem 1rem; /* Đệm bên trong */
+        }
+
+        /* Chỉnh giao diện phần tbody trong bảng */
+        table tbody {
+            width: 95%; /* Chiều rộng là 95% */
+            max-height: 89%; /* Chiều cao tối đa là 89% */
+            background-color: #fffb; /* Màu nền trắng nhạt */
+            overflow: auto; /* Cho phép cuộn nếu nội dung quá dài */
+        }
+
+            /* Phân loại màu cho hàng chẵn trong tbody */
+            table tbody tr:nth-child(even) {
+                background-color: #0000000b; /* Màu nền xám nhạt cho hàng chẵn */
+            }
+
+            /* Hiệu ứng hover khi trỏ vào bản ghi của tbody */
+            table tbody tr:hover {
+                background-color: #fff6; /* Màu nền trắng mờ khi hover */
+            }
+
+    /* Chỉnh giao diện nút Edit */
     .btn-edit {
-        background-color: #41B06E;
-        color: #E9EFEC;
+        background-color: #41B06E; /* Màu nền xanh lá */
+        color: #E9EFEC; /* Màu chữ trắng nhạt */
     }
 
         .btn-edit:hover {
-            background-color: #8DECB4;
-            transform: scale(1.05);
+            background-color: #8DECB4; /* Màu nền khi hover */
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
         }
-    /*Chỉnh button Details*/
+
+    /* Chỉnh giao diện nút Details */
     .btn-details {
         background-color: #41B06E;
         color: #E9EFEC;
@@ -90,7 +113,8 @@
             background-color: #8DECB4;
             transform: scale(1.05);
         }
-    /*Chỉnh button Delete*/
+
+    /* Chỉnh giao diện nút Delete */
     .btn-delete {
         background-color: #41B06E;
         color: #E9EFEC;
@@ -98,9 +122,10 @@
 
         .btn-delete:hover {
             transform: scale(1.05);
-            background-color: red;
+            background-color: red; /* Màu nền đỏ khi hover */
         }
-    /*Chỉnh button Create*/
+
+    /* Chỉnh giao diện nút Create */
     .btn-create {
         background-color: #41B06E;
         color: #E9EFEC;
@@ -108,10 +133,11 @@
 
         .btn-create:hover {
             background-color: #8DECB4;
-            color: black;
+            color: black; /* Màu chữ đen khi hover */
             transform: scale(1.05);
         }
-    /*Chỉnh button Excel*/
+
+    /* Chỉnh giao diện nút Excel */
     .btn-excel {
         background-color: #41B06E;
         color: #E9EFEC;
@@ -121,10 +147,13 @@
             background-color: #8DECB4;
             color: black;
             transform: scale(1.05);
-        }   
-    .dt-buttons .dt-button.btn-primary{
-    border-color: unset;
+        }
+
+    /* Đặt lại viền cho nút trong DataTable */
+    .dt-buttons .dt-button.btn-primary {
+        border-color: unset;
     }
+
 </style>
 
 <div class="khungchua">

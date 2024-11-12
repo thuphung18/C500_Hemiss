@@ -1,143 +1,267 @@
-﻿@model IEnumerable<C500Hemis.Models.TbTaiSanTriTue>
-
-@{
-    ViewData["Title"] = "Index";
+﻿@section heads {
+    <style>
+        footer {
+            position: absolute;
+            left: 0;
+        }
+    </style>
 }
+@model IEnumerable<C500Hemis.Models.TbTaiSanTriTue>
 
-<h1>Index</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANH SÁCH</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+          rel="stylesheet" />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaGiaiPhapSangChe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenTaiSanTriTue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToChucCapBangGiayChungNhan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayCapBangGiayChungNhan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToChucCapBang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoBang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayCap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoDon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayNopDon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuyetDinhCapBangGiayChungNhan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CongBoBang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ipc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChuSoHuu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TacGiaSangCheGiaiPhap)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TomTatNoiDungTaiSanTriTue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NguoiChuTri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NamDuocChapNhanDonHopLe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoaiTaiSanTriTueNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdNhiemVuKhcnNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaGiaiPhapSangChe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenTaiSanTriTue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToChucCapBangGiayChungNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayCapBangGiayChungNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToChucCapBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayCap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoDon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayNopDon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuyetDinhCapBangGiayChungNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongBoBang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ipc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChuSoHuu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TacGiaSangCheGiaiPhap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TomTatNoiDungTaiSanTriTue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NguoiChuTri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NamDuocChapNhanDonHopLe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdLoaiTaiSanTriTueNavigation.IdLoaiTaiSanTriTue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNhiemVuKhcnNavigation.IdNhiemVuKhcn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTaiSanTriTue">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTaiSanTriTue">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTaiSanTriTue">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+    <style>
+                 body
+        {
+            height: 100%;
+            margin: 0;
+            overflow-y: auto;
+            background-image: url("https://images.hdqwalls.com/download/digital-artist-land-water-mountains-lake-slovenia-pic-3840x2160.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+                /* Định dạng cho nội dung chính */
+                .content {
+                    height: 700px; /* Chiều cao cố định của view */
+                    overflow-y: auto; /* Tạo thanh trượt dọc */
+                    border: 1.5px solid #ccc; /* Tùy chọn: tạo viền cho rõ ràng */
+                    padding: 10px; /* Khoảng cách bên trong */
+                }
+
+                /* Định dạng cho các hàng */
+                .Tr {
+                    width: auto; /* Chiều rộng tự động */
+                    text-align: center; /* Căn giữa văn bản */
+                    max-height: min-content; /* Chiều cao tối đa là nội dung */
+                }
+
+                /* Định dạng cho các ô tiêu đề và ô dữ liệu */
+                th, td {
+                    border: 2px solid rgb(17 104 118); /* Viền màu xanh */
+                    text-align: center; /* Căn giữa văn bản */
+                    padding: 10px; /* Khoảng cách bên trong */
+                }
+
+                /* Hiệu ứng khi hover vào hàng dữ liệu */
+                .value:hover {
+                    background-color: #f5f5f5; /* Màu nền khi hover */
+                }
+
+                    /* Hiệu ứng khi hover vào ô dữ liệu */
+                    .value:hover td {
+                        color: #333; /* Màu chữ khi hover */
+                    }
+
+                /* Hiệu ứng khi hover vào nút */
+                .btn:hover {
+                    color: white; /* Màu chữ khi hover */
+                }
+
+                /* Định dạng nút chủ đạo */
+                .btn-primary {
+                    background-color: #007bff; /* Màu nền xanh dương */
+                }
+
+                /* Định dạng nút nguy hiểm */
+                .btn-danger {
+                    background-color: #dc3545; /* Màu nền đỏ */
+                }
+
+                /* Hiệu ứng khi nút được nhấn */
+                .btn-create:active {
+                    font-weight: bolder; /* Chữ sẽ đậm hơn khi nhấn */
+                    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Thay đổi bóng đổ khi nhấn */
+                }
+
+                /* Định dạng văn bản trong form */
+                form .text {
+                    text-align: right; /* Căn lề phải */
+                }
+
+                /* Định dạng chính */
+                .main {
+                }
+
+                /* Định dạng cho phần phân trang */
+                .pagination {
+                    display: flex; /* Hiển thị dưới dạng flexbox */
+                    justify-content: center; /* Căn giữa các phần tử */
+                    padding: 10px; /* Khoảng cách bên trong */
+                }
+
+                    /* Định dạng cho liên kết trong phân trang */
+                    .pagination a {
+                        margin: 0 5px; /* Khoảng cách giữa các liên kết */
+                        padding: 8px 16px; /* Khoảng cách bên trong */
+                        text-decoration: none; /* Bỏ gạch chân */
+                        color: #007bff; /* Màu chữ xanh dương */
+                    }
+
+                        /* Định dạng cho liên kết trang hiện tại */
+                        .pagination a.active {
+                            background-color: #007bff; /* Màu nền xanh dương */
+                            color: white; /* Màu chữ trắng */
+                        }
+
+                /* Định dạng chung cho nội dung */
+                .content {
+                    background-color: lightblue; /* Màu nền xanh nhạt */
+                    border-radius: 10px; /* Bo góc */
+                }
+
+                /* Định dạng nút thành công */
+                .btn-success {
+                    transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+                    border-radius: 50%; /* Bo góc tròn */
+                    font-size: larger; /* Kích thước chữ lớn hơn */
+                }
+
+                    /* Hiệu ứng khi hover vào  nút thuộc tính .btn-success  */
+                    .btn-success:hover {
+                        transform: scale(1.3); /* Làm to nút lên khi hover vào */
+                        color: aquamarine; /* Màu chữ */
+                    }
+
+                /* Định dạng chung cho nút nhỏ */
+                .btn-sm {
+                    transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+                }
+
+                    /* Hiệu ứng khi hover vào nút nhỏ */
+                    .btn-sm :hover {
+                        transform: scale(1.7); /* Làm to nút lên khi hover vào */
+                    }
+
+                /* Định dạng  nút thuộc tính .btn-primary  */
+                .btn-primary {
+                    transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+                }
+
+                    /* Hiệu ứng khi hover vào  nút thuộc tính .btn-primary */
+                    .btn-primary:hover {
+                        transform: scale(1.2); /* Làm to nút lên khi hover vào */
+                    }
+
+                /* Định dạng nút có thuộc tính .btn-danger*/
+                .btn-danger {
+                    transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+                }
+
+                    /* Hiệu ứng khi hover vào thuộc tính .btn-danger */
+                    .btn-danger:hover {
+                        transform: scale(1.2); /* Làm to nút lên khi hover vào */
+                    }
+    </style>
+
+</head>
+<body>
+
+
+    <!-- Tiêu đề trang -->
+    <div>
+        <h1 style="text-align: center; color:#010000; padding-bottom: 40px; margin-top:20px; font-family: 'Dancing Script', cursive; font-size:5rem;">
+            Tài Sản Trí Tuệ
+        </h1>
+    </div>
+
+    <!-- Container chính -->
+    <div class="container">
+        <div class="row">
+            <!-- Form tìm kiếm -->
+            <div class="col-md-5">
+                <form asp-action="Index" method="get" class="form-inline mb-3 justify-content-center">
+                    <div class="form-group">
+                        <label for="searchId" class="mr-2">
+                            <strong style="color: #0d0a0a;">Search by ID:</strong>
+                        </label>
+                        <input type="number" name="id" class="form-control mr-2" id="searchId" placeholder="Enter ID" />
+                        <button type="submit" class="btn btn-primary" style="margin: 5px;">
+                            <i class="fas fa-search" title="Tìm Kiếm Bằng ID"> Search</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Khoảng trống giữa form và nút thêm mới -->
+            <div class="col-md-5"></div>
+            <!-- Nút thêm mới -->
+            <div class="col-md-2">
+                <p class=" text" style="text-align: right;">
+                    <a class="btn btn-success" asp-action="Create">
+                        <i class="fas fa-plus" title="Thêm Mới"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần nội dung chính -->
+    <div class="main">
+        <div>
+            <h1 class="text-center">@ViewData["Title"]</h1>
+        </div>
+
+        <!-- Hiển thị thông báo không tìm thấy -->
+        @if (ViewBag.NotFoundMessage != null)
+        {
+            <div class="message container alert alert-danger text-center" style="width: 50vw;">
+                @ViewBag.NotFoundMessage
+            </div>
+        }
+        <h2 class="alert alert-info" style="text-align: center;">Số bản ghi : @Model.Count()</h2><!--Đếm số đối tượng-->
+        <!-- Bảng dữ liệu -->
+        <div class="content container" style="margin-bottom: 70px;">
+            <table id="data-table" class="table table-hover table-striped text-center table-responsive-lg" style="white-space: nowrap; background-color: bisque;">
+                <thead class="thead-dark">
+                    <tr class="Tr">
+                        <th>Actions</th>
+                        <th>@Html.DisplayNameFor(model => model.IdTaiSanTriTue)</th>
+                        <th>@Html.DisplayNameFor(model => model.MaGiaiPhapSangChe)</th>
+                        <th>@Html.DisplayNameFor(model => model.TenTaiSanTriTue)</th>
+                        <th>@Html.DisplayNameFor(model => model.ChuSoHuu)</th>
+                        <th>@Html.DisplayNameFor(model => model.TacGiaSangCheGiaiPhap)</th>
+                        <th>@Html.DisplayNameFor(model => model.NguoiChuTri)</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr class="value Tr" style="cursor: pointer;" onclick="window.location.href='@Url.Action("Details", new { id = item.IdTaiSanTriTue })'">
+                            <td>
+                                <!--Định dạng icon và màu sắc các btn-->
+                                <a class="btn btn-primary btn-sm" title="Chỉnh Sửa" asp-action="Edit" asp-route-id="@item.IdTaiSanTriTue"><i class="fas fa-user-edit"></i></a>
+                                <a class="btn btn-danger btn-sm" title="Xóa" asp-action="Delete" asp-route-id="@item.IdTaiSanTriTue"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.IdTaiSanTriTue)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MaGiaiPhapSangChe)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TenTaiSanTriTue)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ChuSoHuu)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TacGiaSangCheGiaiPhap)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NguoiChuTri)</td>
+                        </tr>
+                    }
+
+
+                </tbody>
+                </class>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>

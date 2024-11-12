@@ -1,87 +1,139 @@
-﻿@model IEnumerable<C500Hemis.Models.TbDatDai>
+﻿@model C500Hemis.Models.TbDatDai
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <style>
-        .create-new {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
+<style>
+    h1 {
+        font-family: Apice; /* Sử dụng font chữ Apice cho tiêu đề chính---- */
+        text-align: center; /* Căn giữa tiêu đề */
+        color: #16423C; /* Màu chữ cho tiêu đề */
+    }
+
+    h4 {
+        font-family: Apice; /* Sử dụng font chữ Apice cho tiêu đề phụ */
+        text-align: center; /* Căn giữa tiêu đề phụ */
+    }
+
+    .row {
+        background-color: #C4DAD2; /* Màu nền cho hàng */
+        justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+        align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+        padding: 20px; /* Thêm khoảng đệm xung quanh hàng */
+        font-weight: bold; /* Đặt độ đậm cho văn bản trong hàng */
+    }
+
+    .btn-primary {
+        background-color: #16423C; /* Màu nền cho nút chính */
+        color: #C4DAD2; /* Màu chữ cho nút chính */
+    }
+
+        .btn-primary:hover {
+            background-color: #6A9C89; /* Thay đổi màu nền khi di chuột qua nút */
+            transform: scale(1.05); /* Tăng kích thước nút một chút khi di chuột qua */
         }
 
-        .action-links a {
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #ffcccc;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 3px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+    .container {
+        margin-top: 0.5rem; /* Khoảng cách phía trên cho container */
+        border-radius: 6px; /* Bo góc cho container */
+        box-shadow: 0 0 10px rgba(50, 50, 110, 0.85); /* Thêm bóng cho container */
+        width: 850px; /* Đặt chiều rộng cố định cho container */
+    }
+
+    .infor {
+        display: flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        margin-bottom: 20px; /* Khoảng cách dưới cho phần thông tin */
+    }
+
+        .infor .logo {
+            width: 75px; /* Đặt kích thước cho logo */
+            margin-right: 10px; /* Khoảng cách bên phải cho logo */
         }
-    </style>
-</head>
-<body1>
-    <div class="container">
-        <h1 align="center">Cơ Sở Vật Chất Và Trang Thiết Bị Đất Đai</h1>
-        <p>
-            <a class="create-new" asp-action="Create">Tạo Mới</a>
-        </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.MaGiayChungNhanQuyenSoHuu)</th>
-                    <th>@Html.DisplayNameFor(model => model.DienTichDat)</th>
-                    <th>@Html.DisplayNameFor(model => model.TenDonViSoHuu)</th>
-                    <th>@Html.DisplayNameFor(model => model.MinhChungQuyenSoHuuDatDai)</th>
-                    <th>@Html.DisplayNameFor(model => model.MucDichSuDungDat)</th>
-                    <th>@Html.DisplayNameFor(model => model.NamBatDauSuDungDat)</th>
-                    <th>@Html.DisplayNameFor(model => model.ThoiGianSuDungDat)</th>
-                    <th>@Html.DisplayNameFor(model => model.DienTichDatDaSuDung)</th>
-                    <th>@Html.DisplayNameFor(model => model.IdHinhThucSoHuuNavigation)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.MaGiayChungNhanQuyenSoHuu)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DienTichDat)</td>
-                        <td>@Html.DisplayFor(modelItem => item.TenDonViSoHuu)</td>
-                        <td>@Html.DisplayFor(modelItem => item.MinhChungQuyenSoHuuDatDai)</td>
-                        <td>@Html.DisplayFor(modelItem => item.MucDichSuDungDat)</td>
-                        <td>@Html.DisplayFor(modelItem => item.NamBatDauSuDungDat)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ThoiGianSuDungDat)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DienTichDatDaSuDung)</td>
-                        <td>@Html.DisplayFor(modelItem => item.IdHinhThucSoHuuNavigation.IdHinhThucSoHuu)</td>
-                        <td>
-                            <div class="action-links">
-                                <a asp-action="Edit" asp-route-id="@item.IdDatDai">Edit</a>
-                                <hr>
-                                <a asp-action="Details" asp-route-id="@item.IdDatDai">Details</a>
-                                <hr>
-                                <a asp-action="Delete" asp-route-id="@item.IdDatDai">Delete</a>
-                                <hr>
-                            </div>
-                        </td>
-                       
-                    </tr>
-                }
-            </tbody>
-        </table>
+</style>
+
+<div class="information">
+    <div class="infor" style="padding-top: 20px">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png?20220506143703" alt="logo">
+        <h1 style="padding-right: 330px; padding-left:240px;">TẠO MỚI</h1>
     </div>
-</body1>
-</html>
+    <hr />
+    <div class="row">
+        <h1 style="text-align:center">Đất Đai</h1>
+        <div class="col-md-11">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IdDatDai" class="control-label">Đất đai:</label>
+                            <input asp-for="IdDatDai" class="form-control" />
+                            <span asp-validation-for="IdDatDai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaGiayChungNhanQuyenSoHuu" class="control-label">Mã giấy chứng nhận quyền sở hữu: </label>
+                            <input asp-for="MaGiayChungNhanQuyenSoHuu" class="form-control" />
+                            <span asp-validation-for="MaGiayChungNhanQuyenSoHuu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DienTichDat" class="control-label">Diện tích đất:</label>
+                            <input asp-for="DienTichDat" class="form-control" />
+                            <span asp-validation-for="DienTichDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdHinhThucSoHuu" class="control-label">Hình thức sở hữu:</label>
+                            <select asp-for="IdHinhThucSoHuu" class="form-control" asp-items="ViewBag.IdHinhThucSoHuu"></select>
+                            <span asp-validation-for="IdHinhThucSoHuu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TenDonViSoHuu" class="control-label">Tên đơn vị sở hữu:</label>
+                            <input asp-for="TenDonViSoHuu" class="form-control" />
+                            <span asp-validation-for="TenDonViSoHuu" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="MinhChungQuyenSoHuuDatDai" class="control-label">Minh chứng quyền sở hữu:</label>
+                            <input asp-for="MinhChungQuyenSoHuuDatDai" class="form-control" />
+                            <span asp-validation-for="MinhChungQuyenSoHuuDatDai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MucDichSuDungDat" class="control-label">Mục đích sử dụng đất:</label>
+                            <input asp-for="MucDichSuDungDat" class="form-control" />
+                            <span asp-validation-for="MucDichSuDungDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NamBatDauSuDungDat" class="control-label">Năm bắt đầu sử dụng đất: </label>
+                            <input asp-for="NamBatDauSuDungDat" class="form-control" />
+                            <span asp-validation-for="NamBatDauSuDungDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ThoiGianSuDungDat" class="control-label">Thời gian sử dụng đất</label>
+                            <input asp-for="ThoiGianSuDungDat" class="form-control" />
+                            <span asp-validation-for="ThoiGianSuDungDat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DienTichDatDaSuDung" class="control-label">Diện tích đất sử dụng:</label>
+                            <input asp-for="DienTichDatDaSuDung" class="form-control" />
+                            <span asp-validation-for="DienTichDatDaSuDung" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                        <input type="submit" value="Create" class="btn btn-primary" style="background-color:#0D7C66; margin-right: 10px; width: 100px;" />
+                        <a asp-action="Index" class="btn btn-secondary" style="background-color:#C4DAD2; color: #16423C; text-decoration: none; width: 100px; text-align: center;">Quay lại</a>
+                    </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

@@ -4,9 +4,22 @@
         ViewData["Title"] = "Edit";
     }
 
+
+@*
+       /*B8D55 AT13 Ca Kỳ Hòa*/
+    Nội dung:
+        -Tương tự như phần create có thể sửa các thông tin đã nhập
+        -Hiển thị nội dung đã nhập
+        -Bắt lỗi như phần create bao gồm sửa sai thông tin và sửa sai ID
+        -Sử dụng try catch
+
+    Hình thức:
+        - Sử dụng css làm đẹp
+        - Đồng bộ phong cách với các phần khác với màu chủ đạo là đỏ và logo học viện an ninh
+        - Có hiệu ứng tương tác với các thuộc tính
+*@
     @section Heads{
         <style>
-        /*B8D55 AT13 Ca Kỳ Hòa*/
             footer {
                 visibility: hidden;
             }
@@ -14,83 +27,89 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     }
     <style>
-        body {
-            background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: rgb(195,34,34);
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Đặt ảnh nền là logo của học viện */
+        background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-color: rgb(195,34,34); /* Đặt màu nền là đỏ */
+    }
+
+    .khungchua {
+        min-height: 80vh; /* Chiều cao tối thiểu là 80% chiều cao màn hình */
+        width: 600px; /* Chiều rộng cố định là 600px */
+        background-color: #FFF9; /* Màu nền trắng mờ */
+        border-radius: 10px; /* Bo tròn góc khung chứa */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        margin: auto; /* Căn giữa khung chứa */
+    }
+
+    .grid-container {
+        padding-top: 20px; /* Khoảng cách phía trên cho container dạng lưới */
+    }
+
+    h1 {
+        font-family: Apice; /* Đặt font chữ là Apice cho tiêu đề */
+        text-align: center; /* Căn giữa tiêu đề */
+    }
+
+    h4 {
+        text-align: center; /* Căn giữa tiêu đề phụ */
+        font-family: Apice; /* Đặt font chữ là Apice cho tiêu đề phụ */
+    }
+
+    .btn-container {
+        display: flex; /* Sử dụng flexbox để bố trí các nút */
+        justify-content: center; /* Căn giữa các nút */
+        margin-top: 20px; /* Khoảng cách phía trên của container nút */
+    }
+
+    .btn-primary {
+        background-color: #41B06E; /* Màu nền xanh lá cho nút chính */
+        color: #E9EFEC; /* Màu chữ xanh nhạt */
+        margin: 0 10px; /* Khoảng cách ngang giữa các nút */
+    }
+
+        .btn-primary:hover {
+            background-color: #8DECB4; /* Màu nền khi rê chuột vào nút */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi rê chuột */
         }
 
-        .khungchua {
-            min-height: 80vh;
-            width: 600px;
-            background-color: #FFF9;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin: auto;
+    .control-label {
+        font-weight: bold; /* Đặt nhãn là chữ đậm */
+    }
+
+    .form-group {
+        width: 46%; /* Chiều rộng của nhóm form */
+        font-size: 16px; /* Kích thước chữ của nhóm form */
+    }
+
+    .proper {
+        flex-grow: 2; /* Cho phép phần tử này giãn ra chiếm nhiều không gian hơn */
+        margin-left: 15px; /* Khoảng cách bên trái */
+    }
+
+    .header {
+        background-color: #d5d1defe; /* Màu nền của phần header */
+        border-radius: 10px 10px 0 0; /* Bo tròn góc trên của header */
+        height: 100px; /* Chiều cao của header */
+    }
+
+    .icon-container {
+        color: #41B06E; /* Màu xanh cho biểu tượng */
+        font-size: 20px; /* Kích thước biểu tượng */
+        transition: transform 0.3s, color 0.3s; /* Thời gian chuyển đổi cho hiệu ứng */
+        cursor: pointer; /* Con trỏ chuột chuyển thành hình bàn tay khi rê chuột vào */
+    }
+
+        .icon-container:hover {
+            transform: scale(1.1); /* Tăng kích thước biểu tượng khi rê chuột */
+            color: orange; /* Đổi màu sang cam khi rê chuột */
         }
 
-        .grid-container{
-        padding-top: 20px;
-        }
+    .btn {
+        width: 85%; /* Chiều rộng của nút là 85% */
+    }
 
-        h1 {
-            font-family: Apice;
-            text-align: center;
-        }
-
-        h4 {
-            text-align: center;
-            font-family: Apice;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center; /* Căn giữa */
-            margin-top: 20px; /* Khoảng cách phía trên */
-        }
-
-        .btn-primary {
-            background-color: #41B06E;
-            color: #E9EFEC;
-            margin: 0 10px; /* Khoảng cách giữa các nút */
-        }
-
-            .btn-primary:hover {
-                background-color: #8DECB4;
-                transform: scale(1.05);
-            }
-
-        .control-label{
-            font-weight: bold;
-        }
-        .form-group{
-            width: 46%;
-            font-size: 16px;
-        }
-        .proper{
-            flex-grow: 2;
-            margin-left: 15px;
-        }
-
-        .header {
-            background-color: #d5d1defe; /* Màu nền cho header */
-            border-radius: 10px 10px 0 0; /* Bo góc cho phần trên */
-            height: 100px;
-        }
-
-        .icon-container{
-            color: #41B06E;
-            font-size: 20px;
-            transition: transform 0.3s, color 0.3s;
-            cursor: pointer;
-        }
-        .icon-container:hover{
-            transform: scale(1.1);
-            color: orange;
-        }
-        .btn{
-            width: 85%;
         }
     </style>
 
