@@ -3110,7 +3110,7 @@ public partial class HemisContext : DbContext
 
             entity.Property(e => e.IdHoatDongTaiChinh).ValueGeneratedNever();
             entity.Property(e => e.NamTaiChinh).HasColumnType("text");
-            entity.Property(e => e.NoiDung).HasColumnType("text");
+            entity.Property(e => e.NoiDung).HasColumnType("ntext");
 
             entity.HasOne(d => d.IdLoaiHoatDongTaiChinhNavigation).WithMany(p => p.TbHoatDongTaiChinhs)
                 .HasForeignKey(d => d.IdLoaiHoatDongTaiChinh)
@@ -5522,4 +5522,14 @@ public partial class HemisContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+public DbSet<C500Hemis.Models.VCoCauToChuc2> VCoCauToChuc2 { get; set; } = default!;
+
+public DbSet<C500Hemis.Models._VDeAnDuAnChuongTrinh> _VDeAnDuAnChuongTrinh { get; set; } = default!;
+
+public DbSet<C500Hemis.Models._VDoanCongTac> _VDoanCongTac { get; set; } = default!;
+
+public DbSet<C500Hemis.Models._VGvduocCuDiDaoTao> _VGvduocCuDiDaoTao { get; set; } = default!;
+
+
 }
