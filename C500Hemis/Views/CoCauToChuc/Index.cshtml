@@ -3,49 +3,20 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Cơ cấu tổ chức</h1>
+@section Heads {
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+}
+@section styles{
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+<h1>Cơ cấu tổ chức (@Model.Count())</h1>
 
 <p>
-    <a asp-action="Create" class="lien-ket" style="background-color: #00FF00; padding: 8px;
-        border-radius: 10px;"><i class="ti-new-window"></i> Tạo cơ cấu tổ chức mới</a>
+    <a asp-action="Create" class="btn-create"><i class="fas fa-plus"></i> Tạo mới</a>
 </p>
-
-<link rel="stylesheet" href="//cdn.datatables.net/2.1.7/css/dataTables.dataTables.min.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
-<link href="~/themify-icons/themify-icons.css" rel="stylesheet" />
-<script>
-    jQuery.noConflict();
-    jQuery(document).ready(function ($) {
-        $('#myTable').DataTable();
-    })
-</script>
-
-<style>
-    th{
-        background-color: #f2f2f2;
-    }
-
-    .lien-ket{
-        display: inline-block;
-        text-decoration: none;
-        color: black;
-        padding: 8px;
-        border-radius: 10px;
-    }
-
-    .lien-ket:hover{
-        opacity: 60%;
-        color: black;
-    }
-    
-    th, .can-giua{
-        text-align: center;
-    }
-</style>
-
-<table id="myTable" class="display dataTable" style="width:100%">
+<div class="table">
+<table id="myTable" style="width:100%" border="2px">
     <thead>
         <tr>
             <th>
@@ -97,17 +68,56 @@
                 @Html.DisplayFor(modelItem => item.NgayRaQuyetDinh)
             </td>
             <td class="can-giua">
-                    @Html.DisplayFor(modelItem => item.IdLoaiPhongBanNavigation.IdLoaiPhongBan)
+                    @Html.DisplayFor(modelItem => item.IdLoaiPhongBanNavigation.LoaiPhongBan)
                 </td>
                 <td class="can-giua">
-                    @Html.DisplayFor(modelItem => item.IdTrangThaiNavigation.IdTrangThaiCoSoGd)
+                    @Html.DisplayFor(modelItem => item.IdTrangThaiNavigation.TrangThaiCoSoGd)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdCoCauToChuc" class="lien-ket" style="background-color: orange; margin-bottom: 10px;"><i class="ti-pencil-alt"></i> Sửa</a>
-                    <a asp-action="Details" asp-route-id="@item.IdCoCauToChuc" class="lien-ket" style="background-color: #3399FF; margin-bottom: 10px;"><i class="ti-info-alt"></i> Chi tiết</a>
-                    <a asp-action="Delete" asp-route-id="@item.IdCoCauToChuc" class="lien-ket" style="background-color: red; color: #FFFFFF;"><i class="ti-trash"></i> Xóa</a>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdCoCauToChuc"> <i class="fa fa-pencil-alt"></i></a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdCoCauToChuc">  <i class="fa fa-info-circle"></i></a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdCoCauToChuc"> <i class="fa fa-trash"></i></a>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</div>
+@section Scripts {
+    <!-- Nhúng thư viện pdfMake để tạo và xuất tệp PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- Nhúng thư viện DataTables để tạo bảng dữ liệu với nhiều tính năng -->
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/datatables.min.js"></script>
+
+    <script>
+        // Khởi tạo DataTable cho bảng có ID là #myTable
+        var table = new DataTable("#myTable", {
+            language: {
+            // thanh tìm kiếm
+                search: "<b><i class='fas fa-search'></i> Tìm kiếm:</b>",
+            // số bản ghi   
+                info: "<b>Hiển thị _TOTAL_ trong _MAX_ bản ghi</b>",
+                infoFiltered: "<b>(được lọc từ _MAX_ bản ghi tổng)</b>",
+                searchPlaceholder: "Nhập nội dung cần tìm..",
+                lengthMenu: "<b>Hiển thị _MENU_ bản ghi trên mỗi trang</b>",
+                paginate: {
+                    first: "<b>Đầu</b>",
+                    last: "<b>Cuối</b>",
+                    next: "<b>Tiếp</b>",
+                    previous: "<b>Trước</b>"
+                }
+            },
+            
+            createdRow: (row, data, index) => {
+                // Callback khi một hàng mới được tạo (hiện tại không làm gì)
+            },
+        });
+        //HTMLDOM Element: https://developer.mozilla.org/en-US/docs/Web/API/Element
+        //Datatables API: https://datatables.net/reference/api/table().header()
+        // Đoạn mã này tạo ra một bảng có thể tìm kiếm, sắp xếp và cho phép xuất dữ liệu ra PDF
+    </script>
+}

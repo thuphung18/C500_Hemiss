@@ -13,72 +13,86 @@
     </style>
 }
 
+@*
+   /*B8D55 AT13 Ca Kỳ Hòa*/
+   Nội dung:
+    - Tạo form nhập thông tin
+    - Có sử dụng datetime cho kiểu dữ liệu ngày tháng năm
+    - Có selectlist
+    - Bắt lỗi nhập trùng ID và lỗi khi nhập sai định dạng
+    - Sử dụng try catch
+   Hình thức:
+    - Chỉnh css cho đẹp
+    - Màu chủ đạo là màu đỏ và logo học viện an ninh nhân dân
+    - Tạo các hiệu ứng khi tương tác với các thuộc tính
+*@
+
 <style>
-    /*B8D55 AT13 Ca Kỳ Hòa*/
     body {
-        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-color: rgb(195,34,34);
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Đặt ảnh nền là logo của học viện */
+        background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-color: rgb(195,34,34); /* Đặt màu nền chính là đỏ */
     }
 
     .khungchua {
-        min-height: 80vh;
-        width: 600px;
-        background-color: #FFF9;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        margin: auto;
+        min-height: 80vh; /* Chiều cao tối thiểu là 80% chiều cao màn hình */
+        width: 600px; /* Chiều rộng cố định là 600px */
+        background-color: #FFF9; /* Màu nền trắng trong suốt một chút */
+        border-radius: 10px; /* Bo tròn góc khung chứa */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        margin: auto; /* Căn giữa khung chứa */
     }
 
     h1 {
-        font-family: Apice;
-        text-align: center;
+        font-family: Apice; /* Đặt font chữ là Apice */
+        text-align: center; /* Căn giữa văn bản tiêu đề */
     }
 
     h4 {
-        text-align: center;
-        font-family: Apice;
+        text-align: center; /* Căn giữa tiêu đề phụ */
+        font-family: Apice; /* Đặt font chữ là Apice */
     }
 
     .btn-container {
-        display: flex;
-        justify-content: center; /* Căn giữa */
+        display: flex; /* Sử dụng flexbox */
+        justify-content: center; /* Căn giữa các nút */
         margin-top: 20px; /* Khoảng cách phía trên */
     }
 
     .btn-primary {
-        background-color: #41B06E;
-        color: #E9EFEC;
+        background-color: #41B06E; /* Màu nền xanh lá */
+        color: #E9EFEC; /* Màu chữ xanh nhạt */
         margin: 0 10px; /* Khoảng cách giữa các nút */
     }
 
         .btn-primary:hover {
-            background-color: #8DECB4;
-            transform: scale(1.05);
+            background-color: #8DECB4; /* Đổi màu khi rê chuột vào nút */
+            transform: scale(1.05); /* Tạo hiệu ứng phóng to nhẹ khi rê chuột */
         }
 
     .control-label {
-        font-weight: bold;
+        font-weight: bold; /* Chữ in đậm cho nhãn */
     }
 
     .form-group {
-        width: 100%; /* Chiếm hết chiều rộng có sẵn */
-        font-size: 16px;
+        width: 100%; /* Chiếm toàn bộ chiều rộng có sẵn */
+        font-size: 16px; /* Kích thước chữ */
     }
 
     .form-control {
-        width: 100%; /* Đặt chiều rộng cho input là 100% */
+        width: 100%; /* Đặt chiều rộng input là 100% */
     }
 
     .header {
         background-color: #d5d1defe; /* Màu nền cho header */
-        border-radius: 10px 10px 0 0; /* Bo góc cho phần trên */
-        height: 120px;
+        border-radius: 10px 10px 0 0; /* Bo góc trên */
+        height: 120px; /* Chiều cao của header */
         text-align: center; /* Căn giữa nội dung trong header */
-        padding: 20px; /* Padding cho header */
-        margin-bottom: 20px; /* Khoảng cách giữa header và nội dung */
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
+        padding: 20px; /* Khoảng đệm trong header */
+        margin-bottom: 20px; /* Khoảng cách phía dưới header */
+    }
+
 </style>
 
 <div class="khungchua">

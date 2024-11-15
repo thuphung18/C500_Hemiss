@@ -5,56 +5,109 @@
 }
 
 <h1>Details</h1>
-
-<div>
-    <h4>TbNhomNghienCuuManh</h4>
+<div class="container">
+    <h3>Thông tin chi tiết về Nhóm Nghiên Cứu Mạnh</h3>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaNhomNghienCuuManh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaNhomNghienCuuManh)
+        <dt class="col-sm-4">Mã Nhóm</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.MaNhomNghienCuuManh)</dd>
+
+        <dt class="col-sm-4">Tên nhóm nghiên cứu mạnh</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.TenNhomNghienCuuManh)</dd>
+
+        <dt class="col-sm-4">Số quyết định thành lập</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.SoQuyetDinhThanhLap)</dd>
+
+        <dt class="col-sm-4">Tổ chức ban hành quyết định</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.ToChucBanHanhQuyetDinh)</dd>
+
+        <dt class="col-sm-4">Ngày quyết định</dt>
+        <dd class="col-sm-8">
+            @if (Model.NgayQuyetDinh.HasValue)
+            {
+                @Model.NgayQuyetDinh.Value.ToString("dd/MM/yyyy")
+            }
+            else
+            {
+                <span>Không có thông tin</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TenNhomNghienCuuManh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TenNhomNghienCuuManh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoQuyetDinhThanhLap)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToChucBanHanhQuyetDinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToChucBanHanhQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayQuyetDinh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayQuyetDinh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CacNhiemVuNckh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CacNhiemVuNckh)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TomTatKetQuaDatDuoc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TomTatKetQuaDatDuoc)
-        </dd>
+
+        <dt class="col-sm-4">Các nhiệm vụ NCKH</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.CacNhiemVuNckh)</dd>
+
+        <dt class="col-sm-4">Tóm tắt kết quả đạt được</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.TomTatKetQuaDatDuoc)</dd>
     </dl>
+
+    <div class="button-group">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        <a asp-action="Edit" asp-route-id="@Model?.IdNhomNghienCuuManh" class="btn btn-primary">Chỉnh sửa</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdNhomNghienCuuManh">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    body {
+        background: linear-gradient(to top right, #5357CE, #C850C0);
+        color: white;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    h3 {
+        margin: 20px 0;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .btn-group {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        margin-bottom: 30px; /* Adds space above the footer */
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Blue color */
+        color: white;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Gray color */
+        color: white;
+        border: none;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #ccc;
+    }
+</style>

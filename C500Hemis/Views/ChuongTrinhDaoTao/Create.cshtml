@@ -1,4 +1,20 @@
-﻿@model C500Hemis.Models.TbChuongTrinhDaoTao
+﻿<!-- Nguyễn Đăng Phúc 023-B8D55 (Bài tập kiểm tra giữa phần)
+    Các nội dung đã làm trong Views Create:
+        - HTML: 
+            + Thêm "Placeholder" để ghi chú và ví dụ cho người dùng.
+            + Đặt lại tên class, ID cho các thẻ và sắp xếp các thẻ hợp lí cho điều chỉnh CSS.
+            + Thêm các comment chi tiết phục vụ bảo trì và fix bug.
+            + Sửa các khóa ngoài (trong Controllers) để hiện Data từ các Table khác trong thẻ select (Mặc định là các Id số).
+        - CSS:
+            + Lấy ý tưởng từ Google Form dùng để nhập dữ liệu.
+            + Màu chủ đạo là màu xanh, đổi thành màu đỏ nếu xuất hiện các trường lỗi.
+        - JavaScript:
+            + Thêm chức năng nhập và tìm kiếm cho các hộp select khi có quá nhiều thông tin.
+            + Bắt lỗi và thông báo khi nhập sai định dạng thông tin như: bỏ trống ô quan trọng, nhập quá dài,...
+            + Thông báo xác nhận khi muốn kết thúc và lưu dữ liệu.
+-->
+
+@model C500Hemis.Models.TbChuongTrinhDaoTao
 
 @{
     ViewData["Title"] = "ĐĂNG KÍ CTĐT";
@@ -341,15 +357,14 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-
-    <!-- Code dùng để nhập dữ liệu tìm kiếm các thông tin trong box (do quá nhiều) -->
+    <!-- Code dùng để nhập dữ liệu tìm kiếm các thông tin trong box select -->
     <script>
         // Lấy tất cả các phần tử `<select>` trong trang và lưu vào mảng `select`
         var select = document.querySelectorAll("select");
         // Tạo một đối tượng `data` để lưu trữ thông tin các tùy chọn (options) của từng `<select>`
         var data = {};
 
-        // Vòng lặp qua từng `<select>` trong mảng `select`
+        // Vòng lặp chạy duyệt qua tất cả data trong mảng `select`
         for (var i = 0; i < select.length; ++i) {
             // Ẩn `<select>` đi để chỉ hiển thị trường tìm kiếm
             select[i].hidden = true;
@@ -422,11 +437,9 @@
         }
     </script>
 
-
     <!-- Code bắt lỗi, hiển thị thông báo lỗi -->
     <script>
-        $("form").validate({
-            
+        $("form").validate({            
             // Bắt lỗi
             rules: {
                 IdChuongTrinhDaoTao: {
@@ -446,14 +459,14 @@
                 TenChuongTrinhBangTiengAnh: {
                     required: true, // lỗi bỏ trống
                     maxlength: 50, // giới hạn kí tự là 50
-                }
+                },
             },
 
             // Thông báo lỗi
             messages: {
                 IdChuongTrinhDaoTao: {
-                    required: "Đây là một trường thông tin bắt buộc có thì mới lưu dữ liệu thành công vào Database!",
-                    range: "Nhập Id là các số nguyên dương từ khoảng 1 đến 9999!"
+                    required: "Đây là một trường thông tin bắt buộc phải có thì mới lưu dữ liệu thành công vào Database!",
+                    range: "Nhập ID là các số nguyên dương từ khoảng 1 đến 9999!"
                 },
 
                 MaChuongTrinhDaoTao: {  

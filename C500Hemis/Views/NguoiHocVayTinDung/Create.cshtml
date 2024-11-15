@@ -1,83 +1,163 @@
 ﻿@model C500Hemis.Models.TbNguoiHocVayTinDung
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo Mới Khoản Vay";
 }
+
+
 <style>
-    h1, h4  {
-        text-align: center;
+    body {
+        background-color: #C5D3E8;
+        font-family: 'Poppins', sans-serif;
     }
-    div {
-        margin:auto;
+
+    .container {
+        margin-top: 80px;
+        max-width: 650px;
+        background: #fff;
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #444;
+        font-weight: 700;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #444;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+        }
+
+    .btn {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #4CAF50;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #3e8e41;
+        }
+
+    .btn-secondary {
+        background-color: #f1f1f1;
+        color: #444;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+    .text-danger {
+        font-size: 14px;
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+    }
+
+    .row {
+        margin-top: 25px;
     }
 </style>
 
-<h1>Create</h1>
+<div class="container">
+    <h1>Tạo Mới Khoản Vay</h1>
 
-<h4>TbNguoiHocVayTinDung</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdNguoiHocVayTinDung" class="control-label"></label>
-                <input asp-for="IdNguoiHocVayTinDung" class="form-control" />
-                <span asp-validation-for="IdNguoiHocVayTinDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdHocVien" class="control-label"></label>
-                <select asp-for="IdHocVien" class ="form-control" asp-items="ViewBag.IdHocVien"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoTienDuocVay" class="control-label"></label>
-                <input asp-for="SoTienDuocVay" class="form-control" />
-                <span asp-validation-for="SoTienDuocVay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TenToChucTinDung" class="control-label"></label>
-                <input asp-for="TenToChucTinDung" class="form-control" />
-                <span asp-validation-for="TenToChucTinDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayVay" class="control-label"></label>
-                <input asp-for="NgayVay" class="form-control" />
-                <span asp-validation-for="NgayVay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DiaChi" class="control-label"></label>
-                <input asp-for="DiaChi" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ThoiHanVay" class="control-label"></label>
-                <input asp-for="ThoiHanVay" class="form-control" />
-                <span asp-validation-for="ThoiHanVay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TinhTrangVay" class="control-label"></label>
-                <select asp-for="TinhTrangVay" class ="form-control" asp-items="ViewBag.TinhTrangVay"></select>
-            </div>
-            <table>
-                <tr>
-                    <td>
-            <div class="form-group">
-                <input type="submit" value="Tạo mới" class="btn btn-primary" />
-            </div>
-            </td>
-            <td>
-        <div>
-            <a asp-action="Index"><input type="submit" value="Về trang chủ" class="btn btn-primary"</a>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="IdNguoiHocVayTinDung" class="form-label">Mã Người Học</label>
+            <input asp-for="IdNguoiHocVayTinDung" class="form-control" />
+            <span asp-validation-for="IdNguoiHocVayTinDung" class="text-danger"></span>
         </div>
-        </td>
-        </tr>
-        </table>
-        </form>
-    </div>
+
+        <div class="form-group">
+            <label asp-for="IdHocVien" class="form-label">Học Viên</label>
+            <select asp-for="IdHocVien" class="form-control" asp-items="ViewBag.IdHocVien"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SoTienDuocVay" class="form-label">Số Tiền Được Vay</label>
+            <input asp-for="SoTienDuocVay" type="number" min="1" class="form-control" />
+            <span asp-validation-for="SoTienDuocVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TenToChucTinDung" class="form-label">Tên Tổ Chức Tín Dụng</label>
+            <input asp-for="TenToChucTinDung" class="form-control" />
+            <span asp-validation-for="TenToChucTinDung" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NgayVay" class="form-label">Ngày Vay</label>
+            <input asp-for="NgayVay" type="date" class="form-control" />
+            <span asp-validation-for="NgayVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DiaChi" class="form-label">Địa Chỉ</label>
+            <input asp-for="DiaChi" class="form-control" />
+            <span asp-validation-for="DiaChi" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ThoiHanVay" class="form-label">Thời Hạn Vay (tháng)</label>
+            <input asp-for="ThoiHanVay" type="number" min="1" class="form-control" />
+            <span asp-validation-for="ThoiHanVay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TinhTrangVay" class="form-label">Tình Trạng Vay</label>
+            <select asp-for="TinhTrangVay" class="form-control" asp-items="ViewBag.TinhTrangVay"></select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Tạo Mới</button>
+            </div>
+            <div class="col-md-6">
+                <a asp-action="Index" class="btn btn-secondary">Về Trang Chủ</a>
+            </div>
+        </div>
+    </form>
 </div>
 
-
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -11,7 +11,7 @@ namespace C500Hemis.Controllers.NH
 {
     public class NguoiHocVayTinDungController : Controller
     {
-        private readonly HemisContext _context;
+        private readonly HemisContext _context; 
 
         public NguoiHocVayTinDungController(HemisContext context)
         {
@@ -21,112 +21,133 @@ namespace C500Hemis.Controllers.NH
         // GET: NguoiHocVayTinDung
         public async Task<IActionResult> Index()
         {
-            var hemisContext = _context.TbNguoiHocVayTinDungs.Include(t => t.IdHocVienNavigation).Include(t => t.TinhTrangVayNavigation);
-            return View(await hemisContext.ToListAsync());
-        }
+                var hemisContext = _context.TbNguoiHocVayTinDungs
+                    .Include(t => t.IdHocVienNavigation) 
+                    .ThenInclude(h => h.IdNguoiNavigation) 
+                    .Include(t => t.TinhTrangVayNavigation); 
 
-        // GET: NguoiHocVayTinDung/Details/5
+                return View(await hemisContext.ToListAsync());
+            }
+            
+
+        // GET: NguoiHocVayTinDung/Details/
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
+                var tbNguoiHocVayTinDung = await _context.TbNguoiHocVayTinDungs
+                    .Include(t => t.IdHocVienNavigation)
+                    .ThenInclude(h=>h.IdNguoiNavigation)
+                    .Include(t => t.TinhTrangVayNavigation)
+                    .FirstOrDefaultAsync(m => m.IdNguoiHocVayTinDung == id);
 
-            var tbNguoiHocVayTinDung = await _context.TbNguoiHocVayTinDungs
-                .Include(t => t.IdHocVienNavigation)
-                .Include(t => t.TinhTrangVayNavigation)
-                .FirstOrDefaultAsync(m => m.IdNguoiHocVayTinDung == id);
-            if (tbNguoiHocVayTinDung == null)
-            {
-                return NotFound();
-            }
 
-            return View(tbNguoiHocVayTinDung);
-        }
+                return View(tbNguoiHocVayTinDung); 
+            }
+            
 
         // GET: NguoiHocVayTinDung/Create
         public IActionResult Create()
         {
-            ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien");
-            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon");
-            return View();
+                ViewData["IdHocVien"] = new SelectList(
+                    _context.TbHocViens.Include(h => h.IdNguoiNavigation),
+                    "IdHocVien", "IdNguoiNavigation.name"
+                );
+                ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon");
+                return View(); // Trả về view tạo mới
+          
         }
 
         // POST: NguoiHocVayTinDung/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdNguoiHocVayTinDung,IdHocVien,SoTienDuocVay,TenToChucTinDung,NgayVay,DiaChi,ThoiHanVay,TinhTrangVay")] TbNguoiHocVayTinDung tbNguoiHocVayTinDung)
         {
+            if (TbNguoiHocVayTinDungExists(tbNguoiHocVayTinDung.IdNguoiHocVayTinDung)) ModelState.AddModelError("IdNguoiHocVayTinDung", "ID đã tồn tại");
             if (ModelState.IsValid)
             {
-                _context.Add(tbNguoiHocVayTinDung);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(tbNguoiHocVayTinDung);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index)); 
+                }
+                catch (DbUpdateException ex)
+                {
+                    ViewBag.ErrorMessage = "Lỗi cơ sở dữ liệu: " + ex.Message;
+                }
+                catch (Exception ex)
+                { 
+                    ViewBag.ErrorMessage = "Lỗi không xác định: " + ex.Message;
+                }
             }
-            ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbNguoiHocVayTinDung.IdHocVien);
-            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
+            ViewData["IdHocVien"] = new SelectList(
+                _context.TbHocViens.Include(h => h.IdNguoiNavigation),
+                "IdHocVien", "IdNguoiNavigation.name", tbNguoiHocVayTinDung.IdHocVien
+            );
+            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
             return View(tbNguoiHocVayTinDung);
         }
 
-        // GET: NguoiHocVayTinDung/Edit/5
+        // GET: NguoiHocVayTinDung/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound(); 
 
-            var tbNguoiHocVayTinDung = await _context.TbNguoiHocVayTinDungs.FindAsync(id);
-            if (tbNguoiHocVayTinDung == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbNguoiHocVayTinDung.IdHocVien);
-            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
-            return View(tbNguoiHocVayTinDung);
+                var tbNguoiHocVayTinDung = await _context.TbNguoiHocVayTinDungs.FindAsync(id);
+                if (tbNguoiHocVayTinDung == null) return NotFound(); 
+
+                
+                ViewData["IdHocVien"] = new SelectList(
+                    _context.TbHocViens.Include(h => h.IdNguoiNavigation),
+                    "IdHocVien", "IdNguoiNavigation.name", tbNguoiHocVayTinDung.IdHocVien
+                );
+                ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
+                return View(tbNguoiHocVayTinDung); 
+         
+            
         }
 
-        // POST: NguoiHocVayTinDung/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: NguoiHocVayTinDung/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdNguoiHocVayTinDung,IdHocVien,SoTienDuocVay,TenToChucTinDung,NgayVay,DiaChi,ThoiHanVay,TinhTrangVay")] TbNguoiHocVayTinDung tbNguoiHocVayTinDung)
         {
-            if (id != tbNguoiHocVayTinDung.IdNguoiHocVayTinDung)
-            {
-                return NotFound();
-            }
+            if (id != tbNguoiHocVayTinDung.IdNguoiHocVayTinDung) return NotFound(); 
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 try
                 {
                     _context.Update(tbNguoiHocVayTinDung);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index)); 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+             
                     if (!TbNguoiHocVayTinDungExists(tbNguoiHocVayTinDung.IdNguoiHocVayTinDung))
                     {
-                        return NotFound();
+                        return NotFound(); 
                     }
                     else
                     {
-                        throw;
+                        throw; 
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "Lỗi không xác định: " + ex.Message;
+                }
             }
-            ViewData["IdHocVien"] = new SelectList(_context.TbHocViens, "IdHocVien", "IdHocVien", tbNguoiHocVayTinDung.IdHocVien);
-            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "IdTuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
+
+            ViewData["IdHocVien"] = new SelectList(
+                _context.TbHocViens.Include(h => h.IdNguoiNavigation),
+                "IdHocVien", "IdNguoiNavigation.name", tbNguoiHocVayTinDung.IdHocVien
+            );
+            ViewData["TinhTrangVay"] = new SelectList(_context.DmTuyChons, "IdTuyChon", "TuyChon", tbNguoiHocVayTinDung.TinhTrangVay);
             return View(tbNguoiHocVayTinDung);
         }
-
-        // GET: NguoiHocVayTinDung/Delete/5
+        // GET: NguoiHocVayTinDung/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,6 +157,7 @@ namespace C500Hemis.Controllers.NH
 
             var tbNguoiHocVayTinDung = await _context.TbNguoiHocVayTinDungs
                 .Include(t => t.IdHocVienNavigation)
+                .ThenInclude(h=>h.IdNguoiNavigation)
                 .Include(t => t.TinhTrangVayNavigation)
                 .FirstOrDefaultAsync(m => m.IdNguoiHocVayTinDung == id);
             if (tbNguoiHocVayTinDung == null)
@@ -145,8 +167,7 @@ namespace C500Hemis.Controllers.NH
 
             return View(tbNguoiHocVayTinDung);
         }
-
-        // POST: NguoiHocVayTinDung/Delete/5
+        // POST: NguoiHocVayTinDung/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -167,3 +188,5 @@ namespace C500Hemis.Controllers.NH
         }
     }
 }
+
+

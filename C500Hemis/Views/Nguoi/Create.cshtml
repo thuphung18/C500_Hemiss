@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Ho" class="control-label"></label>
-                    <input asp-for="Ho" class="form-control" />
+                    <input asp-for="Ho" class="form-control" data-val="true" data-val-maxlength="Họ dài quá {0} ký tự thôi" data-val-maxlength-max="10"/>
                     <span asp-validation-for="Ho" class="text-danger"></span>
                 </div>
                 <div class="form-group">

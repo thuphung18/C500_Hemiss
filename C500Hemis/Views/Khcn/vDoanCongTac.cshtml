@@ -1,0 +1,86 @@
+﻿@model IEnumerable<C500Hemis.Models.VDoanCongTac>
+
+@{
+    ViewData["Title"] = "vDoanCongTac";
+}
+
+<h1>vDoanCongTac</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaDoanCongTac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhanLoaiDoanRaDoanVao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDoanCongTac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoQuyetDinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayQuyetDinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNuoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThoiGianketThuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MucDichCongTac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KetQuaCongTac)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDoanCongTac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhanLoaiDoanRaDoanVao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDoanCongTac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoQuyetDinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayQuyetDinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNuoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianketThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MucDichCongTac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KetQuaCongTac)
+            </td>
+            <td>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
