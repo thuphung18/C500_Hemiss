@@ -1,0 +1,244 @@
+﻿@section Styles{
+    <style type="text/css">
+        a:link { 
+            text-decoration: none; 
+        }
+    </style>
+}
+    <div class="m-0 card" style="margin-top:30px !important; border: none!important">
+        <div class="card">
+            <div class="card-body m-0">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3">
+                        <div class="col-12 col-sm-12 col-md-12 mb-3" id="divCB"></div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-9">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divHTQT"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCSVC"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCSGD"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divKHCN"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divNH"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCTDT"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3">
+                        <div class="col-12 col-sm-12 col-md-12 mb-3" id="divTC"></div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-9">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divTS"></div>
+                            <div class="col-12 col-sm-12 col-md-4 mb-3" id="divVB"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+    
+@section Scripts{
+    <script type="text/javascript">
+        // Dữ liệu các liên kết Cán bộ
+        var linkDataCB = [
+            { title: "CSDL người", url: "http://localhost:5215/Nguoi/Index" },
+            { title: "Cán bộ", url: "http://localhost:5215/CanBo/Index" },
+            { title: "Cán bộ hướng dẫn sinh viên", url: "http://localhost:5215/CanBoHuongDanThanhCongSinhVien" },
+            { title: "Quá trình công tác của cán bộ", url: "http://localhost:5215/QuaTrinhCongTacCuaCanBo" },
+            { title: "Quá trình đào tạo của cán bộ", url: "http://localhost:5215/QuaTrinhDaoTaoCuaCanBo" },
+            { title: "Trình độ tiếng dân tộc", url: "http://localhost:5215/TrinhDoTiengDanToc" },
+            { title: "Chức danh khoa học của cán bộ", url: "http://localhost:5215/ChucDanhKhoaHocCuaCanBo" },
+            { title: "Đánh giá xếp loại cán bộ", url: "http://localhost:5215/DanhGiaXepLoaiCanBo" },
+            { title: "Danh hiệu thi đua và khen thưởng", url: "http://localhost:5215/DanhHieuThiDuaGiaiThuongKhenThuongCanBo" },
+            { title: "Diễn biến lương", url: "http://localhost:5215/DienBienLuong" },
+            { title: "Đối tượng chính sách cán bộ", url: "http://localhost:5215/DoiTuongChinhSachCanBo" },
+            { title: "Đơn vị công tác của cán bộ", url: "http://localhost:5215/DonViCongTacCuaCanBo" },
+            { title: "Đơn vị thỉnh giảng của cán bộ", url: "http://localhost:5215/DonViThinhGiangCuaCanBo" },
+            { title: "Giảng viên ngoại ngữ", url: "http://localhost:5215/GiangVienNn" },
+            { title: "Giáo viên quốc phòng an ninh", url: "http://localhost:5215/GiaoVienQpan" },
+            { title: "Hợp đồng", url: "http://localhost:5215/HopDong" },
+            { title: "Hợp đồng thỉnh giảng", url: "http://localhost:5215/HopDongThinhGiang" },
+            { title: "Khóa bồi dưỡng, tập huấn của cán bộ", url: "http://localhost:5215/KhoaBoiDuongTapHuanThamGiaCuaCanBo" },
+            { title: "Kỷ luật cán bộ", url: "http://localhost:5215/KyLuatCanBo" },
+            { title: "Lĩnh vực nghiên cứu của cán bộ", url: "http://localhost:5215/LinhVucNghienCuuCuaCanBo" },
+            { title: "Ngành dùng tên giảng dạy", url: "http://localhost:5215/NganhDungTenGiangDay" },
+            { title: "Ngành giảng dạy của cán bộ", url: "http://localhost:5215/NganhGiangDayCuaCanBo" },
+            { title: "Phụ cấp", url: "http://localhost:5215/PhuCap" }
+        ];
+
+        // Dữ liệu cho Hợp tác quốc tế (HTQT)
+        var linkDataHTQT = [
+            { title: "Tổ chức hợp tác quốc tế", url: "http://localhost:5215/TbToChucHopTacQuocTes" },
+            { title: "Thông tin hợp tác với tổ chức", url: "http://localhost:5215/TbThongTinHopTacs" },
+            { title: "Hội thảo/ Hội nghị", url: "http://localhost:5215/TbHoiThaoHoiNghis" },
+            { title: "Đề án/ Dự án/ Chương trình", url: "http://localhost:5215/TbDeAnDuAnChuongTrinhs" },
+            { title: "Lưu học sinh, sinh viên nước ngoài", url: "http://localhost:5215/TbLuuHocSinhSinhVienNns" },
+            { title: "Giảng viên được cử đi đào tạo", url: "http://localhost:5215/TbGvduocCuDiDaoTaos" },
+            { title: "Đoàn công tác", url: "http://localhost:5215/TbDoanCongTacs" },
+            { title: "Thành phần tham gia đoàn công tác", url: "http://localhost:5215/TbThanhPhanThamGiaDoanCongTacs" },
+            { title: "Tổ chức hợp tác doanh nghiệp", url: "http://localhost:5215/TbToChucHopTacDoanhNghieps" }
+        ];
+
+        // Dữ liệu cho Khoa học công nghệ (KHCN)
+        var linkDataKHCN = [
+            { title: "Bài báo KH đã công bố", url: "http://localhost:5215/BaiBaoKhdaCongBo" },
+            { title: "Chuyển giao công nghệ và đào tạo", url: "http://localhost:5215/ChuyenGiaoCongNgheVaDaoTao" },
+            { title: "Doanh Nghiệp KHCN", url: "http://localhost:5215/DoanhNghiepKhcn" },
+            { title: "Đối tượng tham gia", url: "http://localhost:5215/DoiTuongThamGium" },
+            { title: "Giải thưởng khoa học", url: "http://localhost:5215/GiaiThuongKhoaHoc" },
+            { title: "Hoạt động bảo vệ môi trường", url: "http://localhost:5215/HoatDongBaoVeMoiTruong" },
+            { title: "Nhiệm Vụ KHCN", url: "http://localhost:5215/NhiemVuKhcn" },
+            { title: "Nhóm nghiên cứu mạnh", url: "http://localhost:5215/NhomNghienCuuManh" },
+            { title: "Sách Đã Xuất Bản", url: "http://localhost:5215/SachDaXuatBan" },
+            { title: "Tài sản trí tuệ", url: "http://localhost:5215/TaiSanTriTue" },
+            { title: "Tạp chí khoa học", url: "http://localhost:5215/TapChiKhoaHoc" }
+        ];
+
+        var linkDataNH = [
+            { title: "Người học", url: "http://localhost:5215/Home/NH" },
+            { title: "Danh hiệu thi đua giải thưởng khen thưởng người học", url: "http://localhost:5215/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" },
+            { title: "Học viên", url: "http://localhost:5215/HocVien" },
+            { title: "Kỷ luật người học", url: "http://localhost:5215/KyLuatNguoiHoc" },
+            { title: "Người học vay tín dụng", url: "http://localhost:5215/NguoiHocVayTinDung" },
+            { title: "Thông tin học bổng", url: "http://localhost:5215/ThongTinHocBong" },
+            { title: "Thông tin học tập nghiên cứu sinh", url: "http://localhost:5215/ThongTinHocTapNghienCuuSinh" },
+            { title: "Thông tin người học GDTC", url: "http://localhost:5215/ThongTinNguoiHocGdtc" },
+            { title: "Thông tin việc làm sau tốt nghiệp", url: "http://localhost:5215/ThongTinViecLamSauTotNghiep" },
+            { title: "Thông tin vi phạm", url: "http://localhost:5215/ThongTinViPham" },
+        ];
+
+        var linkDataCSVC = [
+            { title: "Cơ sở vật chất", url: "http://localhost:5215/Home/CSVC" },
+            { title: "Đất Đai", url: "http://localhost:5215/DatDai" },
+            { title: "Phòng Học, Giảng Đường, Hội Trường", url: "http://localhost:5215/PhongHocGiangDuongHoiTruong" },
+            { title: "Kí Túc Xá", url: "http://localhost:5215/KiTucXa" },
+            { title: "Công Trình Cơ Sở Vật Chất", url: "http://localhost:5215/CongTrinhCoSoVatChat" },
+            { title: "Phòng Thí Nghiệm", url: "http://localhost:5215/PhongThiNghiem" },
+            { title: "Phòng Thực Hành", url: "http://localhost:5215/PhongThucHanh" },
+            { title: "Thiết Bị Phòng", url: "http://localhost:5215/ThietBiPtnThtren500Tr" },
+            { title: "Thư Viện Trung Tâm Học Liệu", url: "http://localhost:5215/ThuVienTrungTamHocLieu" },
+        ];
+
+        var linkDataCSGD = [
+            { title: "Cơ Cấu Tổ Chức", url: "http://localhost:5215/CoCauToChuc" },
+            { title: "Cơ Sở Giáo Dục", url: "http://localhost:5215/CoSoGiaoDuc" },
+            { title: "Danh Hiệu Thi đua Giải Thưởng, Khen Thưởng Của Cơ Sở Giáo Dục", url: "http://localhost:5215/DanhHieuThiDuaGiaiThuongKhenThuongCuaCoSoGd" },
+            { title: "Đầu Mối Liên Hệ", url: "http://localhost:5215/DauMoiLienHe" },
+            { title: "Đơn Vị Liên Kết Đào Tạo Giáo Dục", url: "http://localhost:5215/DonViLienKetDaoTaoGiaoDuc" },
+            { title: "Khóa Học", url: "http://localhost:5215/KhoaHoc" },
+            { title: "Lịch Sử Đổi Tên Trường", url: "http://localhost:5215/LichSuDoiTenTruong" },
+            { title: "Tổ chức Kiểm Định", url: "http://localhost:5215/ToChucKiemDinh" },
+            { title: "Văn Bản Từ Chữ", url: "http://localhost:5215/VanBanTuChu" },
+        ];
+
+        var linkDataCTDT = [
+            { title: "Chương trình đào tạo", url: "http://localhost:5215/ChuongTrinhDaoTao" },
+            { title: "Gia Hạn Chương Trình Đào Tạo", url: "http://localhost:5215/GiaHanChuongTrinhDaoTao" },
+            { title: "Nắm Áp Dụng Chương Trình", url: "http://localhost:5215/NamApDungChuongTrinh" },
+            { title: "Ngôn Ngữ Giảng Dạy", url: "http://localhost:5215/NgonNguGiangDay" },
+            { title: "Quyết Định Cấp Phép Chương Trình Dùng Cho Chương Trình Nước Ngoài", url: "http://localhost:5215/QuyetDinhCapPhepChuongTrinhDungChoChuongTrinhNuocNgoai" },
+            { title: "Thông Tin Kiểm Định Của Chương Trình", url: "http://localhost:5215/ThongTinKiemDinhCuaChuongTrinh" },
+        ];
+
+        var linkDataTC = [
+            { title: "Hoạt Động Tài Chính", url: "http://localhost:5215/HoatDongTaiChinh" },
+            { title: "Khoản Nộp Ngân Sách", url: "http://localhost:5215/KhoanNopNganSach" },
+            { title: "Khoản Trích Lập Quỹ", url: "http://localhost:5215/KhoanTrichLapQuy" },
+            { title: "Loại Thu Chi", url: "http://localhost:5215/LoaiThuChi" },
+            { title: "Tài Sản Đơn Vị", url: "http://localhost:5215/TaiSanDonVi" },
+            { title: "Chi Tiết Tài Sản Đơn Vị", url: "http://localhost:5215/ChiTietTaiSanDonVi" },
+            { title: "Chi Tiết Thu Chi", url: "http://localhost:5215/ChiTietThuChi" },
+        ];
+
+        var linkDataTS = [
+            { title: "Chỉ tiêu tuyển sinh theo ngành", url: "http://localhost:5215/TbChiTieuTuyenSinhTheoNganhs" },
+            { title: "Dữ liệu trúng tuyển", url: "http://localhost:5215/TbDuLieuTrungTuyens" },
+        ];
+
+        const linkDataVB = [
+            { title: "Danh sách văn bằng chứng chỉ", url: "http://localhost:5215/DanhSachVanBangChungChi" }
+        ];
+
+        // Dữ liệu danh sách
+        var listItems = [
+            { id: "list-cb",    title: "Cán bộ (CB)",                   listLink: linkDataCB,       link: "http://localhost:5215/Home/CB"},
+            { id: "list-htqt",  title: "Hợp tác quốc tế (HTQT, HTDN)",  listLink: linkDataHTQT,     link: "http://localhost:5215/Home/htqt"},
+            { id: "list-khcn",  title: "Khoa học công nghệ",            listLink: linkDataKHCN,     link: "http://localhost:5215/Home/KHCN"},
+            { id: "list-nh",    title: "Người học",                     listLink: linkDataNH,       link: "http://localhost:5215/Home/NH"},
+            { id: "list-csvc",  title: "Cơ sở vật chất",                listLink: linkDataCSVC,     link: "http://localhost:5215/Home/CSVC"},
+            { id: "list-csgd",  title: "Cơ sở giáo dục",                listLink: linkDataCSGD,     link: "http://localhost:5215/Home/CSGD"},
+            { id: "list-ctdt",  title: "Chương trình đào tạo",          listLink: linkDataCTDT,     link: "http://localhost:5215/Home/CTDT"},
+            { id: "list-tc",    title: "Tài chính",                     listLink: linkDataTC,       link: "http://localhost:5215/Home/TCTS"},
+            { id: "list-ts",    title: "Tuyển sinh",                    listLink: linkDataTS,       link: "http://localhost:5215/Home/TS"},
+            { id: "list-vb",    title: "Văn bằng",                      listLink: linkDataVB,       link: "http://localhost:5215/Home/VB"}
+        ];
+        // Tạo vùng chức năng cho từng chức năng con cho thẻ div chỉ định
+        function createTabPanes(item, containerId, idx) {
+            var $tabContent = $(`#${containerId}`);
+            $tabContent.empty();
+            
+            var $linkA = $('<a class="h5 fw-bold"></a>').attr('href', item.link).text(item.title);
+                
+            var $linkList = $('<ul class="list-group list-group-flush mt-2"></ul>');
+            
+            item.listLink.forEach(function(linkItem) {
+                var $link = $('<li class="list-group-item fst-italic ms-3"></li>')
+                    .append($('<a></a>')
+                        .attr('href', linkItem.url)
+                        .text(linkItem.title));
+                $linkList.append($link);
+            });
+            $tabContent.append($linkA);
+            $tabContent.append($linkList);
+        }
+
+        // Dữ liệu các mục điều hướng
+        var navItems = [
+        { title: "Cán bộ (CB)", url: "http://localhost:5215/Home/CB" },
+        { title: "Hợp tác quốc tế (HTQT, HTDN)", url: "http://localhost:5215/Home/htqt" },
+        { title: "Khoa học công nghệ", url: "http://localhost:5215/Home/KHCN" },
+        { title: "Người học", url: "http://localhost:5215/Home/NH" },
+        { title: "Cơ sở vật chất", url: "http://localhost:5215/Home/CSVC" },
+        { title: "Cơ sở giáo dục", url: "http://localhost:5215/Home/CSGD" },
+        { title: "Chương trình đào tạo", url: "http://localhost:5215/Home/CTDT" },
+        { title: "Tài chính", url: "http://localhost:5215/Home/TCTS" },
+        { title: "Tuyển sinh", url: "http://localhost:5215/Home/TS" },
+        { title: "Văn bằng", url: "http://localhost:5215/Home/VB" }
+        ];
+        
+        @* // Xây dựng hader:
+        function createNavbar(navItems, contanerNav) {
+            var $navbar = $(`#${contanerNav}`);
+            $navbar.empty();
+        
+            navItems.forEach(function(item) {
+                var $navItem = $('<li></li>').addClass('nav-item');
+                var $link = $('<a></a>')
+                    .addClass('nav-link text-dark')
+                    .attr('href', item.url)
+                    .attr('b-pahqt12xy2',"")
+                    .text(item.title);
+        
+                $navItem.append($link);
+                $navbar.append($navItem);
+            });
+        }
+        
+        // Tạo các mục danh sách bằng jQuery
+        createNavbar(navItems, 'navbar-nav'); *@
+        $(document).ready(function() {
+            createTabPanes(listItems[0], 'divCB');
+            createTabPanes(listItems[1], 'divHTQT');
+            createTabPanes(listItems[2], 'divKHCN');
+            createTabPanes(listItems[3], 'divNH');
+            createTabPanes(listItems[4], 'divCSVC');
+            createTabPanes(listItems[5], 'divCSGD');
+            createTabPanes(listItems[6], 'divCTDT');
+            createTabPanes(listItems[7], 'divTC');
+            createTabPanes(listItems[8], 'divTS');
+            createTabPanes(listItems[9], 'divVB');
+        });
+    </script>
+
+}
