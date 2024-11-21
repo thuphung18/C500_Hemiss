@@ -9,7 +9,9 @@ public partial class DmToChucKiemDinh
 
     public string? ToChucKiemDinh { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbThongTinKiemDinhCuaChuongTrinh> TbThongTinKiemDinhCuaChuongTrinhs { get; set; } = new List<TbThongTinKiemDinhCuaChuongTrinh>();
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbToChucKiemDinh> TbToChucKiemDinhs { get; set; } = new List<TbToChucKiemDinh>();
 }

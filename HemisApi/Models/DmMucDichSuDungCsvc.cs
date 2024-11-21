@@ -9,5 +9,6 @@ public partial class DmMucDichSuDungCsvc
 
     public string? MucDichSuDungCsvc { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbCongTrinhCoSoVatChat> TbCongTrinhCoSoVatChats { get; set; } = new List<TbCongTrinhCoSoVatChat>();
 }

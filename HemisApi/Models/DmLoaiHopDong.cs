@@ -9,5 +9,6 @@ public partial class DmLoaiHopDong
 
     public string? LoaiHopDong { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbHopDong> TbHopDongs { get; set; } = new List<TbHopDong>();
 }

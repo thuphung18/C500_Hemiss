@@ -9,5 +9,6 @@ public partial class DmQuanHam
 
     public string? QuanHam { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbGiaoVienQpan> TbGiaoVienQpans { get; set; } = new List<TbGiaoVienQpan>();
 }

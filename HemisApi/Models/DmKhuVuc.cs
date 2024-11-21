@@ -9,5 +9,6 @@ public partial class DmKhuVuc
 
     public string? KhuVuc { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbDuLieuTrungTuyen> TbDuLieuTrungTuyens { get; set; } = new List<TbDuLieuTrungTuyen>();
 }

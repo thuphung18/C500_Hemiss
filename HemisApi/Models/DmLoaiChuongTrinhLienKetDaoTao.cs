@@ -9,5 +9,6 @@ public partial class DmLoaiChuongTrinhLienKetDaoTao
 
     public string? LoaiChuongTrinhLienKetDaoTao { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<TbChuongTrinhDaoTao> TbChuongTrinhDaoTaos { get; set; } = new List<TbChuongTrinhDaoTao>();
 }

@@ -11,7 +11,9 @@ public partial class DmKhoiNganhLinhVucDaoTao
 
     public int? IdLinhVucDaoTao { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual TbKhoiNganhDaoTao? IdKhoiNganhNavigation { get; set; }
 
+    [System.Text.Json.Serialization.JsonIgnore]
     public virtual DmLinhVucDaoTao? IdLinhVucDaoTaoNavigation { get; set; }
 }
