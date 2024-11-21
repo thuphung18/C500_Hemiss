@@ -169,7 +169,7 @@ public partial class HemisContext : DbContext
 
     public virtual DbSet<DmLoaiTaiSanTriTue> DmLoaiTaiSanTriTues { get; set; }
 
-    public virtual DbSet<DmLoaiThamGium> DmLoaiThamGia { get; set; }
+    public virtual DbSet<DmLoaiThamGia> DmLoaiThamGias { get; set; }
 
     public virtual DbSet<DmLoaiToChuc> DmLoaiToChucs { get; set; }
 
@@ -285,7 +285,7 @@ public partial class HemisContext : DbContext
 
     public virtual DbSet<DmTuyChon> DmTuyChons { get; set; }
 
-    public virtual DbSet<DmVaiTroThamGium> DmVaiTroThamGia { get; set; }
+    public virtual DbSet<DmVaiTroThamGia> DmVaiTroThamGias { get; set; }
 
     public virtual DbSet<DmViTriViecLam> DmViTriViecLams { get; set; }
 
@@ -625,7 +625,7 @@ public partial class HemisContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=tcp:c500sv.database.windows.net,1433;Encrypt=false;Database=dbHemisC500;User ID=c500;Password=@Abc1234");
+        => optionsBuilder.UseSqlServer("Server=10.0.28.54;Database=dbHemisC500;Encrypt=false;User Id=c500;Password=@Abc1234");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -1432,7 +1432,7 @@ public partial class HemisContext : DbContext
             entity.Property(e => e.LoaiTaiSanTriTue).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<DmLoaiThamGium>(entity =>
+        modelBuilder.Entity<DmLoaiThamGia>(entity =>
         {
             entity.HasKey(e => e.IdLoaiThamGia);
 
@@ -2030,7 +2030,7 @@ public partial class HemisContext : DbContext
             entity.Property(e => e.TuyChon).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<DmVaiTroThamGium>(entity =>
+        modelBuilder.Entity<DmVaiTroThamGia>(entity =>
         {
             entity.HasKey(e => e.IdVaiTroThamGia);
 

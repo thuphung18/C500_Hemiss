@@ -17,5 +17,5 @@ public partial class TbThanhPhanThamGiaDoanCongTac
 
     public virtual TbDoanCongTac? IdDoanCongTacNavigation { get; set; }
 
-    public virtual DmVaiTroThamGium? IdVaiTroThamGiaNavigation { get; set; }
+    public virtual DmVaiTroThamGia? IdVaiTroThamGiaNavigation { get; set; }
 }

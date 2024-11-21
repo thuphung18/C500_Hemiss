@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace C500Hemis;
 
-public partial class DmLoaiThamGium
+public partial class DmLoaiThamGia
 {
     public int IdLoaiThamGia { get; set; }
 
