@@ -517,7 +517,7 @@ public partial class HemisContext : DbContext
 
     public virtual DbSet<VDoanhNghiepKhcn> VDoanhNghiepKhcns { get; set; }
 
-    public virtual DbSet<VDoiTuongThamGium> VDoiTuongThamGia { get; set; }
+    public virtual DbSet<VDoiTuongThamGia> VDoiTuongThamGia { get; set; }
 
     public virtual DbSet<VDonViLienKetDaoTaoGiaoDuc> VDonViLienKetDaoTaoGiaoDucs { get; set; }
 
@@ -4712,7 +4712,7 @@ public partial class HemisContext : DbContext
             entity.Property(e => e.TyLeGopVonCuaCsgddh).HasColumnName("TyLeGopVonCuaCSGDDH");
         });
 
-        modelBuilder.Entity<VDoiTuongThamGium>(entity =>
+        modelBuilder.Entity<VDoiTuongThamGia>(entity =>
         {
             entity
                 .HasNoKey()

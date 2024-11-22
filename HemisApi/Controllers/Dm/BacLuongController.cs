@@ -41,9 +41,5 @@ namespace HemisApi.Controllers.Dm
             return dmBacLuong;
         }
 
-        private bool DmBacLuongExists(int id)
-        {
-            return _context.DmBacLuongs.Any(e => e.IdBacLuong == id);
-        }
     }
 }
